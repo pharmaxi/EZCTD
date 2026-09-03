@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2.0",
-  "generated_at_epoch": 1788431735,
+  "generated_at_epoch": 1788432185,
   "generator": "tools/regulatory/fetch_cde_sources.py",
   "policy": {
     "authority_order": [
@@ -64,8 +64,8 @@
       "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
       "status": 202,
       "content_type": "text/html; charset=utf-8",
-      "sha256": "00e6157cae80c45887383023af31b7b6c0c450abd36d35b1e7f84bac039cf8d5",
-      "saved_as": "pages/page-001-1833f880f38d.html",
+      "sha256": "41957fe19d48446c8303a967482f20ace66f2da21f41caae72aea4ed06904926",
+      "saved_as": "pages\\page-001-1833f880f38d.html",
       "seed_role": "effective_technical_files_notice",
       "links_found": 1
     },
@@ -74,8 +74,8 @@
       "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
       "status": 202,
       "content_type": "text/html; charset=utf-8",
-      "sha256": "c52ad830ca7a706786f68b8a5afd9a1d87107d79b16bd1d3b2ee5e0f65c061ba",
-      "saved_as": "pages/page-002-f61c52eae9ff.html",
+      "sha256": "8bebdd85a75cc2f95c6bcc0dd360dd9cf9979c7b651de2acb3549fa43a661ad7",
+      "saved_as": "pages\\page-002-f61c52eae9ff.html",
       "seed_role": "validator_1_1_0_notice",
       "links_found": 1
     },
@@ -84,8 +84,8 @@
       "final_url": "https://www.cde.org.cn/",
       "status": 200,
       "content_type": "text/html",
-      "sha256": "7f7b16c885d06f9d3318aa9de167381f56bf333f2df055d995681a2626a2a65a",
-      "saved_as": "pages/page-003-076bfedd5465.html",
+      "sha256": "866db05e4ffba196380d3e9c575f693f150ab5cbbdd512d087132bcb2b6e81d3",
+      "saved_as": "pages\\page-003-076bfedd5465.html",
       "seed_role": "common_download_discovery",
       "links_found": 138
     },
@@ -95,7 +95,7 @@
       "status": 200,
       "content_type": "text/html",
       "sha256": "c19774b8c67c6c22182e1aca7db08afb04861080c763ed9d7399c50fa5b7df7c",
-      "saved_as": "pages/page-004-48dc1041275e.html",
+      "saved_as": "pages\\page-004-48dc1041275e.html",
       "seed_role": "international_ectd_3_2_2_package_discovery",
       "links_found": 0
     }
@@ -131,7 +131,7 @@
       "content_type": "application/xml-dtd",
       "content_disposition": null,
       "size": 32111,
-      "saved_as": "assets/001-xhtml1-transitional.dtd",
+      "saved_as": "assets\\001-xhtml1-transitional.dtd",
       "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
       "sm3": "f26e391e192d0ee18df4d5e24644b8a81babc83e5234d0894ca204592c05c2d6",
       "archive": {
@@ -150,7 +150,7 @@
       "content_type": "application/pdf",
       "content_disposition": null,
       "size": 525655,
-      "saved_as": "assets/002-183312.pdf",
+      "saved_as": "assets\\002-183312.pdf",
       "sha256": "3dba8a9bb32e6af6cea585aa742217afdeb95ace3a5e2de60ec557f255e7fe3d",
       "sm3": "b1dfd74830a8c77001dce55064d6cb8e4b3bc182f73f3dbc5d0623806aa07c77",
       "archive": {
@@ -169,7 +169,7 @@
       "content_type": "application/pdf",
       "content_disposition": null,
       "size": 428841,
-      "saved_as": "assets/003-183313.pdf",
+      "saved_as": "assets\\003-183313.pdf",
       "sha256": "9d8b9e8baae0f891d833946a0cde78332c39f8072974387ecdda6ca16c884f7a",
       "sm3": "dc1a77ff57e20eb9186de944d02d867bb2d006b810da9510491baaabff2a3397",
       "archive": {
