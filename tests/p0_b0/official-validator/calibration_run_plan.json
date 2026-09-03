@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1.0",
+  "batch_id": "CDE-V1.1.0-CALIBRATION-01",
+  "status": "NOT_RUN",
+  "validator_target": "CDE eCTD validation software V1.1.0",
+  "design": "Three negative-control baseline runs bracket six target-positive runs to detect cache, state, or baseline drift.",
+  "runs": [
+    {
+      "run_id": "CAL01-01-BASELINE-PRE",
+      "case_id": "CDE-PDF-BASELINE",
+      "role": "negative-control-pre",
+      "restart_before": true
+    },
+    {
+      "run_id": "CAL01-02-RULE-6-8",
+      "case_id": "CDE-PDF-6-8-POS",
+      "role": "target-positive",
+      "restart_before": false
+    },
+    {
+      "run_id": "CAL01-03-BASELINE-MID",
+      "case_id": "CDE-PDF-BASELINE",
+      "role": "negative-control-mid",
+      "restart_before": false
+    },
+    {
+      "run_id": "CAL01-04-RULE-6-22",
+      "case_id": "CDE-PDF-6-22-POS",
+      "role": "target-positive",
+      "restart_before": false
+    },
+    {
+      "run_id": "CAL01-05-RULE-6-26",
+      "case_id": "CDE-PDF-6-26-POS",
+      "role": "target-positive",
+      "restart_before": false
+    },
+    {
+      "run_id": "CAL01-06-RULE-6-19",
+      "case_id": "CDE-PDF-6-19-POS",
+      "role": "target-positive",
+      "restart_before": true
+    },
+    {
+      "run_id": "CAL01-07-RULE-6-21",
+      "case_id": "CDE-PDF-6-21-POS",
+      "role": "target-positive",
+      "restart_before": true
+    },
+    {
+      "run_id": "CAL01-08-RULE-6-1",
+      "case_id": "CDE-PDF-6-1-POS",
+      "role": "target-positive",
+      "restart_before": true
+    },
+    {
+      "run_id": "CAL01-09-BASELINE-POST",
+      "case_id": "CDE-PDF-BASELINE",
+      "role": "negative-control-post",
+      "restart_before": true
+    }
+  ],
+  "expected_run_count": 9,
+  "official_observations": 0
+}
