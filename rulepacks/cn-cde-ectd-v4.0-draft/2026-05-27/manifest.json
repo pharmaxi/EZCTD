@@ -1,13 +1,89 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "profile_id": "cn-cde-ectd-v4.0-draft-2026-05-27",
   "profile_status": "draft_research_only",
   "published_date": "2026-05-27",
   "notice_url": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
   "runtime_enabled": false,
   "must_not_influence": [
-    "cn-cde-ectd-v3.2.2-v1.1-pdf"
+    "cn-cde-ectd-v3.2.2-v1.1-pdf",
+    "cn-cde-ectd-v3.2.2-v1.1-package"
   ],
-  "sources": [],
-  "implementation_policy": "Evidence and delta research only; no compliance claims and no production rule activation."
+  "expected_roles": {
+    "guidance": "cn_ectd_v4_draft_guidance",
+    "controlled_vocabulary": "cn_ectd_v4_draft_controlled_vocabulary",
+    "validation_standard": "cn_ectd_v4_draft_validation_standard",
+    "rationale": "cn_ectd_v4_draft_rationale",
+    "feedback_form": "cn_ectd_v4_draft_feedback_form"
+  },
+  "retrieved_roles": [
+    "controlled_vocabulary",
+    "feedback_form",
+    "guidance",
+    "rationale",
+    "validation_standard"
+  ],
+  "sources": [
+    {
+      "source_id": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY",
+      "role_key": "controlled_vocabulary",
+      "role": "cn_ectd_v4_draft_controlled_vocabulary",
+      "url": "https://www.cde.org.cn/main/att/download/00a5b8edf156d399f72e1543737fec40",
+      "displayed_name": "eCTD v4.0指导原则附件1-受控词汇文件（公开征求意见稿）.pdf",
+      "sha256": "3b5624de9f970c3c00d2d98f5ccfc1bb08062023932a145b8295cd6056647e27",
+      "sm3": "408386aaf8e7212cecd44ec91c75bd796a500ed1d64de06327aa749fadcd8024",
+      "kind": "unknown",
+      "pages": null,
+      "download_status": "SUCCESS"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-GUIDANCE",
+      "role_key": "guidance",
+      "role": "cn_ectd_v4_draft_guidance",
+      "url": "https://www.cde.org.cn/main/att/download/22d2128d8193f20cec98639662a78557",
+      "displayed_name": "eCTD v4.0指导原则（公开征求意见稿）.pdf",
+      "sha256": "96d693a7a60a5dbd0fc1939e6d7ac96d47c40d5b197e107a4af0bc989b25662a",
+      "sm3": "e51b6497e5a686a02f97f39ce04fa36f779b155c1934e6e4ed05e8eadac3807c",
+      "kind": "unknown",
+      "pages": null,
+      "download_status": "SUCCESS"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-FEEDBACK",
+      "role_key": "feedback_form",
+      "role": "cn_ectd_v4_draft_feedback_form",
+      "url": "https://www.cde.org.cn/main/att/download/2aa41d3f263c030f340bf55594befc73",
+      "displayed_name": "征求意见反馈表.docx",
+      "sha256": "95f0017d0f3d24c62511ffa9416dcb9ed0c3195f0d061b3b93a6ddcf2b5b0e6c",
+      "sm3": "aa112aef328afa40fbc0d84d42faa2d29f59e6bc5c2f9915cc017c6b3d95bd2b",
+      "kind": "unknown",
+      "pages": null,
+      "download_status": "SUCCESS"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-RATIONALE",
+      "role_key": "rationale",
+      "role": "cn_ectd_v4_draft_rationale",
+      "url": "https://www.cde.org.cn/main/att/download/7e3c4cee73f2f7457d21bde0d4f302c9",
+      "displayed_name": "《eCTD v4.0指导原则》起草说明.pdf",
+      "sha256": "29c92a9f268cf85784d7f6544bc234d2738c044c6eaff6be65ecb3f04a963289",
+      "sm3": "020711741f04c21f088e1b0c143b007a73f425ed3344aaf441771837fcddf4c1",
+      "kind": "unknown",
+      "pages": null,
+      "download_status": "SUCCESS"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD",
+      "role_key": "validation_standard",
+      "role": "cn_ectd_v4_draft_validation_standard",
+      "url": "https://www.cde.org.cn/main/att/download/cc387d6210363bf551d60e4b4725bb82",
+      "displayed_name": "eCTD v4.0指导原则附件2-eCTD v4.0 验证标准（公开征求意见稿）.pdf",
+      "sha256": "e3ff8b5367d17a3efd7fb87608c90e942a395d195fb1a85614449163a67749c9",
+      "sm3": "ac89ef001e1283e1e0a067797609839cd800e76a7438b2969a5e52bce92f3bb8",
+      "kind": "unknown",
+      "pages": null,
+      "download_status": "SUCCESS"
+    }
+  ],
+  "implementation_policy": "Evidence and delta research only; no production rule activation."
 }

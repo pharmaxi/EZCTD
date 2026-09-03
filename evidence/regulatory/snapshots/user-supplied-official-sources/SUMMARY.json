@@ -1,11 +1,14 @@
 {
   "direct_success": 4,
   "direct_total": 4,
-  "discovered_success": 0,
-  "discovered_total": 0,
-  "v4_assets": 0,
+  "discovered_success": 5,
+  "discovered_total": 5,
+  "v4_assets": 5,
   "v1_pdf_sha256": "fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b",
   "v1_attachment_sha256": "0dbfd2ffb8969731deef3a1dd446da6b48511b2d537c5946eb9498a0b5992eea",
   "attachment_members": 23,
-  "failures": 0
+  "failures": 0,
+  "v4_expected_roles": 5,
+  "v4_retrieved_roles": 5,
+  "v4_failures": 0
 }

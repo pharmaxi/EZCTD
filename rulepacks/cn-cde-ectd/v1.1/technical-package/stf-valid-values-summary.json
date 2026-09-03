@@ -1,0 +1,256 @@
+{
+  "namespace": "http://www.ich.org/ectd",
+  "root_tag": "study-values",
+  "tag_counts": {
+    "study-values": 1,
+    "category": 4,
+    "valid-value": 123,
+    "property": 1,
+    "file-tag": 1
+  },
+  "attribute_counts": {
+    "dtd-version": 1,
+    "name": 4,
+    "realm": 123,
+    "value": 123
+  },
+  "sample_nodes": [
+    {
+      "tag": "study-values",
+      "attributes": {
+        "dtd-version": "3.2"
+      },
+      "text": ""
+    },
+    {
+      "tag": "category",
+      "attributes": {
+        "name": "species"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "mouse"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "rat"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "hamster"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "other-rodent"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "rabbit"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "dog"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "non-human-primate"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "other-non-rodent-mammal"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "non-mammals"
+      },
+      "text": ""
+    },
+    {
+      "tag": "category",
+      "attributes": {
+        "name": "route-of-admin"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "oral"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "intravenous"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "intramuscular"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "intraperitoneal"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "subcutaneous"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "inhalation"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "topical"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "other"
+      },
+      "text": ""
+    },
+    {
+      "tag": "category",
+      "attributes": {
+        "name": "duration"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "us",
+        "value": "short"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "us",
+        "value": "medium"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "us",
+        "value": "long"
+      },
+      "text": ""
+    },
+    {
+      "tag": "category",
+      "attributes": {
+        "name": "type-of-control"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "placebo"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "no-treatment"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "dose-response-without-placebo"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "active-control-without-placebo"
+      },
+      "text": ""
+    },
+    {
+      "tag": "valid-value",
+      "attributes": {
+        "realm": "ich",
+        "value": "external"
+      },
+      "text": ""
+    }
+  ],
+  "source_sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3",
+  "source_path": "valid-values.xml"
+}

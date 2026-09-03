@@ -1,0 +1,569 @@
+{
+  "version": "1.0",
+  "valid_from": "2021-9-1",
+  "elements": [
+    {
+      "name": "cn-1-0",
+      "structure_number": "1.0",
+      "descriptions": {
+        "zh": "说明函",
+        "en": "Cover letter"
+      }
+    },
+    {
+      "name": "cn-1-1",
+      "structure_number": "1.1",
+      "descriptions": {
+        "zh": "目录",
+        "en": "ToC"
+      }
+    },
+    {
+      "name": "cn-1-2",
+      "structure_number": "1.2",
+      "descriptions": {
+        "zh": "申请表",
+        "en": "Application Form"
+      }
+    },
+    {
+      "name": "cn-1-3",
+      "structure_number": "1.3",
+      "descriptions": {
+        "zh": "产品信息相关材料",
+        "en": "Product Information"
+      }
+    },
+    {
+      "name": "cn-1-3-1",
+      "structure_number": "1.3.1",
+      "descriptions": {
+        "zh": "说明书",
+        "en": "Package Insert"
+      }
+    },
+    {
+      "name": "cn-1-3-1-1",
+      "structure_number": "1.3.1.1",
+      "descriptions": {
+        "zh": "研究药物说明书及修订说明（适用于临床试验申请）",
+        "en": "Investigational Drug Package Insert and Descriptions of Revisions (applicable to IND)"
+      }
+    },
+    {
+      "name": "cn-1-3-1-2",
+      "structure_number": "1.3.1.2",
+      "descriptions": {
+        "zh": "上市药品说明书及修订说明（适用于上市及上市后变更申请）",
+        "en": "Marketed Product Package Insert and Descriptions of Revisions (applicable to NDA and post-NDA variation applications)"
+      }
+    },
+    {
+      "name": "cn-1-3-2",
+      "structure_number": "1.3.2",
+      "descriptions": {
+        "zh": "包装标签",
+        "en": "Labeling"
+      }
+    },
+    {
+      "name": "cn-1-3-2-1",
+      "structure_number": "1.3.2.1",
+      "descriptions": {
+        "zh": "研究药物包装标签（适用于临床试验申请）",
+        "en": "Investigational drug package label (applicable to IND)"
+      }
+    },
+    {
+      "name": "cn-1-3-2-2",
+      "structure_number": "1.3.2.2",
+      "descriptions": {
+        "zh": "上市药品包装标签（适用于上市及上市后变更申请）",
+        "en": "Marketed product package label (applicable to NDA/ANDA and post-NDA variation applications)"
+      }
+    },
+    {
+      "name": "cn-1-3-3",
+      "structure_number": "1.3.3",
+      "descriptions": {
+        "zh": "产品质量标准和生产工艺/制造及检定规程",
+        "en": "Product Specification, Manufacturing Process, and Testing Procedures"
+      }
+    },
+    {
+      "name": "cn-1-3-4",
+      "structure_number": "1.3.4",
+      "descriptions": {
+        "zh": "临床试验相关资料（适用于临床试验申请）",
+        "en": "IND Information(applicable to IND)"
+      }
+    },
+    {
+      "name": "cn-1-3-4-1",
+      "structure_number": "1.3.4.1",
+      "descriptions": {
+        "zh": "临床试验计划和方案",
+        "en": "Clinical study development plan and protocol"
+      }
+    },
+    {
+      "name": "cn-1-3-4-2",
+      "structure_number": "1.3.4.2",
+      "descriptions": {
+        "zh": "知情同意书样稿",
+        "en": "Sample Informed Consent Form"
+      }
+    },
+    {
+      "name": "cn-1-3-4-3",
+      "structure_number": "1.3.4.3",
+      "descriptions": {
+        "zh": "研究者手册",
+        "en": "Investigator Brochure"
+      }
+    },
+    {
+      "name": "cn-1-3-5",
+      "structure_number": "1.3.5",
+      "descriptions": {
+        "zh": "药品通用名称核准申请材料",
+        "en": "Generic name application dossiers"
+      }
+    },
+    {
+      "name": "cn-1-3-6",
+      "structure_number": "1.3.6",
+      "descriptions": {
+        "zh": "检查相关信息（适用于上市申请和涉及检查检验的补充申请）",
+        "en": "Inspection related dossiers (Only for NDA and variation application where inspection is needed)"
+      }
+    },
+    {
+      "name": "cn-1-3-7",
+      "structure_number": "1.3.7",
+      "descriptions": {
+        "zh": "疫苗生物安全及环境影响评价",
+        "en": "Vaccine biosafety and environmental impact assessment"
+      }
+    },
+    {
+      "name": "cn-1-3-8",
+      "structure_number": "1.3.8",
+      "descriptions": {
+        "zh": "产品相关证明性文件（如适用）",
+        "en": "Product-related certifications"
+      }
+    },
+    {
+      "name": "cn-1-3-8-1",
+      "structure_number": "1.3.8.1",
+      "descriptions": {
+        "zh": "原料药、药用辅料及药包材证明文件",
+        "en": "Certifications of drug substance, Excipients, and Packaging Materials"
+      }
+    },
+    {
+      "name": "cn-1-3-8-2",
+      "structure_number": "1.3.8.2",
+      "descriptions": {
+        "zh": "专利信息及证明文件",
+        "en": "Patent information and certificates"
+      }
+    },
+    {
+      "name": "cn-1-3-8-3",
+      "structure_number": "1.3.8.3",
+      "descriptions": {
+        "zh": "特殊药品研制立项批准文件",
+        "en": "Approval documents for controlled drug development and approval program (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-3-8-4",
+      "structure_number": "1.3.8.4",
+      "descriptions": {
+        "zh": "商标信息及证明文件",
+        "en": "Trademark information and certificates (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-3-8-5",
+      "structure_number": "1.3.8.5",
+      "descriptions": {
+        "zh": "对照药来源证明文件",
+        "en": "Documents certifying the source of the reference drug"
+      }
+    },
+    {
+      "name": "cn-1-3-8-6",
+      "structure_number": "1.3.8.6",
+      "descriptions": {
+        "zh": "药物临床试验相关证明文件（适用于上市申请）",
+        "en": "Clinical study related certificates (Only for NDA)"
+      }
+    },
+    {
+      "name": "cn-1-3-8-7",
+      "structure_number": "1.3.8.7",
+      "descriptions": {
+        "zh": "研究机构资质证明文件",
+        "en": "Qualification documents of research institutions"
+      }
+    },
+    {
+      "name": "cn-1-3-8-8",
+      "structure_number": "1.3.8.8",
+      "descriptions": {
+        "zh": "药械组合产品相关证明性文件",
+        "en": "Drug-Device combination product related certificates"
+      }
+    },
+    {
+      "name": "cn-1-3-8-9",
+      "structure_number": "1.3.8.9",
+      "descriptions": {
+        "zh": "允许药品上市销售证明文件（适用于境外已上市的药品）",
+        "en": "Documents permitting the marketing of drugs (applicable to drugs already marketed overseas)"
+      }
+    },
+    {
+      "name": "cn-1-3-8-10",
+      "structure_number": "1.3.8.10",
+      "descriptions": {
+        "zh": "允许药品变更的证明文件",
+        "en": "Certificated documents of variation approval (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-3-9",
+      "structure_number": "1.3.9",
+      "descriptions": {
+        "zh": "其他产品信息相关材料",
+        "en": "Other product information related materials"
+      }
+    },
+    {
+      "name": "cn-1-4",
+      "structure_number": "1.4",
+      "descriptions": {
+        "zh": "申请状态（如适用）",
+        "en": "Status of application (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-4-1",
+      "structure_number": "1.4.1",
+      "descriptions": {
+        "zh": "既往批准情况",
+        "en": "Previous approved information"
+      }
+    },
+    {
+      "name": "cn-1-4-2",
+      "structure_number": "1.4.2",
+      "descriptions": {
+        "zh": "申请调整临床试验方案、暂停或者终止临床试验",
+        "en": "Application to adjust clinical trial protocol, hold or terminate a CTA"
+      }
+    },
+    {
+      "name": "cn-1-4-3",
+      "structure_number": "1.4.3",
+      "descriptions": {
+        "zh": "暂停后申请恢复临床试验",
+        "en": "Request to resume a clinical trial"
+      }
+    },
+    {
+      "name": "cn-1-4-4",
+      "structure_number": "1.4.4",
+      "descriptions": {
+        "zh": "终止后重新申请临床试验",
+        "en": "New application after terminating a CTA"
+      }
+    },
+    {
+      "name": "cn-1-4-5",
+      "structure_number": "1.4.5",
+      "descriptions": {
+        "zh": "申请撤回尚未批准的药物临床试验申请、上市注册许可申请、补充申请或再注册申请",
+        "en": "Withdrawal of not yet approved Applications for CTA, NDA, ANDA, variation application or renewal application"
+      }
+    },
+    {
+      "name": "cn-1-4-6",
+      "structure_number": "1.4.6",
+      "descriptions": {
+        "zh": "申请上市注册审评期间变更仅包括申请人更名、变更注册地址名称等不涉及技术审评内容的变更",
+        "en": "Variation Application during the review stage, which will not involve the technical review contents, including the changes of applicant name, registered address, etc."
+      }
+    },
+    {
+      "name": "cn-1-4-7",
+      "structure_number": "1.4.7",
+      "descriptions": {
+        "zh": "申请注销药品注册证书",
+        "en": "Request to withdraw a drug registration certificate"
+      }
+    },
+    {
+      "name": "cn-1-5",
+      "structure_number": "1.5",
+      "descriptions": {
+        "zh": "加快上市注册程序申请（如适用）",
+        "en": "Application for Accelerated review (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-5-1",
+      "structure_number": "1.5.1",
+      "descriptions": {
+        "zh": "加快上市注册程序申请",
+        "en": "Application for Accelerated review designation"
+      }
+    },
+    {
+      "name": "cn-1-5-2",
+      "structure_number": "1.5.2",
+      "descriptions": {
+        "zh": "加快上市注册程序终止申请",
+        "en": "Application for withdrawal of accelerated review designation"
+      }
+    },
+    {
+      "name": "cn-1-5-3",
+      "structure_number": "1.5.3",
+      "descriptions": {
+        "zh": "其他加快注册程序申请",
+        "en": "Other application for accelerated review designation"
+      }
+    },
+    {
+      "name": "cn-1-6",
+      "structure_number": "1.6",
+      "descriptions": {
+        "zh": "沟通交流会议（如适用）",
+        "en": "Communication Meeting (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-6-1",
+      "structure_number": "1.6.1",
+      "descriptions": {
+        "zh": "会议申请",
+        "en": "Meeting request"
+      }
+    },
+    {
+      "name": "cn-1-6-2",
+      "structure_number": "1.6.2",
+      "descriptions": {
+        "zh": "会议背景资料",
+        "en": "Meeting background documents"
+      }
+    },
+    {
+      "name": "cn-1-6-3",
+      "structure_number": "1.6.3",
+      "descriptions": {
+        "zh": "会议相关信函、会议纪要以及答复",
+        "en": "Meeting correspondence/meeting minutes and responses"
+      }
+    },
+    {
+      "name": "cn-1-7",
+      "structure_number": "1.7",
+      "descriptions": {
+        "zh": "临床试验过程管理信息（如适用）",
+        "en": "Clinical trial management information (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-7-1",
+      "structure_number": "1.7.1",
+      "descriptions": {
+        "zh": "临床试验期间增加适应症",
+        "en": "Additional indication during clinical trial"
+      }
+    },
+    {
+      "name": "cn-1-7-2",
+      "structure_number": "1.7.2",
+      "descriptions": {
+        "zh": "临床试验方案变更、非临床或者药学的变化或者新发现等可能增加受试者安全性风险的",
+        "en": "Protocol amendment, major CMC change, significant nonclinical safety findings which may pose additional safety risk to subjects"
+      }
+    },
+    {
+      "name": "cn-1-7-3",
+      "structure_number": "1.7.3",
+      "descriptions": {
+        "zh": "要求申办者调整临床试验方案、暂停或终止药物临床试验",
+        "en": "Request for sponsor to adjust clinical trial protocol, hold or terminate the clinical trial"
+      }
+    },
+    {
+      "name": "cn-1-8",
+      "structure_number": "1.8",
+      "descriptions": {
+        "zh": "药物警戒与风险管理（如适用）",
+        "en": "Pharmacovigilance and risk management plan (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-8-1",
+      "structure_number": "1.8.1",
+      "descriptions": {
+        "zh": "研发期间安全性更新报告及附件",
+        "en": "Risk management plan during clincial trial"
+      }
+    },
+    {
+      "name": "cn-1-8-1-1",
+      "structure_number": "1.8.1.1",
+      "descriptions": {
+        "zh": "研发期间安全性更新报告",
+        "en": "Development safety update report"
+      }
+    },
+    {
+      "name": "cn-1-8-1-2",
+      "structure_number": "1.8.1.2",
+      "descriptions": {
+        "zh": "严重不良反应（SAR）累计汇总表",
+        "en": "Severe adverse reaction (SAR) cumulative summary table"
+      }
+    },
+    {
+      "name": "cn-1-8-1-3",
+      "structure_number": "1.8.1.3",
+      "descriptions": {
+        "zh": "报告周期内境内死亡受试者列表",
+        "en": "List of subjects who died within the reporting period"
+      }
+    },
+    {
+      "name": "cn-1-8-1-4",
+      "structure_number": "1.8.1.4",
+      "descriptions": {
+        "zh": "报告周期内境内因任何不良事件而退出临床试验的受试者列表",
+        "en": "List of subjects who withdrew from clinical trials due to any adverse events within the reporting period"
+      }
+    },
+    {
+      "name": "cn-1-8-1-5",
+      "structure_number": "1.8.1.5",
+      "descriptions": {
+        "zh": "报告周期内发生的药物临床试验方案变更或者临床方面的新发现、非临床或者药学的变化或者新发现总结表",
+        "en": "Summary table of changes in drug clinical trial protocol or new discoveries in clinical areas, non-clinical or pharmaceutical changes or new discoveries that occurred during the reporting period"
+      }
+    },
+    {
+      "name": "cn-1-8-1-6",
+      "structure_number": "1.8.1.6",
+      "descriptions": {
+        "zh": "下一报告周期内总体研究计划概要",
+        "en": "Summary of the overall research plan in the next reporting cycle"
+      }
+    },
+    {
+      "name": "cn-1-8-2",
+      "structure_number": "1.8.2",
+      "descriptions": {
+        "zh": "其他潜在的严重安全性风险信息",
+        "en": "Other potentially serious security risk information"
+      }
+    },
+    {
+      "name": "cn-1-8-3",
+      "structure_number": "1.8.3",
+      "descriptions": {
+        "zh": "风险管理计划（RMP）",
+        "en": "Risk management plan (RMP)"
+      }
+    },
+    {
+      "name": "cn-1-9",
+      "structure_number": "1.9",
+      "descriptions": {
+        "zh": "上市后研究（如适用）",
+        "en": "Post-approval studies (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-10",
+      "structure_number": "1.10",
+      "descriptions": {
+        "zh": "上市后变更（如适用）",
+        "en": "Post-approval changes (if applicable)"
+      }
+    },
+    {
+      "name": "cn-1-10-1",
+      "structure_number": "1.10.1",
+      "descriptions": {
+        "zh": "审批类变更",
+        "en": "Changes requiring approval"
+      }
+    },
+    {
+      "name": "cn-1-10-2",
+      "structure_number": "1.10.2",
+      "descriptions": {
+        "zh": "备案类变更",
+        "en": "Changes requiring filing"
+      }
+    },
+    {
+      "name": "cn-1-10-3",
+      "structure_number": "1.10.3",
+      "descriptions": {
+        "zh": "报告类变更",
+        "en": "Changes requiring reporting"
+      }
+    },
+    {
+      "name": "cn-1-11",
+      "structure_number": "1.11",
+      "descriptions": {
+        "zh": "申请人/生产企业证明性文件",
+        "en": "Applicant/Manufacturer certificates"
+      }
+    },
+    {
+      "name": "cn-1-11-1",
+      "structure_number": "1.11.1",
+      "descriptions": {
+        "zh": "境内生产药品申请人/生产企业资质证明文件",
+        "en": "Domestic Applicant/Manufacturer qualification certificate"
+      }
+    },
+    {
+      "name": "cn-1-11-2",
+      "structure_number": "1.11.2",
+      "descriptions": {
+        "zh": "境外生产药品申请人/生产企业资质证明文件",
+        "en": "Oversea Applicant/Manufacturer qualification certificate"
+      }
+    },
+    {
+      "name": "cn-1-11-3",
+      "structure_number": "1.11.3",
+      "descriptions": {
+        "zh": "注册代理机构证明文件",
+        "en": "Certificated documents of registration agency"
+      }
+    },
+    {
+      "name": "cn-1-12",
+      "structure_number": "1.12",
+      "descriptions": {
+        "zh": "小微企业证明文件（如适用）",
+        "en": "Certificated documents of small or micro enterprises (if applicable)"
+      }
+    }
+  ],
+  "count": 70,
+  "source_sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59",
+  "source_path": "element-property_CN.xml"
+}

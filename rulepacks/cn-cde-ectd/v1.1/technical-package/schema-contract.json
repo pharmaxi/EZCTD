@@ -1,0 +1,395 @@
+{
+  "target_namespace": "cn_ectd",
+  "element_form_default": "qualified",
+  "attribute_form_default": "unqualified",
+  "imports": [
+    {
+      "namespace": "http://www.w3.org/1999/xlink",
+      "schema_location": "xlink.xsd"
+    },
+    {
+      "namespace": "http://www.w3.org/XML/1998/namespace",
+      "schema_location": "xml.xsd"
+    }
+  ],
+  "global_elements": [
+    {
+      "name": "cn_ectd",
+      "type": null,
+      "min_occurs": "1",
+      "max_occurs": "1",
+      "ref": null
+    }
+  ],
+  "global_complex_types": [
+    "cn-contact",
+    "cn-content",
+    "cn-envelope",
+    "cn-leaf",
+    "cn-leaf-ext",
+    "cn-node-extension",
+    "cn-type"
+  ],
+  "global_simple_types": [
+    "ich-checksum-type",
+    "ich-leaf-operations"
+  ],
+  "root_contract": {
+    "children": [
+      {
+        "name": "cn-envelope",
+        "type": "cn-envelope",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-content",
+        "type": "cn-content",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "attributes": [
+      {
+        "name": "schema-version",
+        "type": null,
+        "use": "required",
+        "ref": null,
+        "enumerations": [
+          "1.0"
+        ]
+      }
+    ]
+  },
+  "envelope_contract": {
+    "children": [
+      {
+        "name": "application-id",
+        "type": "xs:string",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "application-type",
+        "type": "cn-type",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "product-type",
+        "type": "cn-type",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "product-number",
+        "type": "xs:string",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "related-sequence",
+        "type": "xs:string",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "regulatory-activity-type",
+        "type": "cn-type",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "sequence-number",
+        "type": "xs:string",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "sequence-type",
+        "type": "cn-type",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "sequence-description",
+        "type": "xs:string",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "sequence-contact",
+        "type": "cn-contact",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "attributes": []
+  },
+  "content_top_level": [
+    {
+      "name": "cn-1-0",
+      "type": "cn-leaf-ext",
+      "min_occurs": "1",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-1",
+      "type": "cn-leaf-ext",
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-2",
+      "type": "cn-leaf-ext",
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-3",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-4",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-5",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-6",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-7",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-8",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-9",
+      "type": "cn-leaf-ext",
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-10",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-11",
+      "type": null,
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    },
+    {
+      "name": "cn-1-12",
+      "type": "cn-leaf-ext",
+      "min_occurs": "0",
+      "max_occurs": "1",
+      "ref": null
+    }
+  ],
+  "leaf_container_contract": {
+    "sequence_min_occurs": "0",
+    "sequence_max_occurs": "unbounded",
+    "empty_container_schema_valid_possible": true
+  },
+  "leaf_contract": {
+    "children": [
+      {
+        "name": "title",
+        "type": null,
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "link-text",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "xref",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "attributes": [
+      {
+        "name": "ID",
+        "type": "xs:ID",
+        "use": "required",
+        "ref": null
+      },
+      {
+        "name": "operation",
+        "type": "ich-leaf-operations",
+        "use": "required",
+        "ref": null
+      },
+      {
+        "name": "xlink:href",
+        "type": null,
+        "use": "optional",
+        "ref": "xlink:href"
+      },
+      {
+        "name": "modified-file",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "checksum-type",
+        "type": "ich-checksum-type",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "checksum",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "application-version",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "version",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "keywords",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "font-library",
+        "type": "xs:string",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "xlink:type",
+        "type": null,
+        "use": "optional",
+        "ref": "xlink:type"
+      },
+      {
+        "name": "xlink:role",
+        "type": null,
+        "use": "optional",
+        "ref": "xlink:role"
+      },
+      {
+        "name": "xlink:show",
+        "type": null,
+        "use": "optional",
+        "ref": "xlink:show"
+      },
+      {
+        "name": "xlink:actuate",
+        "type": null,
+        "use": "optional",
+        "ref": "xlink:actuate"
+      },
+      {
+        "name": "xml:lang",
+        "type": null,
+        "use": "optional",
+        "ref": "xml:lang"
+      }
+    ]
+  },
+  "node_extension_contract": {
+    "children": [
+      {
+        "name": "title",
+        "type": null,
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "attributes": [
+      {
+        "name": "ID",
+        "type": "xs:ID",
+        "use": "optional",
+        "ref": null
+      },
+      {
+        "name": "xml:lang",
+        "type": null,
+        "use": "optional",
+        "ref": "xml:lang"
+      }
+    ]
+  },
+  "simple_type_enumerations": {
+    "ich-checksum-type": [
+      "MD5",
+      "md5"
+    ],
+    "ich-leaf-operations": [
+      "new",
+      "append",
+      "replace",
+      "delete"
+    ]
+  },
+  "source_sha256": "e1a7f6a88189f72d156ae403e1c3de89ddfaed32b5f477348e99c7d7aabc9dd4",
+  "source_path": "cn-regional-1-0.xsd"
+}
