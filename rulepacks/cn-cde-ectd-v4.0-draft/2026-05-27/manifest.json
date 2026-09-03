@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "cn-cde-ectd-v4.0-draft-2026-05-27",
+  "profile_status": "draft_research_only",
+  "published_date": "2026-05-27",
+  "notice_url": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+  "runtime_enabled": false,
+  "must_not_influence": [
+    "cn-cde-ectd-v3.2.2-v1.1-pdf"
+  ],
+  "sources": [],
+  "implementation_policy": "Evidence and delta research only; no compliance claims and no production rule activation."
+}

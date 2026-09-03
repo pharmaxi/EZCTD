@@ -1,0 +1,631 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at_epoch": 1788453779,
+  "generator": "tools/regulatory/deep_dive_official_sources.py",
+  "direct_sources": [
+    {
+      "source_id": "CDE-ECTD-COLUMN",
+      "requested_url": "https://www.cde.org.cn/ectd/index",
+      "content_type": "text/html; charset=utf-8",
+      "content_disposition": null,
+      "filename": "CDE-ECTD-COLUMN--index.html",
+      "size": 24898,
+      "kind": "html",
+      "sha256": "135eedf3dc54a62576aaeea12f939298dc67044fd8dbd7fa93e134c1595a03c9",
+      "sm3": "76834b477bb802f15e85a607515eb2e8ac4755add32741c236483cf05c9ea1d3",
+      "downloaded_at_epoch": 1788453768,
+      "role": "official_ectd_portal",
+      "status": "official_current_portal",
+      "download_status": "SUCCESS"
+    },
+    {
+      "source_id": "CDE-CN-V1.1-SPEC-PDF",
+      "requested_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDJSGFV1.1.pdf?name=eCTD%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83V1.1.0.pdf",
+      "content_type": "application/pdf",
+      "content_disposition": null,
+      "filename": "CDE-CN-V1.1-SPEC-PDF--eCTD技术规范V1.1.0.pdf",
+      "size": 1742696,
+      "kind": "pdf",
+      "sha256": "fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b",
+      "sm3": "9a19d90b78593966904c1062b1075059301f7b79a157e69e33faf56af18be745",
+      "downloaded_at_epoch": 1788453773,
+      "role": "effective_cn_ectd_v3_2_2_technical_specification",
+      "status": "official_effective",
+      "download_status": "SUCCESS",
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 44,
+        "text_file": "CDE-CN-V1.1-SPEC-PDF--eCTD技术规范V1.1.0.txt",
+        "metadata": {
+          "Creator": "Microsoft® Word 2016",
+          "Producer": "Microsoft® Word 2016",
+          "CreationDate": "Thu Jan 15 05:30:30 2026 UTC",
+          "ModDate": "Thu Jan 15 05:30:30 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "44",
+          "Encrypted": "no",
+          "Page size": "595.32 x 841.92 pts (A4)",
+          "Page rot": "0",
+          "File size": "1742696 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        },
+        "pdfinfo_stderr": "",
+        "pdftotext_stderr": ""
+      },
+      "term_hits": {
+        "pdf_file_format": [
+          {
+            "pdf_page": 20,
+            "matched_terms": [
+              "PDF 文件"
+            ],
+            "context": "eCTD 技术规范 V3.2.2》执行。 3.3 文件和文件夹 3.3.1 内容文件的格式 对于 eCTD 申报资料，适用的文件格式有以下五种： 1. 便携文件格式（PDF）- .pdf 文件扩展名 例如：审评内容文件 2. 可扩展标记语言 （XML）- .xml 文件扩展名 例如：eCTD 骨架文件 3. SAS XPORT 传输文件 - .xpt 文件扩展名 例如：临床试验数据文件 4. 文本文件（TXT）- .txt 文件扩展名 例如：程序代码文件 5. 可扩展样式表语言文件（XSL）- .xsl 文件扩展名 16 / 40"
+          },
+          {
+            "pdf_page": 24,
+            "matched_terms": [
+              "PDF 文件"
+            ],
+            "context": " 3.4 PDF 电子提交标准 PDF 是 eCTD 申报资料的主要文件格式。 《ICH eCTD 文 件格式规范 V1.3》 （参见本文档第五章节）为创建用于 eCTD 提交的 PDF 文件提出了建议，主要包括以下方面：限制、版 本、文件大小、字体、字体大小、字体颜色、页面方向、页 面大小和页边距、页眉和页脚、电子文件来源、创建 PDF 文 档和图像的建议、压缩图像减少文件大小、图像颜色匹配、 ICC 配置文件、文档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考"
+          },
+          {
+            "pdf_page": 30,
+            "matched_terms": [
+              "PDF 文件"
+            ],
+            "context": "研究报告可参考《ICH E3 临床研究报告的结构和 内容》的要求，并使用适当的 STF 文件标签来展现文档的内 容。未按照 ICH E3 相关指南编制的临床研究报告可提交单 独的 PDF 文件，并使用“legacy-clinical-study-report”标签进行 标记。 临床研究报告相关的临床试验数据集应在 eCTD 申报资 料中一并提交，在骨架文件中应位于相应的临床研究报告之 后，并使用适当的 STF 标签进行标识。更多 eCTD 中临床试 验数据集及相关资料的申报要求详见《药物临床试验数据递 交指导原则（试行）》 。 模块五中的 5.2 所有临床研究列表、5.3.6 上市后报告和 26 / 40"
+          },
+          {
+            "pdf_page": 40,
+            "matched_terms": [
+              "文件格式规范"
+            ],
+            "context": "TD 骨架文件技术规范 V2.6.1》 4. ICH Specification for Submission Formats for eCTD V1.3 ——《ICH eCTD 文件格式规范 V1.3》 5. ICH eCTD IWG Question and Answer and Specification 2 相 关 参 考 文 件 可 参 见 ICH 网 站 （ https://www.ich.org/ ） 、 药 品 审 评 中 心 网 站 （https://www.cde.org.cn/） 36 / 40"
+          }
+        ],
+        "five_page_bookmark": [
+          {
+            "pdf_page": 24,
+            "matched_terms": [
+              "超过五页",
+              "五页"
+            ],
+            "context": " 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本链接 进行导航。申请人创建的跨文档超文本链接至少应包 括：由模块一的上市后变更/研究等项目到模块二至 20 / 40"
+          }
+        ],
+        "cross_document_links": [
+          {
+            "pdf_page": 24,
+            "matched_terms": [
+              "跨文档",
+              "超文本链接"
+            ],
+            "context": "体、字体大小、字体颜色、页面方向、页 面大小和页边距、页眉和页脚、电子文件来源、创建 PDF 文 档和图像的建议、压缩图像减少文件大小、图像颜色匹配、 ICC 配置文件、文档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本"
+          },
+          {
+            "pdf_page": 25,
+            "matched_terms": [
+              "超文本链接"
+            ],
+            "context": "eCTD 技术规范 V1.1 模块五中的具体内容之间的超文本链接、由模块二的 概述和总结文件到模块三至模块五的详细信息之间 的超文本链接、由临床研究报告到对应附件（如图表） 之间的超文本链接、PDF 格式的临床数据集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4）"
+          }
+        ],
+        "cross_application_links": [
+          {
+            "pdf_page": 23,
+            "matched_terms": [
+              "跨申请"
+            ],
+            "context": "中的文件和引 用同一申请中前序序列中的文件。申请人如需要在同一个申 请中提交相同的文件，无需重复提交实体文件，只需在骨架 文件中对应章节生成叶元素并引用相应实体文件的位置。 不支持跨申请引用，即不允许引用另一个申请中提交的 文件。 更多关于文件复用的说明请参考《ICH eCTD 技术规范 19 / 40"
+          },
+          {
+            "pdf_page": 25,
+            "matched_terms": [
+              "跨申请"
+            ],
+            "context": "报告到对应附件（如图表） 之间的超文本链接、PDF 格式的临床数据集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+          }
+        ],
+        "chinese_font": [
+          {
+            "pdf_page": 25,
+            "matched_terms": [
+              "宋体"
+            ],
+            "context": "集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+          }
+        ],
+        "link_appearance": [
+          {
+            "pdf_page": 25,
+            "matched_terms": [
+              "蓝色文字",
+              "蓝色框"
+            ],
+            "context": " （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+          }
+        ],
+        "foreign_reference": [
+          {
+            "pdf_page": 3,
+            "matched_terms": [
+              "外文参考资料"
+            ],
+            "context": "........ 19 3.4 PDF 电子提交标准 ....................................................... 20 3.5 外文参考资料的要求 ................................................ 21 3.5.1 语言属性的设置 .................................................. 22 3.5.2 语言属性的生命周期管理 .................................. 24 3.6 eCTD 骨架属性和元数据 ................"
+          },
+          {
+            "pdf_page": 24,
+            "matched_terms": [
+              "外文参考资料"
+            ],
+            "context": "档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本链接 进行导航。申请人创建的跨文档超文本链接至少应包 括：由模块一的上市后变更/研究等项目到模块二至 20 / 40"
+          },
+          {
+            "pdf_page": 25,
+            "matched_terms": [
+              "外文参考资料"
+            ],
+            "context": " 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+          },
+          {
+            "pdf_page": 26,
+            "matched_terms": [
+              "外文参考资料"
+            ],
+            "context": "eCTD 技术规范 V1.1 他文种的资料可附后作为参考。中文译文应当与原文内容一 致。 在 eCTD 骨架文件中，外文参考资料应放置在对应的中 文申报资料同级目录结构中，即同一目录元素下的不同叶元 素中。中文申报资料在前并使用中文叶标题进行标识，外文 参考资料在后并使用外文叶标题进行标识，申请人可使用 “xml:lang”属性对中文申报资料及其外文参考资料进行区分。 中外文申报资料在骨架文件中的内容示例如下图 3 所示： 图 3.中外文申报资料骨架文件示例 3.5.1 语言属性的设置 在 eCTD 骨架文件中，每个叶元素都代表一个对应的文 件。叶元"
+          },
+          {
+            "pdf_page": 28,
+            "matched_terms": [
+              "外文参考资料"
+            ],
+            "context": "期管理 使用 eCTD 生命周期操作“替换”，将前序序列中提交的 文件替换为新文件时，被替换的文件和新文件应具有相同的 语言属性。即中文申报资料只能被另一份中文申报资料所替 换，而外文参考资料只能被另一份外文参考资料所替换。 3.6 eCTD 骨架属性和元数据 eCTD 骨架属性指申报资料模块一至模块五章节的相关 属性的集合，包括了本文档 4.3 章节中定义的信封元素属性 以及《ICH eCTD 技术规范 V3.2.2》中定义的模块二至模块 五的属性。 24 / 40"
+          }
+        ],
+        "electronic_seal": [
+          {
+            "pdf_page": 3,
+            "matched_terms": [
+              "电子签章"
+            ],
+            "context": "...... 26 3.9 生命周期操作 ............................................................ 27 3.10 电子签章 .................................................................... 27 3.11 eCTD 提交方式.......................................................... 27 4. 模块一的总体架构 ......................................................."
+          },
+          {
+            "pdf_page": 31,
+            "matched_terms": [
+              "电子签章"
+            ],
+            "context": "型。 申请人对 STF 以外的文件进行增补操作，将导致申报资 料验证时出现警告信息，对此申请人应在说明函中做出解释。 对 STF 进行增补操作，验证时不会出现警告信息。 3.10 电子签章 符合《中华人民共和国电子签名法》要求的电子签章与 手写签名或者盖章具有同等的法律效力。eCTD 申请中将接 受上述电子签章的使用。 3.11 eCTD 提交方式 申请人准备的 eCTD 申报资料需通过网络传输方式或物 理电子媒介提交。目前物理电子媒介只接受一次写入型光盘 作为存储介质，包括 CD-R、DVD+R、DVD-R 这三类。 27 / 40"
+          }
+        ],
+        "md5": [
+          {
+            "pdf_page": 5,
+            "matched_terms": [
+              "MD5",
+              "md5"
+            ],
+            "context": "请首次提交的全 套申报资料输出文件夹的结构示例，包括模块一至模块五的 ，1 个存放 DTD 相关 内容文件，2 个骨架文件（XML 文件） 文件的 util 文件夹及 1 个存放 MD5 值的文本文件。 1 / 40"
+          },
+          {
+            "pdf_page": 21,
+            "matched_terms": [
+              "MD5",
+              "md5"
+            ],
+            "context": "示例 文件夹 文件 命名规则 x202112345 由申请编号命名的申请文件夹 0000 4 位数字组成的序列文件夹 index.xml 符合 ICH 要求的骨架文件 index-md5.txt 符合 ICH 要求的 MD5 校验和文 件 m1 符合 ICH 要求的模块一内容文件 夹 cn 模块一区域文件夹 cn-regional.xml 模块一的骨架文件 1 《ICH eCTD 技术规范 V3.2.2》中规定的文件命名要求不允许使用下划线，但在临床数据集提 交时，SAS XPORT 文件的命名可能会使用下划线。考虑到在其他国家监管机构按照 eCTD 格式 递交的临床数据集文件命名也允许使用下划线，并且在《ICH"
+          },
+          {
+            "pdf_page": 38,
+            "matched_terms": [
+              "MD5",
+              "md5"
+            ],
+            "context": " ， 如 “operation” 、 “xlink:href” 、 “checksum-type”、“checksum”等。其中“checksum-type”属性的 值必须设置为“MD5”或“md5”。 叶元素的叶标题内容应当简短、明确并能提供有用信息。 目录元素在骨架文件中的内容如下图 14 所示： 34 / 40"
+          },
+          {
+            "pdf_page": 43,
+            "matched_terms": [
+              "MD5",
+              "md5"
+            ],
+            "context": "Study Tagging 文件中没有包含的关于研究主题和 Files, STF） 研究报告的信息，例如研究全称，研 究 ID，研究使用的种属，给药途径， 研究时长，对照类型等。 MD5 MD5 消息摘要算法（MD5 Message- Digest Algorithm），一种被广泛使用 的密码散列函数，用于产生一个文件 对应的数字指纹，即校验和。 校验和（checksum） 使用 MD5 消息摘要算法产生的文件 校验和，用以确保信息传输的完整性 和一致性。 DTD 文 档 类 型 定 义 （ Document Type 39 / 40"
+          }
+        ]
+      }
+    },
+    {
+      "source_id": "CDE-CN-V1.1-SPEC-ATTACHMENTS",
+      "requested_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDJSGFV1.1FJ.zip?name=eCTD%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83V1.1%E9%99%84%E4%BB%B6%E5%8C%85.zip",
+      "content_type": "application/zip",
+      "content_disposition": null,
+      "filename": "CDE-CN-V1.1-SPEC-ATTACHMENTS--eCTD技术规范V1.1附件包.zip",
+      "size": 494123,
+      "kind": "zip",
+      "sha256": "0dbfd2ffb8969731deef3a1dd446da6b48511b2d537c5946eb9498a0b5992eea",
+      "sm3": "ce6bb114e9b6b39bff2e16c82ad89fee7509e424fa3a8331607a7da1f9ba1144",
+      "downloaded_at_epoch": 1788453776,
+      "role": "effective_cn_ectd_v3_2_2_technical_attachment_package",
+      "status": "official_effective",
+      "download_status": "SUCCESS",
+      "archive": {
+        "status": "EXTRACTED",
+        "members": [
+          {
+            "name": "eCTD技术规范V1.1附件包/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+            "size": 12034,
+            "compressed_size": 1431
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-cv.xsd",
+            "size": 1652,
+            "compressed_size": 580
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-dependency.xsd",
+            "size": 1304,
+            "compressed_size": 482
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-elements.xsd",
+            "size": 1524,
+            "compressed_size": 532
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-application-type.xml",
+            "size": 1499,
+            "compressed_size": 583
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-product-type.xml",
+            "size": 691,
+            "compressed_size": 340
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+            "size": 2849,
+            "compressed_size": 950
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-sequence-type.xml",
+            "size": 951,
+            "compressed_size": 382
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+            "size": 7363,
+            "compressed_size": 904
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/eCTD受控词汇文件列表说明.pdf",
+            "size": 70318,
+            "compressed_size": 59834
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_CN.xml",
+            "size": 18752,
+            "compressed_size": 3769
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_ICH.xml",
+            "size": 39820,
+            "compressed_size": 6255
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+            "size": 1293,
+            "compressed_size": 499
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/cn-regional-1-1.xsl",
+            "size": 23469,
+            "compressed_size": 3660
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/附件1-4：CTD模块一文件组织结构.pdf",
+            "size": 404306,
+            "compressed_size": 384897
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+            "size": 31400,
+            "compressed_size": 4318
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+            "size": 5024,
+            "compressed_size": 1489
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/ectd-2-0.xsl",
+            "size": 2049,
+            "compressed_size": 694
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+            "size": 5008,
+            "compressed_size": 1282
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl",
+            "size": 5287,
+            "compressed_size": 1363
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/valid-values.xml",
+            "size": 7803,
+            "compressed_size": 1523
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/xlink.xsd",
+            "size": 9261,
+            "compressed_size": 1873
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/",
+            "size": 0,
+            "compressed_size": 0
+          },
+          {
+            "name": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/xml.xsd",
+            "size": 5516,
+            "compressed_size": 1829
+          }
+        ],
+        "extracted": [
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+            "size": 12034,
+            "kind": "unknown",
+            "sha256": "e1a7f6a88189f72d156ae403e1c3de89ddfaed32b5f477348e99c7d7aabc9dd4",
+            "sm3": "445547b2295cb924319bf940ad60b2839a14462f3a0f5eac8c99402d7d3c3a18"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-cv.xsd",
+            "size": 1652,
+            "kind": "unknown",
+            "sha256": "f0c7f0647f718f3f6805bea0a47de79d3fcc056875bf503c7ffefc04c7b7447d",
+            "sm3": "da609e9297604e9efdfa56c1434befd9ab7c2e14548c74ede5ebe4c8eaa8b9e7"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-dependency.xsd",
+            "size": 1304,
+            "kind": "unknown",
+            "sha256": "74e002522da8bb073f60b2e26dd3093f61bf23ddff4785736fbea5b0a35d75b5",
+            "sm3": "04ce3c0b0a6e79e17bfcabf49097e80a196c59308489f74e7407b30367cee362"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-elements.xsd",
+            "size": 1524,
+            "kind": "unknown",
+            "sha256": "303c303ef7b3a4c6d7721c903e08cae3d2a593fe7dbee5fce346f86e573a96ef",
+            "sm3": "d2077ae476da3028172a3d1f49b850d05709e90636b202d324c33e5d0704e18e"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-application-type.xml",
+            "size": 1499,
+            "kind": "unknown",
+            "sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641",
+            "sm3": "cc94dde92e8470c2b7931ec3d440825d2f766e7e8be5cbe717656115b6f9c221"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-product-type.xml",
+            "size": 691,
+            "kind": "unknown",
+            "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216",
+            "sm3": "5b7b8ab3091923c52404fc9cd636c5d24333ef01a4b48469c75a19ff12aa5505"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+            "size": 2849,
+            "kind": "unknown",
+            "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd",
+            "sm3": "5c672f56085c61ba5f3f656db78b561ffdda29690447062ad6ffdc97137df574"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-sequence-type.xml",
+            "size": 951,
+            "kind": "unknown",
+            "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17",
+            "sm3": "e989481e8d42f18a8590738516a9233addc5e70d6b237a1e2150750ec8178a00"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+            "size": 7363,
+            "kind": "unknown",
+            "sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867",
+            "sm3": "b30b3115d06454c4f7a77f6d64c4f9434c78323866b4330c78288e69f88e705e"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/eCTD受控词汇文件列表说明.pdf",
+            "size": 70318,
+            "kind": "pdf",
+            "sha256": "966503796da0e0ceaae814e26b51cf79b37ad23233e652b542c02f1575871151",
+            "sm3": "0d7e90c934f419307e56b969db7c5a4714f14fe9c14182ba53be577bbc38721d"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_CN.xml",
+            "size": 18752,
+            "kind": "unknown",
+            "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59",
+            "sm3": "36aca8fcbcad459cd64807f6b1123781393d4275153acb9ef3f658cfed7c271e"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_ICH.xml",
+            "size": 39820,
+            "kind": "unknown",
+            "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d",
+            "sm3": "68cb309a2453c9b68cec4d64558221e1a304485b97f9552d73ff3b0249c10217"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+            "size": 1293,
+            "kind": "unknown",
+            "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9",
+            "sm3": "f805c5a965dbc99cb82b6b1fce8bf8873816da3a90a3defbf12135e0fd6da0c7"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/cn-regional-1-1.xsl",
+            "size": 23469,
+            "kind": "unknown",
+            "sha256": "bb3c710f51444b9fe36b6cc18cb269beaa10c36ed117c80b60da5e274b5e745f",
+            "sm3": "6392a7019d11b499260dfd3ed6da12ccd34d4931becb510a4337cd328cda597a"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/附件1-4：CTD模块一文件组织结构.pdf",
+            "size": 404306,
+            "kind": "pdf",
+            "sha256": "386296ead625587bab9bcccaa9bada54a02119fec1c0e5604a1bf0cf27a80626",
+            "sm3": "18ddd02c832f75a960352b79559497e24fc7421379bcebc848bad4e7640cb580"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+            "size": 31400,
+            "kind": "unknown",
+            "sha256": "c094aa2bded99564ade8ac78ae1540f95e518461b8eebe9a3063f67a165c2731",
+            "sm3": "26b3e59410f676e9a1275ac4eafffa454f4993e5e171d1f6d35ac8a4d4bec3cc"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+            "size": 5024,
+            "kind": "unknown",
+            "sha256": "e6d47695501e263534a89a2b7bf7018c92e12a11c3dd82fc1d0c462bfa52c81f",
+            "sm3": "13a15d5fcd373cb8b0ee085775f2c4a55f51eda3646cd699720338f06aee54c4"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/ectd-2-0.xsl",
+            "size": 2049,
+            "kind": "unknown",
+            "sha256": "41bf6aaf78fa1ba736951174c5e3dc6724410f4d5d9332034dac9b2c8d34dcd1",
+            "sm3": "480bb3251939781c7064ebeaaf7ba1576c9a5a074df20ead2f87df27ea31c70c"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+            "size": 5008,
+            "kind": "unknown",
+            "sha256": "377e4aa00788e79c64afad0182cb67964b7a4ae8c5b86819b19ec2221e3a1d8f",
+            "sm3": "693248afcbf98de0ff9fde585ce094633b28afc16b9b5435d6a69ed55a4d9aeb"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl",
+            "size": 5287,
+            "kind": "unknown",
+            "sha256": "9131de4db31b5c74d6559e8e92f0aecb82bbd45f7783b8adfead826dbb943023",
+            "sm3": "d46bacf6539553f75a4495f99e45f87bc80612527c862a50969c0ac333ba397f"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/valid-values.xml",
+            "size": 7803,
+            "kind": "unknown",
+            "sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3",
+            "sm3": "eb7d656ef7419c7661c6645440b16af945fdb706f612f2baed7f0f75bce9e7e9"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/xlink.xsd",
+            "size": 9261,
+            "kind": "unknown",
+            "sha256": "04ba27c1e2dd651ebb9d9a888141f933aebe0f69318ba45bf97b0780aaee7b54",
+            "sm3": "9c90d9a2844e2344bb87b0980700c3a6b7cc5e51bf25b86d49cec1b680aeaf80"
+          },
+          {
+            "relative_path": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/xml.xsd",
+            "size": 5516,
+            "kind": "unknown",
+            "sha256": "a694fad40f399c42a4b1df99497e8dba4dd6f212e530733329a490d6ef7b1bb4",
+            "sm3": "5245cf0ed5a118ea432c9a368493c63660fe7436a4445a53cd37c3d2c279cbf3"
+          }
+        ]
+      }
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-NOTICE",
+      "requested_url": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "content_type": "text/html; charset=utf-8",
+      "content_disposition": null,
+      "filename": "CDE-CN-V4-DRAFT-NOTICE--7898f68946d8e8e44d074657c7112002.html",
+      "size": 25318,
+      "kind": "html",
+      "sha256": "34fff3e2fbc24a2352d8c64323d0dc0eb2d734d28a3d529976df217882133c0d",
+      "sm3": "d701f933dd4489248969d5f7625ed8ea519ff19589a1827990314ab4ddd010ec",
+      "downloaded_at_epoch": 1788453779,
+      "role": "cn_ectd_v4_draft_notice",
+      "status": "official_draft_notice",
+      "download_status": "SUCCESS"
+    }
+  ],
+  "discovered_sources": [],
+  "failures": [],
+  "controls": {
+    "raw_binary_storage": "GitHub Actions artifact only",
+    "effective_profile": "China eCTD V3.2.2 technical files V1.1, effective 2026-03-01",
+    "draft_profile": "China eCTD v4.0 consultation package dated 2026-05-27",
+    "role_confirmation": "Validator candidates remain unconfirmed unless content and internal metadata support the role."
+  }
+}

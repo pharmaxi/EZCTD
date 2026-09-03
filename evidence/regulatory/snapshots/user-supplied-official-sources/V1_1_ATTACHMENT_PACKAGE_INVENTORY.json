@@ -1,0 +1,354 @@
+{
+  "schema_version": "0.1.0",
+  "source_id": "CDE-CN-V1.1-SPEC-ATTACHMENTS",
+  "source_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDJSGFV1.1FJ.zip?name=eCTD%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83V1.1%E9%99%84%E4%BB%B6%E5%8C%85.zip",
+  "source_sha256": "0dbfd2ffb8969731deef3a1dd446da6b48511b2d537c5946eb9498a0b5992eea",
+  "source_sm3": "ce6bb114e9b6b39bff2e16c82ad89fee7509e424fa3a8331607a7da1f9ba1144",
+  "status": "EXTRACTED",
+  "members": [
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+      "size": 12034,
+      "kind": "unknown",
+      "sha256": "e1a7f6a88189f72d156ae403e1c3de89ddfaed32b5f477348e99c7d7aabc9dd4",
+      "sm3": "445547b2295cb924319bf940ad60b2839a14462f3a0f5eac8c99402d7d3c3a18"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-cv.xsd",
+      "size": 1652,
+      "kind": "unknown",
+      "sha256": "f0c7f0647f718f3f6805bea0a47de79d3fcc056875bf503c7ffefc04c7b7447d",
+      "sm3": "da609e9297604e9efdfa56c1434befd9ab7c2e14548c74ede5ebe4c8eaa8b9e7"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-dependency.xsd",
+      "size": 1304,
+      "kind": "unknown",
+      "sha256": "74e002522da8bb073f60b2e26dd3093f61bf23ddff4785736fbea5b0a35d75b5",
+      "sm3": "04ce3c0b0a6e79e17bfcabf49097e80a196c59308489f74e7407b30367cee362"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-elements.xsd",
+      "size": 1524,
+      "kind": "unknown",
+      "sha256": "303c303ef7b3a4c6d7721c903e08cae3d2a593fe7dbee5fce346f86e573a96ef",
+      "sm3": "d2077ae476da3028172a3d1f49b850d05709e90636b202d324c33e5d0704e18e"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-application-type.xml",
+      "size": 1499,
+      "kind": "unknown",
+      "sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641",
+      "sm3": "cc94dde92e8470c2b7931ec3d440825d2f766e7e8be5cbe717656115b6f9c221"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-product-type.xml",
+      "size": 691,
+      "kind": "unknown",
+      "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216",
+      "sm3": "5b7b8ab3091923c52404fc9cd636c5d24333ef01a4b48469c75a19ff12aa5505"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+      "size": 2849,
+      "kind": "unknown",
+      "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd",
+      "sm3": "5c672f56085c61ba5f3f656db78b561ffdda29690447062ad6ffdc97137df574"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-sequence-type.xml",
+      "size": 951,
+      "kind": "unknown",
+      "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17",
+      "sm3": "e989481e8d42f18a8590738516a9233addc5e70d6b237a1e2150750ec8178a00"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+      "size": 7363,
+      "kind": "unknown",
+      "sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867",
+      "sm3": "b30b3115d06454c4f7a77f6d64c4f9434c78323866b4330c78288e69f88e705e"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/eCTD受控词汇文件列表说明.pdf",
+      "size": 70318,
+      "kind": "pdf",
+      "sha256": "966503796da0e0ceaae814e26b51cf79b37ad23233e652b542c02f1575871151",
+      "sm3": "0d7e90c934f419307e56b969db7c5a4714f14fe9c14182ba53be577bbc38721d"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_CN.xml",
+      "size": 18752,
+      "kind": "unknown",
+      "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59",
+      "sm3": "36aca8fcbcad459cd64807f6b1123781393d4275153acb9ef3f658cfed7c271e"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_ICH.xml",
+      "size": 39820,
+      "kind": "unknown",
+      "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d",
+      "sm3": "68cb309a2453c9b68cec4d64558221e1a304485b97f9552d73ff3b0249c10217"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+      "size": 1293,
+      "kind": "unknown",
+      "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9",
+      "sm3": "f805c5a965dbc99cb82b6b1fce8bf8873816da3a90a3defbf12135e0fd6da0c7"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/cn-regional-1-1.xsl",
+      "size": 23469,
+      "kind": "unknown",
+      "sha256": "bb3c710f51444b9fe36b6cc18cb269beaa10c36ed117c80b60da5e274b5e745f",
+      "sm3": "6392a7019d11b499260dfd3ed6da12ccd34d4931becb510a4337cd328cda597a"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/附件1-4：CTD模块一文件组织结构.pdf",
+      "size": 404306,
+      "kind": "pdf",
+      "sha256": "386296ead625587bab9bcccaa9bada54a02119fec1c0e5604a1bf0cf27a80626",
+      "sm3": "18ddd02c832f75a960352b79559497e24fc7421379bcebc848bad4e7640cb580"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+      "size": 31400,
+      "kind": "unknown",
+      "sha256": "c094aa2bded99564ade8ac78ae1540f95e518461b8eebe9a3063f67a165c2731",
+      "sm3": "26b3e59410f676e9a1275ac4eafffa454f4993e5e171d1f6d35ac8a4d4bec3cc"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+      "size": 5024,
+      "kind": "unknown",
+      "sha256": "e6d47695501e263534a89a2b7bf7018c92e12a11c3dd82fc1d0c462bfa52c81f",
+      "sm3": "13a15d5fcd373cb8b0ee085775f2c4a55f51eda3646cd699720338f06aee54c4"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/ectd-2-0.xsl",
+      "size": 2049,
+      "kind": "unknown",
+      "sha256": "41bf6aaf78fa1ba736951174c5e3dc6724410f4d5d9332034dac9b2c8d34dcd1",
+      "sm3": "480bb3251939781c7064ebeaaf7ba1576c9a5a074df20ead2f87df27ea31c70c"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+      "size": 5008,
+      "kind": "unknown",
+      "sha256": "377e4aa00788e79c64afad0182cb67964b7a4ae8c5b86819b19ec2221e3a1d8f",
+      "sm3": "693248afcbf98de0ff9fde585ce094633b28afc16b9b5435d6a69ed55a4d9aeb"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl",
+      "size": 5287,
+      "kind": "unknown",
+      "sha256": "9131de4db31b5c74d6559e8e92f0aecb82bbd45f7783b8adfead826dbb943023",
+      "sm3": "d46bacf6539553f75a4495f99e45f87bc80612527c862a50969c0ac333ba397f"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/valid-values.xml",
+      "size": 7803,
+      "kind": "unknown",
+      "sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3",
+      "sm3": "eb7d656ef7419c7661c6645440b16af945fdb706f612f2baed7f0f75bce9e7e9"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/xlink.xsd",
+      "size": 9261,
+      "kind": "unknown",
+      "sha256": "04ba27c1e2dd651ebb9d9a888141f933aebe0f69318ba45bf97b0780aaee7b54",
+      "sm3": "9c90d9a2844e2344bb87b0980700c3a6b7cc5e51bf25b86d49cec1b680aeaf80"
+    },
+    {
+      "relative_path": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/xml.xsd",
+      "size": 5516,
+      "kind": "unknown",
+      "sha256": "a694fad40f399c42a4b1df99497e8dba4dd6f212e530733329a490d6ef7b1bb4",
+      "sm3": "5245cf0ed5a118ea432c9a368493c63660fe7436a4445a53cd37c3d2c279cbf3"
+    }
+  ],
+  "archive_listing": [
+    {
+      "name": "eCTD技术规范V1.1附件包/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+      "size": 12034,
+      "compressed_size": 1431
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-cv.xsd",
+      "size": 1652,
+      "compressed_size": 580
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-dependency.xsd",
+      "size": 1304,
+      "compressed_size": 482
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cn-elements.xsd",
+      "size": 1524,
+      "compressed_size": 532
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-application-type.xml",
+      "size": 1499,
+      "compressed_size": 583
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-product-type.xml",
+      "size": 691,
+      "compressed_size": 340
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+      "size": 2849,
+      "compressed_size": 950
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/cv-sequence-type.xml",
+      "size": 951,
+      "compressed_size": 382
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+      "size": 7363,
+      "compressed_size": 904
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/eCTD受控词汇文件列表说明.pdf",
+      "size": 70318,
+      "compressed_size": 59834
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_CN.xml",
+      "size": 18752,
+      "compressed_size": 3769
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/element-property_ICH.xml",
+      "size": 39820,
+      "compressed_size": 6255
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+      "size": 1293,
+      "compressed_size": 499
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-3：区域性样式文件/cn-regional-1-1.xsl",
+      "size": 23469,
+      "compressed_size": 3660
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件1-4：CTD模块一文件组织结构/附件1-4：CTD模块一文件组织结构.pdf",
+      "size": 404306,
+      "compressed_size": 384897
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+      "size": 31400,
+      "compressed_size": 4318
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+      "size": 5024,
+      "compressed_size": 1489
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-3：ICH样式文件/ectd-2-0.xsl",
+      "size": 2049,
+      "compressed_size": 694
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+      "size": 5008,
+      "compressed_size": 1282
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl",
+      "size": 5287,
+      "compressed_size": 1363
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件2-6：STF标签值文件/valid-values.xml",
+      "size": 7803,
+      "compressed_size": 1523
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件3-1：w3c标准xlink结构定义文件/xlink.xsd",
+      "size": 9261,
+      "compressed_size": 1873
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/",
+      "size": 0,
+      "compressed_size": 0
+    },
+    {
+      "name": "eCTD技术规范V1.1附件包/附件3-2：w3c标准xml命名规范定义文件/xml.xsd",
+      "size": 5516,
+      "compressed_size": 1829
+    }
+  ],
+  "interpretation": "Immutable official technical input; inventory does not mean every member is required in every sequence."
+}
