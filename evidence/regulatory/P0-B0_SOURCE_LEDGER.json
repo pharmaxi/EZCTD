@@ -1,0 +1,148 @@
+{
+  "schema_version": "0.2.0",
+  "milestone": "P0-B0",
+  "as_of": "2026-09-03",
+  "sources": [
+    {
+      "source_id": "SRC-NMPA-2026-008",
+      "authority": "NMPA",
+      "title": "关于化学药品和生物制品全面实施药品电子通用技术文档申报的公告（2026年第8号）",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.nmpa.gov.cn/xxgk/ggtg/ypggtg/ypqtggtg/20260115150651145.html",
+      "role": "scope_and_effective_date",
+      "archive_status": "URL_VERIFIED_LOCAL_ARCHIVE_PENDING",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-2026-004",
+      "authority": "CDE",
+      "title": "关于发布eCTD V3.2.2相关技术文件的通告（2026年第4号）",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
+      "role": "technical_package_release",
+      "archive_status": "PAGE_VERIFIED_ATTACHMENTS_PARTIAL",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-VALIDATION-V1.1",
+      "authority": "CDE",
+      "title": "eCTD验证标准V1.1",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "role": "primary_26_rule_table",
+      "archive_status": "CONTENT_AND_PAGES_VERIFIED_LOCAL_ARCHIVE_PENDING",
+      "printed_pages": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-GUIDE-V1.1",
+      "authority": "CDE",
+      "title": "eCTD实施指南V1.1",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183312.pdf",
+      "role": "context_ocr_navigation_security_signature_size",
+      "archive_status": "CONTENT_AND_PAGES_VERIFIED_LOCAL_ARCHIVE_PENDING",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-TECHSPEC-V1.1-RAR",
+      "authority": "CDE",
+      "title": "eCTD技术规范V1.1及附件包",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183311.rar",
+      "role": "regional_pdf_navigation_and_package_semantics",
+      "archive_status": "URL_AND_METADATA_VERIFIED_CONTENT_NOT_EXTRACTED",
+      "sha256": null,
+      "blocker": "当前研究环境无法解析RAR；3.3/3.4及附件DTD/XSD需本地固化。"
+    },
+    {
+      "source_id": "SRC-CDE-MAPPING-V1.1",
+      "authority": "CDE",
+      "title": "现行申报资料要求与eCTD目录元素、CTD目录层级对应表",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183309.xlsx",
+      "role": "node_context_and_exemption_mapping",
+      "archive_status": "URL_VERIFIED_CONTENT_NOT_PARSED",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-VALIDATOR-1.1.0-NOTICE",
+      "authority": "CDE",
+      "title": "关于更新eCTD验证软件的通知",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "role": "official_validator_version_and_change_scope",
+      "archive_status": "PAGE_VERIFIED_INSTALLER_AND_MANUAL_NOT_ARCHIVED",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-CDE-VALIDATOR-1.1.0",
+      "authority": "CDE",
+      "title": "eCTD验证软件 V1.1.0及配套操作手册",
+      "status": "effective",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "url": null,
+      "role": "black_box_reference_implementation",
+      "archive_status": "NOT_OBTAINED",
+      "sha256": null,
+      "blocker": "需从CDE eCTD专栏常用下载获取并记录安装包/手册哈希。"
+    },
+    {
+      "source_id": "SRC-ICH-FORMAT-1.3",
+      "authority": "ICH",
+      "title": "Specification for Submission Formats for eCTD v1.3",
+      "status": "current_global_reference",
+      "url": "https://admin.ich.org/sites/default/files/inline-files/Specification_for_Submission_Formats_for_eCTD_v1_3.pdf",
+      "role": "global_pdf_semantics",
+      "archive_status": "CONTENT_VERIFIED_LOCAL_ARCHIVE_PENDING",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-ICH-ECTD-3.2.2",
+      "authority": "ICH",
+      "title": "Electronic Common Technical Document Specification v3.2.2",
+      "status": "current_for_target",
+      "url": "https://admin.ich.org/sites/default/files/inline-files/eCTD_Specification_v3_2_2_0.pdf",
+      "role": "backbone_links_paths_md5",
+      "archive_status": "CONTENT_VERIFIED_LOCAL_ARCHIVE_PENDING",
+      "sha256": null
+    },
+    {
+      "source_id": "SRC-PDF-REFERENCE",
+      "authority": "PDF specification ecosystem",
+      "title": "PDF actions, destinations, annotations, encryption and version semantics",
+      "status": "implementation_reference",
+      "url": "https://opensource.adobe.com/dc-acrobat-sdk-docs/library/pdfmark/pdfmark_Actions.html",
+      "role": "object_level_detector_design",
+      "archive_status": "ONLINE_REFERENCE_ONLY",
+      "sha256": null
+    }
+  ],
+  "evidence_policy": {
+    "official_rule_claim": "requires CDE/NMPA effective source",
+    "global_semantics": "may use ICH",
+    "pdf_object_implementation": "may use PDF specification and primary library documentation",
+    "vendor_behavior": "never promoted to official rule without CDE evidence",
+    "observed_validator_behavior": "requires raw validator output, version and input hash"
+  }
+}

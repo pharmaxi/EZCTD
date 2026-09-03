@@ -18,6 +18,12 @@ audit/
 cache/
 logs/
 
+# Generated corpus and black-box workspaces
+/tests/corpus/generated/
+/tests/corpus/generated-*/
+/evidence/black-box/*/sequence/
+/evidence/black-box/*/work/
+
 # Local project data and sensitive fixtures
 local-data/
 samples/private/
