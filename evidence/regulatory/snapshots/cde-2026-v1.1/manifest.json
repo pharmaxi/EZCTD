@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2.0",
-  "generated_at_epoch": 1788433194,
+  "generated_at_epoch": 1788433682,
   "generator": "tools/regulatory/fetch_cde_sources.py",
   "policy": {
     "authority_order": [
@@ -64,7 +64,7 @@
       "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
       "status": 202,
       "content_type": "text/html; charset=utf-8",
-      "sha256": "1b473971471bf8e0445bed1645e92928018a23a8c4371036a6f6b850366a5f02",
+      "sha256": "615784d2d88afc74b1d30769f9c97787ca19e54544965fbfde2d41940e44f142",
       "saved_as": "pages/page-001-1833f880f38d.html",
       "seed_role": "effective_technical_files_notice",
       "links_found": 1
@@ -74,7 +74,7 @@
       "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
       "status": 202,
       "content_type": "text/html; charset=utf-8",
-      "sha256": "30a2bab113df070c17a4ad72f9390afb0993039992ca6a4e5d76c5a7b074077e",
+      "sha256": "55d7f8b2c61c1d33948b5fe6d85a4735ec37bd3d6a6d0334ee6e8ac3ce7ca048",
       "saved_as": "pages/page-002-f61c52eae9ff.html",
       "seed_role": "validator_1_1_0_notice",
       "links_found": 1
@@ -84,7 +84,7 @@
       "final_url": "https://www.cde.org.cn/",
       "status": 200,
       "content_type": "text/html",
-      "sha256": "f5bd86e63188378dcbcbe17415f96f5bea252b293332a7cb39da59f7ddec7f83",
+      "sha256": "36ce5f650e0179cd212e83b5e0b7267c48695184eeaebe8f4b770bcf5996c3ae",
       "saved_as": "pages/page-003-076bfedd5465.html",
       "seed_role": "common_download_discovery",
       "links_found": 138

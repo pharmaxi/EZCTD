@@ -164,9 +164,18 @@ def main() -> int:
         page_candidates = [record for record in matched if not record.get("download_status")]
         binaries = [record for record in matched if record.get("download_status") == "SUCCESS"]
         official_matches = [record for record in matched if provenance(record.get("final_url") or record.get("url") or record.get("requested_url")) == "official"]
-        secondary_binaries = [record for record in binaries if provenance(record.get("final_url") or record.get("requested_url")) == "secondary_mirror"]
+        official_binaries = [
+            record
+            for record in binaries
+            if provenance(record.get("final_url") or record.get("requested_url") or record.get("url")) == "official"
+        ]
+        secondary_binaries = [
+            record
+            for record in binaries
+            if provenance(record.get("final_url") or record.get("requested_url") or record.get("url")) == "secondary_mirror"
+        ]
         status = "NOT_DISCOVERED"
-        if binaries and official_matches:
+        if official_binaries:
             status = "OFFICIAL_BINARY_HASHED"
         elif secondary_binaries:
             status = "SECONDARY_MIRROR_BINARY_HASHED"
@@ -187,6 +196,8 @@ def main() -> int:
             "status": status,
             "page_or_link_candidates": len(page_candidates),
             "binary_candidates": len(binaries),
+            "official_binary_candidates": len(official_binaries),
+            "secondary_binary_candidates": len(secondary_binaries),
             "official_candidates": len(official_matches),
             "matched_records": [
                 {
@@ -233,12 +244,12 @@ def main() -> int:
         "",
         "## Asset ledger",
         "",
-        "| ID | Required asset | Status | Binary candidates | Official candidates | Used for |",
-        "|---|---|---|---:|---:|---|",
+        "| ID | Required asset | Status | Official binaries | Secondary binaries | Official page/link candidates | Used for |",
+        "|---|---|---|---:|---:|---:|---|",
     ]
     for item in output_items:
         lines.append(
-            f"| `{item['id']}` | {item['title']} | `{item['status']}` | {item['binary_candidates']} | {item['official_candidates']} | {', '.join(item['required_for'])} |"
+            f"| `{item['id']}` | {item['title']} | `{item['status']}` | {item['official_binary_candidates']} | {item['secondary_binary_candidates']} | {item['official_candidates']} | {', '.join(item['required_for'])} |"
         )
     lines += [
         "",

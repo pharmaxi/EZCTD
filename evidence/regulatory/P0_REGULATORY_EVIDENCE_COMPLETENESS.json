@@ -27,6 +27,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -44,6 +46,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -62,6 +66,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -79,6 +85,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -101,6 +109,8 @@
       "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
       "page_or_link_candidates": 1,
       "binary_candidates": 1,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": [
         {
@@ -135,6 +145,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -153,6 +165,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -171,13 +185,15 @@
       "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
       "page_or_link_candidates": 2,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 2,
       "matched_records": [
         {
           "url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
           "anchor_or_role": "validator_1_1_0_notice",
           "saved_as": "pages/page-002-f61c52eae9ff.html",
-          "sha256": "30a2bab113df070c17a4ad72f9390afb0993039992ca6a4e5d76c5a7b074077e",
+          "sha256": "55d7f8b2c61c1d33948b5fe6d85a4735ec37bd3d6a6d0334ee6e8ac3ce7ca048",
           "download_status": null,
           "provenance": "official"
         },
@@ -207,6 +223,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -224,6 +242,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -243,6 +263,8 @@
       "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
       "page_or_link_candidates": 1,
       "binary_candidates": 1,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": [
         {
@@ -280,6 +302,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     },
@@ -298,6 +322,8 @@
       "status": "NOT_DISCOVERED",
       "page_or_link_candidates": 0,
       "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
       "official_candidates": 0,
       "matched_records": []
     }
