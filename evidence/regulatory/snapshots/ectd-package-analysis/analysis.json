@@ -1,0 +1,77 @@
+{
+  "schema_version": "0.1.0",
+  "generator": "tools/regulatory/analyze_ectd_packages.py",
+  "status": "OBSERVATIONAL_ONLY",
+  "safety_scope": "Static archive and XML inspection. No executable was launched and no proprietary program was decompiled.",
+  "assets_directory_exists": true,
+  "assets_count": 3,
+  "extractions": [
+    {
+      "source": "build/regulatory-source-snapshot/assets/001-xhtml1-transitional.dtd",
+      "status": "NOT_ARCHIVE",
+      "method": null,
+      "files": 0,
+      "bytes": 0,
+      "error": null,
+      "source_sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+      "source_name": "001-xhtml1-transitional.dtd"
+    },
+    {
+      "source": "build/regulatory-source-snapshot/assets/002-183312.pdf",
+      "status": "NOT_ARCHIVE",
+      "method": null,
+      "files": 0,
+      "bytes": 0,
+      "error": null,
+      "source_sha256": "3dba8a9bb32e6af6cea585aa742217afdeb95ace3a5e2de60ec557f255e7fe3d",
+      "source_name": "002-183312.pdf"
+    },
+    {
+      "source": "build/regulatory-source-snapshot/assets/003-183313.pdf",
+      "status": "NOT_ARCHIVE",
+      "method": null,
+      "files": 0,
+      "bytes": 0,
+      "error": null,
+      "source_sha256": "9d8b9e8baae0f891d833946a0cde78332c39f8072974387ecdda6ca16c884f7a",
+      "source_name": "003-183313.pdf"
+    }
+  ],
+  "observed": [
+    {
+      "source_id": "asset-001-28905cd059167bfa",
+      "file_count": 1,
+      "total_bytes": 32111,
+      "files": [
+        {
+          "relative_path": "001-xhtml1-transitional.dtd",
+          "size": 32111,
+          "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+          "extension": ".dtd"
+        }
+      ],
+      "xml_files": [],
+      "classification": {
+        "has_index_xml": false,
+        "regional_backbones": [],
+        "utility_files": [
+          "001-xhtml1-transitional.dtd"
+        ],
+        "module_directories": [],
+        "sequence_directories": [],
+        "md5_files": [],
+        "likely_sample_sequence": false,
+        "likely_technical_utility_package": true,
+        "xml_roots": []
+      }
+    }
+  ],
+  "summary": {
+    "assets": 3,
+    "successfully_extracted": 0,
+    "trees_analyzed": 1,
+    "sample_sequence_candidates": 0,
+    "packages_with_utility_files": 1,
+    "regional_backbones_observed": 0
+  }
+}
