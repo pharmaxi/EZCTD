@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Build and runtime
+build/
+dist/
+*.egg-info/
+workspace/
+output/
+reports/
+audit/
+cache/
+logs/
+
+# Local project data and sensitive fixtures
+local-data/
+samples/private/
+fixtures/private/
+evidence/private/
+*.p12
+*.pfx
+*.key
+*.pem
+.env
+.env.*
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
