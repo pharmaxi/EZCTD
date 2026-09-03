@@ -6,10 +6,10 @@
 
 | Source ID | Status | Kind | Bytes | SHA-256 |
 |---|---|---:|---:|---|
-| `CDE-ECTD-COLUMN` | SUCCESS | html | 25082 | `36bd27021e061542fb775fb4c7eecab5dcbd10021507c9c0e988cbc906e0b1f9` |
+| `CDE-ECTD-COLUMN` | SUCCESS | html | 25059 | `e006d56ba2a886c495b1f48d4d5f52e7916b2e2878526d277a65b9b6b6f8ce21` |
 | `CDE-CN-V1.1-SPEC-PDF` | SUCCESS | pdf | 1742696 | `fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b` |
 | `CDE-CN-V1.1-SPEC-ATTACHMENTS` | SUCCESS | zip | 494123 | `0dbfd2ffb8969731deef3a1dd446da6b48511b2d537c5946eb9498a0b5992eea` |
-| `CDE-CN-V4-DRAFT-NOTICE` | SUCCESS | html | 25526 | `6db293ca4ce6d80b62eb21e40a3b13daddfc247d0c52212392f693da0a44738e` |
+| `CDE-CN-V4-DRAFT-NOTICE` | SUCCESS | html | 25165 | `8d075d1ec4956b5f1b51abf1a4dd4829b8dcdd63053550fa96068de085cd808b` |
 
 ## Discovered official download candidates
 
