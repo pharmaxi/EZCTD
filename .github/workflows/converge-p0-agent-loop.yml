@@ -1,0 +1,330 @@
+name: Converge P0 agent loop
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - ".github/workflows/converge-p0-agent-loop.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: converge-p0-agent-loop
+  cancel-in-progress: false
+
+jobs:
+  converge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - id: prepare
+        name: Repair and materialize current sources
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build/p0-convergence
+          {
+            python tools/p0-b0/repair_materializer.py
+            python tools/p0-b0/repair_materializer_v2.py
+            python tools/p0-b0/repair_materializer_v3.py
+            python tools/p0-b0/materialize_p0_b0.py
+            python tools/p0-b1/repair_observer.py
+            python tools/p0-b0/generate_sample_isolation_audit.py
+            python tools/regulatory/repair_evidence_completeness.py
+            python -m compileall -q src tools tests
+          } 2>&1 | tee build/p0-convergence/prepare.log
+
+      - id: install
+        name: Install test toolchain
+        if: steps.prepare.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            sudo apt-get update
+            sudo apt-get install -y qpdf p7zip-full
+            python -m pip install --upgrade pip
+            python -m pip install -r tests/p0_b0/requirements.txt
+            python -m pip install -e .
+          } 2>&1 | tee build/p0-convergence/install.log
+
+      - id: p0b0
+        name: Run corrected P0-B0 synthetic gate
+        if: steps.prepare.outcome == 'success' && steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b0/run_all.py 2>&1 | tee build/p0-convergence/p0-b0.log
+
+      - id: p0b1
+        name: Run P0-B1 target coverage and read-only gate
+        if: steps.p0b0.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b1/run_readonly_gate.py build/p0-b0-smoke 2>&1 | tee build/p0-convergence/p0-b1.log
+
+      - id: package
+        name: Package inputs for future official-validator run
+        if: steps.p0b1.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b0/package_for_official_run.py \
+            --smoke-dir build/p0-b0-smoke \
+            --manifest tests/p0_b0/smoke_manifest.json \
+            --output build/ezctd-p0-b0-official-run.zip \
+            2>&1 | tee build/p0-convergence/package.log
+
+      - name: Write auditable convergence report
+        if: always()
+        env:
+          PREPARE: ${{ steps.prepare.outcome }}
+          INSTALL: ${{ steps.install.outcome }}
+          P0B0: ${{ steps.p0b0.outcome }}
+          P0B1: ${{ steps.p0b1.outcome }}
+          PACKAGE: ${{ steps.package.outcome }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import json, os
+          from pathlib import Path
+
+          phases = {
+              'prepare': os.environ.get('PREPARE', 'skipped'),
+              'install': os.environ.get('INSTALL', 'skipped'),
+              'p0_b0': os.environ.get('P0B0', 'skipped'),
+              'p0_b1': os.environ.get('P0B1', 'skipped'),
+              'official_run_package': os.environ.get('PACKAGE', 'skipped'),
+          }
+          success = all(value == 'success' for value in phases.values())
+          logs = {}
+          for name in ['prepare', 'install', 'p0-b0', 'p0-b1', 'package']:
+              path = Path('build/p0-convergence') / f'{name}.log'
+              text = path.read_text(encoding='utf-8', errors='replace') if path.exists() else ''
+              logs[name] = {'path': str(path), 'tail': '\n'.join(text.splitlines()[-180:])}
+
+          b0 = {}
+          b1 = {}
+          readonly = {}
+          for path, target in [
+              (Path('build/p0-b0-gate-report.json'), b0),
+              (Path('build/p0-b1-observer-report.json'), b1),
+              (Path('build/p0-b1-readonly-integrity.json'), readonly),
+          ]:
+              if path.exists():
+                  target.update(json.loads(path.read_text(encoding='utf-8')))
+
+          payload = {
+              'schema_version': '0.1.0',
+              'workflow': 'Converge P0 agent loop',
+              'run_id': os.environ['RUN_ID'],
+              'run_attempt': os.environ['RUN_ATTEMPT'],
+              'trigger_head_sha': os.environ['HEAD_SHA'],
+              'status': 'PASS_CORE_SYNTHETIC' if success else 'FAILED_OR_INCOMPLETE',
+              'phases': phases,
+              'p0_b0_report': b0,
+              'p0_b1_report_summary': {
+                  'cases': b1.get('cases'),
+                  'target_hits': b1.get('target_hits'),
+                  'baseline_findings': b1.get('baseline_findings'),
+                  'reference_exemption_findings': b1.get('reference_exemption_findings'),
+                  'failures': b1.get('failures'),
+              },
+              'read_only_integrity': readonly,
+              'official_validator': {
+                  'target_version': '1.1.0',
+                  'observations': 0,
+                  'status': 'NOT_RUN',
+              },
+              'logs': logs,
+          }
+          Path('docs/status').mkdir(parents=True, exist_ok=True)
+          Path('docs/status/P0_AGENT_LOOP_CONVERGENCE.json').write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+
+          lines = [
+              '# P0 agent-loop convergence report',
+              '',
+              f"- Core synthetic status: **{payload['status']}**",
+              f"- P0-B0 official rules: {b0.get('rules', 'n/a')}",
+              f"- P0-B0 case recipes: {b0.get('case_recipes', 'n/a')}",
+              f"- P0-B0 smoke fixtures: {b0.get('smoke', 'n/a')}",
+              f"- P0-B1 target hits: {b1.get('target_hits', 'n/a')}/26",
+              f"- Baseline findings: {len(b1.get('baseline_findings') or [])}",
+              f"- Read-only unchanged files: {readonly.get('unchanged', 'n/a')}/{readonly.get('files', 'n/a')}",
+              '- CDE eCTD validator V1.1.0 observations: **0; NOT_RUN**',
+              '',
+              '## Phase outcomes',
+              '',
+              '| Phase | Outcome |',
+              '|---|---|',
+          ]
+          for phase, outcome in phases.items():
+              lines.append(f'| `{phase}` | **{outcome}** |')
+          if not success:
+              for name, record in logs.items():
+                  if record['tail']:
+                      lines += ['', f'## Diagnostic tail: {name}', '', '```text', record['tail'], '```']
+          lines += [
+              '',
+              'A PASS here proves only the synthetic fixture, independent probe, target-condition and read-only gates. It does not establish official CDE equivalence or real-dossier performance.',
+              '',
+          ]
+          Path('docs/status/P0_AGENT_LOOP_CONVERGENCE.md').write_text('\n'.join(lines), encoding='utf-8')
+
+          if success:
+              Path('docs/validation/p0-b0/CI_GATE_PASS.md').write_text(
+                  '# P0-B0-A corrected synthetic gate: PASS\n\n'
+                  f"- Rules: {b0.get('rules')}/26\n"
+                  f"- Case recipes: {b0.get('case_recipes')}/130\n"
+                  f"- Smoke fixtures: {b0.get('smoke')}/28\n"
+                  f"- Object self-checks: {b0.get('self_check')}/28\n"
+                  f"- PDFium expected outcomes: {b0.get('pdfium')}/28\n"
+                  f"- qpdf expected outcomes: {b0.get('qpdf')}/28\n"
+                  f"- Fixture reproducibility: {b0.get('fixture_reproducibility')}/28\n"
+                  '- CDE validator V1.1.0: NOT_RUN\n\n'
+                  'This marker is limited to the synthetic gate.\n',
+                  encoding='utf-8',
+              )
+              Path('docs/validation/p0-b1').mkdir(parents=True, exist_ok=True)
+              Path('docs/validation/p0-b1/P0_B1_OBSERVER_GATE.md').write_text(
+                  '# P0-B1 experimental read-only observer gate: PASS\n\n'
+                  f"- Target conditions detected: {b1.get('target_hits')}/26\n"
+                  f"- Baseline findings: {len(b1.get('baseline_findings') or [])}\n"
+                  f"- Input hashes unchanged: {readonly.get('unchanged')}/{readonly.get('files')}\n"
+                  '- CDE validator V1.1.0: NOT_RUN\n\n'
+                  'The observer remains experimental and read-only; this is not an official compatibility claim.\n',
+                  encoding='utf-8',
+              )
+          PY
+
+      - name: Commit convergence state
+        if: always()
+        env:
+          CORE_SUCCESS: ${{ steps.prepare.outcome == 'success' && steps.install.outcome == 'success' && steps.p0b0.outcome == 'success' && steps.p0b1.outcome == 'success' && steps.package.outcome == 'success' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$CORE_SUCCESS" = "true" ]; then
+            git add \
+              tools/p0-b0/materialize_p0_b0.py \
+              tools/regulatory/build_evidence_completeness.py \
+              src/ezctd \
+              tests/p0_b0 \
+              docs/validation/p0-b0 \
+              docs/validation/p0-b1 \
+              docs/status/P0_AGENT_LOOP_CONVERGENCE.json \
+              docs/status/P0_AGENT_LOOP_CONVERGENCE.md \
+              PROJECT_STATUS.md CHANGELOG.md
+            MESSAGE="feat(p0): converge synthetic validation and read-only observer gates"
+          else
+            git add docs/status/P0_AGENT_LOOP_CONVERGENCE.json docs/status/P0_AGENT_LOOP_CONVERGENCE.md
+            MESSAGE="ci(p0): record failed or incomplete convergence run"
+          fi
+          if git diff --cached --quiet; then
+            echo "No convergence changes to commit."
+          else
+            git commit -m "$MESSAGE"
+          fi
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Assert convergence success
+        if: always()
+        env:
+          PREPARE: ${{ steps.prepare.outcome }}
+          INSTALL: ${{ steps.install.outcome }}
+          P0B0: ${{ steps.p0b0.outcome }}
+          P0B1: ${{ steps.p0b1.outcome }}
+          PACKAGE: ${{ steps.package.outcome }}
+        run: |
+          test "$PREPARE" = success
+          test "$INSTALL" = success
+          test "$P0B0" = success
+          test "$P0B1" = success
+          test "$PACKAGE" = success
+
+      - name: Create or update draft pull request
+        if: steps.prepare.outcome == 'success' && steps.install.outcome == 'success' && steps.p0b0.outcome == 'success' && steps.p0b1.outcome == 'success' && steps.package.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BODY=$(cat <<'EOF'
+          ## Scope
+
+          This draft PR establishes the evidence-first P0 baseline for EZCTD:
+
+          - CDE PDF rules 6.1–6.26 source-verified metadata;
+          - 26 detector contracts and 130 case recipes;
+          - 28 target-positive/control/exemption smoke PDFs;
+          - object-level, PDFium, qpdf and reproducibility probes;
+          - target-rule isolation/correlation audit;
+          - experimental read-only PDF observer with byte-integrity gate;
+          - official-validator evidence protocol and regulatory-source inventory.
+
+          ## Passed in CI
+
+          - P0-B0 corrected synthetic gate;
+          - 26/26 target conditions detected on the synthetic corpus;
+          - control PDF has no findings;
+          - rule 6.23 reference exemption does not false-positive;
+          - 28/28 input PDF hashes unchanged by scanning.
+
+          ## Explicitly not completed
+
+          CDE eCTD validation software V1.1.0 has not yet been run against these cases. Official observations remain `0 / NOT_RUN`; this PR does not claim official equivalence or production readiness.
+          EOF
+          )
+          EXISTING=$(gh pr list --repo "$GITHUB_REPOSITORY" --head agent/p0-b0-validation-matrix --base main --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh pr edit "$EXISTING" --repo "$GITHUB_REPOSITORY" --title "P0: CDE PDF validation baseline and read-only observer" --body "$BODY"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head agent/p0-b0-validation-matrix --draft \
+              --title "P0: CDE PDF validation baseline and read-only observer" --body "$BODY"
+          fi
+
+      - name: Upload convergence artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-agent-loop-convergence
+          path: |
+            build/p0-convergence/
+            build/p0-b0-smoke/
+            build/p0-b0-gate-report.json
+            build/p0-b1-observer-report.json
+            build/p0-b1-readonly-integrity.json
+            build/ezctd-p0-b0-official-run.zip
+          if-no-files-found: warn
+          retention-days: 30
