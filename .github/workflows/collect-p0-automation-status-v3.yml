@@ -1,0 +1,55 @@
+name: Collect P0 automation status v3
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/ci/collect_p0_automation_status_v3.py"
+      - ".github/workflows/collect-p0-automation-status-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: collect-p0-automation-status-v3
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Wait for current P0 workflows and collect status
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          P0_BRANCH: agent/p0-b0-validation-matrix
+        run: python tools/ci/collect_p0_automation_status_v3.py
+
+      - name: Commit status snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/status/P0_AUTOMATION_STATUS.json docs/status/P0_AUTOMATION_STATUS.md
+          if git diff --cached --quiet; then
+            echo "No status changes."
+            exit 0
+          fi
+          git commit -m "docs(p0): record P0-B0 and P0-B1 automation status"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
