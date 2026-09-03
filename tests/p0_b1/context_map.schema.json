@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ezctd.local/schemas/pdf-context-map-0.1.0.json",
+  "title": "EZCTD PDF package context map",
+  "type": "object",
+  "required": ["schema_version", "profile_id", "source", "files"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "profile_id": {
+      "const": "cn-cde-ectd-v3.2.2-v1.1-pdf"
+    },
+    "source": {
+      "type": "object",
+      "required": ["kind", "status"],
+      "additionalProperties": true,
+      "properties": {
+        "kind": {
+          "enum": [
+            "official-cde-mapping-workbook",
+            "official-template",
+            "manual-reviewed",
+            "synthetic-test"
+          ]
+        },
+        "status": {
+          "enum": [
+            "official-source-verified",
+            "manual-review-complete",
+            "synthetic-only",
+            "unverified"
+          ]
+        },
+        "asset_id": {
+          "type": ["string", "null"]
+        },
+        "sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "files": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+\\.pdf$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["node_id", "document_role", "language", "mapping_status"],
+        "additionalProperties": false,
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "document_role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "language": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mapping_status": {
+            "enum": [
+              "official-exact",
+              "official-pattern",
+              "manual-reviewed",
+              "synthetic-test"
+            ]
+          },
+          "source_row": {
+            "type": ["string", "integer", "null"]
+          },
+          "notes": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    }
+  }
+}
