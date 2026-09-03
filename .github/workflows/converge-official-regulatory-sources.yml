@@ -1,0 +1,470 @@
+name: Converge official eCTD regulatory sources
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - .github/workflows/converge-official-regulatory-sources.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: converge-official-regulatory-sources
+  cancel-in-progress: true
+
+jobs:
+  source-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install static and browser dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Freeze supplied V1.1 sources
+        shell: bash
+        run: |
+          set +e
+          mkdir -p build/official-source-deep-dive
+          timeout --signal=TERM --kill-after=30s 300s \
+            python tools/regulatory/deep_dive_official_sources.py \
+            2>&1 | tee build/official-source-deep-dive/direct-source.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > build/official-source-deep-dive/direct-source-exit-code.txt
+          # Exit 5 means static discovery could not see protected v4 attachments. Browser acquisition below is controlling.
+          if [[ "$code" != "0" && "$code" != "5" ]]; then exit "$code"; fi
+          exit 0
+
+      - name: Acquire all five v4 public-comment attachments
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM --kill-after=30s 600s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/acquire_v4_draft_with_browser.py
+
+      - name: Analyze V1.1 package and v4 semantics
+        run: |
+          python tools/regulatory/analyze_v11_attachment_package.py
+          python tools/regulatory/analyze_v4_draft_semantics.py
+
+      - name: Validate source evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          evidence = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
+          summary = json.loads((evidence / "SUMMARY.json").read_text(encoding="utf-8"))
+          assert summary["direct_success"] == summary["direct_total"] == 4, summary
+          assert summary["attachment_members"] == 23, summary
+          assert summary["v4_assets"] == 5, summary
+          assert summary["v4_retrieved_roles"] == summary["v4_expected_roles"] == 5, summary
+          assert summary["v4_failures"] == 0 and summary["v4_byte_identity_validated"] is True, summary
+
+          package = json.loads((evidence / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert package["manifest"]["member_count"] == 23
+          assert package["schema_contract"]["target_namespace"] == "cn_ectd"
+          assert package["dependency_matrix"]["count"] == 75
+          assert package["module1_elements"]["count"] == 70
+          assert package["ich_elements"]["count"] == 159
+          assert package["node_extension_elements"]["count"] == 6
+          assert package["package_source_sha256"] == summary["v1_attachment_sha256"]
+
+          profile = json.loads(Path("rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/manifest.json").read_text(encoding="utf-8"))
+          assert profile["profile_status"] == "draft_research_only"
+          assert profile["runtime_enabled"] is False
+          assert len(profile["sources"]) == 5
+          assert all(item["download_status"] == "SUCCESS_BYTE_VALIDATED" for item in profile["sources"])
+
+          semantic = json.loads((evidence / "V4_DRAFT_SEMANTIC_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert semantic["status"] == "DRAFT_RESEARCH_ONLY"
+          assert semantic["runtime_enabled"] is False
+          assert semantic["validation_standard"]["totals"] == {
+              "rules": 165, "提示信息": 6, "错误": 145, "警告": 14
+          }
+          assert len(semantic["validation_standard"]["pdf_rules"]) == 27
+          assert semantic["controlled_vocabulary"]["counts"] == {
+              "application_type": 4,
+              "submission_type": 9,
+              "submissionunit_type": 26,
+              "product_type": 2,
+              "context_of_use": 63,
+              "contact_type": 3,
+          }
+          assert Path("docs/validation/V1_1_TO_V4_DRAFT_DELTA.md").exists()
+          assert Path("docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md").exists()
+          print(json.dumps({
+              "summary": summary,
+              "v11_package": {
+                  "members": package["manifest"]["member_count"],
+                  "cn_module1_elements": package["module1_elements"]["count"],
+                  "ich_elements": package["ich_elements"]["count"],
+              },
+              "v4": {
+                  "all_rules": semantic["validation_standard"]["totals"],
+                  "pdf_rules": len(semantic["validation_standard"]["pdf_rules"]),
+                  "controlled_vocabulary": semantic["controlled_vocabulary"]["counts"],
+              },
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Stage source evidence artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          stage=build/converge/source-stage
+          mkdir -p "$stage/evidence/regulatory/snapshots/user-supplied-official-sources"
+          mkdir -p "$stage/rulepacks/cn-cde-ectd/v1.1/technical-package"
+          mkdir -p "$stage/rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27"
+          mkdir -p "$stage/docs/validation" "$stage/docs/decisions"
+          cp -a evidence/regulatory/snapshots/user-supplied-official-sources/. \
+            "$stage/evidence/regulatory/snapshots/user-supplied-official-sources/"
+          cp -a rulepacks/cn-cde-ectd/v1.1/technical-package/. \
+            "$stage/rulepacks/cn-cde-ectd/v1.1/technical-package/"
+          cp -a rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/. \
+            "$stage/rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/"
+          cp docs/validation/V1_1_TO_V4_DRAFT_DELTA.md "$stage/docs/validation/"
+          cp docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md "$stage/docs/decisions/"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: converged-official-source-evidence
+          path: build/converge/source-stage/
+          if-no-files-found: error
+          retention-days: 90
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: converged-official-source-raw
+          path: build/official-source-deep-dive/
+          if-no-files-found: error
+          retention-days: 90
+
+  validator-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install browser and inspection dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Acquire validator and manual from exact portal controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM --kill-after=30s 600s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/acquire_validator_from_portal.py
+
+      - name: Validate acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("evidence/regulatory/snapshots/cde-validator-v1.1.0/official-portal-acquisition.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["status"] == "COMPLETE_OFFICIAL_PORTAL_ACQUISITION", data
+          assert data["controls"] == {"validator": "downloadFiles(4)", "manual": "downloadFiles(5)"}
+          assert len(data["records"]) == 2
+          by_role = {item["role"]: item for item in data["records"]}
+          software = by_role["validator_software_v1_1_0"]
+          manual = by_role["validator_manual_v1_1_0"]
+          assert software["kind"] in {"zip", "rar", "7z", "pe", "msi"}
+          assert software["size"] > 100000 and software["sha256"]
+          assert manual["kind"] == "pdf" and manual["size"] > 25000 and manual["sha256"]
+          assert int(manual["pdf"]["pages"] or 0) > 0
+          print(json.dumps({
+              "software": {"name": software["file_name"], "kind": software["kind"], "size": software["size"], "sha256": software["sha256"]},
+              "manual": {"name": manual["file_name"], "pages": manual["pdf"]["pages"], "size": manual["size"], "sha256": manual["sha256"]},
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Stage acquisition evidence
+        run: |
+          mkdir -p build/converge/validator-acquisition
+          cp -a evidence/regulatory/snapshots/cde-validator-v1.1.0/. build/converge/validator-acquisition/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: converged-validator-acquisition-evidence
+          path: build/converge/validator-acquisition/
+          if-no-files-found: error
+          retention-days: 90
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: converged-validator-raw-assets
+          path: build/official-source-deep-dive/validator-assets/
+          if-no-files-found: error
+          retention-days: 90
+
+  validator-windows:
+    needs: validator-linux
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: converged-validator-raw-assets
+          path: build/cde-validator-v1.1.0
+
+      - name: Inspect Authenticode, file versions and archive members without execution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          ./tools/regulatory/Inspect-CDEValidatorAssets.ps1 `
+            -SourceDirectory "build/cde-validator-v1.1.0" `
+            -ReportDirectory "build/cde-validator-v1.1.0/windows-static-inspection"
+
+      - name: Validate Windows static evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $path = "build/cde-validator-v1.1.0/windows-static-inspection/windows-validator-asset-inspection.json"
+          if (-not (Test-Path -LiteralPath $path)) { throw "Windows static report missing" }
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if ($data.file_count -lt 2) { throw "Expected at least two inspected files" }
+          if ($data.scan_scope -notmatch "No executable was launched") { throw "Safety scope missing" }
+          Get-Content -Raw -LiteralPath "build/cde-validator-v1.1.0/windows-static-inspection/windows-validator-asset-inspection.md" | Write-Host
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: converged-validator-windows-evidence
+          path: build/cde-validator-v1.1.0/windows-static-inspection/
+          if-no-files-found: error
+          retention-days: 90
+
+  commit-and-open-pr:
+    needs: [source-linux, validator-linux, validator-windows]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: converged-official-source-evidence
+          path: build/converge/source
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: converged-validator-acquisition-evidence
+          path: build/converge/validator
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: converged-validator-windows-evidence
+          path: build/converge/windows
+
+      - name: Assemble evidence and status
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a build/converge/source/. .
+          target="evidence/regulatory/snapshots/cde-validator-v1.1.0"
+          mkdir -p "$target/windows-static-inspection" docs/status
+          cp -a build/converge/validator/. "$target/"
+          cp -a build/converge/windows/. "$target/windows-static-inspection/"
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          source_root = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
+          validator_root = Path("evidence/regulatory/snapshots/cde-validator-v1.1.0")
+          summary = json.loads((source_root / "SUMMARY.json").read_text(encoding="utf-8"))
+          semantic = json.loads((source_root / "V4_DRAFT_SEMANTIC_ANALYSIS.json").read_text(encoding="utf-8"))
+          package = json.loads((source_root / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
+          acquisition = json.loads((validator_root / "official-portal-acquisition.json").read_text(encoding="utf-8"))
+          windows = json.loads((validator_root / "windows-static-inspection/windows-validator-asset-inspection.json").read_text(encoding="utf-8-sig"))
+          by_role = {item["role"]: item for item in acquisition["records"]}
+          status = {
+              "schema_version": "0.2.0",
+              "generated_at": datetime.now(timezone.utc).isoformat(),
+              "status": "OFFICIAL_SOURCES_AND_VALIDATOR_STATIC_EVIDENCE_COMPLETE",
+              "effective_runtime_profile": "cn-cde-ectd-v3.2.2-v1.1",
+              "draft_research_profile": "cn-cde-ectd-v4.0-draft-2026-05-27",
+              "v11_technical_spec_sha256": summary["v1_pdf_sha256"],
+              "v11_attachment_package_sha256": summary["v1_attachment_sha256"],
+              "v11_attachment_members": package["manifest"]["member_count"],
+              "v4_draft_assets": summary["v4_assets"],
+              "v4_validation_rules": semantic["validation_standard"]["totals"],
+              "v4_pdf_rules": len(semantic["validation_standard"]["pdf_rules"]),
+              "v4_runtime_enabled": semantic["runtime_enabled"],
+              "validator_software": {
+                  "file_name": by_role["validator_software_v1_1_0"]["file_name"],
+                  "kind": by_role["validator_software_v1_1_0"]["kind"],
+                  "size": by_role["validator_software_v1_1_0"]["size"],
+                  "sha256": by_role["validator_software_v1_1_0"]["sha256"],
+              },
+              "validator_manual": {
+                  "file_name": by_role["validator_manual_v1_1_0"]["file_name"],
+                  "pages": by_role["validator_manual_v1_1_0"]["pdf"]["pages"],
+                  "size": by_role["validator_manual_v1_1_0"]["size"],
+                  "sha256": by_role["validator_manual_v1_1_0"]["sha256"],
+              },
+              "windows_static_file_count": windows["file_count"],
+              "software_executed": False,
+              "official_black_box_observations": 0,
+              "next_gate": "Build one official-validator-clean V3.2.2/V1.1 baseline sequence, then execute the nine-run calibration batch.",
+              "boundary": "The validator and manual were acquired from the exact CDE portal controls and statically inspected. No executable was launched; this does not establish CDE validation compatibility.",
+          }
+          (validator_root / "STATUS.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          Path("docs/status/OFFICIAL_SOURCE_DEEP_DIVE_STATUS.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          md = [
+              "# Official eCTD source deep dive — status",
+              "",
+              f"> Status: **{status['status']}**",
+              "",
+              "## Completed evidence",
+              "",
+              f"- V1.1 technical specification SHA-256: `{status['v11_technical_spec_sha256']}`",
+              f"- V1.1 attachment package SHA-256: `{status['v11_attachment_package_sha256']}`; {status['v11_attachment_members']} members.",
+              f"- v4.0 public-comment package: {status['v4_draft_assets']} byte-validated assets; {status['v4_validation_rules']['rules']} validation rules, including {status['v4_pdf_rules']} PDF rules.",
+              f"- Validator software: `{status['validator_software']['file_name']}`, `{status['validator_software']['sha256']}`.",
+              f"- Validator manual: `{status['validator_manual']['file_name']}`, {status['validator_manual']['pages']} pages, `{status['validator_manual']['sha256']}`.",
+              f"- Windows static files inspected: {status['windows_static_file_count']}.",
+              "",
+              "## Runtime decision",
+              "",
+              "- Current implementation and calibration remain on China eCTD V3.2.2/V1.1.",
+              "- The 2026-05-27 v4.0 package is research-only and cannot influence current findings or applicability.",
+              "",
+              "## Evidence boundary",
+              "",
+              status["boundary"],
+              "",
+              "## Next gate",
+              "",
+              status["next_gate"],
+              "",
+          ]
+          Path("docs/status/OFFICIAL_SOURCE_DEEP_DIVE_STATUS.md").write_text("\n".join(md), encoding="utf-8")
+
+          body = [
+              "## Purpose",
+              "",
+              "Freeze and analyze the official CDE V1.1 technical package, isolate the 2026-05-27 China eCTD v4.0 public-comment profile, and acquire the official validator/manual for non-executing static inspection.",
+              "",
+              "## Evidence added",
+              "",
+              "- Official V1.1 technical specification and 23-member attachment package provenance.",
+              "- Generated typed inventory for China Module 1, ICH elements, dependencies and node extensions.",
+              "- Five byte-validated v4.0 draft assets and structured 165-rule/27-PDF-rule index.",
+              "- V1.1→v4.0 PDF mapping and profile-isolation ADR.",
+              "- Validator software/manual provenance plus Windows Authenticode/version/archive static evidence.",
+              "",
+              "## Hard boundary",
+              "",
+              "No validator executable was launched. Official black-box observations remain **0**. This PR does not claim a clean China eCTD sequence or CDE compatibility.",
+              "",
+              "## Next gate after review",
+              "",
+              "Construct one minimal V3.2.2/V1.1 sequence that is clean in the official validator and execute the planned nine-run calibration batch.",
+          ]
+          Path("docs/status/OFFICIAL_SOURCE_DEEP_DIVE_PR_BODY.md").write_text("\n".join(body) + "\n", encoding="utf-8")
+          print(json.dumps(status, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit all structured evidence atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            evidence/regulatory/snapshots/user-supplied-official-sources \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0 \
+            rulepacks/cn-cde-ectd/v1.1/technical-package \
+            rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27 \
+            docs/validation/V1_1_TO_V4_DRAFT_DELTA.md \
+            docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md \
+            docs/status/OFFICIAL_SOURCE_DEEP_DIVE_STATUS.json \
+            docs/status/OFFICIAL_SOURCE_DEEP_DIVE_STATUS.md \
+            docs/status/OFFICIAL_SOURCE_DEEP_DIVE_PR_BODY.md
+          if git diff --cached --quiet; then
+            echo "No converged evidence changes."
+          else
+            git commit -m "research(regulatory): converge official sources and validator static evidence"
+            pushed=0
+            for attempt in 1 2 3 4 5; do
+              git fetch origin agent/official-source-deep-dive
+              if git rebase origin/agent/official-source-deep-dive && git push origin HEAD:agent/official-source-deep-dive; then
+                pushed=1
+                break
+              fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((attempt * 7))
+            done
+            test "$pushed" -eq 1
+          fi
+
+      - name: Create or update draft PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          existing="$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --head agent/official-source-deep-dive \
+            --base agent/p0-b0-validation-matrix \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')"
+          if [[ -n "$existing" ]]; then
+            gh pr edit "$existing" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "research: freeze official eCTD sources and isolate China v4 draft" \
+              --body-file docs/status/OFFICIAL_SOURCE_DEEP_DIVE_PR_BODY.md
+            echo "Updated PR #$existing"
+          else
+            gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --base agent/p0-b0-validation-matrix \
+              --head agent/official-source-deep-dive \
+              --draft \
+              --title "research: freeze official eCTD sources and isolate China v4 draft" \
+              --body-file docs/status/OFFICIAL_SOURCE_DEEP_DIVE_PR_BODY.md
+          fi
