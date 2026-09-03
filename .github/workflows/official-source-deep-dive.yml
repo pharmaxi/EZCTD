@@ -36,7 +36,7 @@ jobs:
       - name: Install inspection tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils p7zip-full file
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
           python -m pip install --disable-pip-version-check selenium
 
       - name: Discover dynamic CDE links in a real browser
@@ -45,7 +45,7 @@ jobs:
         run: |
           set +e
           mkdir -p build/official-source-deep-dive
-          python tools/regulatory/discover_cde_dynamic_links.py 2>&1 | tee build/official-source-deep-dive/browser-discovery.log
+          EZCTD_BROWSER_HEADLESS=0 xvfb-run -a python tools/regulatory/discover_cde_dynamic_links.py 2>&1 | tee build/official-source-deep-dive/browser-discovery.log
           code=${PIPESTATUS[0]}
           echo "$code" > build/official-source-deep-dive/browser-discovery-exit-code.txt
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
