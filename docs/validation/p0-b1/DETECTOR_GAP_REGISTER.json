@@ -1,0 +1,284 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "cn-cde-ectd-v3.2.2-v1.1-pdf",
+  "status": "PRE_OFFICIAL_CALIBRATION",
+  "official_validator": {
+    "target_version": "1.1.0",
+    "observations": 0,
+    "status": "NOT_RUN"
+  },
+  "interpretation": {
+    "IMPLEMENTED_SYNTHETIC_UNCALIBRATED": "Target predicate is implemented and exercised by synthetic samples, but official sensitivity and specificity are unknown.",
+    "IMPLEMENTED_CONTEXT_DEPENDENT": "Object predicate is implemented; correct applicability depends on a verified CTD/eCTD node mapping.",
+    "PARTIAL_HEURISTIC": "The current detector intentionally uses an incomplete heuristic and must not be treated as authoritative.",
+    "BLOCKED_OFFICIAL_BEHAVIOR": "Technical predicate exists, but message coexistence, precedence or exact threshold requires CDE V1.1.0 observation."
+  },
+  "rules": [
+    {
+      "rule_id": "6.1",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["pikepdf/qpdf-backed parse", "qpdf --check", "PDFium first/last-page render", "page count"],
+      "known_false_negative_risks": ["damage on an unrendered middle page", "recoverable cross-reference damage accepted by one engine", "content-stream errors not reached during sampled rendering"],
+      "known_false_positive_risks": ["qpdf warning that CDE tolerates", "renderer-specific rejection"],
+      "official_questions": ["whether one unreadable leaf short-circuits remaining PDF rules", "whether recoverable files are error or accepted", "reported path/object granularity"],
+      "next_test_priority": "P0-B2 calibration case 6.1 plus recoverable-corruption boundary family"
+    },
+    {
+      "rule_id": "6.2",
+      "status": "IMPLEMENTED_CONTEXT_DEPENDENT",
+      "implemented_evidence": ["GoToR/Launch FileSpec path classification", "Windows/UNC/POSIX/file URI detection", "submission-root escape check"],
+      "known_false_negative_risks": ["platform-specific nested Launch dictionaries", "unusual FileSpec encodings", "percent-encoded paths"],
+      "known_false_positive_risks": ["relative path interpreted from a different base directory", "reference-document exemption missing because node mapping is unresolved"],
+      "official_questions": ["path base used by validator", "message coexistence with 6.3 and 6.6"],
+      "next_test_priority": "controlled Windows existing-absolute-target experiment"
+    },
+    {
+      "rule_id": "6.3",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["URI/mailto/scheme classification", "absolute and package-escape target classification"],
+      "known_false_negative_risks": ["nested Launch platform dictionary", "custom protocol hidden in FileSpec", "external target represented through named action"],
+      "known_false_positive_risks": ["officially exempt reference context", "valid package-local Launch path misbased"],
+      "official_questions": ["whether URI also emits 6.4", "treatment of http, https, mailto and file separately"],
+      "next_test_priority": "URI/mailto/Launch/GoToR encoding matrix"
+    },
+    {
+      "rule_id": "6.4",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["primary /A action type check against GoTo, GoToR and Launch"],
+      "known_false_negative_risks": ["unknown action only in /AA", "unknown action only in /Next chain", "action arrays", "field or page additional actions"],
+      "known_false_positive_risks": ["none expected for primary action type, apart from context exemption"],
+      "official_questions": ["whether JavaScript produces 6.4, 6.24 or both", "action graph traversal depth"],
+      "next_test_priority": "recursive action-graph detector before calibration expansion"
+    },
+    {
+      "rule_id": "6.5",
+      "status": "IMPLEMENTED_SYNTHETIC_UNCALIBRATED",
+      "implemented_evidence": ["outline item lacks both /Dest and /A"],
+      "known_false_negative_risks": ["operation supplied only through nonstandard additional-action structure"],
+      "known_false_positive_risks": ["container/bookmark nodes intentionally used only for hierarchy if CDE permits them"],
+      "official_questions": ["whether non-clickable parent bookmarks are allowed", "treatment of empty-title nodes"],
+      "next_test_priority": "parent-with-valid-children and empty-title boundaries"
+    },
+    {
+      "rule_id": "6.6",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["internal page-object validation", "numeric page index range", "legacy/name-tree named destination resolution", "external target existence"],
+      "known_false_negative_risks": ["embedded-file destinations", "GoToE", "destination fragments", "platform-specific FileSpec", "damaged destination tolerated by pikepdf"],
+      "known_false_positive_risks": ["external target unavailable in the test filesystem but available in the actual package context", "different path base"],
+      "official_questions": ["distinction between invalid and damaged", "target file versus target page error precedence"],
+      "next_test_priority": "destination-type and named-destination boundary family"
+    },
+    {
+      "rule_id": "6.7",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["/Dest plus /A count", "/Next chain recursion", "/AA key count"],
+      "known_false_negative_risks": ["cyclic or malformed arrays", "viewer-triggered actions outside inspected outline dictionary"],
+      "known_false_positive_risks": ["/AA actions that official software does not count as bookmark actions"],
+      "official_questions": ["which action containers contribute to the count", "whether /Dest plus /A is always multiple"],
+      "next_test_priority": "one-action-per-container factorial experiment"
+    },
+    {
+      "rule_id": "6.8",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["explicit destination resolution", "/XYZ zoom null versus numeric", "Fit-family classification"],
+      "known_false_negative_risks": ["named destination indirection not resolved in malformed trees", "remote destination semantics"],
+      "known_false_positive_risks": ["official validator may accept one or more Fit destination types as equivalent for this rule"],
+      "official_questions": ["exact handling of /XYZ null, omitted zoom, zero zoom and Fit/FitH/FitV/FitR"],
+      "next_test_priority": "P0-B2 calibration case 6.8 followed by full destination matrix"
+    },
+    {
+      "rule_id": "6.9",
+      "status": "IMPLEMENTED_CONTEXT_DEPENDENT",
+      "implemented_evidence": ["same path classification and package-root escape controls as 6.2 for Link annotations"],
+      "known_false_negative_risks": ["nested platform FileSpec", "URI-like path embedded in custom action"],
+      "known_false_positive_risks": ["reference exemption unresolved", "wrong path base"],
+      "official_questions": ["message coexistence with 6.10/6.13", "case sensitivity and Unicode normalization"],
+      "next_test_priority": "controlled Windows existing-absolute-target experiment"
+    },
+    {
+      "rule_id": "6.10",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["URI/mailto/absolute/package-escape detection on Link actions"],
+      "known_false_negative_risks": ["nested Launch structures", "custom schemes hidden in non-primary actions"],
+      "known_false_positive_risks": ["reference exemption unresolved"],
+      "official_questions": ["whether URI also emits 6.11", "whether visible URL text without a link annotation is relevant"],
+      "next_test_priority": "URI/mailto/Launch/GoToR link matrix"
+    },
+    {
+      "rule_id": "6.11",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["primary Link /A type check against GoTo, GoToR and Launch"],
+      "known_false_negative_risks": ["unknown type in /AA or /Next", "actions attached through form fields or page events"],
+      "known_false_positive_risks": ["none expected for primary action, apart from context exemption"],
+      "official_questions": ["recursive action traversal", "relationship to 6.24"],
+      "next_test_priority": "recursive action-graph detector"
+    },
+    {
+      "rule_id": "6.12",
+      "status": "IMPLEMENTED_SYNTHETIC_UNCALIBRATED",
+      "implemented_evidence": ["Link annotation lacks both /Dest and /A"],
+      "known_false_negative_risks": ["action supplied only through /AA or unusual structure"],
+      "known_false_positive_risks": ["zero-area placeholder Link annotations if official software ignores them"],
+      "official_questions": ["treatment of zero-area and invisible links", "whether /AA alone counts"],
+      "next_test_priority": "geometry and alternate-action boundary cases"
+    },
+    {
+      "rule_id": "6.13",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["internal page and named destination validation", "external file and numeric page checks"],
+      "known_false_negative_risks": ["fragment syntax", "embedded destinations", "nested FileSpec", "cross-platform filename normalization"],
+      "known_false_positive_risks": ["target resolution base mismatch"],
+      "official_questions": ["distinction from 6.12", "file versus page error precedence"],
+      "next_test_priority": "destination-type and missing-file/page matrix"
+    },
+    {
+      "rule_id": "6.14",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["/Dest, /A, /AA and /Next action counting"],
+      "known_false_negative_risks": ["malformed arrays and cyclic action graphs"],
+      "known_false_positive_risks": ["additional actions the official validator excludes from link action count"],
+      "official_questions": ["exact action containers counted"],
+      "next_test_priority": "factorial action-container matrix"
+    },
+    {
+      "rule_id": "6.15",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["same explicit/named destination zoom classification as 6.8 for Link annotations"],
+      "known_false_negative_risks": ["remote and malformed named destinations"],
+      "known_false_positive_risks": ["Fit-family semantics may differ in official software"],
+      "official_questions": ["same destination-mode matrix as 6.8"],
+      "next_test_priority": "post-6.8 calibration link matrix"
+    },
+    {
+      "rule_id": "6.16",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["header version", "Catalog /Version override", "allowed ordinary PDF 1.4–1.7 range"],
+      "known_false_negative_risks": ["false or inconsistent PDF/A claims", "features incompatible with the declared version", "header/catalog conflicts accepted by current logic"],
+      "known_false_positive_risks": ["valid PDF/A conformance that requires external conformance validation"],
+      "official_questions": ["whether CDE validates PDF/A conformance or only version declaration", "header versus Catalog precedence"],
+      "next_test_priority": "veraPDF-assisted PDF/A and version-conflict matrix"
+    },
+    {
+      "rule_id": "6.17",
+      "status": "IMPLEMENTED_SYNTHETIC_UNCALIBRATED",
+      "implemented_evidence": ["EmbeddedFiles name tree", "Catalog /AF", "FileAttachment annotations"],
+      "known_false_negative_risks": ["embedded payload reachable only through RichMedia or unusual FileSpec graph"],
+      "known_false_positive_risks": ["PDF/A-3 associated file if CDE rule has an undocumented exception"],
+      "official_questions": ["whether all associated files are treated identically", "reported attachment name/path"],
+      "next_test_priority": "name-tree, AF and FileAttachment variants"
+    },
+    {
+      "rule_id": "6.18",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["page annotation subtype inventory; Link excluded"],
+      "known_false_negative_risks": ["annotations hidden in malformed page trees"],
+      "known_false_positive_risks": ["signature/form Widget annotations", "appearance-only or flattened content incorrectly represented as annotation"],
+      "official_questions": ["treatment of signature widgets and AcroForm fields", "whether annotations are counted after flattening"],
+      "next_test_priority": "signature, widget, stamp and highlight subtype matrix"
+    },
+    {
+      "rule_id": "6.19",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["Encrypt dictionary/pikepdf is_encrypted", "empty-user-password encrypted sample"],
+      "known_false_negative_risks": ["non-encryption document restrictions represented through signatures/DocMDP", "permission details not fully decoded"],
+      "known_false_positive_risks": ["encryption with no effective restrictions if official software distinguishes it"],
+      "official_questions": ["whether encryption alone is sufficient", "which permissions are named", "relationship and precedence with 6.21"],
+      "next_test_priority": "P0-B2 calibration case 6.19"
+    },
+    {
+      "rule_id": "6.20",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["PageMode", "PageLayout", "OpenAction initial destination and zoom"],
+      "known_false_negative_risks": ["viewer-preference combinations", "named OpenAction", "initial-page semantics", "document-type-specific expectation"],
+      "known_false_positive_risks": ["SinglePage/default equivalence", "valid PageOnly choice for files without bookmarks", "fit modes accepted by CDE"],
+      "official_questions": ["exact accepted value set and conditional logic"],
+      "next_test_priority": "official-manual extraction then factorial initial-view matrix"
+    },
+    {
+      "rule_id": "6.21",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["pikepdf PasswordError on no-password open", "PDFium/qpdf independent failure signals"],
+      "known_false_negative_risks": ["nonstandard handlers accepted by one engine", "credential cached externally"],
+      "known_false_positive_risks": ["corrupted encryption dictionary misclassified as password protection"],
+      "official_questions": ["whether 6.19 is emitted together", "whether subsequent rules are skipped"],
+      "next_test_priority": "P0-B2 calibration case 6.21"
+    },
+    {
+      "rule_id": "6.22",
+      "status": "BLOCKED_OFFICIAL_BEHAVIOR",
+      "implemented_evidence": ["pikepdf/qpdf linearization status on final bytes", "explicit node/reference exemptions"],
+      "known_false_negative_risks": ["stale or partially damaged linearization accepted by library", "incremental update after linearization"],
+      "known_false_positive_risks": ["official software may inspect only marker or use different structural tolerance"],
+      "official_questions": ["final structural validation versus marker check", "handling of post-linearization incremental updates"],
+      "next_test_priority": "P0-B2 calibration case 6.22 and stale-linearization boundary"
+    },
+    {
+      "rule_id": "6.23",
+      "status": "IMPLEMENTED_CONTEXT_DEPENDENT",
+      "implemented_evidence": ["page count >5", "outline-tree presence", "application/reference/foreign-reference exemptions"],
+      "known_false_negative_risks": ["empty or entirely invalid outline tree counted as present", "node mapping unavailable"],
+      "known_false_positive_risks": ["additional official exemptions not yet imported from mapping workbook"],
+      "official_questions": ["whether an invalid outline satisfies presence before other rules fail", "exact application-form scope"],
+      "next_test_priority": "official mapping workbook import and invalid-outline interaction"
+    },
+    {
+      "rule_id": "6.24",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["object scan for JavaScript action/keys", "3D, RichMedia, Movie and Sound subtype/key scan"],
+      "known_false_negative_risks": ["dynamic content hidden in compressed/embedded structures not exposed as inspected dictionaries", "XFA events", "page/field additional actions not recursively classified"],
+      "known_false_positive_risks": ["orphaned, unreachable dynamic objects if official software only walks reachable graph"],
+      "official_questions": ["reachability policy", "coexistence with 6.4/6.11", "XFA handling"],
+      "next_test_priority": "reachable/orphaned and action-location matrix"
+    },
+    {
+      "rule_id": "6.25",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["PDFium text extraction by page", "image-XObject count", "image page without text"],
+      "known_false_negative_risks": ["inline images", "vector-only scanned-equivalent pages", "text that exists but is unusable, invisible or wrong", "Form XObject images", "partial page OCR gaps"],
+      "known_false_positive_risks": ["intentional full-page figure with no searchable text", "symbolic/vector content not intended as text"],
+      "official_questions": ["threshold and page aggregation", "whether any text is sufficient", "OCR quality expectations"],
+      "next_test_priority": "rendered nonblank/no-text detector and page-mixture matrix"
+    },
+    {
+      "rule_id": "6.26",
+      "status": "PARTIAL_HEURISTIC",
+      "implemented_evidence": ["page content Tf operator scan", "font resource lookup", "Base-14 exclusion", "FontFile/FontFile2/FontFile3 check"],
+      "known_false_negative_risks": ["fonts used inside Form XObjects", "inherited resources", "Type3/internal resources", "unusual content tokenization", "font descriptor on descendant structures not reached"],
+      "known_false_positive_risks": ["font treated as standard by official software but outside local Base-14 list", "unused resources if usage parser is wrong"],
+      "official_questions": ["used resources versus all resources", "font name/page reporting", "subset and CIDFont handling"],
+      "next_test_priority": "P0-B2 calibration case 6.26 then recursive resource/font traversal"
+    }
+  ],
+  "cross_cutting_gaps": [
+    {
+      "priority": "P0-B1-HIGH",
+      "gap": "Recursive action graph",
+      "affected_rules": ["6.3", "6.4", "6.7", "6.10", "6.11", "6.14", "6.24"],
+      "required_change": "Walk /A, /AA, /Next arrays/chains and nested Launch platform dictionaries with cycle protection."
+    },
+    {
+      "priority": "P0-B1-HIGH",
+      "gap": "Recursive page resources and Form XObjects",
+      "affected_rules": ["6.25", "6.26"],
+      "required_change": "Resolve inherited resources, recurse Form XObjects, detect inline images and track actually used fonts."
+    },
+    {
+      "priority": "P0-B1-HIGH",
+      "gap": "Official path normalization",
+      "affected_rules": ["6.2", "6.3", "6.6", "6.9", "6.10", "6.13"],
+      "required_change": "Test URL decoding, fragments, Windows casefold, Unicode normalization, trailing dots/spaces and the official path base."
+    },
+    {
+      "priority": "P0-B1-MEDIUM",
+      "gap": "Signature/form safety inventory",
+      "affected_rules": ["6.18", "6.19", "6.24"],
+      "required_change": "Record signature fields, ByteRange, DocMDP, AcroForm/XFA and prohibit future mutation without separate policy."
+    },
+    {
+      "priority": "P0-B1-MEDIUM",
+      "gap": "Per-file worker isolation and resource ceilings",
+      "affected_rules": ["6.1", "6.21", "6.24", "6.25", "6.26"],
+      "required_change": "Move native parsing/rendering into cancellable worker processes with CPU, memory and file-size limits."
+    }
+  ]
+}
