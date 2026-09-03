@@ -1,0 +1,5 @@
+{
+  "schema_version": "0.1.0",
+  "interpretation": "Responses rejected because HTTP success did not satisfy expected PDF/DOCX byte identity. Raw rejected bytes remain in the workflow artifact.",
+  "records": []
+}

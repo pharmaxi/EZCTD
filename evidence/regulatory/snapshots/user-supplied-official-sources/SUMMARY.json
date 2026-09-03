@@ -10,5 +10,7 @@
   "failures": 0,
   "v4_expected_roles": 5,
   "v4_retrieved_roles": 5,
-  "v4_failures": 0
+  "v4_failures": 0,
+  "v4_rejected_http_payloads": 0,
+  "v4_byte_identity_validated": true
 }

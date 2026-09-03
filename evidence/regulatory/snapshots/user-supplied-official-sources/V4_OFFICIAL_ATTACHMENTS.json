@@ -1,90 +1,1530 @@
 {
   "records": [
     {
-      "requested_url": "https://www.cde.org.cn/main/att/download/00a5b8edf156d399f72e1543737fec40",
-      "filename": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY--eCTD v4.0指导原则附件1-受控词汇文件（公开征求意见稿）.pdf",
-      "size": 25345,
-      "kind": "unknown",
-      "sha256": "3b5624de9f970c3c00d2d98f5ccfc1bb08062023932a145b8295cd6056647e27",
-      "sm3": "408386aaf8e7212cecd44ec91c75bd796a500ed1d64de06327aa749fadcd8024",
-      "downloaded_at_epoch": 1788454831,
       "source_id": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY",
       "role_key": "controlled_vocabulary",
       "role": "cn_ectd_v4_draft_controlled_vocabulary",
       "status": "official_draft",
       "source_page": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "requested_url": "https://www.cde.org.cn/main/att/download/00a5b8edf156d399f72e1543737fec40",
       "displayed_name": "eCTD v4.0指导原则附件1-受控词汇文件（公开征求意见稿）.pdf",
-      "discovery_method": "anchor",
-      "download_status": "SUCCESS"
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies",
+      "acquisition_attempts": [
+        {
+          "method": "requests-with-browser-cookies",
+          "status_code": 200,
+          "final_url": "https://www.cde.org.cn/main/att/download/00a5b8edf156d399f72e1543737fec40",
+          "headers": {
+            "server": "******",
+            "content-type": "application/octet-stream",
+            "transfer-encoding": "chunked",
+            "date": "Thu, 03 Sep 2026 17:19:43 GMT",
+            "vary": "Accept-Encoding",
+            "content-disposition": "attachment; filename=eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E9%99%84%E4%BB%B61-%E5%8F%97%E6%8E%A7%E8%AF%8D%E6%B1%87%E6%96%87%E4%BB%B6%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf;filename*=utf-8''eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E9%99%84%E4%BB%B61-%E5%8F%97%E6%8E%A7%E8%AF%8D%E6%B1%87%E6%96%87%E4%BB%B6%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf",
+            "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: ;",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload;",
+            "x-xss-protection": "1;mode=block",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "SAMEORIGIN",
+            "set-cookie": "Path=/; HttpOnly; Secure; SameLite=Strict;"
+          },
+          "sha256": "bc8d57e1a988608d2afd1e4739f0a7446c97211bd8bf42b34189cae19a9e6461",
+          "sm3": "99ef2bd7202c1d1558e7024dd97f6f191fda8c7afb9f8f6e78ddf060173d622f",
+          "kind": "pdf",
+          "pdf_header_offset": 0,
+          "expected_kind": "pdf",
+          "size": 221237,
+          "valid": true,
+          "reason": null
+        }
+      ],
+      "kind": "pdf",
+      "size": 221237,
+      "sha256": "bc8d57e1a988608d2afd1e4739f0a7446c97211bd8bf42b34189cae19a9e6461",
+      "sm3": "99ef2bd7202c1d1558e7024dd97f6f191fda8c7afb9f8f6e78ddf060173d622f",
+      "canonical_artifact": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY.pdf",
+      "byte_validation": {
+        "kind": "pdf",
+        "pdf_header_offset": 0,
+        "expected_kind": "pdf",
+        "size": 221237,
+        "valid": true,
+        "reason": null
+      },
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 10,
+        "metadata": {
+          "Creator": "Microsoft® Excel® 2016",
+          "Producer": "Microsoft® Excel® 2016",
+          "CreationDate": "Mon May 25 06:44:48 2026 UTC",
+          "ModDate": "Mon May 25 06:44:48 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "10",
+          "Encrypted": "no",
+          "Page size": "595.2 x 841.68 pts (A4)",
+          "Page rot": "0",
+          "File size": "221237 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        },
+        "text_file": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY.txt",
+        "pdfinfo_stderr": "",
+        "pdftotext_stderr": ""
+      },
+      "term_hits": {
+        "hl7_rps": [],
+        "submission_unit": [
+          {
+            "physical_page": 2,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "icode Filename Revision History NMPA 申请类型 application-type tbd NMPA 注册行为类型 submission-type tbd NMPA 提交单元类型 submissionunit-type tbd NMPA 产品类型 product-type tbd NMPA 区域CoU标题 context-of-use tbd NMPA 联系人类型 contact-type tbd"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "codeSystem Name 提交单元类型 Go To INDEX 说明 提供区域的提交单元类型 XPATH /PORP_IN000001UV/controlActProcess/subject/submissi onUnit/code/@code codeSystem OID 代码 说明 状态 Operation Previous Current Last Valid Revision Valid Valid Version Notes Code(s) Code(s) cnsqt1 首次提交 Active - - - - - cnsqt2 回复 Active - - - - - c"
+          }
+        ],
+        "context_of_use": [],
+        "document_reference": [],
+        "uuid": [],
+        "controlled_vocabulary": [],
+        "keyword": [
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": "nent/contextOfU XPATH se/code/@code codeSystem OID TBD Previous Current Last Valid Revision 代码 标题元素 关键词 状态 Operation Valid Valid Version Notes Code(s) Code(s) cn-1-0 说明函 Active - - - - - cn-1-1 目录 Active - - - - - cn-1-2 申请表 Active - - - - - cn-1-3-1-1 研究药物说明书及修订说明（适用于临床试验申请） Active - - - - - cn-1-3-1-2 上市药品说明书及修订说明（适用于上市及上市后变更申请） Active - - - - - cn-1-3-2-1 研究药物包装标签（适用于临床试验申请）"
+          }
+        ],
+        "reuse": [],
+        "lifecycle": [],
+        "validation": [],
+        "priority_number": [],
+        "status_code": []
+      }
     },
     {
-      "requested_url": "https://www.cde.org.cn/main/att/download/22d2128d8193f20cec98639662a78557",
-      "filename": "CDE-CN-V4-DRAFT-GUIDANCE--eCTD v4.0指导原则（公开征求意见稿）.pdf",
-      "size": 25425,
-      "kind": "unknown",
-      "sha256": "96d693a7a60a5dbd0fc1939e6d7ac96d47c40d5b197e107a4af0bc989b25662a",
-      "sm3": "e51b6497e5a686a02f97f39ce04fa36f779b155c1934e6e4ed05e8eadac3807c",
-      "downloaded_at_epoch": 1788454834,
       "source_id": "CDE-CN-V4-DRAFT-GUIDANCE",
       "role_key": "guidance",
       "role": "cn_ectd_v4_draft_guidance",
       "status": "official_draft",
       "source_page": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "requested_url": "https://www.cde.org.cn/main/att/download/22d2128d8193f20cec98639662a78557",
       "displayed_name": "eCTD v4.0指导原则（公开征求意见稿）.pdf",
-      "discovery_method": "anchor",
-      "download_status": "SUCCESS"
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies",
+      "acquisition_attempts": [
+        {
+          "method": "requests-with-browser-cookies",
+          "status_code": 200,
+          "final_url": "https://www.cde.org.cn/main/att/download/22d2128d8193f20cec98639662a78557",
+          "headers": {
+            "server": "******",
+            "content-type": "application/octet-stream",
+            "transfer-encoding": "chunked",
+            "date": "Thu, 03 Sep 2026 17:17:47 GMT",
+            "vary": "Accept-Encoding",
+            "content-disposition": "attachment; filename=eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf;filename*=utf-8''eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf",
+            "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: ;",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload;",
+            "x-xss-protection": "1;mode=block",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "SAMEORIGIN",
+            "set-cookie": "Path=/; HttpOnly; Secure; SameLite=Strict;"
+          },
+          "sha256": "f24401043663bab609773defb3daaacad07febe62581108180a592dd23535d63",
+          "sm3": "7705637b1a7e3d3f95a0146e9462179a9b6dc72ba97855f2bf013efc4368fe32",
+          "kind": "pdf",
+          "pdf_header_offset": 0,
+          "expected_kind": "pdf",
+          "size": 1613653,
+          "valid": true,
+          "reason": null
+        }
+      ],
+      "kind": "pdf",
+      "size": 1613653,
+      "sha256": "f24401043663bab609773defb3daaacad07febe62581108180a592dd23535d63",
+      "sm3": "7705637b1a7e3d3f95a0146e9462179a9b6dc72ba97855f2bf013efc4368fe32",
+      "canonical_artifact": "CDE-CN-V4-DRAFT-GUIDANCE.pdf",
+      "byte_validation": {
+        "kind": "pdf",
+        "pdf_header_offset": 0,
+        "expected_kind": "pdf",
+        "size": 1613653,
+        "valid": true,
+        "reason": null
+      },
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 82,
+        "metadata": {
+          "Creator": "Microsoft® Word 2016",
+          "Producer": "Microsoft® Word 2016",
+          "CreationDate": "Wed May 27 10:03:21 2026 UTC",
+          "ModDate": "Wed May 27 10:03:21 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "82",
+          "Encrypted": "no",
+          "Page size": "595.32 x 841.92 pts (A4)",
+          "Page rot": "0",
+          "File size": "1613653 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        },
+        "text_file": "CDE-CN-V4-DRAFT-GUIDANCE.txt",
+        "pdfinfo_stderr": "",
+        "pdftotext_stderr": ""
+      },
+      "term_hits": {
+        "hl7_rps": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "eCTD v4.0 指导原则 7.2 ICH 指定受控词汇表................................................ 23 7.3 HL7 指定受控词汇表 ............................................... 23 7.4 ISO 指定受控词汇表 ................................................ 23 7.5 申请人定义词汇........................................................ 23 7.6 受控词汇表版本........................................................ 23 8 eCTD "
+          },
+          {
+            "physical_page": 6,
+            "matched_terms": [
+              "HL7",
+              "RPS"
+            ],
+            "context": " for Submission Formats for eCTD ——《ICH eCTD 文件格式规范》最新版本 4.本文档中引用 Health Level Seven® International（HL7®） 第 3 版法规产品提交（RPS）第 2 版规范的章节，经出版商 许可后使用。HL7 第 3 版法规产品提交第 2 版规范的版权归 Health Level Seven International 所有。保留所有权利。 1.4 术语和缩略语 1) 电子通用技术文档 Electronic Common Technical 1"
+          },
+          {
+            "physical_page": 9,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "文件内容。 22) 有效载荷 Payload Message 有效载荷是 eCTD v4.0 XML 报文中除报文头外的数据 主体。 23) 国际健康数据标准制定组织 Health Level 7 ，HL7 国际健康数据标准制定组织负责为 eCTD v4.0 提供数 据模型及信息结构。 24) 国 际 标 准 化 组 织 International Organization for Standardization ，ISO 4"
+          },
+          {
+            "physical_page": 28,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "元类型 4）产品类型 5）区域标题 6）联系人类型 7.2 ICH 指定受控词汇表 对于 ICH 受控词汇，区域无特殊要求和差异，请参考 《ICH eCTD v4.0 实施指南》以获取详情。 7.3 HL7 指定受控词汇表 对于 HL7 受控词汇，区域无特殊要求和差异，请参考 《ICH eCTD v4.0 实施指南》以获取详情。 7.4 ISO 指定受控词汇表 国际标准化组织（ISO）-双字母语言代码：ISO 639-1 标 准中规定语言指定的双字母代码。此受控词汇用于定义文档 的语言属性。 7.5 申请人定义词汇 申请人可以在 eCTD v4.0 XML 报文中提供自定义受控 词汇信息。自定义受控词汇信息应清晰、简洁，其代码值长 度不超过 32 个字符，代码系统值长度不超过 64 个字符，代 码显示值不超过 1000 个字符。 自定义受控词汇的定义"
+          },
+          {
+            "physical_page": 30,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "eCTD v4.0 指导原则 表 9-1 报文头 XML 结构 报文头 XML 结构 <PORP_IN000001UV ITSVersion=\"XML_1.0\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 PORP_IN000001UV.xsd\"> <id/> <creationTime/> <interactionId/> 该部分元素应使用自闭合标签进行标识 <processingCode/> <processingModeCode/> <acceptAckCode/> <receiver typeCode=\"RCV\"> <device classCode"
+          },
+          {
+            "physical_page": 31,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "、xmlns、xmlns:xsi、xsi:schemaLocation均为固定值，按 要求提供--> <PORP_IN000001UV ITSVersion=\"XML_1.0\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 PORP_IN000001UV.xsd\"> <!--以下内容均使用自闭合标签标识，无需提供其他信息--> <id/> <creationTime/> <interactionId/> <processingCode/> <processingModeCode/> <acceptAckCode/> <!--typeCode设置为“RCV”--> <recei"
+          }
+        ],
+        "submission_unit": [
+          {
+            "physical_page": 2,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "........... 9 3.2 注册行为 ...................................................................... 9 3.3 提交单元 ...................................................................... 9 3.4 申请、注册行为和提交单元的关系 ......................... 9 4 eCTD v4.0 区域元数据信息 ............................................... 10 4.1 申请信息 .................................................................... 10 4."
+          },
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "... 16 6 文件和文件夹 ...................................................................... 16 6.1 文件夹结构和提交单元内容 ................................... 16 6.2 命名规则 .................................................................... 17 6.3 文件格式 .................................................................... 18 6.4 文件大小 ..............................................................."
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "submission unit"
+            ],
+            "context": ".............................. 27 9.4.1 有效载荷 XML 结构 ...................................... 27 9.4.2 Submission Unit 元素 ..................................... 30 9.4.3 Priority Number 元素...................................... 33 9.4.4 Context of Use 元素 ........................................ 35 9.4.5 Related Context of Use 元素 .......................... 39 9.4.6 Document Reference"
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "submission unit",
+              "提交单元"
+            ],
+            "context": "请 Application 申请是指为了一个特定的监管目的（如临床试验申请） 提交的申报资料的集合。 3) 注册行为 Submission 注册行为是指针对某一特定注册目的从首次提交到获 得批准的所有提交单元的申报资料集合。 4) 提交单元 Submission Unit 提交单元是在某一注册行为中单次提交的申报资料的 集合。 5) 原始编号 Product Number 原始编号是用于标识申请人、活性成分和剂型的唯一识 别码。 6) 申请编号 Application Number 申请编号是一个申请在其全生命周期内的唯一识别编 号。 7) 序列号 Sequence Number 序列号是申请中唯一的整数的字符串，是用于区分同一 申请中不同提交单元的唯一标识。 8) 受控词汇 Controlled Vocabulary 2"
+          },
+          {
+            "physical_page": 13,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "交 eCTD v4.0 申报资料。 申请人使用 eCTD v4.0 提交申报资料后，不得再使用其 他方式进行递交。 3 eCTD v4.0 申报资料结构 eCTD v4.0 申报资料由申请、注册行为、提交单元三个 层级构成，示例如图 3-1。 图 3-1 eCTD v4.0 申报资料结构层级示例 8"
+          },
+          {
+            "physical_page": 14,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "请等。 申请类型是由监管机构定义，用来描述申请目的的一组 固定表述，如临床试验申请、新药申请、仿制药申请、原料 药申请。 3.2 注册行为 注册行为是指针对某一特定注册目的从首次提交到获 得批准的所有提交单元的申报资料集合，可以包含一个提交 单元或多个提交单元。同一个注册行为中的多个提交单元的 序列号可以是连续的，也可以是不连续的。 注册行为类型是由监管机构定义，用来描述注册目的的 一组固定表述，例如首次申请、补充申请等。 3.3 提交单元 提交单元是在某一注册行为中单次提交的申报资料的 集合。 提交单元类型是由监管机构定义，用来描述提交目的的 一组固定表述，例如首次提交、回复、撤回等。 3.4 申请、注册行为和提交单元的关系 申请、注册行为和提交单元的关系示例如表 3-1 所示。 表 3-1 申请、注册行为和提交单元的关系示例 9"
+          },
+          {
+            "physical_page": 15,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "eCTD v4.0 指导原则 申请类型 注册行为类型 提交单元类型 临床试验申请 首次申请 首次提交、回复、撤回 补充申请 首次提交、回复、撤回、 新适应症和联合用药 首次提交、回复、撤回 研发期间安全性报告 首次提交、回复、撤回 基线 格式转换、回复、撤回 新药申请 首次申请 首次提交、回复、撤回 补充申请 首次提交、回复、撤回 备案 首次提交、回复、撤回 报告 首次提交、回复、撤回 新适应症 首次提交、回复、撤回 再注册 首次提交、回复、撤回 基线 格式转换、回复、撤回 仿制药申请 首次申请 首次提交、回复、撤回 补充申请 首次提交、回复、撤回 备案 首次提交、回复、撤回 报告 首次提交、回复、撤回 新"
+          },
+          {
+            "physical_page": 17,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "附件 1 受控 词汇文件，申请人应从中选取一个用来描述本次提交的产品。 4.4 注册行为信息 注册行为信息包括注册行为类型等信息。 有关注册行为类型的详细信息请参考附件 1 受控词汇文 件。 4.5 提交单元信息 提交单元信息包括序列号、提交单元类型、提交单元描 述、提交单元联系人等信息。 4.5.1 序列号 序列号是申请中唯一的整数的字符串，是用于区分同一 申请中不同提交单元的唯一标识。 在提交 eCTD v4.0 提交单元时，申请人应从药品业务应 12"
+          },
+          {
+            "physical_page": 18,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "eCTD v4.0 指导原则 用系统获取序列号。序列号应从 1 开始提交，每次提交时须 将序列号加 1，并按先后次序提交，不得跳号提交。 4.5.2 提交单元类型 有关提交单元类型的详细信息请参考附件 1 受控词汇文 件。 4.5.3 提交单元描述 提交单元描述是对提交单元提交目的的简要描述，用于 区分相似类型的提交单元。提交单元描述长度应在 120 个中 文字符以内。 以下列出了一些提交单元描述的示例： 1）适应症为 xx 的新药上市申请 2）对提交单元 xx 的发补回复 3）药品生产商的变更，从 xx 改为 yy 4）增加新的原料药生产商，xx 5）增加新适应症 xx 6）xx（方案编号）方案修正 申请人填写的提交单元描述不得替代对监管机构问题 的回复、说明函，或用于向监管机构提问等。 4.5.4"
+          },
+          {
+            "physical_page": 21,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "关于 eCTD v4.0 验证标准的要求，详见本文第 14 章节。 6 文件和文件夹 申请人提交的文件和文件夹结构应符合本章节相关要 求，不得包含本指导原则未描述的文件和文件夹。 6.1 文件夹结构和提交单元内容 图 6-1 是针对一个 eCTD v4.0 提交单元申报资料文件夹 结构示例。 16"
+          },
+          {
+            "physical_page": 22,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "eCTD v4.0 指导原则 图 6-1 eCTD v4.0 提交单元申报资料文件夹结构示例 一个提交单元应放置于以申请编号命名的根目录文件 夹中，并包含以下内容： 1）以序列号命名的第一级文件夹； 2）第二级文件夹，包含模块一至模块五的内容文件、一 个 eCTD v4.0 XML 报文文件（submissionunit.xml）、一个存 放 eCTD v4.0 XML 报文文件校验和值的文本文件。 模块一的申报资料应放置于 m1/cn 文件夹内，不应设置 子文件夹。 模块二至模块五的文件夹结构要求请参考《ICH eCTD v4.0 实施指南》。 6.2 命名规则 17"
+          },
+          {
+            "physical_page": 23,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "eCTD v4.0 指导原则 eCTD v4.0 申报资料文件及文件夹命名仅允许使用小写 字母“a”至“z”、数字“0”至“9”、中划线“-”和下划 线“_”。 对于申报资料中的任一文件，由提交单元文件夹开始的 所有文件夹和文件名（含扩展名）路径长度不应超过 180 个 字符，单一文件夹或文件名称（含扩展名）长度不应超过 64 个字符。 6.3 文件格式 对于 eCTD v4.0 申报资料，适用的文件格式有以下五种： 1）便携文件格式（PDF）- .pdf 文件扩展名 例如：审评内容文件 2）可扩展标记语言 （XML）- .xml 文件扩展名 例如：eCTD v4.0 XML 报文文件 3）SAS XPORT 传输文件 - .xpt 文件扩展名 例如：临床试验数据文件 4）文本文件（TXT）- .txt 文件扩展名 例如：程序代码文件 5）"
+          }
+        ],
+        "context_of_use": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "context of use"
+            ],
+            "context": "........................ 30 9.4.3 Priority Number 元素...................................... 33 9.4.4 Context of Use 元素 ........................................ 35 9.4.5 Related Context of Use 元素 .......................... 39 9.4.6 Document Reference 元素 .............................. 42 9.4.7 Keyword 元素 ................................................. 43 9.4.8 Sequence Number 元素"
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "context of use",
+              "使用情境"
+            ],
+            "context": "L 元素是 XML 文档中的基本结构单元，用于封装和 组织数据。 13) XML 属性 XML Attribute XML 属性是 XML 文档中用于修饰元素、提供附加信息 的核心语法构造。 14) 使用情境 Context of Use，CoU 使用情境是用于定义目录标题（CTD 章节）与其所关联 的引用文件之间的对应关系的元素。 15) 使用情境组 Context Group 使用情境组是具有相同使用情境代码和关键词代码组 合的一组使用情境元素的集合。 16) 关键词 Keyword 关键词是一组已定义的代码列表，用于标识使用情境元 素的额外信息。 3"
+          },
+          {
+            "physical_page": 10,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": " 报文中 将多个文档元素所指向的实体文件路径设置为同一个文件 相对路径的行为。 26) 文档复用 Document Reuse 为减少实体文件的重复提交，在 eCTD v4.0 XML 报文中 将多个使用情境元素所引用的文档元素 UUID 设置为同一个 文档元素 UUID 的行为。 1.5 字符和符号说明 1.5.1 XML 示例说明 本指导原则包含部分 XML 示例片段， 表 1-1 标识了 XML 示例片段中使用的颜色及其在示例中的含义。 表 1-1 XML 示例片段图例 文本颜色 描述 蓝色 XML 元素，例如：<application> 红色 XML 属性，例如： root，code 紫色 XML 属性的值，例如：2.16.840.1.113883 绿色 XML 注释，例如：contextOfUse 元素样例 1.5.2 XML 中的位置 本"
+          },
+          {
+            "physical_page": 25,
+            "matched_terms": [
+              "使用情境"
+            ],
+            "context": "eCTD v4.0 指导原则 应使用与中文申报资料同样的使用情境代码和关键词代码， 并使用相邻的优先级编号（priorityNumber）进行排序，中文 资料在前，外文资料在后。 6.8 PDF 文件版本及 OCR 针对 PDF 格式的文件，其版本应为 1.4、1.5、1.6、1.7 或 PDF/A-1、PDF/A-2。 PDF 文件中的内容需要符合可复制、可搜索的要求，建 议申请人使用由源文件（如 WORD 文件）转化形成的 PDF 文件，而不是扫描后创建的 PDF 文件。 如申报资料包含无法访问电子来源的文件或需要第三 方签章的文件，该部分资料可以是扫描后创建的 PDF 文件。 扫描后创建的 PDF 文件"
+          },
+          {
+            "physical_page": 33,
+            "matched_terms": [
+              "contextOfUse"
+            ],
+            "context": "lassCode=\"ACTN\" moodCode=\"EVN\"> <subject typeCode=\"SUBJ\"> submissionUnit 元素主要包含如下元素和属性：  component.contextOfUse o replacementOf.relatedContextOfUse o derivedFrom.documentReference o referencedBy.keyword <submissionUnit> <id/> <code/> submissionUnit-详见本文 9.4.2 章节 <title/> <statusCode/> <component> <priorityNumber value=\"\"/> priorityNumber-详见本文 9.4.3 章节 <contextOfUse> <id/> <cod"
+          },
+          {
+            "physical_page": 38,
+            "matched_terms": [
+              "contextOfUse"
+            ],
+            "context": "xx 的新药上市申请\"/> <!--提交单元状态应始终设置为 active--> <statusCode code=\"active\"/> <!--submissionUnit 元素中可包含一个或多个 contextOfUse 元素--> <!--一个 contextOfUse 元素开始--> <component> <!--contextOfUse 元素的详细信息，示例详见文本第 9.4. 4.3 章节--> </component> <!--一个 contextOfUse 元素结束--> <!--componentOf1 元素主要用于标识 submission 元素信息--> <componentOf1> <!--submission 元素的详细信息，示例详见文本 9.4.9.3 章 节--> </componentOf1> </submissio"
+          },
+          {
+            "physical_page": 39,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": "mber及其值的布局 容器组件 value [1..1] 数字，例如： priorityNumber元素的value属 1000、2000、 性是一个整数，可在 3000 ContextGroup内对contextOfUse 元素进行排序。 updateMode [0..1] 字母，例如： updateMode属性提供了编码 R（表示替 值，用于表明priorityNumber 换） 的value属性是否已发生更改 技术要求 priorityNumber@value为必需属性 业务规则 各contextOfUse元素均需要赋予priorityNumber。 priorityNumber是一个正整数。对于具有相同使用情境代码和关键词代 码组合的contextOfUse元素，其值应从 \"1\" 开始，并以整数递增。该值 不应大于\"999999\"。 对于共享"
+          },
+          {
+            "physical_page": 40,
+            "matched_terms": [
+              "context of use",
+              "contextOfUse"
+            ],
+            "context": "eCTD v4.0 指导原则 9.4.3.3 XML 示例 详见本文 9.4.4.3 章节。 9.4.4 Context of Use 元素 contextOfUse 元素在 CTD 目录标题与相关参考文档间 建立链接，以及标识对所引用文档关键词信息。所有模块一 的目录标题及 3.2.R 章节的扩展目录标题由中国区域受控词 汇表提供。模块二至模块五的目录标题由 ICH 受控词汇表提 供。 contextOfUse 元素将根据需要在提交单元中重复使用， 即一个 submissionUnit 中可以包含多个 contextOfUse 元素。 更多关于 contextOfUse 元素的信息请参考《ICH eCTD v4.0 实施指南》9.2.6 章节。 9.4.4"
+          },
+          {
+            "physical_page": 41,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": "eCTD v4.0 指导原则  contextOfUse.id  contextOfUse.code  contextOfUse.statusCode  contextOfUse.replacementOf  contextOfUse.derivedFrom  contextOfUse.referencedBy contextOfUse.id 元素 属性 基数 允许值 描述 布局容器组件，用于唯一标识 [1..1] 报文中发送的使用情境 有效UUID或 OID： 2.16.840.1.1 id元素的root属性是contextOfUs root [1..1] 13883.3."
+          },
+          {
+            "physical_page": 42,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": "eCTD v4.0 指导原则 元素 属性 基数 允许值 描述 发送状态为“active”的 contextOfUse 元素时，需要提供 code 元素。 如果 contextOfUse.statusCode 状态代码为“suspended”，或者当更新相关 业务规则 priorityNumber 时，则不需要 code 元素。 contextOfUse.statusCode 元素 属性 基数 允许值 描述 statusCode [1..1] 布局容器元素，用于显示使用 情境状态 code [1..1] 字母，例如： statusCode元素的code属性表 active、 示使用情境状态 suspended 技术要求 statusCode是必需"
+          },
+          {
+            "physical_page": 43,
+            "matched_terms": [
+              "contextOfUse"
+            ],
+            "context": "eCTD v4.0 指导原则 </documentReference> </derivedFrom> <!--引用必要的关键词信息，用于对 contextOfUse 元素进行分类分组；关 键词的设置应遵循 ICH 受控词汇文件中的要求，例如 2.3.s 章节允许使用 substance 和 manufacturer 两个关键词信息--> <!--设置第一个关键词引用信息，typeCode 设置为“REFR”--> <referencedBy typeCode=\"REFR\"> <keyword> <!--code 值设置为申请人自定义关键词的代码，codeSystem 设置 为默认的“2.16.840.1.113883.3”，或申请人自定义的值--> <code code=\"companyA\""
+          },
+          {
+            "physical_page": 44,
+            "matched_terms": [
+              "context of use",
+              "contextOfUse"
+            ],
+            "context": "tReference> <id root=\"a1a77c1a-c31f-46e3-9535-21dd2b5be500\"/> </documentReference> </derivedFrom> </contextOfUse> </component> <!--在提交单元 2 中将该 contextOfUse 元素的 priorityNumber 由 1000 变更为 2000--> <component> <!--priorityNumber 的值设置为新的值 2000，并将 updateMode 属性设置为 “R”进行标识--> <priorityNumber value=\"2000\" updateMode=\"R\"/> <contextOfUse> <!--当前 CoU 的 UUID 值应与提交单元 1 中的值保持一致--> <id root=\""
+          }
+        ],
+        "document_reference": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "document reference"
+            ],
+            "context": "............................ 35 9.4.5 Related Context of Use 元素 .......................... 39 9.4.6 Document Reference 元素 .............................. 42 9.4.7 Keyword 元素 ................................................. 43 9.4.8 Sequence Number 元素 .................................. 45 9.4.9 Submission 元素 ............................................. 46 9.4.10 Contact Party 元"
+          },
+          {
+            "physical_page": 33,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "ssionUnit 元素主要包含如下元素和属性：  component.contextOfUse o replacementOf.relatedContextOfUse o derivedFrom.documentReference o referencedBy.keyword <submissionUnit> <id/> <code/> submissionUnit-详见本文 9.4.2 章节 <title/> <statusCode/> <component> <priorityNumber value=\"\"/> priorityNumber-详见本文 9.4.3 章节 <contextOfUse> <id/> <code/> contextOfUse-详见本文 9.4.4 章节 <statusCode/> <replacementOf typ"
+          },
+          {
+            "physical_page": 42,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "统会将其状态从“active”变更为“obsolete”。 9.4.4.3 XML 示例 contextOfUse 元素 XML 示例 <!--priorityNumber、contextOfUse、documentReference、keyword 等元 素 XML 示例--> <component> <!--为 contextOfUse 元素指定优先级排序的值--> <priorityNumber value=\"1000\"/> <contextOfUse> <!--为 contextOfUse 元素指定唯一 UUID--> <id root=\"fd4b6199-5f4e-401c-b2df-bdb99736a046\"/> <!--设置 code 值，用于标识当前 contextOfUse 元素的 CTD 章节位置，c odeSystem 的值根据"
+          },
+          {
+            "physical_page": 43,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "eCTD v4.0 指导原则 </documentReference> </derivedFrom> <!--引用必要的关键词信息，用于对 contextOfUse 元素进行分类分组；关 键词的设置应遵循 ICH 受控词汇文件中的要求，例如 2.3.s 章节允许使用 substance 和 manufacturer 两个关键词信息--> <!--设置第一个关键词引用信息，typeCode 设置为“REFR”--> <referencedBy typeCode=\"REFR\"> <keyword> <!--code 值设置为申请人自定义关键词的代码，codeSystem 设置 为默认的“2."
+          },
+          {
+            "physical_page": 44,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "eCTD v4.0 指导原则 <!--提供当前 CoU 引用的文档元素的 UUID 值--> <documentReference> <id root=\"a1a77c1a-c31f-46e3-9535-21dd2b5be500\"/> </documentReference> </derivedFrom> </contextOfUse> </component> <!--在提交单元 2 中将该 contextOfUse 元素的 priorityNumber 由 1000 变更为 2000--> <component> <!--priorityNumber 的值设置为新的值 2000，并将 updateMode 属性设置为 “R”进行标识--> <pr"
+          },
+          {
+            "physical_page": 46,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "tive”，表示当前 CoU 处于有效状态--> <statusCode code=\"active\"/> <derivedFrom> <!--提供当前 CoU 引用的文档元素的 UUID 值--> <documentReference> <id root=\"a1a77c1a-c31f-46e3-9535-21dd2b5be500\"/> </documentReference> </derivedFrom> </contextOfUse> </component> <!--在提交单元 2 中，新建一个 contextOfUse 元素，对提交单元 1 中的 contextO fUse 元素进行替换操作--> <component> <!--priorityNumber 保持不变，也可根据实际情况设置为新的值--> <priorityNumber valu"
+          },
+          {
+            "physical_page": 47,
+            "matched_terms": [
+              "document reference",
+              "documentReference"
+            ],
+            "context": "d1838e57c\"/> </relatedContextOfUse> </replacementOf> <derivedFrom> <!--提供当前 CoU 引用的文档元素的 UUID 值--> <documentReference> <id root=\"51b25b1d-58a0-43a3-95e6-a3e04dd4d46c\"/> </documentReference> </derivedFrom> </contextOfUse> </component> 9.4.6 Document Reference 元素 documentReference 元素用于提供 contextOfUse 元素关 联的 document 元素信息。每个新建的 contextOfUse 元素（状 态为 active）均应引用一个 document 元素。当 cont"
+          },
+          {
+            "physical_page": 48,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "eCTD v4.0 指导原则 eCTD v4.0 XML 报文中可不提供。如果 eCTD v4.0 XML 报 文包含该属性的其他值，则该报文无效。 documentReference@moodCode 应取值为“EVN”，在 eCTD v4.0 XML 报文中可不提供。如果 eCTD v4.0 XML 报 文包含该属性的其他值，则该报文无效。 documentReference 元素下允许使用的元素包括：  documentReference.id documentReference.id 元素 属性 基数 允许值 描述 布局容器组件，用于标识引用 [1..1] 的文档信息 有效UUID或 OID： 2.16.840.1.1 root属性用于标识被引用的doc root [1..1] 13883."
+          },
+          {
+            "physical_page": 71,
+            "matched_terms": [
+              "documentReference",
+              "文档引用"
+            ],
+            "context": "同文档元素的引用文件路径的 值（document.text.reference@value）设置为指向同一相对路 径的文件地址实现。 2）基于文档元素的文档复用 此类复用方式通过将不同的使用情境元素的文档引用 的值（contextOfUse.derivedFrom.documentReference.id@root） 设置为指向同一个文档元素实现。 10.1.3 撤回操作 申请人在提交单元类型为“撤回”的提交单元中需进行 以下操作： 1）针对当前注册行为前序提交单元中新增的使用情境 元素，需在本次提交单元中进行删除操作。其中，说明函、 申请表除外，申请人应保留前序提交单元中的说明函、申请 表，并在本次提交单元中创建新的说明函。 2）针对当前注册行为前序提交单元中被替换的使用情 66"
+          },
+          {
+            "physical_page": 81,
+            "matched_terms": [
+              "documentReference"
+            ],
+            "context": "54d5f585e055\"/> </relatedContextOfUse> </replacementOf> <derivedFrom> <!--设置当前 CoU 元素引用的文档 UUID--> <documentReference> <id root=\"8ea8c215-bd0b-4665-9fa3-8d24373b90d5\"/> </documentReference> </derivedFrom> </contextOfUse> </component> 向前兼容的生命周期管理 XML 示例——删除 <!--在 eCTD v4.0 提交单元报文中创建 1 个新的 contextOfUse 元素--> <component> <!--为 contextOfUse 元素指定优先级排序的值--> <priorityNumber value=\"100"
+          }
+        ],
+        "uuid": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "........... 14 5.5 生命周期管理 ............................................................ 14 5.6 OID 和 UUID............................................................. 15 5.6.1 OID .................................................................. 15 5.6.2 UUID ............................................................... 15 5.7 数据类型 ............................................"
+          },
+          {
+            "physical_page": 9,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "ntifier，OID 对象标识符是一种用于全局唯一标识通信与信息处理 世界中任何对象、概念或事物的数字标识符。 20) 通用唯一标识符 Universally Unique Identifier， UUID 通用唯一标识符是一种软件建构标准，用于在分布式计 算环境中为信息提供唯一的标识符。 21) eCTD v4.0 XML 报文 eCTD v4.0 XML Message eCTD v4.0 XML 报文是根据 《ICH eCTD v4.0 实施指南》 以及本指导原则要求，向监管机构提交的 submissionunit.xml 文件内容。 22) 有效载荷 Payload Message 有效载荷是 eCTD v4.0 XML 报文中除报文头外的数据 主体。 23) 国际健康数据标准制定组织 Health Level 7 ，HL7 国际健康数据标"
+          },
+          {
+            "physical_page": 10,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "的实体文件路径设置为同一个文件 相对路径的行为。 26) 文档复用 Document Reuse 为减少实体文件的重复提交，在 eCTD v4.0 XML 报文中 将多个使用情境元素所引用的文档元素 UUID 设置为同一个 文档元素 UUID 的行为。 1.5 字符和符号说明 1.5.1 XML 示例说明 本指导原则包含部分 XML 示例片段， 表 1-1 标识了 XML 示例片段中使用的颜色及其在示例中的含义。 表 1-1 XML 示例片段图例 文本颜色 描述 蓝色 XML 元素，例如：<application> 红色 XML 属性，例如： root，code 紫色 XML 属性的值，例如：2.16.840.1.113883 绿色 XML 注释，例如：contextOfUse 元素样例 1.5.2 XML 中的位置 本文档中的每个元素都包含一个名为"
+          },
+          {
+            "physical_page": 20,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "eCTD v4.0 指导原则 关于 eCTD v4.0 生命周期管理的要求详见本文第 10 章 节。 5.6 OID 和 UUID eCTD v4.0 的 唯 一 标 识 符 有 两 种 类 型 ： 对 象 标 识 符 （Object Identifiers，OID）和通用唯一标识符（Universally Unique Identifiers，UUID）。 5.6.1 OID 对象标识符（OID）是一串数字序列，唯一标识一个对 象并代表分层分配的命名空间。对象标识符通过国际电信联 盟的 ASN.1 标准正式定义。 中国区域代码列表的当前 OID 根节点为： TBD（该 OID 值尚未最终确定，待确定后同步更新） 中国区域 OID 代码系统定义详见附件 1 受控词汇文件 O"
+          },
+          {
+            "physical_page": 36,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "t  submissionUnit.componentOf1 submissionUnit.id 元素 属性 基数 允许值 描述 布局容器组件，用于唯一标识 [1..1] 报文中发送的提交单元 有效UUID id 例如： id元素的root属性是 root [1..1] 578af0a6- submissionUnit元素的全球唯一 4e99-410b- 标识符。 b3db- 3f14c349275f 技术要求 id@root为必需属性。 业务规则 submissionUnit元素的id@root应该是唯一的。 submissionUnit.code 元素 属性 基数 允许值 描述 布局容器组件，用于定义提交单 [0..1] 元类型 字母数字，例 code 属性，为唯一值，表示 code code [1..1] 如：cnsqt1、 submissi"
+          },
+          {
+            "physical_page": 37,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "bject typeCode=\"SUBJ\"> <!--submissionUnit 元素 XML 示例--> <submissionUnit> <!--为 submissionUnit 元素指定唯一 UUID--> <id root=\"5bd909dd-1919-42d0-9547-0af4f8f28d28\"/> <!--设置 code 值，用于标识当前提交单元的类型--> <code code=\"cnsqt1\" codeSystem=\"TBD\"/> <!--title 元素用于标识提交单元描述信息--> 32"
+          },
+          {
+            "physical_page": 41,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "dFrom  contextOfUse.referencedBy contextOfUse.id 元素 属性 基数 允许值 描述 布局容器组件，用于唯一标识 [1..1] 报文中发送的使用情境 有效UUID或 OID： 2.16.840.1.1 id元素的root属性是contextOfUs root [1..1] 13883.3.989 e元素的全球唯一标识符或v3.2. id .2.2.1.13.1 2 OID命名空间。 （向前兼 容） 叶节点引用 id元素的extension属性是一个 extension [0..1] （向前兼 指向v3.2.2叶节点引用的引用链 容） 接，仅可停用v3.2.2内容。 id@root为必需属性。 当id@root属性为2.16.840.1.113883.3.989.2.2.1.13.1，且 技术要求 cont"
+          },
+          {
+            "physical_page": 42,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "contextOfUse 元素指定优先级排序的值--> <priorityNumber value=\"1000\"/> <contextOfUse> <!--为 contextOfUse 元素指定唯一 UUID--> <id root=\"fd4b6199-5f4e-401c-b2df-bdb99736a046\"/> <!--设置 code 值，用于标识当前 contextOfUse 元素的 CTD 章节位置，c odeSystem 的值根据 ICH 或区域受控词汇文件中的 CoU 标题对应的 OID 值进行提供- -> <code code=\"ich_2.3.s\" codeSystem=\"2.16.840.1.113883.3.98 9.2.2.1.1.5\"/> <!--状态代码设置为“active”，表示当前 CoU 处于有效状态--> <statu"
+          },
+          {
+            "physical_page": 43,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "初始的 priorityNumber 设置为 1000--> <priorityNumber value=\"1000\"/> <contextOfUse> <!--在 root 属性中提供 CoU 的 UUID 信息--> <id root=\"d26a228f-053d-430f-9e80-efdd1838e57c\"/> <!--指定当前 CoU 所属的 CTD 章节，并根据受控词汇文件提供对应的 OID 信 息--> <code code=\"ich_2.7.1\" codeSystem=\"2.16.840.1.113883.3.98 9.2.2.1.1.5\"/> <!--状态代码设置为“active”，表示当前 CoU 处于有效状态--> <statusCode code=\"active\"/> <derivedFrom> 38"
+          },
+          {
+            "physical_page": 44,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "eCTD v4.0 指导原则 <!--提供当前 CoU 引用的文档元素的 UUID 值--> <documentReference> <id root=\"a1a77c1a-c31f-46e3-9535-21dd2b5be500\"/> </documentReference> </derivedFrom> </contextOfUse> </component> <!--在提交单元 2 中将该 contextOfUse 元素的 priorityNumber 由 1000 变更为 2000--> <component> <!--priorityNumber 的值设置为新的值 2000，并将 updateMode 属性设置为 “R”"
+          },
+          {
+            "physical_page": 45,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "elatedContextOfUse.id relatedContextOfUse.id 元素 属性 基数 允许值 描述 布局容器组件，用于标识引用 [1..1] 的相关contextOfUse 有效UUID或 OID： id元素的root属性是正在被替换 2.16.840.1.1 的relatedContextOfUse元素的 root [1..1] 13883.3.989 全球唯一标识符或v3.2.2 OID id .2.2.1.13.1 命名空间。 （向前兼 容） id元素的extension属性是一个 叶节点引用 指向v3.2.2叶节点引用的引用链 extension [0..1] （向前兼 接，且只应在引用v3.2.2内容时 容） 使用。 id@root为必需属性。 技术要求 当id@root属性为2.16.840.1.113883.3.9"
+          },
+          {
+            "physical_page": 46,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "<!--priorityNumber 设置为 1000--> <priorityNumber value=\"1000\"/> <contextOfUse> <!--在 root 属性中提供 CoU 的 UUID 信息--> <id root=\"d26a228f-053d-430f-9e80-efdd1838e57c\"/> <!--指定当前 CoU 所属的 CTD 章节，并根据受控词汇文件提供对应的 OID 信 息--> <code code=\"ich_2.7.1\" codeSystem=\"2.16.840.1.113883.3.98 9.2.2.1.1.5\"/> <!--状态代码设置为“active”，表示当前 CoU 处于有效状态--> <statusCode code=\"active\"/> <derivedFrom> <!--提供当前 CoU 引用"
+          }
+        ],
+        "controlled_vocabulary": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "................. 14 5.1 文件和文件夹 ............................................................ 14 5.2 受控词汇表 ................................................................ 14 5.3 eCTD v4.0 XML 架构 ............................................... 14 5.4 eCTD v4.0 XML 报文 ............................................... 14 5.5 生命周期管理 ..................................................."
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "eCTD v4.0 指导原则 7.2 ICH 指定受控词汇表................................................ 23 7.3 HL7 指定受控词汇表 ............................................... 23 7.4 ISO 指定受控词汇表 ................................................ 23 7.5 申请人定义词汇........................................................ 23 7.6 受控词汇表版本......"
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "受控词汇",
+              "controlled vocabulary"
+            ],
+            "context": "umber 申请编号是一个申请在其全生命周期内的唯一识别编 号。 7) 序列号 Sequence Number 序列号是申请中唯一的整数的字符串，是用于区分同一 申请中不同提交单元的唯一标识。 8) 受控词汇 Controlled Vocabulary 2"
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "eCTD v4.0 指导原则 受控词汇是对特定概念规定术语的限定列表。 9) SHA256 SHA256 是一种广泛使用的加密哈希算法。 10) 校验和 Checksum 一个代表数据总和的值，用以确保信息传输的完整性和 一致性。eCTD v4.0 中使用 SHA256 算法生成校验和。 11) 验证 指申请人和监管机构根据公开和统一的验证标准，对 eCTD 申报资料进行检查校验的过程。 12) XML 元素 XML Element XML 元素是 XML 文档中的基本结构单元，用于封装和 组织数据。 13) XML 属性 XML Attribute XML 属性是 XML 文档中用"
+          },
+          {
+            "physical_page": 17,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "号。对于已以 eCTD v3.2.2 方式提交并获批临床或上市许可的药品，如需转 换为 eCTD v4.0 提交，也无需申请新的申请编号。 4.3.1 申请类型 有关申请类型的详细信息请参考附件 1 受控词汇文件， 申请人应从中选取一个作为本次申请的申请类型。 4.3.2 产品类型 产品类型是由监管机构定义，用来描述产品分类信息的 一组固定表述。有关产品类型的详细信息请参考附件 1 受控 词汇文件，申请人应从中选取一个用来描述本次提交的产品。 4.4 注册行为信息 注册行为信息包括注册行为类型等信息。 有关注册行为类型的详细信息请参考附件 1 受控词汇文 件。 4.5 提交单元信息 提交单元信息包括序列号、提交单元类型、提交单元描 述、提交单元联系人等信息。 4.5.1 序列号 序列号是申请中唯一的整数的字符串，是用于区分同一 申请中不同提交单元的唯"
+          },
+          {
+            "physical_page": 18,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "D v4.0 指导原则 用系统获取序列号。序列号应从 1 开始提交，每次提交时须 将序列号加 1，并按先后次序提交，不得跳号提交。 4.5.2 提交单元类型 有关提交单元类型的详细信息请参考附件 1 受控词汇文 件。 4.5.3 提交单元描述 提交单元描述是对提交单元提交目的的简要描述，用于 区分相似类型的提交单元。提交单元描述长度应在 120 个中 文字符以内。 以下列出了一些提交单元描述的示例： 1）适应症为 xx 的新药上市申请 2）对提交单元 xx 的发补回复 3）药品生产商的变更，从 xx 改为 yy 4）增加新的原料药生产商，xx 5）增加新适应症 xx 6）xx（方案编号）方案修正 申请人填写的提交单元描述不得替代对监管机构问题 的回复、说明函，或用于向监管机构提问等。 4.5.4 提交单元联系人信息 提交单元联系人信息是对该提交单元的"
+          },
+          {
+            "physical_page": 19,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": " 册受理号等其他编号的要求按现行管理规定执行。 5 基于中国区域要求的 eCTD v4.0 组成部分 5.1 文件和文件夹 关于 eCTD v4.0 文件和文件夹的要求详见本文第 6 章节。 5.2 受控词汇表 关于 eCTD v4.0 受控词汇文件管理的要求详见本文第 7 章节。 5.3 eCTD v4.0 XML 架构 关于 eCTD v4.0 XML 架构的要求详见本文第 8 章节。 5.4 eCTD v4.0 XML 报文 关于 eCTD v4.0 XML 报文的要求详见本文第 9 章节。 5.5 生命周期管理 14"
+          },
+          {
+            "physical_page": 20,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "标识符通过国际电信联 盟的 ASN.1 标准正式定义。 中国区域代码列表的当前 OID 根节点为： TBD（该 OID 值尚未最终确定，待确定后同步更新） 中国区域 OID 代码系统定义详见附件 1 受控词汇文件 OID 列表。更多详细信息请参阅《ICH eCTD v4.0 实施指南》 第 4.5 章节。 5.6.2 UUID 通用唯一标识符（UUID）是 8-4-4-4-12 字符形式的十六 进制文本，即文本值包含 32 个字符和 4 个连字符。通用唯 一标识符由 ISO/IEC 11578:1996 和 ITU-T Rec X.667 | ISO/IEC 9834-8:2005 正式定义。 在 eCTD v4.0 中， 通用唯一标识符将用于表示 eCTD v4.0 XML 报 文 中 特 定 元 素 的 根 属 性 值 ， 例 如 applica"
+          },
+          {
+            "physical_page": 27,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": " eCTD 申报资料将会被拒收。 6.13 校验和 申请人提交的 eCTD v4.0 申报资料需按照《ICH eCTD v4.0 实施指南》要求提供校验和信息，以保证申报资料的完 整性和一致性。 7 受控词汇表 7.1 区域受控词汇表 中国区域指定的 eCTD v4.0 受控词汇表详见附件 1 受控 词汇文件。每个受控词汇代码集的 codeSystem OID 和代码值 由国家药品监督管理部门定义和提供。 区域受控词汇清单如下： 1）申请类型 22"
+          },
+          {
+            "physical_page": 28,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "eCTD v4.0 指导原则 2）注册行为类型 3）提交单元类型 4）产品类型 5）区域标题 6）联系人类型 7.2 ICH 指定受控词汇表 对于 ICH 受控词汇，区域无特殊要求和差异，请参考 《ICH eCTD v4.0 实施指南》以获取详情。 7.3 HL7 指定受控词汇表 对于 HL7 受控词汇，区域无特殊要求和差异，请参考 《ICH eCTD v4.0 实施指南》以获取详情。 7.4 ISO 指定受控词汇表 国际标准化组织（ISO）-双字母语言代码：ISO 639-1 标 准中规定语言指定的双字母代码。此受控词汇用于定义文档 的语言属性。 7.5 申请人定义词汇 申请人可以在 eCTD v4.0 XML 报文中提供自定义受控 词汇信息。自定义受控词汇信息应清晰、简洁，其代"
+          },
+          {
+            "physical_page": 29,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "eCTD v4.0 指导原则 受控词汇表版本用于确定监管机构可接受的受控词汇 有效值。申请人应按国家药品监督管理部门有关要求选择正 确的受控词汇表版本。 更多详细信息请参考《ICH eCTD v4.0 实施指南》、ICH eCTD v4.0 受控词汇表以及本指导原则附件 1 受控词汇文件。 8 eCTD v4.0 XML 架构 对于 XML 架构使用原则区域无特殊要求和差异，请参 考《ICH eCTD v4.0 实施指南》以获取详情。 9 eCTD v4.0 XML 报文 eCTD v4.0 XML 报文的构建原则与《ICH eCTD v4.0 实 施指南》无偏离。除《ICH eCT"
+          },
+          {
+            "physical_page": 37,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "eCTD v4.0 指导原则 元素 属性 基数 允许值 描述 业务规则 应根据中国区域受控词汇表提供正确的提交单元类型。 submissionUnit.title 元素 属性 基数 允许值 描述 title [0..1] 此容器元素提供申请人定义的 提交单元描述 value [0..1] 文本 title元素的value属性表示当前 提交单元的描述信息 技术要求 每个提交单元均需提供title元素，并有value属性。 业务规则 value属性是对提交单元目的的简要描述，用于区分相似类型的提交单 元。长度应控制在120个中文字符内。该描述信息不得替代对监管机构问 题的回复、说明函，或用于向监管机构提问等。 submissionUnit.s"
+          }
+        ],
+        "keyword": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "keyword"
+            ],
+            "context": "素 .......................... 39 9.4.6 Document Reference 元素 .............................. 42 9.4.7 Keyword 元素 ................................................. 43 9.4.8 Sequence Number 元素 .................................. 45 9.4.9 Submission 元素 ............................................. 46 9.4.10 Contact Party 元素 .......................................... 48 9.4.11 Manufac"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": "....... 74 13.1 序列号 ....................................................................... 74 13.2 关键词映射 ............................................................... 75 13.3 生命周期操作 ........................................................... 75 13.4 其他要求 ................................................................... 77 14 验证标准 ..........................................."
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "ext of Use，CoU 使用情境是用于定义目录标题（CTD 章节）与其所关联 的引用文件之间的对应关系的元素。 15) 使用情境组 Context Group 使用情境组是具有相同使用情境代码和关键词代码组 合的一组使用情境元素的集合。 16) 关键词 Keyword 关键词是一组已定义的代码列表，用于标识使用情境元 素的额外信息。 3"
+          },
+          {
+            "physical_page": 9,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "eCTD v4.0 指导原则 17) 关键词定义 Keyword Definition 关键词定义是用于提供关键词代码列表定义的元素。 18) 优先级编号 Priority Number 优先级编号是用于标识同一个使用情景组下的使用情 境元素显示优先级顺序的元素。 19) 对象标识符 Object Identifier，OID 对象标识符是一种用于全局唯一标识通信与信息处理 世界中任何对象、概念或事物的数字标识符。 20) 通用唯一标识符 Universally Unique Identifier， UUID 通用唯一标识符是一种软件建构标准，用于在分布式计 算环境中为信息提供唯一的标识符。"
+          },
+          {
+            "physical_page": 25,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": "eCTD v4.0 指导原则 应使用与中文申报资料同样的使用情境代码和关键词代码， 并使用相邻的优先级编号（priorityNumber）进行排序，中文 资料在前，外文资料在后。 6.8 PDF 文件版本及 OCR 针对 PDF 格式的文件，其版本应为 1.4、1.5、1.6、1.7 或 PDF/A-1、PDF/A-2。 PDF 文件中的内容需要符合可复制、可搜索的要求，建 议申请人使用由源文件（如 WORD 文件）转化形成的 PDF 文件，而不是扫描后创建的 PDF 文件。 如申报资料包含无法访问电子来源的文件或需要第三 方签章的文件，该部分资料可以是扫描后创建的 PDF 文件。 扫描后创建的 PDF 文件属于纸质文件的"
+          },
+          {
+            "physical_page": 28,
+            "matched_terms": [
+              "keyword"
+            ],
+            "context": "过 64 个字符，代 码显示值不超过 1000 个字符。 自定义受控词汇的定义类型需要遵循《ICH eCTD v4.0 实 施指南》第 6.5 章节以及 ICH eCTD v4.0 受控词汇表中关于 Keyword Definition Type 的要求。 7.6 受控词汇表版本 23"
+          },
+          {
+            "physical_page": 33,
+            "matched_terms": [
+              "keyword"
+            ],
+            "context": "ent.contextOfUse o replacementOf.relatedContextOfUse o derivedFrom.documentReference o referencedBy.keyword <submissionUnit> <id/> <code/> submissionUnit-详见本文 9.4.2 章节 <title/> <statusCode/> <component> <priorityNumber value=\"\"/> priorityNumber-详见本文 9.4.3 章节 <contextOfUse> <id/> <code/> contextOfUse-详见本文 9.4.4 章节 <statusCode/> <replacementOf typeCode=\"RPLC\"> <relatedContextOfUs"
+          },
+          {
+            "physical_page": 34,
+            "matched_terms": [
+              "keyword"
+            ],
+            "context": "y> </subject2> </review> </subject2> application 元素主要包含如下元素和属性：  component.document  referencedBy.keywordDefinition <componentOf> <application> <id> application-详见本文 <item/> 9.4.13 章节 </id> <code/> <component> <document> <id/> document-详见本 <title/> <text integrityCheckAlgorithm=\"\" language=\"\"> 文 9.4.14 章节 <reference/> <integrityCheck/> 29"
+          },
+          {
+            "physical_page": 35,
+            "matched_terms": [
+              "keyword"
+            ],
+            "context": "eCTD v4.0 指导原则 </text> </document> </component> <referencedBy> <keywordDefinition> <code/> keywordDefinit <statusCode/> ion -详见本文 <value> 9.4.15 章节 <item code=\"\" codeSystem=\"\"> <displayName/> </item> </value> </keywordDefinition> </referencedBy> </application> </componentOf> </submission> </componentOf1> 9.4.2 Submission Unit 元素 submissionUni"
+          },
+          {
+            "physical_page": 38,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "且具有相同的 contextOfUse.code@code 值，则可通过 priorityNumber 在提 交单元内及跨提交单元对这些元素进行排序。 如果 contextOfUse 元素同时还提供了关键词信息，则应 通 过 priorityNumber 对 contextOfUse.code@code 和 keyword.code@code 的代码组合进行排序。 更多关于 priorityNumber 元素的信息请参考《ICH eCTD v4.0 实施指南》9.2.5 章节。 9.4.3.1 XML 中的位置 33"
+          },
+          {
+            "physical_page": 39,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": "riorityNumber@value为必需属性 业务规则 各contextOfUse元素均需要赋予priorityNumber。 priorityNumber是一个正整数。对于具有相同使用情境代码和关键词代 码组合的contextOfUse元素，其值应从 \"1\" 开始，并以整数递增。该值 不应大于\"999999\"。 对于共享相同使用情境代码和关键词代码组合的使用情境，初始提交时 建议从\"1000\"开始，以1000为间隔递增（例如：\"2000\"、\"3000\"等）。 从而在重新排序和/或插入使用情境时可以以1、10和100递增。 如果priorityNumber不再生效或使用（即对应的使用情境元素被替换或 暂停），则申请人可将该priorityNumber重新分配给新的使用情境代码 和关键词代码组合，或在更新现有使用情境元素时重新分配。 在同一使用情境"
+          },
+          {
+            "physical_page": 40,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": ".3 XML 示例 详见本文 9.4.4.3 章节。 9.4.4 Context of Use 元素 contextOfUse 元素在 CTD 目录标题与相关参考文档间 建立链接，以及标识对所引用文档关键词信息。所有模块一 的目录标题及 3.2.R 章节的扩展目录标题由中国区域受控词 汇表提供。模块二至模块五的目录标题由 ICH 受控词汇表提 供。 contextOfUse 元素将根据需要在提交单元中重复使用， 即一个 submissionUnit 中可以包含多个 contextOfUse 元素。 更多关于 contextOfUse 元素的信息请参考《ICH eCTD v4.0 实施指南》9.2.6 章节。 9.4.4.1 XML 中的位置 contextOfUse 元素在 XML 文件中的位置如下所示： controlActProcess>>sub"
+          }
+        ],
+        "reuse": [
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "复用"
+            ],
+            "context": "eCTD v4.0 指导原则 10.1.2 内容复用 ......................................................... 65 10.1.3 撤回操作 ......................................................... 66 10.2 元数据生命周期管理 ............................................... 67 11 各模块的区域特殊要求 ...................................................... 67 11.1 "
+          },
+          {
+            "physical_page": 10,
+            "matched_terms": [
+              "reuse",
+              "复用"
+            ],
+            "context": "TD v4.0 指导原则 国际标准化组织负责制定全球通用技术与行业标准的 国际组织，其标准为 eCTD 4.0 提供唯一标识、语言/国家代 码等关键基础规范，并支持监管数据的全球一致性。 25) 文件复用 File Reuse 为减少实体文件的重复提交，在 eCTD v4.0 XML 报文中 将多个文档元素所指向的实体文件路径设置为同一个文件 相对路径的行为。 26) 文档复用 Document Reuse 为减少实体文件的重复提交，在 eCTD v4.0 XML 报文中 将多个使用情境元素所引用的文档元素 UUID 设置为同一个 文档元素 UUID 的行为。 1.5 字符和符号说明 1.5.1 XML 示例说明 本指导原则包含部分 XML 示例片段， 表 1-1 标识了 XML 示例片段中使用的颜色及其在示例中的含义。 表 1-1 XML 示例片段"
+          },
+          {
+            "physical_page": 48,
+            "matched_terms": [
+              "复用"
+            ],
+            "context": "d@extension属性，且其值必须是有效的叶节点引用。 id@root是对在当前提交单元或前序提交单元中发送的文档的引用。 业务规则 为了向前兼容，从v3.2.2引用的文档将在不做任何变更的情况下复用其现 有的元数据。 9.4.6.3 XML 示例 详见本文 9.4.4.3 章节。 9.4.7 Keyword 元素 keyword 元素用于传输 contextOfUse 元素的其他相关信 43"
+          },
+          {
+            "physical_page": 64,
+            "matched_terms": [
+              "复用"
+            ],
+            "context": "ext元素 更新文档标题时不需要text元素 text@language属性标识文档所使用的语言类型，对中文申报资料及其 外文参考资料进行区分，其值的设置需要遵循ISO639-1标准。 业务规则 文件复用时，text元素必须显示与先前提交的document元素相同的 reference@value、text@IntegrityCheckAlgorithm和text.integrityCheck 值。reference@value应该是文档的相对路径。如果是在同一提交单元 内复用，则相对路径位于其各自的模块文件夹中。如果是跨提交单元 复用，则相对路径需要显示序列号，无需显示申请编号。不允许跨申 请的文件复用。 9.4.14.3 XML 示例 document 元素 XML 示例 <!--document 元素 XML 示例--> <component>"
+          },
+          {
+            "physical_page": 70,
+            "matched_terms": [
+              "复用"
+            ],
+            "context": "active）。 针对模块一 1.2 章节中的申请表文件，在补正资料时要 求修改申请表的情况下，可进行替换操作；其他情况下，其 对应的使用情境状态代码应始终为新建（active）。 10.1.2 内容复用 65"
+          },
+          {
+            "physical_page": 71,
+            "matched_terms": [
+              "reuse",
+              "复用"
+            ],
+            "context": "eCTD v4.0 指导原则 eCTD v4.0 的内容复用分为文件复用（File Reuse）和文 档复用（Document Reuse）两种方式。申请人可根据实际情 况选择合适的内容复用方式以减少文件的重复提交。所有内 容复用均应在同一个申请中使用，不允许跨申请的内容复用。 在多个注册行为同时提交进行审评的情况下，申请人应注意 在对申报资料中的文件进行生命周期操作或复用时，不得引 用未被监管机构批准的内容。更多关于内容复用的要求，请 参考《ICH eCTD v4.0 实施指南》第 9.2.17 章节。 1）基于文件相对路径的文件复用 此类复用方式通过将不同文档元素的引用文件路径的 值（document.t"
+          }
+        ],
+        "lifecycle": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": ".................... 14 5.4 eCTD v4.0 XML 报文 ............................................... 14 5.5 生命周期管理 ............................................................ 14 5.6 OID 和 UUID............................................................. 15 5.6.1 OID .................................................................. 15 5.6.2 UUID ......................................."
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "............................. 56 9.4.15Keyword Definition 元素 ................................ 60 10 生命周期管理 ...................................................................... 64 10.1 文件生命周期管理 ................................................... 65 10.1.1 基本要求 ......................................................... 65"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "............... 65 10.1.3 撤回操作 ......................................................... 66 10.2 元数据生命周期管理 ............................................... 67 11 各模块的区域特殊要求 ...................................................... 67 11.1 模块一的特殊要求.................................................... 67 11.1.1 申请表的准备 ................................................. 67 11.1.2 说明函的准备 "
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "报资料的 集合。 5) 原始编号 Product Number 原始编号是用于标识申请人、活性成分和剂型的唯一识 别码。 6) 申请编号 Application Number 申请编号是一个申请在其全生命周期内的唯一识别编 号。 7) 序列号 Sequence Number 序列号是申请中唯一的整数的字符串，是用于区分同一 申请中不同提交单元的唯一标识。 8) 受控词汇 Controlled Vocabulary 2"
+          },
+          {
+            "physical_page": 16,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "eCTD v4.0 指导原则 原始编号是用于标识申请人、活性成分和剂型的唯一识 别码，由监管机构分配。同一个药品全生命周期内原始编号 不变。 申请人在首次以 eCTD 方式提交注册申请时，或首次从 非 eCTD 方式提交转为 eCTD 方式提交时，应从药品业务应 用系统获取原始编号，并在 eCTD v4.0 报文中正确填写。对 于原料药申请，在获取原始编号时，剂型默认为“原料药”。 原始编号编码规则为年份（4 位数字）+6 位流水号，例 如：2026123456。 申请人应注意，在同一药品提交新的申请时，无需获取 新的原始编号。 对于已以 eCTD v3.2.2 方式提交获批上市许可的药品， 如需转换为 eCTD v4.0 提交，也无需申请新的原始编号。 如因品种转"
+          },
+          {
+            "physical_page": 19,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "XML 架构 关于 eCTD v4.0 XML 架构的要求详见本文第 8 章节。 5.4 eCTD v4.0 XML 报文 关于 eCTD v4.0 XML 报文的要求详见本文第 9 章节。 5.5 生命周期管理 14"
+          },
+          {
+            "physical_page": 20,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "eCTD v4.0 指导原则 关于 eCTD v4.0 生命周期管理的要求详见本文第 10 章 节。 5.6 OID 和 UUID eCTD v4.0 的 唯 一 标 识 符 有 两 种 类 型 ： 对 象 标 识 符 （Object Identifiers，OID）和通用唯一标识符（Universally Unique Identifiers，UUID）。 5.6.1 OID 对象标识符（OID）是一串数字序列，唯一标识一个对 象并代表分层分配的命名空间。对象标识符通过国际电信联 盟的 ASN.1 标准正式定义。 中国区域代码列表的当前 OID 根节点为： TBD（该 OID 值尚未最终确定，待确定后同步更"
+          },
+          {
+            "physical_page": 24,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "ISO639-1 标准。 未设置语言属性、语言属性设置为中文（zh）或设置为空时， 对应文件将被识别为中文申报资料。语言属性设置为外文时， 对应文件将被识别为外文参考资料。语言属性一旦设置后， 在资料生命周期内将保持一致，不允许更新。外文参考资料 19"
+          },
+          {
+            "physical_page": 69,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "yName value=\"xxxx 股份有限公司\" updateMode=\"R\"/> </item> </value> </keywordDefinition> </referencedBy> 10 生命周期管理 64"
+          },
+          {
+            "physical_page": 70,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "eCTD v4.0 指导原则 10.1 文件生命周期管理 《ICH eCTD v4.0 实施指南》对申报资料内容提供了新 建、删除、替换三种生命管理方式，并通过使用情境元素的 状态代码（contextOfUse.statusCode@code）来进行控制。状 态代码取值包括 active、suspended 和 obsolete 三种。 新建一个使用情境元素时，其状态代码应设置为“active”。 当一个使用情境元素不再使用时，应将其状态代码设置 为“suspended”，表示删除该使用情境元素。 替换一个使用情境元素时，替换后的使用情境元素状态 代码应设置为“active”。被替换的使用情境元素"
+          },
+          {
+            "physical_page": 71,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "根据实际情 况选择合适的内容复用方式以减少文件的重复提交。所有内 容复用均应在同一个申请中使用，不允许跨申请的内容复用。 在多个注册行为同时提交进行审评的情况下，申请人应注意 在对申报资料中的文件进行生命周期操作或复用时，不得引 用未被监管机构批准的内容。更多关于内容复用的要求，请 参考《ICH eCTD v4.0 实施指南》第 9.2.17 章节。 1）基于文件相对路径的文件复用 此类复用方式通过将不同文档元素的引用文件路径的 值（document.text.reference@value）设置为指向同一相对路 径的文件地址实现。 2）基于文档元素的文档复用 此类复用方式通过将不同的使用情境元素的文档引用 的值（contextOfUse.derivedFrom.documentReference.id@root） 设置为指向同一个文档元素实现。 1"
+          },
+          {
+            "physical_page": 72,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "引用前序提交单元已经提交的文档元素，不应 创建新的文档元素。 3）针对当前注册行为前序提交单元中被删除的使用情境 元素，需创建新的使用情境元素，并引用前序提交单元中 对应的文档元素。 10.2 元数据生命周期管理 原始编号、申请编号、申请类型、产品类型在一个申请 的全生命周期中应保持一致，并在每次提交的 eCTD v4.0 XML 报文中提供正确的值。 注册行为类型在一个注册行为生命周期中应保持一致， 并在每次提交的 eCTD v4.0 XML 报文中提供正确的值。 序列号、提交单元类型、提交单元描述、提交单元联系 人信息应在每次提交的 eCTD v4.0 XML 报文中提供正确的 值。 priorityNumber 元素的信息变更操作参见本文第 9.4.3 章 节。 document.title 元素的信息变更操作参见本文第 9.4.14 章 节。"
+          }
+        ],
+        "validation": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": ".......... 16 5.10 向前兼容 ................................................................... 16 5.11 验证标准 .................................................................... 16 6 文件和文件夹 ...................................................................... 16 6.1 文件夹结构和提交单元内容 ................................... 16 6.2 命名规则 ......................................................."
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "............ 75 13.4 其他要求 ................................................................... 77 14 验证标准 .............................................................................. 77 15 其他 ...................................................................................... 77 附件 ............................................................................................ 7"
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "10) 校验和 Checksum 一个代表数据总和的值，用以确保信息传输的完整性和 一致性。eCTD v4.0 中使用 SHA256 算法生成校验和。 11) 验证 指申请人和监管机构根据公开和统一的验证标准，对 eCTD 申报资料进行检查校验的过程。 12) XML 元素 XML Element XML 元素是 XML 文档中的基本结构单元，用于封装和 组织数据。 13) XML 属性 XML Attribute XML 属性是 XML 文档中用于修饰元素、提供附加信息 的核心语法构造。 14) 使用情境 Context of Use，CoU 使用情境是用于定义目录标题（CTD 章节）与其所关联 的引用文件之间的对应关系的元素。 15) 使用情境组 Context Group 使用情境组是具有相同使用情境代码和关键词代码组 合的一组使用情境元素的集"
+          },
+          {
+            "physical_page": 21,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "4.0 申报资料中特定类型提交的要求，详见 本文第 12 章节。 5.10 向前兼容 关于从 eCTD v3.2.2 转为 eCTD v4.0 提交的兼容性要求， 详见本文第 13 章节。 5.11 验证标准 关于 eCTD v4.0 验证标准的要求，详见本文第 14 章节。 6 文件和文件夹 申请人提交的文件和文件夹结构应符合本章节相关要 求，不得包含本指导原则未描述的文件和文件夹。 6.1 文件夹结构和提交单元内容 图 6-1 是针对一个 eCTD v4.0 提交单元申报资料文件夹 结构示例。 16"
+          },
+          {
+            "physical_page": 82,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "xtOfUse> </component> 13.4 其他要求 eCTD v3.2.2 向 v4.0 的转换应从一个注册行为的首次提 交开始，正在处于监管活动中的注册行为不允许执行转换操 作。 14 验证标准 中国区域验证标准包括：基础信息校验、文件文件夹校 验、报文信息校验、模块一完整性校验、PDF 文件校验。更 多关于验证标准的详细内容，请参见附件 2 eCTD v4.0 验证 标准。 15 其他 其他未尽事宜请参照《药品注册管理办法》等现行的法 律法规、技术指导原则有关文件执行。 附件 1.受控词汇文件 2. eCTD v4.0 验证标准 77"
+          }
+        ],
+        "priority_number": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "priority number"
+            ],
+            "context": "........................ 27 9.4.2 Submission Unit 元素 ..................................... 30 9.4.3 Priority Number 元素...................................... 33 9.4.4 Context of Use 元素 ........................................ 35 9.4.5 Related Context of Use 元素 .......................... 39 9.4.6 Document Reference 元素 .............................. 42 9.4.7 Keyword 元素 ..........."
+          },
+          {
+            "physical_page": 9,
+            "matched_terms": [
+              "priority number"
+            ],
+            "context": "eCTD v4.0 指导原则 17) 关键词定义 Keyword Definition 关键词定义是用于提供关键词代码列表定义的元素。 18) 优先级编号 Priority Number 优先级编号是用于标识同一个使用情景组下的使用情 境元素显示优先级顺序的元素。 19) 对象标识符 Object Identifier，OID 对象标识符是一种用于全局唯一标识通信与信息处理 世界中任何对象、概念或事物的数字标识符。 20) 通用唯一标识符 Universally Unique Identifier， UUID 通用唯一标识符是一种软件建构标准，用于在分布式计 算环境中为信息提供唯一的标识符。 21) eCTD v4.0 XML 报文 eCTD v4.0 XML Message eCTD v4.0 XML 报"
+          },
+          {
+            "physical_page": 38,
+            "matched_terms": [
+              "priority number"
+            ],
+            "context": "的详细信息，示例详见文本 9.4.9.3 章 节--> </componentOf1> </submissionUnit> </subject> </controlActProcess> 9.4.3 Priority Number 元素 priorityNumber 元素用于标识同一个使用情景组下的 contextOfUse 元素显示优先级顺序。 如果存在多个 contextOfUse 元素实例且具有相同的 contextOfUse.code@code 值，则可通过 priorityNumber 在提 交单元内及跨提交单元对这些元素进行排序。 如果 contextOfUse 元素同时还提供了关键词信息，则应 通 过 priorityNumber 对 contextOfUse.code@code 和 keyword.code@code 的代码组合进行排"
+          }
+        ],
+        "status_code": []
+      }
     },
     {
-      "requested_url": "https://www.cde.org.cn/main/att/download/2aa41d3f263c030f340bf55594befc73",
-      "filename": "CDE-CN-V4-DRAFT-FEEDBACK--征求意见反馈表.docx",
-      "size": 25357,
-      "kind": "unknown",
-      "sha256": "95f0017d0f3d24c62511ffa9416dcb9ed0c3195f0d061b3b93a6ddcf2b5b0e6c",
-      "sm3": "aa112aef328afa40fbc0d84d42faa2d29f59e6bc5c2f9915cc017c6b3d95bd2b",
-      "downloaded_at_epoch": 1788454837,
       "source_id": "CDE-CN-V4-DRAFT-FEEDBACK",
       "role_key": "feedback_form",
       "role": "cn_ectd_v4_draft_feedback_form",
       "status": "official_draft",
       "source_page": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "requested_url": "https://www.cde.org.cn/main/att/download/2aa41d3f263c030f340bf55594befc73",
       "displayed_name": "征求意见反馈表.docx",
-      "discovery_method": "anchor",
-      "download_status": "SUCCESS"
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies",
+      "acquisition_attempts": [
+        {
+          "method": "requests-with-browser-cookies",
+          "status_code": 200,
+          "final_url": "https://www.cde.org.cn/main/att/download/2aa41d3f263c030f340bf55594befc73",
+          "headers": {
+            "server": "******",
+            "content-type": "application/octet-stream",
+            "transfer-encoding": "chunked",
+            "date": "Thu, 03 Sep 2026 17:17:51 GMT",
+            "vary": "Accept-Encoding",
+            "content-disposition": "attachment; filename=%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88%E8%A1%A8.docx;filename*=utf-8''%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88%E8%A1%A8.docx",
+            "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: ;",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload;",
+            "x-xss-protection": "1;mode=block",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "SAMEORIGIN",
+            "set-cookie": "Path=/; HttpOnly; Secure; SameLite=Strict;"
+          },
+          "sha256": "e98e1478130cd2f7d90e16ba7ae043f5384aff5e3668cd51892afe2bd568e7dd",
+          "sm3": "a3f177d04f3325012ec72d1ca978df90453d6c98992a57d5c55a465134f72076",
+          "kind": "docx",
+          "expected_kind": "docx",
+          "size": 17058,
+          "valid": true,
+          "reason": null,
+          "docx_required_members": [
+            "[Content_Types].xml",
+            "word/document.xml"
+          ],
+          "docx_members_present": [
+            "[Content_Types].xml",
+            "word/document.xml"
+          ]
+        }
+      ],
+      "kind": "docx",
+      "size": 17058,
+      "sha256": "e98e1478130cd2f7d90e16ba7ae043f5384aff5e3668cd51892afe2bd568e7dd",
+      "sm3": "a3f177d04f3325012ec72d1ca978df90453d6c98992a57d5c55a465134f72076",
+      "canonical_artifact": "CDE-CN-V4-DRAFT-FEEDBACK.docx",
+      "byte_validation": {
+        "kind": "docx",
+        "expected_kind": "docx",
+        "size": 17058,
+        "valid": true,
+        "reason": null,
+        "docx_required_members": [
+          "[Content_Types].xml",
+          "word/document.xml"
+        ],
+        "docx_members_present": [
+          "[Content_Types].xml",
+          "word/document.xml"
+        ]
+      },
+      "docx": {
+        "status": "SUCCESS",
+        "members": 13,
+        "text_length": 136,
+        "text_excerpt": "附件 5 征求意见反馈表 单位 / 企业名称： 填写人： 联系电话： 电子邮箱： 序号 文件名称 修订位置（条款） 原文内容 修订建议 理由或依据 1 《 eCTD v4.0 指导原则 》 2 3 《 受控词汇文件 》 4 5 《 eCTD v4.0 验证标准 》 6 …"
+      },
+      "term_hits": {
+        "hl7_rps": [],
+        "submission_unit": [],
+        "context_of_use": [],
+        "document_reference": [],
+        "uuid": [],
+        "controlled_vocabulary": [
+          {
+            "physical_page": 1,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "件 5 征求意见反馈表 单位 / 企业名称： 填写人： 联系电话： 电子邮箱： 序号 文件名称 修订位置（条款） 原文内容 修订建议 理由或依据 1 《 eCTD v4.0 指导原则 》 2 3 《 受控词汇文件 》 4 5 《 eCTD v4.0 验证标准 》 6 …"
+          }
+        ],
+        "keyword": [],
+        "reuse": [],
+        "lifecycle": [],
+        "validation": [
+          {
+            "physical_page": 1,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "人： 联系电话： 电子邮箱： 序号 文件名称 修订位置（条款） 原文内容 修订建议 理由或依据 1 《 eCTD v4.0 指导原则 》 2 3 《 受控词汇文件 》 4 5 《 eCTD v4.0 验证标准 》 6 …"
+          }
+        ],
+        "priority_number": [],
+        "status_code": []
+      }
     },
     {
-      "requested_url": "https://www.cde.org.cn/main/att/download/7e3c4cee73f2f7457d21bde0d4f302c9",
-      "filename": "CDE-CN-V4-DRAFT-RATIONALE--《eCTD v4.0指导原则》起草说明.pdf",
-      "size": 25387,
-      "kind": "unknown",
-      "sha256": "29c92a9f268cf85784d7f6544bc234d2738c044c6eaff6be65ecb3f04a963289",
-      "sm3": "020711741f04c21f088e1b0c143b007a73f425ed3344aaf441771837fcddf4c1",
-      "downloaded_at_epoch": 1788454840,
       "source_id": "CDE-CN-V4-DRAFT-RATIONALE",
       "role_key": "rationale",
       "role": "cn_ectd_v4_draft_rationale",
       "status": "official_draft",
       "source_page": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "requested_url": "https://www.cde.org.cn/main/att/download/7e3c4cee73f2f7457d21bde0d4f302c9",
       "displayed_name": "《eCTD v4.0指导原则》起草说明.pdf",
-      "discovery_method": "anchor",
-      "download_status": "SUCCESS"
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies",
+      "acquisition_attempts": [
+        {
+          "method": "requests-with-browser-cookies",
+          "status_code": 200,
+          "final_url": "https://www.cde.org.cn/main/att/download/7e3c4cee73f2f7457d21bde0d4f302c9",
+          "headers": {
+            "server": "******",
+            "content-type": "application/octet-stream",
+            "transfer-encoding": "chunked",
+            "date": "Thu, 03 Sep 2026 17:19:56 GMT",
+            "vary": "Accept-Encoding",
+            "content-disposition": "attachment; filename=%E3%80%8AeCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E3%80%8B%E8%B5%B7%E8%8D%89%E8%AF%B4%E6%98%8E.pdf;filename*=utf-8''%E3%80%8AeCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E3%80%8B%E8%B5%B7%E8%8D%89%E8%AF%B4%E6%98%8E.pdf",
+            "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: ;",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload;",
+            "x-xss-protection": "1;mode=block",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "SAMEORIGIN",
+            "set-cookie": "Path=/; HttpOnly; Secure; SameLite=Strict;"
+          },
+          "sha256": "f589fd7f2d68512658ea9a69b31394b1ab1538c5f01edd14461013630a5e5a82",
+          "sm3": "9000ea1c9149cd3dab138a28da31aa24865d811dd98d574bda78773372e06438",
+          "kind": "pdf",
+          "pdf_header_offset": 0,
+          "expected_kind": "pdf",
+          "size": 318423,
+          "valid": true,
+          "reason": null
+        }
+      ],
+      "kind": "pdf",
+      "size": 318423,
+      "sha256": "f589fd7f2d68512658ea9a69b31394b1ab1538c5f01edd14461013630a5e5a82",
+      "sm3": "9000ea1c9149cd3dab138a28da31aa24865d811dd98d574bda78773372e06438",
+      "canonical_artifact": "CDE-CN-V4-DRAFT-RATIONALE.pdf",
+      "byte_validation": {
+        "kind": "pdf",
+        "pdf_header_offset": 0,
+        "expected_kind": "pdf",
+        "size": 318423,
+        "valid": true,
+        "reason": null
+      },
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 5,
+        "metadata": {
+          "Creator": "Microsoft® Word 2016",
+          "Producer": "Microsoft® Word 2016",
+          "CreationDate": "Mon May 25 06:53:15 2026 UTC",
+          "ModDate": "Mon May 25 06:53:15 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "5",
+          "Encrypted": "no",
+          "Page size": "595.32 x 841.92 pts (A4)",
+          "Page rot": "0",
+          "File size": "318423 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        },
+        "text_file": "CDE-CN-V4-DRAFT-RATIONALE.txt",
+        "pdfinfo_stderr": "",
+        "pdftotext_stderr": ""
+      },
+      "term_hits": {
+        "hl7_rps": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "HL7"
+            ],
+            "context": "区域受控词汇表、ICH 指定受控词汇表、HL7 指定受控词汇 表、ISO 指定受控词汇表、申请人定义词汇及受控词汇表版 本要求。 第八章介绍 eCTD v4.0 申报资料 XML 架构。我国无特 殊要求和差异，均遵循《ICH eCTD v4.0 实施指南》有关要 求。 第九章介绍 eCTD v4.0 申报资料中的 XML 报文要求。 包括 XML 报文的编码格式、元素和属性、报文头结构及元 素要求、有效载荷结构及相关元素等内容要求，并提供了部 分元素使用示例。 第十章介绍 eCTD v4.0 申报资料的生命周期管理要求。 包括文件的生命周期管理和元数据的生命周期管理。 第十一章介绍 eCTD "
+          }
+        ],
+        "submission_unit": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "CTD v4.0 申报资料的一般性要 求和现有提交方式（电子申报、eCTD v3.2.2）向 eCTD v4.0 提交过渡的要求。 第三章介绍 eCTD v4.0 申报资料结构。包括申请、注册 行为、提交单元，以及三者间的对应关系。 第四章介绍 eCTD v4.0 区域元数据信息。包括申请信息、 注册行为信息、提交单元信息，以及原始编号、申请编号、 序列号等编号的管理和各编号之间的关联性。 第五章介绍中国区域要求的 eCTD v4.0 组成部分概述， 此章节为后续章节的索引章节。包括文件和文件夹、受控词 汇、eCTD v4.0 XML 架构、eCTD v4.0 XML 报文、生命周期 管理、OID 和 UUID、数据类型、各模块的区域特殊要求、 特定类型提交的建议、向前兼容、验证标准。 第六章介绍对 eCTD v4.0 申报资中的文件和文件夹要求。 "
+          }
+        ],
+        "context_of_use": [],
+        "document_reference": [],
+        "uuid": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "域要求的 eCTD v4.0 组成部分概述， 此章节为后续章节的索引章节。包括文件和文件夹、受控词 汇、eCTD v4.0 XML 架构、eCTD v4.0 XML 报文、生命周期 管理、OID 和 UUID、数据类型、各模块的区域特殊要求、 特定类型提交的建议、向前兼容、验证标准。 第六章介绍对 eCTD v4.0 申报资中的文件和文件夹要求。 包括文件夹结构和提交单元内容、文件和文件夹的命名规则、 申报资料文件格式、文件大小、文件压缩和加密要求，对空 缺章节的处理要求，外文在提交资料中的要求，PDF 文件版 本及 OCR 要求，文件页码、书签与超文本链接要求，中文申 报资料文字体例、电子签章和校验和的要求。 第七章介绍 eCTD v4.0 申报资料受控词汇表要求。包括 3"
+          }
+        ],
+        "controlled_vocabulary": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "缺章节的处理要求，外文在提交资料中的要求，PDF 文件版 本及 OCR 要求，文件页码、书签与超文本链接要求，中文申 报资料文字体例、电子签章和校验和的要求。 第七章介绍 eCTD v4.0 申报资料受控词汇表要求。包括 3"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "区域受控词汇表、ICH 指定受控词汇表、HL7 指定受控词汇 表、ISO 指定受控词汇表、申请人定义词汇及受控词汇表版 本要求。 第八章介绍 eCTD v4.0 申报资料 XML 架构。我国无特 殊要求和差异，均遵循《ICH eCTD v4.0 实施指南》有关要 求。 第九章介绍 eCTD v4.0 申报资料中的 XML 报文要求。 包括 XML 报文的编码格式、元素和属性、报文头结构及元 素要求、有效载荷结构及相关元素等内容要求，并提供了部 分元素使用示例。 第十章介绍 eCTD v4.0 申报资料的生命周期管理要求。 包括文件的生命周期管理和元数据的生命"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "求。包括： 基础信息校验、文件文件夹校验、报文信息校验、模块一完 整性校验、PDF 文件校验。 第十五章说明其他未尽事宜参照《药品注册管理办法》 等现行的法律法规、技术指导原则有关文件执行。 附件一《受控词汇文件》介绍 eCTD v4.0 XML 文件中区 域有关的代码定义文件。包括申请类型、注册行为类型、提 交单元类型、产品类型、区域 CoU 标题、联系人类型 OID 代 码及受控词汇代码取值说明等。 附件二《eCTD v4.0 验证标准》共五部分，分别从基础识 别、文件和文件夹、报文文件、内容完整性、PDF 分析五个 方面详细描述对 eCTD v4.0 申报资料进行验证的标准和规则， 以指导申请人按照要求制作和验证 eCTD v4.0 申报资料。 5"
+          }
+        ],
+        "keyword": [
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "关键词"
+            ],
+            "context": "等特殊类型提交的建议。同时提供了部分特殊类型提交时的 相关信息使用示例。 第十三章介绍当从 eCTD v3.2.2 转为 v4.0 提交时，向前 兼容相关要求。包括序列号提供方式，关键词映射规则、生 命周期操作要求等。 第十四章介绍 eCTD v4.0 申报资料验证标准要求。包括： 基础信息校验、文件文件夹校验、报文信息校验、模块一完 整性校验、PDF 文件校验。 第十五章说明其他未尽事宜参照《药品注册管理办法》 等现行的法律法规、技术指导原则有关文件执行。 附件一《受控词汇文件》介绍 eCTD v4.0 XML 文件中区 域有关的代码定义文件。包括申请类型、注册行为类型、提 交单元类型、产品类型、区域 CoU 标题、联系人类型 OID 代 码及受控词汇代码取值说明等。 附件二《eCTD v4.0 验证标准》共五部分，分别从基础识"
+          }
+        ],
+        "reuse": [],
+        "lifecycle": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "的关联性。 第五章介绍中国区域要求的 eCTD v4.0 组成部分概述， 此章节为后续章节的索引章节。包括文件和文件夹、受控词 汇、eCTD v4.0 XML 架构、eCTD v4.0 XML 报文、生命周期 管理、OID 和 UUID、数据类型、各模块的区域特殊要求、 特定类型提交的建议、向前兼容、验证标准。 第六章介绍对 eCTD v4.0 申报资中的文件和文件夹要求。 包括文件夹结构和提交单元内容、文件和文件夹的命名规则、 申报资料文件格式、文件大小、文件压缩和加密要求，对空 缺章节的处理要求，外文在提交资料中的要求，PDF 文件版 本及 OCR 要求，文件页码、书签与超文本链接要求，中文申 报资料文字体例、电子签章和校验和的要求。 第七章介绍 eCTD v4.0 申报资料受控词汇表要求。包括 3"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "料中的 XML 报文要求。 包括 XML 报文的编码格式、元素和属性、报文头结构及元 素要求、有效载荷结构及相关元素等内容要求，并提供了部 分元素使用示例。 第十章介绍 eCTD v4.0 申报资料的生命周期管理要求。 包括文件的生命周期管理和元数据的生命周期管理。 第十一章介绍 eCTD v4.0 申报资料模块一至模块五的区 域特殊要求。包括模块一中申请表和说明函的要求，模块二 中多个 2.3.S 或 2.3.P 章节、模块三中多个 3.2.S 或 3.2.P 章 节、模块四中 4.2.X 章节、模块五中 5.3.1.X 至 5.3.5.X 章节 等特殊要求。 第十二章介绍 eCTD v4.0 申报过程中特殊类型提交的建 议。包括临床试验申请的新适应症和联合用药、新药申请和 仿制药申请的新适应症、基线、再注册、研发期间安全性报 告提交的要求，以及审"
+          }
+        ],
+        "validation": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "包括文件和文件夹、受控词 汇、eCTD v4.0 XML 架构、eCTD v4.0 XML 报文、生命周期 管理、OID 和 UUID、数据类型、各模块的区域特殊要求、 特定类型提交的建议、向前兼容、验证标准。 第六章介绍对 eCTD v4.0 申报资中的文件和文件夹要求。 包括文件夹结构和提交单元内容、文件和文件夹的命名规则、 申报资料文件格式、文件大小、文件压缩和加密要求，对空 缺章节的处理要求，外文在提交资料中的要求，PDF 文件版 本及 OCR 要求，文件页码、书签与超文本链接要求，中文申 报资料文字体例、电子签章和校验和的要求。 第七章介绍 eCTD v4.0 申报资料受控词汇表要求。包括 3"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "验证标准"
+            ],
+            "context": "使用示例。 第十三章介绍当从 eCTD v3.2.2 转为 v4.0 提交时，向前 兼容相关要求。包括序列号提供方式，关键词映射规则、生 命周期操作要求等。 第十四章介绍 eCTD v4.0 申报资料验证标准要求。包括： 基础信息校验、文件文件夹校验、报文信息校验、模块一完 整性校验、PDF 文件校验。 第十五章说明其他未尽事宜参照《药品注册管理办法》 等现行的法律法规、技术指导原则有关文件执行。 附件一《受控词汇文件》介绍 eCTD v4.0 XML 文件中区 域有关的代码定义文件。包括申请类型、注册行为类型、提 交单元类型、产品类型、区域 CoU 标题、联系人类型 OID 代 码及受控词汇代码取值说明等。 附件二《eCTD v4.0 验证标准》共五部分，分别从基础识 别、文件和文件夹、报文文件、内容完整性、PDF 分析五个 方面详细描述对 eCT"
+          }
+        ],
+        "priority_number": [],
+        "status_code": []
+      }
     },
     {
-      "requested_url": "https://www.cde.org.cn/main/att/download/cc387d6210363bf551d60e4b4725bb82",
-      "filename": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD--eCTD v4.0指导原则附件2-eCTD v4.0 验证标准（公开征求意见稿）.pdf",
-      "size": 25368,
-      "kind": "unknown",
-      "sha256": "e3ff8b5367d17a3efd7fb87608c90e942a395d195fb1a85614449163a67749c9",
-      "sm3": "ac89ef001e1283e1e0a067797609839cd800e76a7438b2969a5e52bce92f3bb8",
-      "downloaded_at_epoch": 1788454847,
       "source_id": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD",
       "role_key": "validation_standard",
       "role": "cn_ectd_v4_draft_validation_standard",
       "status": "official_draft",
       "source_page": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+      "requested_url": "https://www.cde.org.cn/main/att/download/cc387d6210363bf551d60e4b4725bb82",
       "displayed_name": "eCTD v4.0指导原则附件2-eCTD v4.0 验证标准（公开征求意见稿）.pdf",
-      "discovery_method": "anchor",
-      "download_status": "SUCCESS"
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies",
+      "acquisition_attempts": [
+        {
+          "method": "requests-with-browser-cookies",
+          "status_code": 200,
+          "final_url": "https://www.cde.org.cn/main/att/download/cc387d6210363bf551d60e4b4725bb82",
+          "headers": {
+            "server": "******",
+            "content-type": "application/octet-stream",
+            "transfer-encoding": "chunked",
+            "date": "Thu, 03 Sep 2026 17:19:55 GMT",
+            "vary": "Accept-Encoding",
+            "content-disposition": "attachment; filename=eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E9%99%84%E4%BB%B62-eCTD%20v4.0%20%E9%AA%8C%E8%AF%81%E6%A0%87%E5%87%86%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf;filename*=utf-8''eCTD%20v4.0%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99%E9%99%84%E4%BB%B62-eCTD%20v4.0%20%E9%AA%8C%E8%AF%81%E6%A0%87%E5%87%86%EF%BC%88%E5%85%AC%E5%BC%80%E5%BE%81%E6%B1%82%E6%84%8F%E8%A7%81%E7%A8%BF%EF%BC%89.pdf",
+            "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: ;",
+            "strict-transport-security": "max-age=31536000; includeSubDomains; preload;",
+            "x-xss-protection": "1;mode=block",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "SAMEORIGIN",
+            "set-cookie": "Path=/; HttpOnly; Secure; SameLite=Strict;"
+          },
+          "sha256": "36f871b89a3292f97d2a865506aeed0e1418dde1767eea61d03c9a9cc86a0774",
+          "sm3": "fe3145865508a49249baab1d6338923bbfe27a32adb8ed01eb81c0458b0ad9ed",
+          "kind": "pdf",
+          "pdf_header_offset": 0,
+          "expected_kind": "pdf",
+          "size": 309311,
+          "valid": true,
+          "reason": null
+        }
+      ],
+      "kind": "pdf",
+      "size": 309311,
+      "sha256": "36f871b89a3292f97d2a865506aeed0e1418dde1767eea61d03c9a9cc86a0774",
+      "sm3": "fe3145865508a49249baab1d6338923bbfe27a32adb8ed01eb81c0458b0ad9ed",
+      "canonical_artifact": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD.pdf",
+      "byte_validation": {
+        "kind": "pdf",
+        "pdf_header_offset": 0,
+        "expected_kind": "pdf",
+        "size": 309311,
+        "valid": true,
+        "reason": null
+      },
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 10,
+        "metadata": {
+          "Creator": "Microsoft® Excel® 2016",
+          "Producer": "Microsoft® Excel® 2016",
+          "CreationDate": "Mon May 25 07:30:31 2026 UTC",
+          "ModDate": "Mon May 25 07:30:31 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "10",
+          "Encrypted": "no",
+          "Page size": "595.2 x 841.68 pts (A4)",
+          "Page rot": "0",
+          "File size": "309311 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        },
+        "text_file": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD.txt",
+        "pdfinfo_stderr": "",
+        "pdftotext_stderr": ""
+      },
+      "term_hits": {
+        "hl7_rps": [],
+        "submission_unit": [
+          {
+            "physical_page": 2,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "序号 编号 描述 说明 严重程度 1 - 基础识别 1.1 CN-eCTD-101 文件数量统计 显示当前提交单元中包含的所有文件的数量。 提示信息 1.2 CN-eCTD-102 文件大小统计 显示当前提交单元所有文件的总容量大小。 提示信息 1.3 CN-eCTD-103 空缺的章节统计 显示当前提交单元中空缺的目录结构清单。 提示信息 2 - 文件/文件夹 存 在 eCTD v4.0 XML 报 文 文 件 未找到XML报文文件。文件可能位于其他位置、未命名为submissionunit.xml或采用大小 2.1 eCTD4-059 错误 submissionunit.xml 写混合格式 未找到校验和文件。文件可能位于其他位置、未命名为sha256.t"
+          },
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": " 错误 的OID值 报文头包含区域eCTD v4.0指导原则正确 3.2.3 CN-eCTD-304 报文头中未提供区域eCTD v4.0指导原则 OID或提供无效的值 错误 的OID值 3.3 - 提交单元（submissionUnit元素） 3.3.1 eCTD4-003 需要提交单元标识符（1..1） 未提供submissionUnit.id@root属性 错误 3.3.2 eCTD4-004 提交单元ID根必须是UUID submissionUnit.id@root属性值不是UUID 错误 3.3.3 eCTD4-005 一条报文仅有一个submissionUnit元素 该报文的有效载荷中不能包含多个submissionUnit元素信息 错误 3.3.4 eCTD4-006 需要提交单元代码（1..1） 未提供submissionUnit.c"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "ntextOfUse.statusCode@code值未处于“active”或“suspended”状态 错误 ”或“suspended”状态。 使用“suspended”状态代码时，使用情 在之前的提交单元中未找到被引用的使用情境标识符或v3.2.2叶节点或被引用的使用情 3.6.6 eCTD4-080 境标识符或v3.2.2叶节点引用必须已经 错误 境标识符或v3.2.2叶节点无效 存在 3.6.7 eCTD4-081 使用情境代码系统需为有效OID contextOfUse.code@codeSystem不是有效注册或已知的OID 错误 3.6.8 CN-eCTD-311 无效的生命周期操作 只能对状态为“active”的使用情境进行删除操作 错误 3.6.9 CN-eCTD-312 说明函的生命周期操作 说明函的状态始终为“active”，不"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "CN-eCTD-319 一条报文仅有一个注册行为元素 该报文的有效载荷中不能包含多个submission元素信息 错误 3.10.8 CN-eCTD-320 注册行为类型限制 申请类型、注册行为类型、提交单元类型之间的关联关系必须符合OID中的定义 错误 同一注册行为中注册行为类型应保持一 3.10.9 CN-eCTD-321 注册行为类型应和当前注册行为的前序提交单元保持一致 错误 致 3.10.10 CN-eCTD-322 联系人类型必须正确提供 联系人类型不是区域受控词汇中的有效值 错误 3.10.11 CN-eCTD-323 原始编号必须正确提供 原始编号不能为空且符合原始编号编码规则 错误 原始编号信息包括原始编号对应的UUID和原始编号值应和当前申请的前序提交单元保持 3.10.12 CN-eCTD-324 同一申请中原始编号应保持一致 "
+          },
+          {
+            "physical_page": 6,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "申请编号信息包括申请编号对应的UUID和申请编号值应和当前申请的前序提交单元保持 3.11.8 CN-eCTD-329 同一申请中申请编号应保持一致 错误 一致 3.11.9 CN-eCTD-330 同一申请中申请类型应保持一致 申请类型应和当前申请的前序提交单元保持一致 错误 3.12 - 文档（document元素） 3.12.1 eCTD4-043 需要文档标识符（1..1） 未提供document.id@root属性 错误 3.12.2 eCTD4-044 文档标识符必须有有效值。 文档标识符值为无效值 错误 3.12.3 eCTD4-045 文档ID根必须为UUID。 document.id@root值为非UU"
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "关键词定义必须存在且与v3.2.2值相匹 3.13.10 eCTD4-078 提交单元需重新提交，并提供eCTD v4.0关键词定义显示名称的确切v3.2.2值 错误 配 keywordDefinition.code@codeSystem不是ICH受控词汇表中“ICH Keyword Definition 3.13.11 eCTD4-083 关键词定义代码系统必须为有效OID。 错误 Type”中有效注册或已知的OID 自定义关键词代码值长度不超过32个字符，代码系统值长度不超过64个字符，代码显示 3.13.12 CN-eCTD-334 自定义关键词的字符长度限制 错误 值不超过1000个字符 3.13.13 CN-eCTD-3"
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "提交单元"
+            ],
+            "context": "模块一完整性验证： 申请类型：临床试验申请 4.8 CN-eCTD-408 针对上述类型，不能同时包含以下两个章节cn-1-8-1，cn-1-8-2 错误 注册行为类型：研发期间安全性报告 提交单元类型：首次提交 模块一完整性验证： 申请类型：原料药申请 针对上述类型，必须包含以下章节 4.9 CN-eCTD-409 错误 注册行为类型：首次申请 cn-1-0，cn-1-2，cn-1-3-2-2，cn-1-3-3，cn-1-3-8-1，cn-1-3-8-2，cn-1-11 提交单元类型：首次提交 模块一完整性验证： 申请类型：原料药申请 针对上述类型，不能包含以下章节 4.10 CN-eCTD-410 错误 注册行为类型：首次申请 cn-1-3-1-1，cn-1-3-2-1，cn-1-3-4-1，cn-1-3-4-2，cn-1-3-4-3 "
+          }
+        ],
+        "context_of_use": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "使用情境"
+            ],
+            "context": "代码属性为“ 3.3.8 eCTD4-010 提交单元的状态代码值未处于active状态 错误 active”。 提交单元必须在报文中包含至少一个使 3.3.9 eCTD4-011 提交单元不包含任何使用情境元素 错误 用情境元素。 申请类型、注册行为类型、提交单元类型之间的关联关系必须《eCTD v4.0指导原则》要 3.3.10 CN-eCTD-305 提交单元类型限制 错误 求 3.3.11 CN-eCTD-306 提交单元描述字符限制 提交单元描述长度应在120个中文字符以内 错误 3.4 - 序列号（sequenceNumber元素） 3.4.1 eCTD4-012 需要序列号（1..1） 未提供序列号值 错误 3.4.2 eCTD4-013 序列号必须是介于1和999999之间的整数 序列号值不是1至999999之间的整数 错误 申请中初"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": "优先级编号变更时，应提供对应使用情境元素的UUID和修改后的优先级编号，并将优先 3.5.5 CN-eCTD-309 优先级编号变更标识 错误 级编号的updateMode属性值设置为“R”进行标识 3.5.6 CN-eCTD-310 无效的优先级编号变更 优先级编号变更时，对应的使用情境元素状态必须为“active” 错误 3.6 - 使用情境（contextOfUse元素） 3.6.1 eCTD4-020 需要使用情境标识符 未提供contextOfUse.id@root属性 错误 3.6.2 eCTD4-021 使用情境ID根必须是唯一标识符 contextOfUse.id@"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "contextOfUse",
+              "使用情境"
+            ],
+            "context": "必须包括使用情境代码属性的必需关键 3.9.5 eCTD4-070 未提交使用情境标题所需的keyword.code@code属性 错误 词 对于使用情境标题，关键词类型必须有 3.9.6 eCTD4-071 为使用情境标题提交的关键词代码值contextOfUse.code对eCTD标题无效 错误 效 每个使用情境元素上，有效关键词类型 3.9.7 eCTD4-072 同一关键词类型已在使用情境元素中多次使用 错误 仅可使用一次 模块五（5.3章节）中xpt格式的临床数据集文件的有效文档类型值有： 临床试验数据集相关文件必须使用正确 ich_document_"
+          },
+          {
+            "physical_page": 6,
+            "matched_terms": [
+              "使用情境"
+            ],
+            "context": "text.reference@value属性中的文件夹路径值包含无效的特殊字符 错误 符 3.12.11 eCTD4-082 文档标识符必须由CoU引用 新的document元素未在当前XML报文中被使用情境元素引用 错误 3.12.12 CN-eCTD-331 文档标题字符长度限制 document.title@value的值应控制在64个中文字符内 错误 文档标题变更时，应提供文档UUID和修改后的文档标题，并将文档标题的updateMode属 3.12.13 CN-eCTD-332 文档标题变更标识 错误 性值设置为“R”进行标识 3.12.14 CN-eCTD-333 不允许使用跨申请的文件引用 报文中提供的文档路径不在当前提交单元文件夹或前序提交单元文件中 错误 3.13 - 关键词定义（keywordDefinition元素） 3.13."
+          },
+          {
+            "physical_page": 8,
+            "matched_terms": [
+              "使用情境"
+            ],
+            "context": "-1，cn-1- 3-2-1，cn-1-3-2-2，cn-1-3-8-8，cn-1-4-1，cn-1-4-2，cn-1-4-3，cn-1-4-4， cn-1- 4.11 CN-eCTD-411 报文中使用情境代码的数量 提示信息 4-5，cn-1-4-6，cn-1-4-7，cn-1-6-1，cn-1-6-3，cn-1-10-1，cn-1-10-2，cn-1-10- 3，cn-1-12 5 - PDF分析 针对被破坏或不可读的PDF文件（因内容无效，或页码数为0）进行检查，并提示错误信 5.1 CN-eCTD-501 PDF文件必须可读。 错误 息。 5.2 CN-eCTD-502 PDF文件不能有密码保护 不能提交使用密码保护或无法打开的文件。 错误 允许的PDF文件版本为1.4，1.5，1.6，1.7，PDF/A-1，PDF/A-2。参考文献（2."
+          }
+        ],
+        "document_reference": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "documentReference",
+              "文档引用"
+            ],
+            "context": "识符或v3.2.2叶节点引 或该标识符/叶节点引用不存在或无效 3.7.4 CN-eCTD-314 无效的生命周期操作 只能对状态为“active”的使用情境进行替换操作 错误 3.8 - 文档参考（documentReference元素） 所有已激活的新使用情境元素均需要文 3.8.1 eCTD4-027 当新的contextOfUse激活时，未提供documentReference.id@root属性 错误 档引用标识符 处于暂停状态的使用情境元素不允许使 3.8.2 eCTD4-028 当使用情境暂停时，提供documentReference元素 错误 用文档引用元素 3.8.3 CN-eCTD-315 使用情境中引用的文档信息必须存在 使用情境中引用的文档必须在当前提交单元或当前申请的前序提交单元中已经被定义 错误 3.9 - 关键词（key"
+          }
+        ],
+        "uuid": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "ionUnit元素） 3.3.1 eCTD4-003 需要提交单元标识符（1..1） 未提供submissionUnit.id@root属性 错误 3.3.2 eCTD4-004 提交单元ID根必须是UUID submissionUnit.id@root属性值不是UUID 错误 3.3.3 eCTD4-005 一条报文仅有一个submissionUnit元素 该报文的有效载荷中不能包含多个submissionUnit元素信息 错误 3.3.4 eCTD4-006 需要提交单元代码（1..1） 未提供submissionUnit.code@code属性 错误 3.3.5 eCTD4-007 提交单元必须具备有效的代码值 submissionUnit.code@code不是区域受控词汇中的有效值 错误 3.3.6 eCTD4-008 需要提交单元代码系统"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "优先级编号变更时，应提供对应使用情境元素的UUID和修改后的优先级编号，并将优先 3.5.5 CN-eCTD-309 优先级编号变更标识 错误 级编号的updateMode属性值设置为“R”进行标识 3.5.6 CN-eCTD-310 无效的优先级编号变更 优先级编号变更时，对应的使用情境元素状态必须为“active” 错误 3.6 - 使用情境（contextOfUse元素） 3.6.1 eCTD4-020 需要使用情境标识符 未提供contextOfUse.id@root属性 错误 3.6.2 eCTD4-021 使用情境ID根必须是唯一标识符 contextOfUse.id@root值并非"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "sion元素） 3.10.1 eCTD4-033 需要注册行为标识符（1..1） 未提供submission.id.item@root属性 错误 3.10.2 eCTD4-077 注册行为标识符是一个UUID submission.id.item@root属性值不是UUID 错误 3.10.3 eCTD4-034 需要注册行为类型代码（1..1） 未提供submission.code@code属性 错误 注册行为类型代码必须具有区域的有效 3.10.4 eCTD4-035 submission.code@code不是区域受控词汇中的有效值 错误 值 3.10.5 eCTD4-036 需要注册行为类型代码系统（1..1） 未提供submission.code@codeSystem属性 错误 注册行为类型代码系统必须包含有效的 3.10.6 eCTD4-"
+          },
+          {
+            "physical_page": 6,
+            "matched_terms": [
+              "UUID"
+            ],
+            "context": "申请编号信息包括申请编号对应的UUID和申请编号值应和当前申请的前序提交单元保持 3.11.8 CN-eCTD-329 同一申请中申请编号应保持一致 错误 一致 3.11.9 CN-eCTD-330 同一申请中申请类型应保持一致 申请类型应和当前申请的前序提交单元保持一致 错误 3.12 - 文档（document元素） 3.12.1 eCTD4-043 需要文档标识符（1..1） 未提供document.id@root属性 错误 3.12.2 eCTD4-044 文档标识符必须有有效值。 文档标识符值为无效值 错误 3.12.3 eCTD4-045 文档ID根必须为UUID。 do"
+          }
+        ],
+        "controlled_vocabulary": [
+          {
+            "physical_page": 3,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "码（1..1） 未提供submissionUnit.code@code属性 错误 3.3.5 eCTD4-007 提交单元必须具备有效的代码值 submissionUnit.code@code不是区域受控词汇中的有效值 错误 3.3.6 eCTD4-008 需要提交单元代码系统值（1..1） 未提供submissionUnit.code@codeSystem属性 错误 提交单元代码必须拥有代码系统值的有 3.3.7 eCTD4-009 submissionUnit.code@codeSystem不是区域受控词汇中有效注册或已知的OID 错误 效OID。 提交单元状态代码要求代码属性为“ 3.3.8 eCTD4-010 提交单元的状态代码值未处于active状态 错误 active”。 提交单元必须在报文中包含至少一个使 3.3.9 eCTD4-011"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "为类型代码（1..1） 未提供submission.code@code属性 错误 注册行为类型代码必须具有区域的有效 3.10.4 eCTD4-035 submission.code@code不是区域受控词汇中的有效值 错误 值 3.10.5 eCTD4-036 需要注册行为类型代码系统（1..1） 未提供submission.code@codeSystem属性 错误 注册行为类型代码系统必须包含有效的 3.10.6 eCTD4-037 submission.code@codeSystem不是区域受控词汇中的有效值 错误 区域代码系统OID 3.10.7 CN-eCTD-319 一条报文仅有一个注册行为元素 该报文的有效载荷中不能包含多个submission元素信息 错误 3.10.8 CN-eCTD-320 注册行为类型限制 申请类型、注册行为类型"
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "受控词汇"
+            ],
+            "context": "3.10 eCTD4-078 提交单元需重新提交，并提供eCTD v4.0关键词定义显示名称的确切v3.2.2值 错误 配 keywordDefinition.code@codeSystem不是ICH受控词汇表中“ICH Keyword Definition 3.13.11 eCTD4-083 关键词定义代码系统必须为有效OID。 错误 Type”中有效注册或已知的OID 自定义关键词代码值长度不超过32个字符，代码系统值长度不超过64个字符，代码显示 3.13.12 CN-eCTD-334 自定义关键词的字符长度限制 错误 值不超过1000个字符 3.13.13 CN-eCTD-335 关键词定义的状态代码限制 关键词定义的状态代码应始终设置为“acitve” 错误 4 - 内容完整性 模块一完整性验证： 申请类型：新药申请 针对上述类型，必须包含"
+          }
+        ],
+        "keyword": [
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "-024 提供相关使用情境时，必须提供标识符 未提供relatedContextOfUse.id@root属性 错误 引用的使用情境及相关使用情境必须具 contextOfUse.code@code和keyword.code@code组合（或匹配的v3.2.2等效代码）与相关 3.7.2 eCTD4-025 有相同的使用情境代码和关键词代码组 错误 使用情境中引用的先前使用情境不匹配 合（或与其v3.2.2版本匹配的等效物） 相关使用情境的ID根只能引用先前提交 relatedContextOfUse.id@root未引用先前已提交的有效使用情境标识符或叶节点引用， 3.7.3 eCTD4-026 错误 的已激活的ID标识符或v3.2.2叶节点引 或该标识符/叶节点引用不存在或无效 3.7.4 CN-eCTD-314 无效的生命周期操作 只能对状态为"
+          },
+          {
+            "physical_page": 5,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "必须包括使用情境代码属性的必需关键 3.9.5 eCTD4-070 未提交使用情境标题所需的keyword.code@code属性 错误 词 对于使用情境标题，关键词类型必须有 3.9.6 eCTD4-071 为使用情境标题提交的关键词代码值contextOfUse.code对eCTD标题无效 错误 效 每个使用情境元素上，有效关键词类型 3.9.7 eCTD4-072 同一关键词类型已在使用情境元素中多次使用 错误 仅可使用一次 模块五（5.3章节）中xpt格式的临床数据集文件的有效文档类型值有： 临床试验数据集相关文件必须使用正确 ich_document_type_47、ich_document_type_71、ich_document_"
+          },
+          {
+            "physical_page": 6,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "档标题变更标识 错误 性值设置为“R”进行标识 3.12.14 CN-eCTD-333 不允许使用跨申请的文件引用 报文中提供的文档路径不在当前提交单元文件夹或前序提交单元文件中 错误 3.13 - 关键词定义（keywordDefinition元素） 3.13.1 eCTD4-052 需要关键词定义代码（1..1） 未提供keywordDefinition.code@code属性 错误 3.13.2 eCTD4-053 关键词定义代码必须有有效值。 keywordDefinition.code@code为无效值 错误 3.13.3 eCTD4-054 需要关键词定义值代码（1..1） 未提供keywordDefinition.value.item@code属性 错误 3.13.4 eCTD4-055 关键词定义值代码必须有有效值 keywordDe"
+          },
+          {
+            "physical_page": 7,
+            "matched_terms": [
+              "keyword",
+              "关键词"
+            ],
+            "context": "关键词定义必须存在且与v3.2.2值相匹 3.13.10 eCTD4-078 提交单元需重新提交，并提供eCTD v4.0关键词定义显示名称的确切v3.2.2值 错误 配 keywordDefinition.code@codeSystem不是ICH受控词汇表中“ICH Keyword Definition 3.13.11 eCTD4-083 关键词定义代码系统必须为有效OID。 错误 Type”中有效注册或已知的OID 自定义关键词代码值长度不超过32个字符，代码系统值长度不超过64个字符，代码显示 3.13.12 CN-eCTD-334 自定义关键词的"
+          }
+        ],
+        "reuse": [],
+        "lifecycle": [
+          {
+            "physical_page": 2,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "许其他文件 错误 文件 2.17 CN-eCTD-207 m1文件夹存在但是不存放单个文件 m1文件夹必须存在并且必须仅包含子文件夹而不是单个文件。 错误 使用eCTD v4.0提交的资料,在注册文件生命周期内的每次提交都必须有一个序列号，初 始序列号必须从1开始，依次增加1（例如：1，2，3，依次类推）。序列号不允许跳号。 如果序列号3不存在，即便4中不引用3的内容，验证序列号为4的提交时依然会提示错误 2.18 CN-eCTD-208 序列号 信息。 错误 向前兼容：如果前序使用了eCTD v3.2.2提交的资料，后续使用eCTD v4.0提交资料，也 应遵循序列号不允许跳号的原则，如果序列号0003不存在，即便4中不引用0003的内容， 验证序列号为4的提交时依然会提示错误信息。 3 - 报文文件 3.1 - 架构 XML报文文件必须是基于 X"
+          },
+          {
+            "physical_page": 4,
+            "matched_terms": [
+              "生命周期"
+            ],
+            "context": "在 3.6.7 eCTD4-081 使用情境代码系统需为有效OID contextOfUse.code@codeSystem不是有效注册或已知的OID 错误 3.6.8 CN-eCTD-311 无效的生命周期操作 只能对状态为“active”的使用情境进行删除操作 错误 3.6.9 CN-eCTD-312 说明函的生命周期操作 说明函的状态始终为“active”，不得进行删除和替换操作 错误 提交单元类型为“首次提交”，且提交单元中包含申请表文件时，其状态必须为“ 3.6.10 CN-eCTD-313 申请表的生命周期操作 错误 active” 3.7 - 相关使用情境（relatedContextOfUse元素） 3.7.1 eCTD4-024 提供相关使用情境时，必须提供标识符 未提供relatedContextOfUse.id@root属性 错"
+          }
+        ],
+        "validation": [],
+        "priority_number": [],
+        "status_code": []
+      }
     }
   ],
-  "failures": []
+  "failures": [],
+  "missing_roles": []
 }
