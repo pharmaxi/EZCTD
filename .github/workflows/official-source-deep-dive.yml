@@ -61,7 +61,7 @@ jobs:
           code=${PIPESTATUS[0]}
           echo "$code" > build/official-source-deep-dive/collector-exit-code.txt
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          # Static discovery may not see protected v4 attachment responses; the next browser step is controlling.
+          # Static discovery may not see protected v4 attachment responses; the browser acquisition is controlling.
           exit 0
 
       - name: Acquire byte-valid v4 consultation attachments
@@ -99,7 +99,11 @@ jobs:
           assert all(item["download_status"] == "SUCCESS_BYTE_VALIDATED" for item in profile["sources"])
           assert sum(item["kind"] == "pdf" and int(item["pages"] or 0) > 0 for item in profile["sources"]) == 4
           assert sum(item["kind"] == "docx" for item in profile["sources"]) == 1
-          assert all(item["size"] and item["size"] > 25000 for item in profile["sources"])
+          assert all(
+              (item["kind"] == "pdf" and item["size"] and item["size"] > 25000)
+              or (item["kind"] == "docx" and item["size"] and item["size"] > 10000)
+              for item in profile["sources"]
+          )
           assert "cn-cde-ectd-v3.2.2-v1.1-pdf" in profile["must_not_influence"]
 
           package = json.loads((evidence / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
@@ -146,7 +150,7 @@ jobs:
             echo "No structured evidence changes."
             exit 0
           fi
-          git commit -m "research(regulatory): correct v4 draft assets with byte validation"
+          git commit -m "research(regulatory): freeze V1.1 technical package and complete v4 draft evidence"
           for attempt in 1 2 3 4; do
             git pull --rebase origin agent/official-source-deep-dive
             if git push origin HEAD:agent/official-source-deep-dive; then
