@@ -1,1 +1,1 @@
-P0-B0 payload is complete. The workflow must verify MANIFEST.json before extraction.
+P0-B0 payload is complete. Retry 2 separates workflow changes from the generated commit.
