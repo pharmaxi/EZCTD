@@ -1,0 +1,53 @@
+name: Open-source eCTD reference inventory
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/research/inventory_open_source_ectd.py"
+      - ".github/workflows/open-source-reference-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: open-source-ectd-inventory
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Search and inventory GitHub references
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/research/inventory_open_source_ectd.py
+
+      - name: Commit inventory
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/research/open-source
+          if git diff --cached --quiet; then
+            echo "No inventory changes."
+            exit 0
+          fi
+          git commit -m "research(p0): inventory open-source PDF and eCTD references"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
