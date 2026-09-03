@@ -7,7 +7,7 @@ on:
     paths:
       - tools/regulatory/deep_dive_official_sources.py
       - tools/regulatory/discover_cde_dynamic_links.py
-      - tools/regulatory/ingest_dynamic_cde_candidates.py
+      - tools/regulatory/acquire_v4_draft_with_browser.py
       - tools/regulatory/analyze_v11_attachment_package.py
       - .github/workflows/official-source-deep-dive.yml
   workflow_dispatch:
@@ -22,7 +22,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 60
     steps:
       - name: Check out research branch
         uses: actions/checkout@v4
@@ -39,19 +39,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils p7zip-full file xvfb
-          python -m pip install --disable-pip-version-check selenium
+          python -m pip install --disable-pip-version-check selenium requests
 
       - name: Discover dynamic CDE links in a real browser
         id: browser
         shell: bash
         run: |
-          set +e
+          set -euo pipefail
           mkdir -p build/official-source-deep-dive
           EZCTD_BROWSER_HEADLESS=0 xvfb-run -a python tools/regulatory/discover_cde_dynamic_links.py 2>&1 | tee build/official-source-deep-dive/browser-discovery.log
           code=${PIPESTATUS[0]}
           echo "$code" > build/official-source-deep-dive/browser-discovery-exit-code.txt
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
 
       - name: Download and analyze exact direct official sources
         id: collect
@@ -62,10 +61,13 @@ jobs:
           code=${PIPESTATUS[0]}
           echo "$code" > build/official-source-deep-dive/collector-exit-code.txt
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # Static discovery may not see protected v4 attachment responses; the next browser step is controlling.
           exit 0
 
-      - name: Ingest browser-discovered v4 consultation attachments
-        run: python tools/regulatory/ingest_dynamic_cde_candidates.py
+      - name: Acquire byte-valid v4 consultation attachments
+        shell: bash
+        run: |
+          EZCTD_BROWSER_HEADLESS=0 xvfb-run -a python tools/regulatory/acquire_v4_draft_with_browser.py
 
       - name: Parse V1.1 technical attachment package
         run: python tools/regulatory/analyze_v11_attachment_package.py
@@ -87,12 +89,17 @@ jobs:
           assert summary["v4_assets"] == 5, summary
           assert summary["v4_retrieved_roles"] == summary["v4_expected_roles"] == 5, summary
           assert summary["v4_failures"] == 0, summary
+          assert summary["v4_byte_identity_validated"] is True, summary
 
           profile = json.loads(Path("rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/manifest.json").read_text(encoding="utf-8"))
+          assert profile["schema_version"] == "0.3.0"
           assert profile["profile_status"] == "draft_research_only"
           assert profile["runtime_enabled"] is False
           assert len(profile["sources"]) == 5
-          assert all(item["download_status"] == "SUCCESS" for item in profile["sources"])
+          assert all(item["download_status"] == "SUCCESS_BYTE_VALIDATED" for item in profile["sources"])
+          assert sum(item["kind"] == "pdf" and int(item["pages"] or 0) > 0 for item in profile["sources"]) == 4
+          assert sum(item["kind"] == "docx" for item in profile["sources"]) == 1
+          assert all(item["size"] and item["size"] > 25000 for item in profile["sources"])
           assert "cn-cde-ectd-v3.2.2-v1.1-pdf" in profile["must_not_influence"]
 
           package = json.loads((evidence / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
@@ -104,14 +111,18 @@ jobs:
           assert package["node_extension_elements"]["count"] == 6
           assert package["package_source_sha256"] == summary["v1_attachment_sha256"]
 
-          dynamic_path = Path("build/official-source-deep-dive/browser-discovery/dynamic-link-discovery.json")
-          dynamic = json.loads(dynamic_path.read_text(encoding="utf-8"))
+          acquisition = json.loads(Path("build/official-source-deep-dive/browser-attachment-acquisition/acquisition-summary.json").read_text(encoding="utf-8"))
+          assert acquisition["status"] == "COMPLETE_BYTE_VALIDATED", acquisition
+          assert acquisition["valid_records"] == 5, acquisition
+
+          dynamic = json.loads(Path("build/official-source-deep-dive/browser-discovery/dynamic-link-discovery.json").read_text(encoding="utf-8"))
           result = {
-              "status": "COMPLETE_FOR_SUPPLIED_SOURCES",
+              "status": "COMPLETE_FOR_SUPPLIED_SOURCES_BYTE_VALIDATED",
               "browser_exit_code": int(Path("build/official-source-deep-dive/browser-discovery-exit-code.txt").read_text().strip()),
               "collector_exit_code": int(Path("build/official-source-deep-dive/collector-exit-code.txt").read_text().strip()),
               "summary": summary,
               "dynamic_discovery": dynamic.get("summary", {}),
+              "v4_acquisition": acquisition,
               "v4_profile": profile["profile_id"],
               "v11_package_profile": package["manifest"]["release_profile"],
           }
@@ -135,7 +146,7 @@ jobs:
             echo "No structured evidence changes."
             exit 0
           fi
-          git commit -m "research(regulatory): freeze V1.1 technical package and v4 draft sources"
+          git commit -m "research(regulatory): correct v4 draft assets with byte validation"
           for attempt in 1 2 3 4; do
             git pull --rebase origin agent/official-source-deep-dive
             if git push origin HEAD:agent/official-source-deep-dive; then
@@ -145,7 +156,7 @@ jobs:
           done
           exit 1
 
-      - name: Upload raw official assets and extracted text
+      - name: Upload raw official assets, rejected responses, and extracted text
         if: always()
         uses: actions/upload-artifact@v4
         with:
