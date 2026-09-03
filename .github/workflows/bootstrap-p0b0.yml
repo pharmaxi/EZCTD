@@ -1,0 +1,71 @@
+name: Expand P0-B0 research payload
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - bootstrap/READY
+
+permissions:
+  contents: write
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reassemble, verify, and extract payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64
+          import hashlib
+          import json
+          import zipfile
+          from pathlib import Path
+
+          root = Path.cwd()
+          bootstrap = root / "bootstrap"
+          manifest = json.loads((bootstrap / "MANIFEST.json").read_text(encoding="utf-8"))
+          parts = sorted(bootstrap.glob("payload.part*"))
+          if len(parts) != manifest["chunk_count"]:
+              raise SystemExit(f"expected {manifest['chunk_count']} chunks, found {len(parts)}")
+          encoded = "".join(p.read_text(encoding="ascii") for p in parts)
+          if len(encoded) != manifest["base64_length"]:
+              raise SystemExit("base64 payload length mismatch")
+          payload = base64.b64decode(encoded, validate=True)
+          digest = hashlib.sha256(payload).hexdigest()
+          if digest != manifest["zip_sha256"]:
+              raise SystemExit(f"payload sha256 mismatch: {digest}")
+          archive = Path("/tmp/p0-b0-payload.zip")
+          archive.write_bytes(payload)
+          with zipfile.ZipFile(archive) as zf:
+              for member in zf.infolist():
+                  target = (root / member.filename).resolve()
+                  if root.resolve() not in target.parents and target != root.resolve():
+                      raise SystemExit(f"unsafe archive path: {member.filename}")
+              zf.extractall(root)
+          PY
+
+      - name: Replace bootstrap files with research deliverables
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf bootstrap
+          rm -f .github/workflows/bootstrap-p0b0.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No payload changes to commit."
+            exit 0
+          fi
+          git commit -m "feat(p0-b0): establish validation matrix and synthetic corpus"
+          git push origin HEAD:agent/p0-b0-validation-matrix
