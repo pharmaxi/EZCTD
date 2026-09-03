@@ -1,0 +1,68 @@
+name: Windows validator asset inspection
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/regulatory/Inspect-CDEValidatorAssets.ps1"
+      - "tools/regulatory/fetch_cde_sources.py"
+      - ".github/workflows/windows-validator-asset-inspection.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: windows-validator-asset-inspection
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch CDE and ICH source candidates
+        shell: pwsh
+        run: python tools/regulatory/fetch_cde_sources.py
+
+      - name: Inspect downloaded assets without executing them
+        shell: pwsh
+        run: ./tools/regulatory/Inspect-CDEValidatorAssets.ps1
+
+      - name: Commit metadata and unresolved state
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/regulatory/snapshots/cde-validator-v1.1.0 evidence/regulatory/snapshots/cde-2026-v1.1
+          if git diff --cached --quiet; then
+            echo "No validator asset metadata changes."
+            exit 0
+          fi
+          git commit -m "evidence(p0): inspect CDE validator V1.1.0 asset candidates"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload raw downloads and static inspection inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-static-inspection
+          path: |
+            build/regulatory-source-snapshot/
+            build/cde-validator-inspection/
+          if-no-files-found: warn
+          retention-days: 30
