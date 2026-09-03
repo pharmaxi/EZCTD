@@ -31,7 +31,7 @@ jobs:
           import zipfile
           from pathlib import Path
 
-          root = Path.cwd()
+          root = Path.cwd().resolve()
           bootstrap = root / "bootstrap"
           manifest = json.loads((bootstrap / "MANIFEST.json").read_text(encoding="utf-8"))
           parts = sorted(bootstrap.glob("payload.part*"))
@@ -47,11 +47,17 @@ jobs:
           archive = Path("/tmp/p0-b0-payload.zip")
           archive.write_bytes(payload)
           with zipfile.ZipFile(archive) as zf:
+              safe_members = []
               for member in zf.infolist():
                   target = (root / member.filename).resolve()
-                  if root.resolve() not in target.parents and target != root.resolve():
+                  if root not in target.parents and target != root:
                       raise SystemExit(f"unsafe archive path: {member.filename}")
-              zf.extractall(root)
+                  # GitHub's workflow token may not rewrite workflow files.
+                  # These are applied separately through the authenticated connector.
+                  if member.filename.startswith(".github/workflows/"):
+                      continue
+                  safe_members.append(member)
+              zf.extractall(root, safe_members)
           PY
 
       - name: Replace bootstrap files with research deliverables
@@ -59,7 +65,6 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf bootstrap
-          rm -f .github/workflows/bootstrap-p0b0.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
