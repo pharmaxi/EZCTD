@@ -7,6 +7,8 @@ on:
     paths:
       - tools/regulatory/deep_dive_official_sources.py
       - tools/regulatory/discover_cde_dynamic_links.py
+      - tools/regulatory/ingest_dynamic_cde_candidates.py
+      - tools/regulatory/analyze_v11_attachment_package.py
       - .github/workflows/official-source-deep-dive.yml
   workflow_dispatch:
 
@@ -20,7 +22,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 55
     steps:
       - name: Check out research branch
         uses: actions/checkout@v4
@@ -51,7 +53,7 @@ jobs:
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
 
-      - name: Download and analyze exact official sources
+      - name: Download and analyze exact direct official sources
         id: collect
         shell: bash
         run: |
@@ -60,8 +62,13 @@ jobs:
           code=${PIPESTATUS[0]}
           echo "$code" > build/official-source-deep-dive/collector-exit-code.txt
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          # A discovery gap must not discard successfully downloaded official assets.
           exit 0
+
+      - name: Ingest browser-discovered v4 consultation attachments
+        run: python tools/regulatory/ingest_dynamic_cde_candidates.py
+
+      - name: Parse V1.1 technical attachment package
+        run: python tools/regulatory/analyze_v11_attachment_package.py
 
       - name: Validate generated evidence and classify completeness
         shell: bash
@@ -71,28 +78,42 @@ jobs:
           import json
           from pathlib import Path
 
-          root = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
-          summary = json.loads((root / "SUMMARY.json").read_text(encoding="utf-8"))
+          evidence = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
+          summary = json.loads((evidence / "SUMMARY.json").read_text(encoding="utf-8"))
           assert summary["direct_success"] == summary["direct_total"] == 4, summary
           assert summary["v1_pdf_sha256"], summary
           assert summary["v1_attachment_sha256"], summary
-          assert summary["attachment_members"] > 0, summary
+          assert summary["attachment_members"] == 23, summary
+          assert summary["v4_assets"] == 5, summary
+          assert summary["v4_retrieved_roles"] == summary["v4_expected_roles"] == 5, summary
+          assert summary["v4_failures"] == 0, summary
 
           profile = json.loads(Path("rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/manifest.json").read_text(encoding="utf-8"))
           assert profile["profile_status"] == "draft_research_only"
           assert profile["runtime_enabled"] is False
+          assert len(profile["sources"]) == 5
+          assert all(item["download_status"] == "SUCCESS" for item in profile["sources"])
           assert "cn-cde-ectd-v3.2.2-v1.1-pdf" in profile["must_not_influence"]
 
+          package = json.loads((evidence / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert package["manifest"]["member_count"] == 23
+          assert package["schema_contract"]["target_namespace"] == "cn_ectd"
+          assert package["dependency_matrix"]["count"] == 75
+          assert package["module1_elements"]["count"] == 70
+          assert package["ich_elements"]["count"] == 159
+          assert package["node_extension_elements"]["count"] == 6
+          assert package["package_source_sha256"] == summary["v1_attachment_sha256"]
+
           dynamic_path = Path("build/official-source-deep-dive/browser-discovery/dynamic-link-discovery.json")
-          dynamic = json.loads(dynamic_path.read_text(encoding="utf-8")) if dynamic_path.exists() else {"summary": {}}
-          completeness = "COMPLETE" if summary["v4_assets"] >= 4 else "PARTIAL_V4_LINK_DISCOVERY_GAP"
+          dynamic = json.loads(dynamic_path.read_text(encoding="utf-8"))
           result = {
-              "status": completeness,
+              "status": "COMPLETE_FOR_SUPPLIED_SOURCES",
               "browser_exit_code": int(Path("build/official-source-deep-dive/browser-discovery-exit-code.txt").read_text().strip()),
               "collector_exit_code": int(Path("build/official-source-deep-dive/collector-exit-code.txt").read_text().strip()),
               "summary": summary,
               "dynamic_discovery": dynamic.get("summary", {}),
               "v4_profile": profile["profile_id"],
+              "v11_package_profile": package["manifest"]["release_profile"],
           }
           Path("build/official-source-deep-dive/completeness.json").write_text(
               json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -100,7 +121,7 @@ jobs:
           print(json.dumps(result, ensure_ascii=False, indent=2))
           PY
 
-      - name: Commit structured evidence
+      - name: Commit structured evidence and generated rule data
         shell: bash
         run: |
           set -euo pipefail
@@ -108,12 +129,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             evidence/regulatory/snapshots/user-supplied-official-sources \
+            rulepacks/cn-cde-ectd/v1.1/technical-package \
             rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27
           if git diff --cached --quiet; then
             echo "No structured evidence changes."
             exit 0
           fi
-          git commit -m "research(regulatory): freeze official V1.1 package and isolate v4 draft"
+          git commit -m "research(regulatory): freeze V1.1 technical package and v4 draft sources"
           for attempt in 1 2 3 4; do
             git pull --rebase origin agent/official-source-deep-dive
             if git push origin HEAD:agent/official-source-deep-dive; then
