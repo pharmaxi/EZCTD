@@ -9,6 +9,7 @@ on:
       - tools/regulatory/discover_cde_dynamic_links.py
       - tools/regulatory/acquire_v4_draft_with_browser.py
       - tools/regulatory/analyze_v11_attachment_package.py
+      - tools/regulatory/analyze_v4_draft_semantics.py
       - .github/workflows/official-source-deep-dive.yml
   workflow_dispatch:
 
@@ -72,6 +73,9 @@ jobs:
       - name: Parse V1.1 technical attachment package
         run: python tools/regulatory/analyze_v11_attachment_package.py
 
+      - name: Build semantic v4 draft rule index and V1.1 delta
+        run: python tools/regulatory/analyze_v4_draft_semantics.py
+
       - name: Validate generated evidence and classify completeness
         shell: bash
         run: |
@@ -115,13 +119,29 @@ jobs:
           assert package["node_extension_elements"]["count"] == 6
           assert package["package_source_sha256"] == summary["v1_attachment_sha256"]
 
+          semantic = json.loads((evidence / "V4_DRAFT_SEMANTIC_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert semantic["status"] == "DRAFT_RESEARCH_ONLY"
+          assert semantic["runtime_enabled"] is False
+          assert semantic["validation_standard"]["totals"] == {"rules": 165, "提示信息": 6, "错误": 145, "警告": 14}
+          assert len(semantic["validation_standard"]["pdf_rules"]) == 27
+          assert semantic["controlled_vocabulary"]["counts"] == {
+              "application_type": 4,
+              "submission_type": 9,
+              "submissionunit_type": 26,
+              "product_type": 2,
+              "context_of_use": 63,
+              "contact_type": 3,
+          }
+          assert Path("docs/validation/V1_1_TO_V4_DRAFT_DELTA.md").exists()
+          assert Path("docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md").exists()
+
           acquisition = json.loads(Path("build/official-source-deep-dive/browser-attachment-acquisition/acquisition-summary.json").read_text(encoding="utf-8"))
           assert acquisition["status"] == "COMPLETE_BYTE_VALIDATED", acquisition
           assert acquisition["valid_records"] == 5, acquisition
 
           dynamic = json.loads(Path("build/official-source-deep-dive/browser-discovery/dynamic-link-discovery.json").read_text(encoding="utf-8"))
           result = {
-              "status": "COMPLETE_FOR_SUPPLIED_SOURCES_BYTE_VALIDATED",
+              "status": "COMPLETE_FOR_SUPPLIED_SOURCES_BYTE_VALIDATED_AND_SEMANTICALLY_INDEXED",
               "browser_exit_code": int(Path("build/official-source-deep-dive/browser-discovery-exit-code.txt").read_text().strip()),
               "collector_exit_code": int(Path("build/official-source-deep-dive/collector-exit-code.txt").read_text().strip()),
               "summary": summary,
@@ -129,6 +149,9 @@ jobs:
               "v4_acquisition": acquisition,
               "v4_profile": profile["profile_id"],
               "v11_package_profile": package["manifest"]["release_profile"],
+              "v4_validation_rules": semantic["validation_standard"]["totals"],
+              "v4_pdf_rules": len(semantic["validation_standard"]["pdf_rules"]),
+              "v4_controlled_vocabulary": semantic["controlled_vocabulary"]["counts"],
           }
           Path("build/official-source-deep-dive/completeness.json").write_text(
               json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -145,17 +168,17 @@ jobs:
           git add \
             evidence/regulatory/snapshots/user-supplied-official-sources \
             rulepacks/cn-cde-ectd/v1.1/technical-package \
-            rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27
+            rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27 \
+            docs/validation/V1_1_TO_V4_DRAFT_DELTA.md \
+            docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md
           if git diff --cached --quiet; then
             echo "No structured evidence changes."
             exit 0
           fi
-          git commit -m "research(regulatory): freeze V1.1 technical package and complete v4 draft evidence"
+          git commit -m "research(regulatory): index v4 draft validation and isolate runtime profile"
           for attempt in 1 2 3 4; do
             git pull --rebase origin agent/official-source-deep-dive
-            if git push origin HEAD:agent/official-source-deep-dive; then
-              exit 0
-            fi
+            if git push origin HEAD:agent/official-source-deep-dive; then exit 0; fi
             sleep $((attempt * 5))
           done
           exit 1
