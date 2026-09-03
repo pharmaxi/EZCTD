@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "cde-ectd-v3.2.2-cn-v1.1",
+  "profile_name": "中国 CDE eCTD V3.2.2 / 技术文件 V1.1 — PDF分析",
+  "effective_date": "2026-03-01",
+  "source_document": {
+    "title": "eCTD验证标准V1.1",
+    "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+    "section": "6 - PDF分析"
+  },
+  "autofix_levels": {
+    "A": "确定性、低风险，可默认勾选，但仍写入变更记录",
+    "B": "条件性或可能造成信息删除/重写，必须预览确认",
+    "C": "语义不确定、凭据缺失或高风险，不自动修复"
+  },
+  "rules": [
+    {"id":"6.1","title":"PDF文件必须可读","severity":"错误","scope_exemptions":[],"detection":"使用 qpdf --check、pikepdf 打开、PDFium 渲染首尾页；页数必须>0，交叉引用表、对象流和页面树可解析。","autofix_level":"B","fix_strategy":"仅对可恢复的结构损坏尝试 qpdf/pikepdf 重写；修复后必须逐页渲染和复检。无法稳定恢复时终止，不覆盖原件。","mvp":true},
+    {"id":"6.2","title":"书签必须指向相对路径","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"遍历 Outline/Action/FileSpec，识别盘符、UNC、file://、根路径及逃逸包根目录的路径。","autofix_level":"B","fix_strategy":"仅在目标文件可在申报包内唯一定位时改写为相对路径；歧义、重名或越界路径进入人工确认。","mvp":true},
+    {"id":"6.3","title":"书签不得包含网页、邮箱或其他外部链接","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"识别 URI、mailto、外部协议和不在申报包内的 Launch/GoToR 目标。","autofix_level":"B","fix_strategy":"默认不静默删除；提供“删除书签节点”“改为内部目标”“列为例外”三种处置。","mvp":true},
+    {"id":"6.4","title":"书签不得使用未知动作","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"动作类型仅允许 GoTo、GoToR、Launch；检查 /A 与 /AA。","autofix_level":"B","fix_strategy":"可识别且可等价转换的动作转为允许类型；否则要求删除节点或人工重新指向。","mvp":true},
+    {"id":"6.5","title":"书签不能失效","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查每个书签是否存在有效 Destination 或 Action，且对象引用完整。","autofix_level":"B","fix_strategy":"可根据同名标题/目录唯一匹配时建议重新定位；否则删除书签节点或人工修复。","mvp":true},
+    {"id":"6.6","title":"书签目标不能损坏","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"验证内部页对象、命名目的地、跨文件目标文件和目标页是否存在。","autofix_level":"C","fix_strategy":"目标缺失无法自动推断；只提供候选匹配、删除或人工重定向。","mvp":true},
+    {"id":"6.7","title":"书签不能有多个动作","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 /A、/AA、/Next 动作链及动作数组。","autofix_level":"B","fix_strategy":"展示全部动作；用户选择保留一个。禁止默认“保留第一个”。","mvp":true},
+    {"id":"6.8","title":"书签缩放应为 Inherit Zoom","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"解析 Explicit Destination 的 XYZ/Fit 等参数及 zoom 值。","autofix_level":"A","fix_strategy":"批量将书签目的地缩放参数改为承前缩放，同时保留目标页和坐标。","mvp":true},
+    {"id":"6.9","title":"超文本链接应使用相对路径","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"遍历 Link 注释的 Action/FileSpec，识别绝对路径和包根目录逃逸。","autofix_level":"B","fix_strategy":"目标唯一且位于申报包内时自动建议相对化；重名/歧义需确认。","mvp":true},
+    {"id":"6.10","title":"超文本链接不得包含网页、邮箱或其他外部链接","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"识别 URI、mailto、外部协议及包外目标。","autofix_level":"B","fix_strategy":"默认保留可见文字，仅移除链接注释或改为内部目标；必须在变更清单中逐项可复核。","mvp":true},
+    {"id":"6.11","title":"超文本链接不得使用未知动作","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"动作仅允许 GoTo、GoToR、Launch；检查注释 /A、/AA。","autofix_level":"B","fix_strategy":"可等价转换时转换；否则删除链接动作并进入人工复核。","mvp":true},
+    {"id":"6.12","title":"超文本链接不能失效","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"Link 注释必须具有有效 Destination/Action；矩形区域、页引用和对象引用有效。","autofix_level":"B","fix_strategy":"可唯一匹配时重建目标；否则移除注释或人工重建。","mvp":true},
+    {"id":"6.13","title":"超文本链接目标不能损坏","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"验证内部页、命名目的地、目标文件与目标页存在；区分文件缺失和页目标无效。","autofix_level":"C","fix_strategy":"提供候选目标和批量筛选，最终需人工确认或删除链接。","mvp":true},
+    {"id":"6.14","title":"超文本链接不能有多个动作","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 /A、/AA、/Next 及动作链。","autofix_level":"B","fix_strategy":"展示动作差异，由用户选择唯一动作；不自动猜测。","mvp":true},
+    {"id":"6.15","title":"超文本链接缩放应为 Inherit Zoom","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"解析 Link 注释目标的显式缩放参数。","autofix_level":"A","fix_strategy":"批量改为承前缩放，保留目标页及位置。","mvp":true},
+    {"id":"6.16","title":"PDF版本必须正确","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"读取 Header/Catalog Version，并区分普通 PDF 与真实 PDF/A 一致性声明。","autofix_level":"A","fix_strategy":"普通 PDF 可通过重写统一到 PDF 1.7；不得仅改 Header 就宣称完成 PDF/A 转换。","mvp":true},
+    {"id":"6.17","title":"PDF不得嵌入附件","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 EmbeddedFiles、FileAttachment 注释及相关 Name Tree。","autofix_level":"B","fix_strategy":"先导出附件到隔离目录并记录哈希，再由用户确认移除；禁止静默丢弃。","mvp":true},
+    {"id":"6.18","title":"除超文本链接外不得包含其他注释","severity":"提示信息","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"枚举全部 Annotation Subtype，Link 以外均报告。","autofix_level":"B","fix_strategy":"支持导出注释清单、扁平化或删除；签章/签名相关 Widget 不得按普通注释删除。","mvp":true},
+    {"id":"6.19","title":"PDF不得有安全设置","severity":"错误","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 Encrypt 字典及打印、复制、修改、注释等权限。","autofix_level":"B","fix_strategy":"在能够合法打开且具备所需凭据时保存无加密副本；未知密码时不能修复。","mvp":true},
+    {"id":"6.20","title":"PDF初始视图正确","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 PageMode、PageLayout、OpenAction/初始页与默认缩放。","autofix_level":"A","fix_strategy":"有书签时设置显示书签面板；页面布局和缩放设为默认，打开第一页。","mvp":true},
+    {"id":"6.21","title":"PDF不得为无法打开的密码保护文件","severity":"错误","scope_exemptions":[],"detection":"尝试无密码打开并区分用户密码、权限密码及损坏。","autofix_level":"C","fix_strategy":"需要提供密码或无密码原件；不得绕过未知密码。","mvp":true},
+    {"id":"6.22","title":"PDF应启用 Fast Web View","severity":"提示信息","scope_exemptions":["1.0","1.2","1.3.8","1.10","1.11","1.12","2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 Linearized 字典并用 qpdf 验证线性化结构。","autofix_level":"A","fix_strategy":"所有其他修改完成后最后执行线性化；随后再次打开、渲染和验证。","mvp":true},
+    {"id":"6.23","title":"大于5页的文件必须有书签","severity":"错误","scope_exemptions":["申请表","2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"页数>5且 Outline 为空时报告；需根据 CTD 路径/资料类型判断例外。","autofix_level":"C","fix_strategy":"优先从 Word 标题、现有目录、用户提供的 CSV/JSON 清单生成；仅靠视觉/AI推断时必须预览确认。","mvp":true},
+    {"id":"6.24","title":"PDF不得包含 JavaScript、3D、音频或视频","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"检查 Catalog/Names/JavaScript、OpenAction、AA、RichMedia、Movie、Sound、3D 等对象。","autofix_level":"B","fix_strategy":"先报告对象位置；用户确认后删除动态对象和动作，修复后逐页渲染比对。","mvp":true},
+    {"id":"6.25","title":"PDF内容必须可搜索","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"按页评估可提取文本、字符覆盖率、图像占比和搜索命中；不能只按整份文档字符数判断。","autofix_level":"B","fix_strategy":"对缺失文本层的页选择性 OCR；保留原图，生成可搜索文本层并提供抽样校验。","mvp":true},
+    {"id":"6.26","title":"非标准字体必须嵌入","severity":"警告","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"detection":"枚举字体资源、BaseFont、FontDescriptor、FontFile/FontFile2/FontFile3、子集标识及 ToUnicode。","autofix_level":"C","fix_strategy":"没有原字体程序时通常无法可靠补嵌；首选返回源 Word/PDF 重新导出。仅在字体文件、授权和字符映射齐备时尝试。","mvp":true}
+  ]
+}
