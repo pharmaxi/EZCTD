@@ -1,0 +1,455 @@
+name: Converge P0 agent loop v2
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - ".github/workflows/converge-p0-agent-loop-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: converge-p0-agent-loop-v2
+  cancel-in-progress: false
+
+jobs:
+  converge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize feature branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - id: prepare
+        name: Repair, materialize and compile current sources
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build/p0-convergence-v2
+          {
+            python tools/p0-b0/repair_materializer.py
+            python tools/p0-b0/repair_materializer_v2.py
+            python tools/p0-b0/repair_materializer_v3.py
+            python tools/p0-b0/materialize_p0_b0.py
+            python tools/p0-b1/repair_observer.py
+            python tools/p0-b1/repair_package_inspector.py
+            python tools/regulatory/repair_evidence_completeness.py
+            python tools/regulatory/repair_manual_asset_import.py
+            python tools/p0-b0/generate_sample_isolation_audit.py
+            python -m compileall -q src tools tests
+            python -m json.tool tests/p0_b0/case_matrix.json >/dev/null
+            python -m json.tool tests/p0_b0/smoke_manifest.json >/dev/null
+            python -m json.tool tests/p0_b0/smoke_expectations.json >/dev/null
+            python -m json.tool tests/p0_b1/context_map.schema.json >/dev/null
+            python -m json.tool tests/p0_b0/official-validator/calibration_manifest.json >/dev/null
+            python -m json.tool tests/p0_b0/official-validator/calibration_run_plan.json >/dev/null
+          } 2>&1 | tee build/p0-convergence-v2/prepare.log
+
+      - id: install
+        name: Install deterministic test toolchain
+        if: steps.prepare.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            sudo apt-get update
+            sudo apt-get install -y qpdf p7zip-full
+            python -m pip install --upgrade pip
+            python -m pip install -r tests/p0_b0/requirements.txt
+            python -m pip install -e .
+          } 2>&1 | tee build/p0-convergence-v2/install.log
+
+      - id: p0b0
+        name: Run P0-B0 corrected synthetic fixture gate
+        if: steps.prepare.outcome == 'success' && steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            python tests/p0_b0/validators/validate_case_matrix.py
+            python tests/p0_b0/run_all.py
+            python tools/p0-b0/generate_sample_isolation_audit.py
+          } 2>&1 | tee build/p0-convergence-v2/p0-b0.log
+
+      - id: applicability
+        name: Run PDF-rule applicability contract
+        if: steps.p0b0.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            python - <<'PY'
+            import json
+            import jsonschema
+            schema=json.loads(open('tests/p0_b1/context_map.schema.json',encoding='utf-8').read())
+            jsonschema.Draft202012Validator.check_schema(schema)
+            print('context-map schema valid')
+            PY
+            python tests/p0_b1/test_applicability_contract.py
+          } 2>&1 | tee build/p0-convergence-v2/applicability.log
+
+      - id: p0b1
+        name: Run target-condition coverage and byte-level read-only gate
+        if: steps.applicability.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b1/run_readonly_gate.py build/p0-b0-smoke 2>&1 | tee build/p0-convergence-v2/p0-b1.log
+
+      - id: package_inspector
+        name: Run candidate eCTD package-inspector positive and negative tests
+        if: steps.p0b1.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b1/test_baseline_candidate_inspector.py \
+            build/p0-b0-smoke/CDE-PDF-BASELINE.pdf \
+            2>&1 | tee build/p0-convergence-v2/package-inspector.log
+
+      - id: calibration_contract
+        name: Run official-validator calibration evidence contract self-tests
+        if: steps.package_inspector.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b0/official-validator/test_calibration_summarizer.py \
+            2>&1 | tee build/p0-convergence-v2/calibration-contract.log
+
+      - id: manual_asset_contract
+        name: Run manual regulatory-asset intake safety contract
+        if: steps.calibration_contract.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/regulatory/test_manual_asset_import.py \
+            2>&1 | tee build/p0-convergence-v2/manual-asset-contract.log
+
+      - id: package_official_inputs
+        name: Package future official-validator PDF inputs
+        if: steps.manual_asset_contract.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tests/p0_b0/package_for_official_run.py \
+            --smoke-dir build/p0-b0-smoke \
+            --manifest tests/p0_b0/smoke_manifest.json \
+            --output build/ezctd-p0-b0-official-run.zip \
+            2>&1 | tee build/p0-convergence-v2/package-official-inputs.log
+
+      - name: Write convergence report and success markers from actual outputs
+        if: always()
+        env:
+          PREPARE: ${{ steps.prepare.outcome }}
+          INSTALL: ${{ steps.install.outcome }}
+          P0B0: ${{ steps.p0b0.outcome }}
+          APPLICABILITY: ${{ steps.applicability.outcome }}
+          P0B1: ${{ steps.p0b1.outcome }}
+          PACKAGE_INSPECTOR: ${{ steps.package_inspector.outcome }}
+          CALIBRATION_CONTRACT: ${{ steps.calibration_contract.outcome }}
+          MANUAL_ASSET_CONTRACT: ${{ steps.manual_asset_contract.outcome }}
+          PACKAGE_INPUTS: ${{ steps.package_official_inputs.outcome }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          TRIGGER_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import json, os
+          from pathlib import Path
+
+          phases = {
+              'prepare': os.environ.get('PREPARE', 'skipped'),
+              'install': os.environ.get('INSTALL', 'skipped'),
+              'p0_b0': os.environ.get('P0B0', 'skipped'),
+              'applicability': os.environ.get('APPLICABILITY', 'skipped'),
+              'p0_b1': os.environ.get('P0B1', 'skipped'),
+              'package_inspector': os.environ.get('PACKAGE_INSPECTOR', 'skipped'),
+              'calibration_evidence_contract': os.environ.get('CALIBRATION_CONTRACT', 'skipped'),
+              'manual_asset_intake_contract': os.environ.get('MANUAL_ASSET_CONTRACT', 'skipped'),
+              'official_input_packaging': os.environ.get('PACKAGE_INPUTS', 'skipped'),
+          }
+          success = all(value == 'success' for value in phases.values())
+
+          def load(path: str):
+              candidate=Path(path)
+              return json.loads(candidate.read_text(encoding='utf-8')) if candidate.is_file() else {}
+
+          b0=load('build/p0-b0-gate-report.json')
+          observer=load('build/p0-b1-observer-report.json')
+          readonly=load('build/p0-b1-readonly-integrity.json')
+          package_tests=load('build/p0-b1-package-inspector-tests.json')
+          applicability=load('build/p0-b1-applicability-contract.json')
+          calibration=load('build/calibration-summarizer-self-test.json')
+          manual=load('build/manual-asset-import-contract.json')
+
+          assertions = {
+              'b0_rules_26': b0.get('rules') == 26,
+              'b0_cases_130': b0.get('case_recipes') == 130,
+              'b0_smoke_28': b0.get('smoke') == 28,
+              'b0_reproducible_28': b0.get('fixture_reproducibility') == 28,
+              'observer_target_hits_26': observer.get('target_hits') == 26,
+              'observer_baseline_clean': observer.get('baseline_findings') == [],
+              'observer_failures_empty': observer.get('failures') == [],
+              'readonly_28': readonly.get('status') == 'PASS' and readonly.get('unchanged') == 28,
+              'package_tests_pass': package_tests.get('status') == 'PASS' and len(package_tests.get('tests') or []) >= 5,
+              'applicability_pass': applicability.get('status') == 'PASS',
+              'calibration_contract_pass': calibration.get('status') == 'PASS',
+              'manual_asset_contract_pass': manual.get('status') == 'PASS',
+          }
+          if success and not all(assertions.values()):
+              success=False
+              phases['output_assertions']='failure'
+          else:
+              phases['output_assertions']='success' if all(assertions.values()) else 'skipped'
+
+          log_records={}
+          for name in [
+              'prepare','install','p0-b0','applicability','p0-b1','package-inspector',
+              'calibration-contract','manual-asset-contract','package-official-inputs'
+          ]:
+              path=Path('build/p0-convergence-v2')/f'{name}.log'
+              text=path.read_text(encoding='utf-8',errors='replace') if path.is_file() else ''
+              log_records[name]={'path':str(path),'tail':'\n'.join(text.splitlines()[-160:])}
+
+          payload={
+              'schema_version':'0.2.0',
+              'workflow':'Converge P0 agent loop v2',
+              'run_id':os.environ['RUN_ID'],
+              'run_attempt':os.environ['RUN_ATTEMPT'],
+              'trigger_sha':os.environ['TRIGGER_SHA'],
+              'status':'PASS_ALL_LOCAL_CONTRACTS' if success else 'FAILED_OR_INCOMPLETE',
+              'phases':phases,
+              'assertions':assertions,
+              'reports':{
+                  'p0_b0':b0,
+                  'observer_summary':{
+                      'cases':observer.get('cases'),
+                      'target_hits':observer.get('target_hits'),
+                      'baseline_findings':observer.get('baseline_findings'),
+                      'reference_exemption_findings':observer.get('reference_exemption_findings'),
+                      'failures':observer.get('failures'),
+                  },
+                  'read_only':readonly,
+                  'package_inspector':package_tests,
+                  'applicability':applicability,
+                  'calibration_evidence_contract':calibration,
+                  'manual_asset_intake_contract':manual,
+              },
+              'official_validator':{
+                  'target_version':'1.1.0',
+                  'observations':0,
+                  'status':'NOT_RUN',
+              },
+              'logs':log_records,
+          }
+          Path('docs/status').mkdir(parents=True,exist_ok=True)
+          Path('docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.json').write_text(
+              json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'
+          )
+
+          lines=[
+              '# P0 agent-loop convergence v2',
+              '',
+              f"- Local/synthetic contract state: **{payload['status']}**",
+              f"- Official CDE validator V1.1.0: **0 observations / NOT_RUN**",
+              '',
+              '## Phase outcomes',
+              '',
+              '| Phase | Outcome |',
+              '|---|---|',
+          ]
+          for phase,outcome in phases.items():
+              lines.append(f'| `{phase}` | **{outcome}** |')
+          lines += ['', '## Output assertions', '', '| Assertion | Passed |', '|---|---:|']
+          for name,passed in assertions.items():
+              lines.append(f'| `{name}` | {passed} |')
+          if not success:
+              for name,record in log_records.items():
+                  if record['tail']:
+                      lines += ['',f'## Diagnostic tail: {name}','','```text',record['tail'],'```']
+          lines += [
+              '',
+              'A PASS proves only repository-local synthetic fixtures, independent parser/render probes, read-only behavior and evidence-contract enforcement. It does not prove CDE compatibility, real-dossier sensitivity/specificity, or a valid eCTD sequence.',
+              '',
+          ]
+          Path('docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.md').write_text('\n'.join(lines),encoding='utf-8')
+
+          if success:
+              Path('docs/validation/p0-b0').mkdir(parents=True,exist_ok=True)
+              Path('docs/validation/p0-b1').mkdir(parents=True,exist_ok=True)
+              Path('docs/validation/p0-b0/P0_B0_ALL_LOCAL_GATES.md').write_text(
+                  '# P0-B0 all local gates: PASS\n\n'
+                  '- 26 source-verified PDF rules represented\n'
+                  '- 130 case recipes\n'
+                  '- 28 smoke fixtures\n'
+                  '- object, PDFium, qpdf and reproducibility gates passed\n'
+                  '- target-positive correlation audit generated\n'
+                  '- calibration evidence contract self-tests passed\n'
+                  '- manual official-asset intake contract self-tests passed\n'
+                  '- CDE validator V1.1.0 remains NOT_RUN\n',
+                  encoding='utf-8',
+              )
+              Path('docs/validation/p0-b1/P0_B1_ALL_LOCAL_GATES.md').write_text(
+                  '# P0-B1 all local gates: PASS\n\n'
+                  '- 26/26 target conditions detected on synthetic fixtures\n'
+                  '- baseline has zero findings\n'
+                  '- 28/28 PDF hashes unchanged after observation\n'
+                  '- applicability contract passed\n'
+                  '- candidate package inspector positive/negative/read-only tests passed\n'
+                  '- CDE validator V1.1.0 remains NOT_RUN\n',
+                  encoding='utf-8',
+              )
+          PY
+
+      - name: Commit convergence state
+        if: always()
+        env:
+          CORE_SUCCESS: ${{ steps.prepare.outcome == 'success' && steps.install.outcome == 'success' && steps.p0b0.outcome == 'success' && steps.applicability.outcome == 'success' && steps.p0b1.outcome == 'success' && steps.package_inspector.outcome == 'success' && steps.calibration_contract.outcome == 'success' && steps.manual_asset_contract.outcome == 'success' && steps.package_official_inputs.outcome == 'success' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$CORE_SUCCESS" = "true" ]; then
+            git add \
+              tools/p0-b0/materialize_p0_b0.py \
+              tools/regulatory/import_official_assets.py \
+              tools/regulatory/build_evidence_completeness.py \
+              tools/ectd/inspect_baseline_candidate.py \
+              tests/p0_b1/test_baseline_candidate_inspector.py \
+              src/ezctd \
+              tests/p0_b0 \
+              tests/p0_b1 \
+              docs/validation/p0-b0 \
+              docs/validation/p0-b1 \
+              docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.json \
+              docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.md \
+              PROJECT_STATUS.md CHANGELOG.md
+            MESSAGE="feat(p0): pass all local validation and read-only contracts"
+          else
+            git add docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.json docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.md
+            MESSAGE="ci(p0): record failed P0 convergence v2"
+          fi
+          if git diff --cached --quiet; then
+            echo "No convergence state changes."
+          else
+            git commit -m "$MESSAGE"
+          fi
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Assert all local contracts passed
+        if: always()
+        env:
+          PREPARE: ${{ steps.prepare.outcome }}
+          INSTALL: ${{ steps.install.outcome }}
+          P0B0: ${{ steps.p0b0.outcome }}
+          APPLICABILITY: ${{ steps.applicability.outcome }}
+          P0B1: ${{ steps.p0b1.outcome }}
+          PACKAGE_INSPECTOR: ${{ steps.package_inspector.outcome }}
+          CALIBRATION_CONTRACT: ${{ steps.calibration_contract.outcome }}
+          MANUAL_ASSET_CONTRACT: ${{ steps.manual_asset_contract.outcome }}
+          PACKAGE_INPUTS: ${{ steps.package_official_inputs.outcome }}
+        run: |
+          test "$PREPARE" = success
+          test "$INSTALL" = success
+          test "$P0B0" = success
+          test "$APPLICABILITY" = success
+          test "$P0B1" = success
+          test "$PACKAGE_INSPECTOR" = success
+          test "$CALIBRATION_CONTRACT" = success
+          test "$MANUAL_ASSET_CONTRACT" = success
+          test "$PACKAGE_INPUTS" = success
+          python - <<'PY'
+          import json
+          report=json.loads(open('docs/status/P0_AGENT_LOOP_CONVERGENCE_V2.json',encoding='utf-8').read())
+          assert report['status']=='PASS_ALL_LOCAL_CONTRACTS'
+          PY
+
+      - name: Create or update draft pull request
+        if: steps.prepare.outcome == 'success' && steps.install.outcome == 'success' && steps.p0b0.outcome == 'success' && steps.applicability.outcome == 'success' && steps.p0b1.outcome == 'success' && steps.package_inspector.outcome == 'success' && steps.calibration_contract.outcome == 'success' && steps.manual_asset_contract.outcome == 'success' && steps.package_official_inputs.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BODY=$(cat <<'EOF'
+          ## Scope
+
+          This draft PR establishes the evidence-first local P0 baseline for EZCTD:
+
+          - CDE PDF rules 6.1–6.26 source-verified metadata;
+          - 26 detector contracts and 130 case recipes;
+          - 28 target-positive/control/exemption smoke PDFs;
+          - object-level, PDFium, qpdf and reproducibility probes;
+          - target-positive isolation/correlation audit;
+          - experimental read-only PDF observer with byte-integrity gate;
+          - package-level XML href/MD5/context/read-only checks;
+          - explicit applicability exceptions;
+          - official-validator calibration evidence contract;
+          - safe manual regulatory-asset intake contract.
+
+          ## Passed locally/in CI
+
+          - all 26 target conditions detected on the synthetic corpus;
+          - control PDF has no findings;
+          - rule 6.23 reference exemption does not false-positive;
+          - 28/28 PDF hashes unchanged after observation;
+          - package-inspector positive and negative controls;
+          - calibration summarizer rejects missing evidence and contaminated controls;
+          - manual asset intake rejects missing, unresolved, oversized and duplicate-role assets.
+
+          ## Explicitly not completed
+
+          CDE eCTD validation software V1.1.0 has not been run against these cases. Official observations remain `0 / NOT_RUN`. This PR does not claim official equivalence, a valid China eCTD sequence, or production readiness.
+          EOF
+          )
+          EXISTING=$(gh pr list --repo "$GITHUB_REPOSITORY" --head agent/p0-b0-validation-matrix --base main --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh pr edit "$EXISTING" --repo "$GITHUB_REPOSITORY" --title "P0: CDE PDF validation baseline and read-only observer" --body "$BODY"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head agent/p0-b0-validation-matrix --draft \
+              --title "P0: CDE PDF validation baseline and read-only observer" --body "$BODY"
+          fi
+
+      - name: Upload convergence artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-agent-loop-convergence-v2
+          path: |
+            build/p0-convergence-v2/
+            build/p0-b0-smoke/
+            build/p0-b0-gate-report.json
+            build/p0-b1-observer-report.json
+            build/p0-b1-readonly-integrity.json
+            build/p0-b1-package-inspector-tests.json
+            build/p0-b1-applicability-contract.json
+            build/calibration-summarizer-self-test.json
+            build/manual-asset-import-contract.json
+            build/ezctd-p0-b0-official-run.zip
+          if-no-files-found: warn
+          retention-days: 30
