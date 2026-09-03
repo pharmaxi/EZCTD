@@ -1,0 +1,95 @@
+name: Official eCTD source deep dive
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/deep_dive_official_sources.py
+      - .github/workflows/official-source-deep-dive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-source-deep-dive
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install static inspection tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file
+
+      - name: Download and analyze exact official sources
+        run: python tools/regulatory/deep_dive_official_sources.py
+
+      - name: Validate generated evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
+          summary = json.loads((root / "SUMMARY.json").read_text(encoding="utf-8"))
+          assert summary["direct_success"] == summary["direct_total"] == 4, summary
+          assert summary["v1_pdf_sha256"], summary
+          assert summary["v1_attachment_sha256"], summary
+          assert summary["attachment_members"] > 0, summary
+          assert summary["v4_assets"] >= 4, summary
+
+          profile = json.loads(Path("rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/manifest.json").read_text(encoding="utf-8"))
+          assert profile["profile_status"] == "draft_research_only"
+          assert profile["runtime_enabled"] is False
+          assert "cn-cde-ectd-v3.2.2-v1.1-pdf" in profile["must_not_influence"]
+          print(json.dumps({"summary": summary, "v4_profile": profile["profile_id"]}, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit structured evidence only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            evidence/regulatory/snapshots/user-supplied-official-sources \
+            rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27
+          if git diff --cached --quiet; then
+            echo "No structured evidence changes."
+            exit 0
+          fi
+          git commit -m "research(regulatory): freeze official V1.1 package and isolate v4 draft"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/official-source-deep-dive
+            if git push origin HEAD:agent/official-source-deep-dive; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload raw official assets and extracted text
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-ectd-source-deep-dive
+          path: build/official-source-deep-dive/
+          if-no-files-found: error
+          retention-days: 90
