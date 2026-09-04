@@ -1,0 +1,191 @@
+name: Diagnose CDE validator portal controls
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/probe_validator_portal.py
+      - .github/workflows/validator-portal-diagnostic-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: validator-portal-diagnostic-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install browser dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb file
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Run diagnostic probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM --kill-after=20s 480s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/probe_validator_portal.py
+
+      - name: Build committable diagnostic summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          build = Path("build/validator-portal-probe")
+          source = build / "probe-report.json"
+          if not source.exists():
+              raise SystemExit("probe-report.json missing")
+          data = json.loads(source.read_text(encoding="utf-8"))
+
+          def text_hash(value):
+              if value is None:
+                  return None
+              return hashlib.sha256(str(value).encode("utf-8")).hexdigest()
+
+          function_sources = data.get("function_sources", {})
+          functions = {
+              name: {
+                  "length": len(str(value)),
+                  "sha256": text_hash(value),
+                  "source": value if name in {"downloadFiles", "downloadFile"} else None,
+              }
+              for name, value in function_sources.items()
+          }
+
+          scripts = []
+          for item in data.get("script_fetch", []):
+              scripts.append({
+                  key: item.get(key)
+                  for key in (
+                      "url",
+                      "final_url",
+                      "status",
+                      "content_type",
+                      "size",
+                      "sha256",
+                      "contains_downloadFiles",
+                      "contains_downloadFile",
+                      "download_related_excerpt",
+                      "error",
+                  )
+                  if item.get(key) is not None
+              })
+
+          targets = []
+          for item in data.get("targets", []):
+              targets.append({
+                  "role": item.get("role"),
+                  "label": item.get("label"),
+                  "onclick": item.get("onclick"),
+                  "status": item.get("status"),
+                  "file_name": item.get("file_name"),
+                  "kind": item.get("kind"),
+                  "size": item.get("size"),
+                  "sha256": item.get("sha256"),
+                  "expected_kind_match": item.get("expected_kind_match"),
+                  "chosen_nested_control": item.get("chosen_nested_control"),
+                  "nested_candidates": item.get("nested_candidates", []),
+                  "error": item.get("error"),
+              })
+
+          summary = {
+              "schema_version": "0.1.0",
+              "status": data.get("status"),
+              "portal": data.get("portal"),
+              "software_executed": False,
+              "official_black_box_observations": 0,
+              "downloaded_target_count": data.get("downloaded_target_count", 0),
+              "functions": functions,
+              "scripts": scripts,
+              "targets": targets,
+              "errors": data.get("errors", []),
+              "boundary": "Diagnostic browser observation only. No downloaded executable was launched and no official validation result was produced.",
+          }
+
+          target = Path("evidence/regulatory/snapshots/cde-validator-v1.1.0")
+          target.mkdir(parents=True, exist_ok=True)
+          (target / "portal-probe-summary.json").write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          lines = [
+              "# CDE eCTD 验证器下载入口诊断",
+              "",
+              f"- 状态：**{summary['status']}**",
+              f"- 已下载目标：{summary['downloaded_target_count']}/2",
+              "- 已执行验证器：否",
+              "- 官方黑盒观察：0",
+              "",
+              "| 目标 | 结果 | 文件 | 类型 | SHA-256 |",
+              "|---|---|---|---|---|",
+          ]
+          for item in targets:
+              lines.append(
+                  f"| `{item['role']}` | {item['status']} | {item.get('file_name') or ''} | "
+                  f"{item.get('kind') or ''} | `{item.get('sha256') or ''}` |"
+              )
+          lines += [
+              "",
+              "## 诊断边界",
+              "",
+              "本次只观察 CDE 专栏页面的函数、脚本、弹窗、控件和下载行为；未运行任何下载的软件，因此不能产生官方验证结果。完整 DOM、截图、网络日志和下载字节保存在本次 Actions artifact 中。",
+              "",
+          ]
+          (target / "PORTAL_PROBE.md").write_text("\n".join(lines), encoding="utf-8")
+          print(json.dumps(summary, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload complete probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-portal-diagnostic-probe
+          path: build/validator-portal-probe/
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Commit diagnostic summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/portal-probe-summary.json \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/PORTAL_PROBE.md
+          if git diff --cached --quiet; then
+            echo "No portal-probe summary changes."
+            exit 0
+          fi
+          git commit -m "research(regulatory): record validator portal diagnostic probe"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin agent/official-source-deep-dive
+            if git push origin HEAD:agent/official-source-deep-dive; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
