@@ -1,11 +1,9 @@
+# v2.1: deterministic process-by-payload tracking; fail closed on outbound-firewall failure.
 param(
-  [Parameter(Mandatory = $true)]
-  [string]$ApplicationPath,
-  [Parameter(Mandatory = $true)]
-  [string]$PayloadDirectory,
+  [Parameter(Mandatory = $true)] [string]$ApplicationPath,
+  [Parameter(Mandatory = $true)] [string]$PayloadDirectory,
   [string]$OutputDirectory = "build/cde-validator-launch-recon-v2",
-  [Parameter(Mandatory = $true)]
-  [string]$ExpectedApplicationSha256,
+  [Parameter(Mandatory = $true)] [string]$ExpectedApplicationSha256,
   [int]$ObservationSeconds = 45
 )
 
@@ -17,7 +15,7 @@ function Get-Sha256([string]$Path) {
 }
 
 function Write-Json([string]$Path, $Value) {
-  $Value | ConvertTo-Json -Depth 50 | Set-Content -LiteralPath $Path -Encoding UTF8
+  $Value | ConvertTo-Json -Depth 40 | Set-Content -LiteralPath $Path -Encoding UTF8
 }
 
 function Get-Inventory([string]$Root) {
@@ -29,8 +27,8 @@ function Get-Inventory([string]$Root) {
         [ordered]@{
           path = [IO.Path]::GetRelativePath($base, $_.FullName).Replace('\\','/')
           size = $_.Length
-          sha256 = Get-Sha256 $_.FullName
           last_write_utc = $_.LastWriteTimeUtc.ToString('o')
+          sha256 = Get-Sha256 $_.FullName
         }
       }
   )
@@ -47,7 +45,7 @@ function Get-InventoryDigest($Inventory) {
   }
 }
 
-function Convert-CimDate($Value) {
+function Convert-CreationDate($Value) {
   if ($null -eq $Value) { return $null }
   try {
     if ($Value -is [datetime]) { return $Value.ToUniversalTime().ToString('o') }
@@ -57,19 +55,13 @@ function Convert-CimDate($Value) {
   }
 }
 
-function Get-TargetProcesses([datetime]$StartedUtc, [string]$PayloadRoot, [int]$RootProcessId) {
-  $normalizedRoot = ((Resolve-Path -LiteralPath $PayloadRoot).Path.TrimEnd('\\') + '\\').ToLowerInvariant()
+function Get-TargetProcesses([string]$PayloadRoot, [int]$RootProcessId) {
+  $root = ((Resolve-Path -LiteralPath $PayloadRoot).Path.TrimEnd('\\') + '\\').ToLowerInvariant()
   return @(
     Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
       Where-Object {
         $path = if ($_.ExecutablePath) { ([string]$_.ExecutablePath).ToLowerInvariant() } else { '' }
-        $created = $null
-        try {
-          if ($_.CreationDate -is [datetime]) { $created = $_.CreationDate.ToUniversalTime() }
-          elseif ($_.CreationDate) { $created = [Management.ManagementDateTimeConverter]::ToDateTime([string]$_.CreationDate).ToUniversalTime() }
-        } catch {}
-        ([int]$_.ProcessId -eq $RootProcessId) -or
-        ($path.StartsWith($normalizedRoot) -and ($null -eq $created -or $created -ge $StartedUtc.AddSeconds(-3)))
+        ([int]$_.ProcessId -eq $RootProcessId) -or $path.StartsWith($root)
       } |
       Sort-Object ProcessId |
       ForEach-Object {
@@ -79,18 +71,18 @@ function Get-TargetProcesses([datetime]$StartedUtc, [string]$PayloadRoot, [int]$
           name = $_.Name
           executable_path = $_.ExecutablePath
           command_line = $_.CommandLine
-          creation_date = Convert-CimDate $_.CreationDate
+          creation_date = Convert-CreationDate $_.CreationDate
         }
       }
   )
 }
 
-$windowSource = @"
+$windowType = @"
 using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-public static class EzctdTopWindowsV2 {
+public static class EzctdWindowProbeV21 {
   public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
   [DllImport("user32.dll")] public static extern bool EnumWindows(EnumWindowsProc callback, IntPtr lParam);
   [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr hWnd);
@@ -114,11 +106,8 @@ public static class EzctdTopWindowsV2 {
       GetWindowText(hWnd, title, title.Capacity);
       GetClassName(hWnd, cls, cls.Capacity);
       result.Add(new WindowInfo {
-        Handle = hWnd.ToInt64(),
-        ProcessId = processId,
-        Visible = IsWindowVisible(hWnd),
-        Title = title.ToString(),
-        ClassName = cls.ToString()
+        Handle=hWnd.ToInt64(), ProcessId=processId, Visible=IsWindowVisible(hWnd),
+        Title=title.ToString(), ClassName=cls.ToString()
       });
       return true;
     }, IntPtr.Zero);
@@ -126,13 +115,13 @@ public static class EzctdTopWindowsV2 {
   }
 }
 "@
-Add-Type -TypeDefinition $windowSource -Language CSharp
+Add-Type -TypeDefinition $windowType -Language CSharp
 
 function Get-TargetWindows([int[]]$ProcessIds) {
   $set = New-Object 'System.Collections.Generic.HashSet[int]'
   foreach ($processId in $ProcessIds) { [void]$set.Add($processId) }
   return @(
-    [EzctdTopWindowsV2]::Read() |
+    [EzctdWindowProbeV21]::Read() |
       Where-Object { $set.Contains([int]$_.ProcessId) } |
       ForEach-Object {
         [ordered]@{
@@ -146,22 +135,22 @@ function Get-TargetWindows([int[]]$ProcessIds) {
   )
 }
 
-function Get-UiTree([int[]]$ProcessIds) {
+function Get-UiAutomation([int[]]$ProcessIds) {
   try {
     Add-Type -AssemblyName UIAutomationClient
     Add-Type -AssemblyName UIAutomationTypes
     $set = New-Object 'System.Collections.Generic.HashSet[int]'
     foreach ($processId in $ProcessIds) { [void]$set.Add($processId) }
     $root = [Windows.Automation.AutomationElement]::RootElement
-    $trueCondition = [Windows.Automation.Condition]::TrueCondition
-    $top = $root.FindAll([Windows.Automation.TreeScope]::Children, $trueCondition)
+    $condition = [Windows.Automation.Condition]::TrueCondition
+    $top = $root.FindAll([Windows.Automation.TreeScope]::Children, $condition)
     $windows = New-Object System.Collections.Generic.List[object]
     foreach ($window in $top) {
       try {
         if (-not $set.Contains([int]$window.Current.ProcessId)) { continue }
-        $descendants = $window.FindAll([Windows.Automation.TreeScope]::Descendants, $trueCondition)
+        $descendants = $window.FindAll([Windows.Automation.TreeScope]::Descendants, $condition)
         $nodes = New-Object System.Collections.Generic.List[object]
-        $limit = [Math]::Min($descendants.Count, 2000)
+        $limit = [Math]::Min($descendants.Count, 1500)
         for ($index = 0; $index -lt $limit; $index++) {
           try {
             $element = $descendants.Item($index)
@@ -186,9 +175,9 @@ function Get-UiTree([int[]]$ProcessIds) {
         })
       } catch {}
     }
-    return [ordered]@{ status = 'CAPTURED'; error = $null; windows = @($windows) }
+    return [ordered]@{ status='CAPTURED'; error=$null; windows=@($windows) }
   } catch {
-    return [ordered]@{ status = 'UNAVAILABLE'; error = "$($_.Exception.GetType().FullName): $($_.Exception.Message)"; windows = @() }
+    return [ordered]@{ status='UNAVAILABLE'; error="$($_.Exception.GetType().FullName): $($_.Exception.Message)"; windows=@() }
   }
 }
 
@@ -197,19 +186,18 @@ function Save-Screenshot([string]$Path) {
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
     $bounds = [Windows.Forms.SystemInformation]::VirtualScreen
-    if ($bounds.Width -le 0 -or $bounds.Height -le 0) { throw 'No virtual screen' }
+    if ($bounds.Width -le 0 -or $bounds.Height -le 0) { throw 'No virtual screen available' }
     $bitmap = New-Object Drawing.Bitmap $bounds.Width, $bounds.Height
     $graphics = [Drawing.Graphics]::FromImage($bitmap)
     try {
       $graphics.CopyFromScreen($bounds.Left, $bounds.Top, 0, 0, $bitmap.Size)
       $bitmap.Save($Path, [Drawing.Imaging.ImageFormat]::Png)
     } finally {
-      $graphics.Dispose()
-      $bitmap.Dispose()
+      $graphics.Dispose(); $bitmap.Dispose()
     }
-    return [ordered]@{ status = 'CAPTURED'; path = (Split-Path -Leaf $Path); sha256 = Get-Sha256 $Path; width = $bounds.Width; height = $bounds.Height; error = $null }
+    return [ordered]@{ status='CAPTURED'; path=(Split-Path -Leaf $Path); sha256=(Get-Sha256 $Path); width=$bounds.Width; height=$bounds.Height; error=$null }
   } catch {
-    return [ordered]@{ status = 'UNAVAILABLE'; path = $null; sha256 = $null; width = $null; height = $null; error = "$($_.Exception.GetType().FullName): $($_.Exception.Message)" }
+    return [ordered]@{ status='UNAVAILABLE'; path=$null; sha256=$null; width=$null; height=$null; error="$($_.Exception.GetType().FullName): $($_.Exception.Message)" }
   }
 }
 
@@ -219,10 +207,7 @@ function Get-EnvironmentFacts {
   $screen = $null
   try {
     Add-Type -AssemblyName System.Windows.Forms
-    $screen = [ordered]@{
-      width = [Windows.Forms.SystemInformation]::VirtualScreen.Width
-      height = [Windows.Forms.SystemInformation]::VirtualScreen.Height
-    }
+    $screen = [ordered]@{ width=[Windows.Forms.SystemInformation]::VirtualScreen.Width; height=[Windows.Forms.SystemInformation]::VirtualScreen.Height }
   } catch {}
   return [ordered]@{
     os_caption = $os.Caption
@@ -242,38 +227,35 @@ function Get-EnvironmentFacts {
 }
 
 function Get-RecentFiles([datetime]$SinceUtc) {
-  $roots = @($PayloadDirectory, $env:TEMP, $env:APPDATA, $env:LOCALAPPDATA) | Select-Object -Unique
-  $items = New-Object System.Collections.Generic.List[object]
-  foreach ($root in $roots) {
+  $records = New-Object System.Collections.Generic.List[object]
+  foreach ($root in @($PayloadDirectory, $env:TEMP, $env:APPDATA, $env:LOCALAPPDATA) | Select-Object -Unique) {
     if (-not $root -or -not (Test-Path -LiteralPath $root)) { continue }
     $base = (Resolve-Path -LiteralPath $root).Path
     Get-ChildItem -LiteralPath $base -File -Recurse -ErrorAction SilentlyContinue |
       Where-Object { $_.LastWriteTimeUtc -ge $SinceUtc.AddSeconds(-2) } |
       Sort-Object FullName |
-      Select-Object -First 2500 |
+      Select-Object -First 1000 |
       ForEach-Object {
         $hash = $null
-        if ($_.Length -le 52428800) {
-          try { $hash = Get-Sha256 $_.FullName } catch {}
-        }
-        $items.Add([ordered]@{
-          root = $base
-          path = [IO.Path]::GetRelativePath($base, $_.FullName).Replace('\\','/')
-          size = $_.Length
-          last_write_utc = $_.LastWriteTimeUtc.ToString('o')
-          sha256 = $hash
+        if ($_.Length -le 52428800) { try { $hash = Get-Sha256 $_.FullName } catch {} }
+        $records.Add([ordered]@{
+          root=$base
+          path=[IO.Path]::GetRelativePath($base, $_.FullName).Replace('\\','/')
+          size=$_.Length
+          last_write_utc=$_.LastWriteTimeUtc.ToString('o')
+          sha256=$hash
         })
       }
   }
-  return @($items)
+  return @($records)
 }
 
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 $ApplicationPath = (Resolve-Path -LiteralPath $ApplicationPath).Path
 $PayloadDirectory = (Resolve-Path -LiteralPath $PayloadDirectory).Path
-$actualApplicationSha256 = Get-Sha256 $ApplicationPath
-if ($actualApplicationSha256 -ne $ExpectedApplicationSha256.ToLowerInvariant()) {
-  throw "Application SHA-256 mismatch: expected=$ExpectedApplicationSha256 actual=$actualApplicationSha256"
+$applicationSha256 = Get-Sha256 $ApplicationPath
+if ($applicationSha256 -ne $ExpectedApplicationSha256.ToLowerInvariant()) {
+  throw "Application SHA-256 mismatch: expected=$ExpectedApplicationSha256 actual=$applicationSha256"
 }
 
 $startedUtc = (Get-Date).ToUniversalTime()
@@ -281,85 +263,89 @@ $inventoryBefore = Get-Inventory $PayloadDirectory
 $digestBefore = Get-InventoryDigest $inventoryBefore
 Write-Json (Join-Path $OutputDirectory 'payload-inventory-before.json') $inventoryBefore
 
-$firewallRules = New-Object System.Collections.Generic.List[object]
+$firewall = New-Object System.Collections.Generic.List[object]
 $firewallNames = New-Object System.Collections.Generic.List[string]
+$firewallReady = $true
 foreach ($program in @(
   $ApplicationPath,
   (Join-Path $PayloadDirectory 'jre\jre1.8.0_202\bin\java.exe'),
   (Join-Path $PayloadDirectory 'jre\jre1.8.0_202\bin\javaw.exe')
 )) {
   if (-not (Test-Path -LiteralPath $program)) { continue }
-  $ruleName = "EZCTD-LaunchReconV2-$([Guid]::NewGuid().ToString('N'))"
+  $ruleName = "EZCTD-LaunchRecon-$([Guid]::NewGuid().ToString('N'))"
   try {
     New-NetFirewallRule -DisplayName $ruleName -Direction Outbound -Program $program -Action Block -Profile Any -ErrorAction Stop | Out-Null
     $firewallNames.Add($ruleName)
-    $firewallRules.Add([ordered]@{ program = $program; status = 'BLOCKED_OUTBOUND'; rule_name = $ruleName; error = $null })
+    $firewall.Add([ordered]@{ program=$program; status='BLOCKED_OUTBOUND'; rule_name=$ruleName; error=$null })
   } catch {
-    $firewallRules.Add([ordered]@{ program = $program; status = 'RULE_FAILED'; rule_name = $ruleName; error = "$($_.Exception.GetType().FullName): $($_.Exception.Message)" })
+    $firewallReady = $false
+    $firewall.Add([ordered]@{ program=$program; status='RULE_FAILED'; rule_name=$ruleName; error="$($_.Exception.GetType().FullName): $($_.Exception.Message)" })
   }
 }
 
 $rootProcess = $null
 $rootProcessId = -1
 $startSucceeded = $false
-$startError = $null
+$startError = if ($firewallReady) { $null } else { 'Safety gate failed: one or more outbound firewall rules could not be installed.' }
 $samples = New-Object System.Collections.Generic.List[object]
-try {
-  $startInfo = New-Object Diagnostics.ProcessStartInfo
-  $startInfo.FileName = $ApplicationPath
-  $startInfo.WorkingDirectory = $PayloadDirectory
-  $startInfo.UseShellExecute = $false
-  $startInfo.CreateNoWindow = $false
-  $startInfo.Environment.Clear()
-  foreach ($name in @('SystemRoot','WINDIR','COMSPEC','PATH','PATHEXT','TEMP','TMP','USERPROFILE','HOMEDRIVE','HOMEPATH','APPDATA','LOCALAPPDATA','PROGRAMDATA','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS')) {
-    $value = [Environment]::GetEnvironmentVariable($name)
-    if ($null -ne $value) { $startInfo.Environment[$name] = $value }
-  }
-  $rootProcess = New-Object Diagnostics.Process
-  $rootProcess.StartInfo = $startInfo
-  $startSucceeded = $rootProcess.Start()
-  if (-not $startSucceeded) { throw 'Process.Start returned false' }
-  $rootProcessId = $rootProcess.Id
-  for ($elapsed = 3; $elapsed -le $ObservationSeconds; $elapsed += 3) {
-    Start-Sleep -Seconds 3
-    $targetProcesses = Get-TargetProcesses $startedUtc $PayloadDirectory $rootProcessId
-    $processIds = @($targetProcesses | ForEach-Object { [int]$_.process_id })
-    $targetWindows = Get-TargetWindows $processIds
-    $tcp = New-Object System.Collections.Generic.List[object]
-    foreach ($processId in $processIds) {
-      try {
-        Get-NetTCPConnection -OwningProcess $processId -ErrorAction SilentlyContinue |
-          ForEach-Object {
-            $tcp.Add([ordered]@{
-              process_id = $processId
-              state = [string]$_.State
-              local_address = $_.LocalAddress
-              local_port = $_.LocalPort
-              remote_address = $_.RemoteAddress
-              remote_port = $_.RemotePort
-            })
-          }
-      } catch {}
+if ($firewallReady) {
+  try {
+    $startInfo = New-Object Diagnostics.ProcessStartInfo
+    $startInfo.FileName = $ApplicationPath
+    $startInfo.WorkingDirectory = $PayloadDirectory
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $false
+    $startInfo.Environment.Clear()
+    foreach ($name in @('SystemRoot','WINDIR','COMSPEC','PATH','PATHEXT','TEMP','TMP','USERPROFILE','HOMEDRIVE','HOMEPATH','APPDATA','LOCALAPPDATA','PROGRAMDATA','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS')) {
+      $value = [Environment]::GetEnvironmentVariable($name)
+      if ($null -ne $value) { $startInfo.Environment[$name] = $value }
     }
-    $rootExited = $false
-    try { $rootExited = $rootProcess.HasExited } catch { $rootExited = $true }
-    $samples.Add([ordered]@{
-      elapsed_seconds = $elapsed
-      root_process_exited = $rootExited
-      processes = $targetProcesses
-      windows = $targetWindows
-      tcp_connections = @($tcp)
-    })
-    if ($rootExited -and $targetProcesses.Count -eq 0) { break }
+    $rootProcess = New-Object Diagnostics.Process
+    $rootProcess.StartInfo = $startInfo
+    $startSucceeded = $rootProcess.Start()
+    if (-not $startSucceeded) { throw 'Process.Start returned false' }
+    $rootProcessId = $rootProcess.Id
+    for ($elapsed = 3; $elapsed -le $ObservationSeconds; $elapsed += 3) {
+      Start-Sleep -Seconds 3
+      $processes = Get-TargetProcesses $PayloadDirectory $rootProcessId
+      $processIds = @($processes | ForEach-Object { [int]$_.process_id })
+      $windows = Get-TargetWindows $processIds
+      $connections = New-Object System.Collections.Generic.List[object]
+      foreach ($processId in $processIds) {
+        try {
+          Get-NetTCPConnection -OwningProcess $processId -ErrorAction SilentlyContinue |
+            ForEach-Object {
+              $connections.Add([ordered]@{
+                process_id=$processId
+                state=[string]$_.State
+                local_address=$_.LocalAddress
+                local_port=$_.LocalPort
+                remote_address=$_.RemoteAddress
+                remote_port=$_.RemotePort
+              })
+            }
+        } catch {}
+      }
+      $samples.Add([ordered]@{
+        elapsed_seconds=$elapsed
+        processes=$processes
+        windows=$windows
+        tcp_connections=@($connections)
+      })
+      if ($processes.Count -eq 0) { break }
+    }
+  } catch {
+    $startError = "$($_.Exception.GetType().FullName): $($_.Exception.Message)"
   }
-} catch {
-  $startError = "$($_.Exception.GetType().FullName): $($_.Exception.Message)"
 }
 
-$finalProcesses = if ($startSucceeded) { Get-TargetProcesses $startedUtc $PayloadDirectory $rootProcessId } else { @() }
-$finalProcessIds = @($finalProcesses | ForEach-Object { [int]$_.process_id })
-$finalWindows = Get-TargetWindows $finalProcessIds
-$uiAutomation = Get-UiTree $finalProcessIds
+$allProcesses = @($samples | ForEach-Object { $_.processes } | Group-Object process_id | ForEach-Object { $_.Group[0] } | Sort-Object process_id)
+$allWindows = @($samples | ForEach-Object { $_.windows } | Group-Object handle | ForEach-Object { $_.Group[-1] } | Sort-Object process_id, handle)
+$visibleWindows = @($allWindows | Where-Object { $_.visible -and $_.title })
+$finalProcesses = if ($startSucceeded) { Get-TargetProcesses $PayloadDirectory $rootProcessId } else { @() }
+$finalIds = @($finalProcesses | ForEach-Object { [int]$_.process_id })
+$finalWindows = Get-TargetWindows $finalIds
+$uiAutomation = Get-UiAutomation $finalIds
 Write-Json (Join-Path $OutputDirectory 'observation-samples.json') @($samples)
 Write-Json (Join-Path $OutputDirectory 'ui-automation-tree.json') $uiAutomation
 $screenshot = Save-Screenshot (Join-Path $OutputDirectory 'desktop-final.png')
@@ -368,9 +354,9 @@ $termination = New-Object System.Collections.Generic.List[object]
 foreach ($processInfo in @($finalProcesses | Sort-Object process_id -Descending)) {
   try {
     Stop-Process -Id ([int]$processInfo.process_id) -Force -ErrorAction Stop
-    $termination.Add([ordered]@{ process_id = [int]$processInfo.process_id; status = 'TERMINATED'; error = $null })
+    $termination.Add([ordered]@{ process_id=[int]$processInfo.process_id; status='TERMINATED'; error=$null })
   } catch {
-    $termination.Add([ordered]@{ process_id = [int]$processInfo.process_id; status = 'TERMINATION_FAILED'; error = $_.Exception.Message })
+    $termination.Add([ordered]@{ process_id=[int]$processInfo.process_id; status='TERMINATION_FAILED'; error=$_.Exception.Message })
   }
 }
 foreach ($ruleName in $firewallNames) {
@@ -384,105 +370,95 @@ Write-Json (Join-Path $OutputDirectory 'payload-inventory-after.json') $inventor
 $recentFiles = Get-RecentFiles $startedUtc
 Write-Json (Join-Path $OutputDirectory 'recent-files.json') $recentFiles
 
-$beforeByPath = @{}
-foreach ($item in $inventoryBefore) { $beforeByPath[$item.path] = $item }
-$afterByPath = @{}
-foreach ($item in $inventoryAfter) { $afterByPath[$item.path] = $item }
-$addedFiles = @($inventoryAfter | Where-Object { -not $beforeByPath.ContainsKey($_.path) })
-$removedFiles = @($inventoryBefore | Where-Object { -not $afterByPath.ContainsKey($_.path) })
-$modifiedFiles = @(
+$before = @{}; foreach ($item in $inventoryBefore) { $before[$item.path] = $item }
+$after = @{}; foreach ($item in $inventoryAfter) { $after[$item.path] = $item }
+$added = @($inventoryAfter | Where-Object { -not $before.ContainsKey($_.path) })
+$removed = @($inventoryBefore | Where-Object { -not $after.ContainsKey($_.path) })
+$modified = @(
   $inventoryAfter |
-    Where-Object { $beforeByPath.ContainsKey($_.path) -and $beforeByPath[$_.path].sha256 -ne $_.sha256 } |
-    ForEach-Object {
-      [ordered]@{
-        path = $_.path
-        before_sha256 = $beforeByPath[$_.path].sha256
-        after_sha256 = $_.sha256
-      }
-    }
+    Where-Object { $before.ContainsKey($_.path) -and $before[$_.path].sha256 -ne $_.sha256 } |
+    ForEach-Object { [ordered]@{ path=$_.path; before_sha256=$before[$_.path].sha256; after_sha256=$_.sha256 } }
 )
 
-$visibleWindows = @($finalWindows | Where-Object { $_.visible -and $_.title })
-$allObservedProcesses = @($samples | ForEach-Object { $_.processes } | Group-Object process_id | ForEach-Object { $_.Group[0] } | Sort-Object process_id)
-$allObservedWindows = @($samples | ForEach-Object { $_.windows } | Group-Object handle | ForEach-Object { $_.Group[-1] } | Sort-Object process_id, handle)
-$observedVisibleWindows = @($allObservedWindows | Where-Object { $_.visible -and $_.title })
-
-$classification = if (-not $startSucceeded) {
+$classification = if (-not $firewallReady) {
+  'SAFETY_GATE_FAILED'
+} elseif (-not $startSucceeded) {
   'START_FAILED'
-} elseif ($observedVisibleWindows.Count -gt 0) {
+} elseif ($visibleWindows.Count -gt 0) {
   'VISIBLE_WINDOW_OBSERVED'
-} elseif ($allObservedProcesses.Count -gt 0) {
+} elseif ($allProcesses.Count -gt 0) {
   'PROCESS_OBSERVED_NO_VISIBLE_WINDOW'
 } else {
   'PROCESS_STATE_INCONCLUSIVE'
 }
 
 $result = [ordered]@{
-  schema_version = '0.2.0'
-  run_id = 'CDE-V110-LAUNCH-RECON-001'
-  run_type = 'launch_reconnaissance'
-  classification = $classification
-  execution_mode = 'direct_static_payload_no_installer'
-  environment = Get-EnvironmentFacts
-  safety = [ordered]@{
-    real_submission_data_present = $false
-    sequence_selected = $false
-    checkout_credentials_persisted = $false
-    child_environment_scrubbed = $true
-    outbound_firewall = @($firewallRules)
-    ephemeral_runner_expected = $true
+  schema_version='0.2.1'
+  run_id='CDE-V110-LAUNCH-RECON-001'
+  run_type='launch_reconnaissance'
+  classification=$classification
+  execution_mode='direct_static_payload_no_installer'
+  environment=Get-EnvironmentFacts
+  safety=[ordered]@{
+    real_submission_data_present=$false
+    sequence_selected=$false
+    checkout_credentials_persisted=$false
+    child_environment_scrubbed=$true
+    outbound_firewall=@($firewall)
+    outbound_firewall_ready=$firewallReady
+    ephemeral_runner_expected=$true
   }
-  validator = [ordered]@{
-    name = 'CDE eCTD validation software'
-    declared_version = '1.1.0'
-    application_path = $ApplicationPath
-    application_sha256 = $actualApplicationSha256
+  validator=[ordered]@{
+    name='CDE eCTD validation software'
+    declared_version='1.1.0'
+    application_path=$ApplicationPath
+    application_sha256=$applicationSha256
   }
-  execution = [ordered]@{
-    start_succeeded = $startSucceeded
-    start_error = $startError
-    root_process_id = if ($startSucceeded) { $rootProcessId } else { $null }
-    started_at = $startedUtc.ToString('o')
-    finished_at = $finishedUtc.ToString('o')
-    observation_seconds_requested = $ObservationSeconds
-    observed_processes = $allObservedProcesses
-    observed_windows = $allObservedWindows
-    observed_visible_window_count = $observedVisibleWindows.Count
-    final_processes = $finalProcesses
-    final_windows = $finalWindows
-    ui_automation = $uiAutomation
-    screenshot = $screenshot
-    termination = @($termination)
+  execution=[ordered]@{
+    start_succeeded=$startSucceeded
+    start_error=$startError
+    root_process_id=if ($startSucceeded) { $rootProcessId } else { $null }
+    started_at=$startedUtc.ToString('o')
+    finished_at=$finishedUtc.ToString('o')
+    observation_seconds_requested=$ObservationSeconds
+    observed_processes=$allProcesses
+    observed_windows=$allWindows
+    observed_visible_window_count=$visibleWindows.Count
+    final_processes=$finalProcesses
+    final_windows=$finalWindows
+    ui_automation=$uiAutomation
+    screenshot=$screenshot
+    termination=@($termination)
   }
-  side_effects = [ordered]@{
-    payload_inventory_sha256_before = $digestBefore
-    payload_inventory_sha256_after = $digestAfter
-    payload_unchanged = ($digestBefore -eq $digestAfter)
-    added_files = $addedFiles
-    removed_files = $removedFiles
-    modified_files = $modifiedFiles
-    recent_file_count = $recentFiles.Count
-    recent_files = $recentFiles
+  side_effects=[ordered]@{
+    payload_inventory_sha256_before=$digestBefore
+    payload_inventory_sha256_after=$digestAfter
+    payload_unchanged=($digestBefore -eq $digestAfter)
+    added_files=$added
+    removed_files=$removed
+    modified_files=$modified
+    recent_file_count=$recentFiles.Count
+    recent_files=$recentFiles
   }
-  assertions = [ordered]@{
-    software_executed = $startSucceeded
-    validation_invoked = $false
-    terminal_validation_state_observed = $false
-    native_validation_report_present = $false
-    input_inventory_present = $false
+  assertions=[ordered]@{
+    software_executed=$startSucceeded
+    validation_invoked=$false
+    terminal_validation_state_observed=$false
+    native_validation_report_present=$false
+    input_inventory_present=$false
   }
-  observation_counters = [ordered]@{
-    launch_reconnaissance_runs = 1
-    completed_validation_runs = 0
-    admissible_black_box_observations = 0
-    calibration_informative_observations = 0
-    repeated_baseline_controls = 0
-    official_black_box_observations = 0
+  observation_counters=[ordered]@{
+    launch_reconnaissance_runs=1
+    completed_validation_runs=0
+    admissible_black_box_observations=0
+    calibration_informative_observations=0
+    repeated_baseline_controls=0
+    official_black_box_observations=0
   }
-  interpretation = [ordered]@{
-    admissible_as_validation_observation = $false
-    reason = 'Application launch only. No sequence was selected, validation was not invoked and no native validation report was produced.'
-    next_gate = 'Use observed process/window/UI evidence to build the first synthetic-sequence validation adapter.'
+  interpretation=[ordered]@{
+    admissible_as_validation_observation=$false
+    reason='Application launch only. No sequence was selected, validation was not invoked and no native validation report was produced.'
+    next_gate='Use the observed process/window/UI evidence to build the first synthetic-sequence validation adapter.'
   }
 }
 
@@ -492,8 +468,8 @@ $lines = @(
   '',
   "- 分类：**$classification**",
   "- 软件启动：**$startSucceeded**",
-  "- 观察到的相关进程：**$($allObservedProcesses.Count)**",
-  "- 观察到的可见窗口：**$($observedVisibleWindows.Count)**",
+  "- 观察到的相关进程：**$($allProcesses.Count)**",
+  "- 观察到的可见窗口：**$($visibleWindows.Count)**",
   "- UI Automation：**$($uiAutomation.status)**",
   "- 桌面截图：**$($screenshot.status)**",
   "- payload 启动前后字节不变：**$($digestBefore -eq $digestAfter)**",
@@ -510,12 +486,12 @@ $lines = @(
   '| PID | Visible | Class | Title |',
   '|---:|---:|---|---|'
 )
-foreach ($window in $allObservedWindows) {
-  $safeTitle = ([string]$window.title).Replace('|','\|')
-  $lines += "| $($window.process_id) | $($window.visible) | $($window.class_name) | $safeTitle |"
+foreach ($window in $allWindows) {
+  $title = ([string]$window.title).Replace('|','\|')
+  $lines += "| $($window.process_id) | $($window.visible) | $($window.class_name) | $title |"
 }
 $lines += @('', '## 观察到的进程', '', '| PID | PPID | Name | Executable |', '|---:|---:|---|---|')
-foreach ($processInfo in $allObservedProcesses) {
+foreach ($processInfo in $allProcesses) {
   $lines += "| $($processInfo.process_id) | $($processInfo.parent_process_id) | $($processInfo.name) | $($processInfo.executable_path) |"
 }
 $lines += @(
@@ -526,6 +502,5 @@ $lines += @(
   ''
 )
 $lines -join "`n" | Set-Content -LiteralPath (Join-Path $OutputDirectory 'launch-recon-result.md') -Encoding UTF8
-
-Write-Host ($result | ConvertTo-Json -Depth 9)
+Write-Host ($result | ConvertTo-Json -Depth 8)
 exit 0
