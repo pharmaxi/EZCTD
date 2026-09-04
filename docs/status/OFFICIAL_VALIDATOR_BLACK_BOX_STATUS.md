@@ -1,15 +1,28 @@
 # CDE eCTD 官方验证器黑盒状态
 
-- 当前状态：**BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED**
-- 原始中文入口 UI 可达：**False**
-- 字节一致的 ASCII 别名 UI 可达：**True**
-- 修正绝对 classpath 的 Java 诊断 UI 可达：**False**
+- 当前状态：**SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION**
+- 验证事务尝试：**1**
 - 完整验证运行：**0**
 - 可采信黑盒观察：**0**
+- 环境适配的官方二进制观察：**0**
+- 默认环境观察：**0**
+- 规则校准观察：**0**
 - `official_black_box_observations`：**0**
 
-路径适配或界面打开都不是验证事务。只有选择固定合成输入、触发验证、达到终态并保存原生结果后，观察计数才能增加。
+## 最近一次事务
+
+- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T021541Z`
+- Case：`cn-v11-probe-000-invalid-empty-root`
+- 分类：`non_admissible_official_validator_transaction_attempt`
+- 可采信：`False`
+- 原生终态：`None`
+- 原生报告：`False`
+- 输入未变化：`None`
+
+## 当前解释
+
+`official_black_box_observations` 只统计满足证据合同的完整事务。环境适配观察使用官方原始字节，但通过 ASCII NTFS 别名规避 runner 编码缺陷；因此单独统计，不能冒充默认环境兼容性，也不能直接当作具体规则校准结果。
 
 ## 下一门槛
 
-Use the recorded UI Automation model to select the frozen synthetic input and invoke one real validation transaction.
+Repair only the failed admissibility gates using the preserved raw evidence; do not increment counters.
