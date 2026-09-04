@@ -1,8 +1,8 @@
 {
-  "schema_version": "0.2.0",
-  "status": "OFFICIAL_ASSETS_ACQUIRED_AND_STATICALLY_IDENTIFIED",
+  "schema_version": "0.6.0",
+  "status": "BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED",
   "official_black_box_observations": 0,
-  "software_executed": false,
+  "software_executed": true,
   "acquisition_method": "official_control_plus_current_same_origin_javascript",
   "common_js": {
     "url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
@@ -33,6 +33,980 @@
     "files_inspected": 2,
     "likely_candidates": 2
   },
-  "next_gate": "Controlled execution reconnaissance on an isolated Windows runner; no dossier calibration until launch mode, input contract and output locations are observed.",
-  "boundary": "Official provenance and static identity only. No official validator result and no CDE compatibility claim."
+  "next_gate": "Use the recorded UI Automation model to select the frozen synthetic input and invoke one real validation transaction.",
+  "boundary": "A byte-identical ASCII hardlink or copy is an environment adaptation. It may establish UI reachability, but no observation is countable until validation is actually invoked and native terminal evidence is captured.",
+  "official_wrapper_ui_reached": false,
+  "diagnostic_java_adapter_ui_reached": false,
+  "completed_validation_runs": 0,
+  "admissible_black_box_observations": 0,
+  "calibration_informative_observations": 0,
+  "latest_launch_forensics": {
+    "run_id": "cde-validator-forensics-20260904T020228Z",
+    "status": "BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED",
+    "installation": {
+      "executed": true,
+      "return_code": 0,
+      "requested_directory_exists": true,
+      "installed_file_count": 313,
+      "installed_tree_digest": "93ae40117d2f7043ab10de5e0ccc9769df9c5e543a6da69d61e1ff6125611a1f",
+      "registry_delta": [
+        {
+          "hive": "HKLM32",
+          "key": "eCTD验证软件",
+          "DisplayName": "eCTD验证软件 1.1.0",
+          "DisplayVersion": "1.1.0",
+          "Publisher": "国家药品监督管理局药品审评中心",
+          "InstallLocation": null,
+          "UninstallString": "C:\\CDEValidatorForensics\\uninst.exe",
+          "QuietUninstallString": null,
+          "InstallDate": null
+        }
+      ],
+      "application_candidates": [
+        {
+          "path": "C:\\CDEValidatorForensics\\eCTD验证软件.exe",
+          "size": 600115,
+          "sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+          "matches_expected_application": true
+        }
+      ]
+    },
+    "identity": {
+      "installer_sha256": "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8",
+      "static_application_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+      "installed_application": "C:\\CDEValidatorForensics\\eCTD验证软件.exe",
+      "installed_application_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+      "installed_matches_static": true,
+      "static_payload_digest_before": "fee2ad62ceb958f4e99fed21ee4cfacc03da608f0027b72fc58811187396f875",
+      "static_payload_digest_after": "fee2ad62ceb958f4e99fed21ee4cfacc03da608f0027b72fc58811187396f875",
+      "static_payload_unchanged": true
+    },
+    "wrapped_application": {
+      "zip_readable": true,
+      "entry_count": 65,
+      "main_class_entries": [
+        "Main.class"
+      ],
+      "manifest": "Manifest-Version: 1.0\r\nClass-Path: aspose.pdf-20.6.jar bcpkix-jdk15on-1.70.jar bcprov-jdk15on\r\n -1.70.jar commons-codec-1.15.jar commons-lang3-3.9.jar commons-loggin\r\n g-1.2.jar contentBusAPI-docAccess-java-client-7.0.0.jar dom4j-2.1.1.j\r\n ar cde-validator-common.jar cde-validator-ectd32-core.jar fastjson-1.\r\n 2.75.jar fontbox-2.0.32.jar gson-2.8.1.jar gson-fire-1.8.3.jar hutool\r\n -all-5.8.26.jar java-jwt-3.10.3.jar jsoup-1.16.1.jar juniversalcharde\r\n t-2.4.0.jar log4j-api-2.17.0.jar log4j-core-2.17.0.jar lombok-1.18.30\r\n .jar okhttp-2.7.5.jar okio-1.6.0.jar openpdf-1.3.30.jar pdfbox-2.0.32\r\n .jar preflight-2.0.32.jar xmpbox-2.0.32.jar\r\nMain-Class: Main\r\n\r\n",
+      "rebuilt_jar": "wrapped-application.jar",
+      "rebuilt_jar_sha256": "9a8ec599ba56de65153d343b202cd98646997cd15a3b1a23eddd561995f3262a",
+      "error": null
+    },
+    "official_wrapper": {
+      "start_succeeded": true,
+      "root_return_code": 0,
+      "visible_window_count": 0,
+      "uia_status": "CAPTURED",
+      "uia_descendant_count": 0,
+      "ui_reachable": false,
+      "class_not_found_main": true,
+      "error": null
+    },
+    "diagnostic_java_adapter": {
+      "executed": true,
+      "start_succeeded": true,
+      "root_return_code": 1,
+      "visible_window_count": 0,
+      "uia_status": "CAPTURED",
+      "uia_descendant_count": 0,
+      "ui_reachable": false,
+      "error": null,
+      "eligibility": "diagnostic_only_not_an_official_black_box_observation"
+    },
+    "raw_evidence": {
+      "workflow_run_id": 33827971556,
+      "workflow_run_attempt": 1,
+      "artifact_id": "9920675156",
+      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33827971556/artifacts/9920675156",
+      "artifact_digest": "4a3a0a7b3bb489e4b22a259ba37e41b2490a05358ee394510fdf886655d527c0",
+      "retention_days": 90
+    }
+  },
+  "byte_identical_ascii_alias_ui_reached": true,
+  "diagnostic_java_absolute_classpath_ui_reached": false,
+  "ascii_alias_adaptation": {
+    "schema_version": "0.1.0",
+    "run_id": "cde-validator-forensics-20260904T020228Z",
+    "status": "BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED",
+    "alias_identity": {
+      "source": "C:\\CDEValidatorForensics\\eCTD验证软件.exe",
+      "alias": "C:\\CDEValidatorForensics\\CDEValidator.exe",
+      "method": "ntfs_hardlink",
+      "source_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+      "alias_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+      "samefile": true,
+      "byte_identical": true
+    },
+    "ascii_alias_probe": {
+      "start_succeeded": true,
+      "root_pid": 7124,
+      "root_return_code": 0,
+      "processes": [
+        {
+          "pid": 8380,
+          "ppid": 7124,
+          "name": "javaw.exe",
+          "exe": "C:\\CDEValidatorForensics\\jre\\jre1.8.0_202\\bin\\javaw.exe",
+          "cmdline": [
+            "C:\\CDEValidatorForensics\\.\\jre\\jre1.8.0_202\\bin\\javaw.exe",
+            "-Xms2048m",
+            "-Xmx3466m",
+            "-classpath",
+            "C:\\CDEValidatorForensics\\CDEValidator.exe;aspose.pdf-20.6.jar;bcpkix-jdk15on-1.70.jar;bcprov-jdk15on-1.70.jar;commons-codec-1.15.jar;commons-lang3-3.9.jar;commons-logging-1.2.jar;contentBusAPI-docAccess-java-client-7.0.0.jar;dom4j-2.1.1.jar;cde-validator-common.jar;cde-validator-ectd32-core.jar;fastjson-1.2.75.jar;fontbox-2.0.32.jar;gson-2.8.1.jar;gson-fire-1.8.3.jar;hutool-all-5.8.26.jar;java-jwt-3.10.3.jar;jsoup-1.16.1.jar;juniversalchardet-2.4.0.jar;log4j-api-2.17.0.jar;log4j-core-2.17.0.jar;lombok-1.18.30.jar;okhttp-2.7.5.jar;okio-1.6.0.jar;openpdf-1.3.30.jar;pdfbox-2.0.32.jar;preflight-2.0.32.jar;xmpbox-2.0.32.jar",
+            "Main"
+          ],
+          "create_time_utc": "2026-09-04T02:03:13.176672+00:00",
+          "status": "running"
+        }
+      ],
+      "windows": [
+        {
+          "handle": 131272,
+          "pid": 8380,
+          "visible": false,
+          "title": "MSCTFIME UI",
+          "class_name": "MSCTFIME UI"
+        },
+        {
+          "handle": 131422,
+          "pid": 8380,
+          "visible": false,
+          "title": "Default IME",
+          "class_name": "IME"
+        },
+        {
+          "handle": 196948,
+          "pid": 8380,
+          "visible": true,
+          "title": "验证标准校验",
+          "class_name": "GlassWndClass-GlassWindowClass-2"
+        },
+        {
+          "handle": 262488,
+          "pid": 8380,
+          "visible": false,
+          "title": "",
+          "class_name": "GlassWndClass-GlassToolkitWindowClass-1"
+        }
+      ],
+      "visible_window_count": 1,
+      "uia": {
+        "status": "CAPTURED",
+        "windows": [
+          {
+            "pid": 8380,
+            "name": "验证标准校验",
+            "automation_id": "JavaFX1",
+            "control_type": "Window",
+            "class_name": "GlassWndClass-GlassWindowClass-2",
+            "descendant_count": 93,
+            "descendants": [
+              {
+                "name": "",
+                "automation_id": "",
+                "control_type": "TitleBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "System",
+                "automation_id": "MenuBar",
+                "control_type": "MenuBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "System",
+                "automation_id": "",
+                "control_type": "MenuItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "Minimize",
+                "automation_id": "",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "Maximize",
+                "automation_id": "",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "Close",
+                "automation_id": "",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX3",
+                "control_type": "Group",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "验证标准",
+                "automation_id": "JavaFX6",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "验证标准",
+                "automation_id": "JavaFX7",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX8",
+                "control_type": "ComboBox",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX11",
+                "control_type": "List",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "中国eCTD验证标准 V1.1",
+                "automation_id": "JavaFX15",
+                "control_type": "ListItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX17",
+                "control_type": "ScrollBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "increment",
+                "automation_id": "JavaFX19",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "decrement",
+                "automation_id": "JavaFX21",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX24",
+                "control_type": "Thumb",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX25",
+                "control_type": "ScrollBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "increment",
+                "automation_id": "JavaFX27",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "decrement",
+                "automation_id": "JavaFX29",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX32",
+                "control_type": "Thumb",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "中国eCTD验证标准 V1.1",
+                "automation_id": "JavaFX35",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "选择申报资料",
+                "automation_id": "JavaFX36",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "选择申报资料",
+                "automation_id": "JavaFX37",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX38",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX39",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "报告输出路径",
+                "automation_id": "JavaFX40",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "报告输出路径",
+                "automation_id": "JavaFX41",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX42",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX43",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "启动验证",
+                "automation_id": "JavaFX44",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "启动验证",
+                "automation_id": "JavaFX45",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "打开验证报告",
+                "automation_id": "JavaFX46",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "打开验证报告",
+                "automation_id": "JavaFX47",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "重置",
+                "automation_id": "JavaFX48",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "重置",
+                "automation_id": "JavaFX49",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX51",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX52",
+                "control_type": "Group",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX56",
+                "control_type": "Tree",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "中国eCTD验证标准 V1.1",
+                "automation_id": "JavaFX57",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "基础识别",
+                "automation_id": "JavaFX61",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "文件/文件夹",
+                "automation_id": "JavaFX62",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "ICH 骨架文件",
+                "automation_id": "JavaFX63",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "区域性管理信息",
+                "automation_id": "JavaFX64",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "基础信息",
+                "automation_id": "JavaFX65",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "信封信息",
+                "automation_id": "JavaFX66",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "内容完整性",
+                "automation_id": "JavaFX67",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "研究标签文件（STF）",
+                "automation_id": "JavaFX68",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "PDF分析",
+                "automation_id": "JavaFX69",
+                "control_type": "TreeItem",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "错误",
+                "automation_id": "JavaFX71",
+                "control_type": "CheckBox",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "错误",
+                "automation_id": "JavaFX72",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "警告",
+                "automation_id": "JavaFX75",
+                "control_type": "CheckBox",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "警告",
+                "automation_id": "JavaFX76",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "提示信息",
+                "automation_id": "JavaFX79",
+                "control_type": "CheckBox",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "提示信息",
+                "automation_id": "JavaFX80",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "[验证标准]",
+                "automation_id": "JavaFX84",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "[验证标准]",
+                "automation_id": "JavaFX85",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "[基础识别]",
+                "automation_id": "JavaFX86",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "[基础识别]",
+                "automation_id": "JavaFX87",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX88",
+                "control_type": "ProgressBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX94",
+                "control_type": "Table",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "编号",
+                "automation_id": "JavaFX99",
+                "control_type": "Custom",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "编号",
+                "automation_id": "JavaFX100",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "编号",
+                "automation_id": "JavaFX101",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "验证结果",
+                "automation_id": "JavaFX102",
+                "control_type": "Custom",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "验证结果",
+                "automation_id": "JavaFX103",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "验证结果",
+                "automation_id": "JavaFX104",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "严重程度",
+                "automation_id": "JavaFX105",
+                "control_type": "Custom",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "严重程度",
+                "automation_id": "JavaFX106",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "严重程度",
+                "automation_id": "JavaFX107",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "描述",
+                "automation_id": "JavaFX108",
+                "control_type": "Custom",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "描述",
+                "automation_id": "JavaFX109",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "描述",
+                "automation_id": "JavaFX110",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "说明",
+                "automation_id": "JavaFX111",
+                "control_type": "Custom",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "说明",
+                "automation_id": "JavaFX112",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "说明",
+                "automation_id": "JavaFX113",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX123",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX124",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX129",
+                "control_type": "ScrollBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "increment",
+                "automation_id": "JavaFX131",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "decrement",
+                "automation_id": "JavaFX133",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX136",
+                "control_type": "Thumb",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX137",
+                "control_type": "ScrollBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "increment",
+                "automation_id": "JavaFX139",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "decrement",
+                "automation_id": "JavaFX141",
+                "control_type": "Button",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX144",
+                "control_type": "Thumb",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "No content in table",
+                "automation_id": "JavaFX149",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "No content in table",
+                "automation_id": "JavaFX150",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX152",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX153",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX154",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX155",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX156",
+                "control_type": "ProgressBar",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              },
+              {
+                "name": "",
+                "automation_id": "JavaFX160",
+                "control_type": "Text",
+                "class_name": "",
+                "enabled": true,
+                "visible": true
+              }
+            ]
+          }
+        ],
+        "error": null
+      },
+      "uia_descendant_count": 93,
+      "ui_reachable": true,
+      "class_not_found_main": false,
+      "launch4j_log_mentions_ascii_alias": true,
+      "launch4j_log_contains_question_mark_executable": true,
+      "screenshot": {
+        "status": "CAPTURED",
+        "path": "ascii-alias.png",
+        "width": 1024,
+        "height": 768,
+        "sha256": "1151966dcbf24b6fe7054d4483cb81c926a8cc6590736b2ab39c21c8ce8f03e2",
+        "error": null
+      },
+      "captured_files": [
+        {
+          "source": "C:\\CDEValidatorForensics\\launch4j.log",
+          "captured_as": "captured-files/launch4j.log",
+          "size": 7616,
+          "sha256": "9964f588f2823817cd518f60e118f4fdbb2da9b7e7b46b737c9d0596580850c5"
+        },
+        {
+          "source": "C:\\CDEValidatorForensics\\logs\\client.log",
+          "captured_as": "captured-files/logs/client.log",
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "error": null
+    },
+    "diagnostic_java_absolute_classpath_probe": {
+      "start_succeeded": null,
+      "root_pid": null,
+      "root_return_code": null,
+      "processes": null,
+      "windows": null,
+      "visible_window_count": null,
+      "uia": null,
+      "uia_descendant_count": null,
+      "ui_reachable": null,
+      "screenshot": null,
+      "captured_files": null,
+      "error": null,
+      "eligibility": null
+    },
+    "firewall_ready": true,
+    "validation_invoked": false,
+    "native_validation_report_present": false,
+    "official_black_box_observations": 0,
+    "next_gate": "Use the recorded UI Automation model to select the frozen synthetic input and invoke one real validation transaction.",
+    "raw_evidence": {
+      "workflow_run_id": 33827971556,
+      "workflow_run_attempt": 1,
+      "artifact_id": "9920675156",
+      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33827971556/artifacts/9920675156",
+      "artifact_digest": "4a3a0a7b3bb489e4b22a259ba37e41b2490a05358ee394510fdf886655d527c0",
+      "retention_days": 90
+    },
+    "boundary": "A byte-identical ASCII hardlink or copy is an environment adaptation. It may establish UI reachability, but no observation is countable until validation is actually invoked and native terminal evidence is captured."
+  }
 }

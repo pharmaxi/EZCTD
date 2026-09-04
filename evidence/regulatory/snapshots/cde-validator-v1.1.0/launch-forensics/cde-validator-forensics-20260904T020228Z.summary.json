@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "cde-validator-forensics-20260904T020228Z",
+  "run_type": "installed_layout_and_launch_forensics",
+  "status": "BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED",
+  "started_at": "2026-09-04T02:02:28.111302+00:00",
+  "finished_at": "2026-09-04T02:03:09.148890+00:00",
+  "identity": {
+    "installer_sha256": "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8",
+    "static_application_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "installed_application": "C:\\CDEValidatorForensics\\eCTD验证软件.exe",
+    "installed_application_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "installed_matches_static": true,
+    "static_payload_digest_before": "fee2ad62ceb958f4e99fed21ee4cfacc03da608f0027b72fc58811187396f875",
+    "static_payload_digest_after": "fee2ad62ceb958f4e99fed21ee4cfacc03da608f0027b72fc58811187396f875",
+    "static_payload_unchanged": true
+  },
+  "installation": {
+    "executed": true,
+    "return_code": 0,
+    "requested_directory_exists": true,
+    "installed_file_count": 313,
+    "installed_tree_digest": "93ae40117d2f7043ab10de5e0ccc9769df9c5e543a6da69d61e1ff6125611a1f",
+    "registry_delta": [
+      {
+        "hive": "HKLM32",
+        "key": "eCTD验证软件",
+        "DisplayName": "eCTD验证软件 1.1.0",
+        "DisplayVersion": "1.1.0",
+        "Publisher": "国家药品监督管理局药品审评中心",
+        "InstallLocation": null,
+        "UninstallString": "C:\\CDEValidatorForensics\\uninst.exe",
+        "QuietUninstallString": null,
+        "InstallDate": null
+      }
+    ],
+    "application_candidates": [
+      {
+        "path": "C:\\CDEValidatorForensics\\eCTD验证软件.exe",
+        "size": 600115,
+        "sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+        "matches_expected_application": true
+      }
+    ]
+  },
+  "wrapped_application": {
+    "zip_readable": true,
+    "entry_count": 65,
+    "main_class_entries": [
+      "Main.class"
+    ],
+    "manifest": "Manifest-Version: 1.0\r\nClass-Path: aspose.pdf-20.6.jar bcpkix-jdk15on-1.70.jar bcprov-jdk15on\r\n -1.70.jar commons-codec-1.15.jar commons-lang3-3.9.jar commons-loggin\r\n g-1.2.jar contentBusAPI-docAccess-java-client-7.0.0.jar dom4j-2.1.1.j\r\n ar cde-validator-common.jar cde-validator-ectd32-core.jar fastjson-1.\r\n 2.75.jar fontbox-2.0.32.jar gson-2.8.1.jar gson-fire-1.8.3.jar hutool\r\n -all-5.8.26.jar java-jwt-3.10.3.jar jsoup-1.16.1.jar juniversalcharde\r\n t-2.4.0.jar log4j-api-2.17.0.jar log4j-core-2.17.0.jar lombok-1.18.30\r\n .jar okhttp-2.7.5.jar okio-1.6.0.jar openpdf-1.3.30.jar pdfbox-2.0.32\r\n .jar preflight-2.0.32.jar xmpbox-2.0.32.jar\r\nMain-Class: Main\r\n\r\n",
+    "rebuilt_jar": "wrapped-application.jar",
+    "rebuilt_jar_sha256": "9a8ec599ba56de65153d343b202cd98646997cd15a3b1a23eddd561995f3262a",
+    "error": null
+  },
+  "official_wrapper": {
+    "start_succeeded": true,
+    "root_pid": 5728,
+    "root_return_code": 0,
+    "processes": [],
+    "windows": [],
+    "visible_window_count": 0,
+    "uia_status": "CAPTURED",
+    "uia_windows": [],
+    "uia_descendant_count": 0,
+    "ui_reachable": false,
+    "class_not_found_main": true,
+    "screenshot": {
+      "status": "CAPTURED",
+      "path": "official-wrapper.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "b77d99756284842d27a8def1df1c793bd151b23e735ee197598e05a4ffc0b412",
+      "error": null
+    },
+    "captured_files": [
+      {
+        "source": "C:\\CDEValidatorForensics\\launch4j.log",
+        "captured_as": "captured-files/launch4j.log",
+        "size": 3804,
+        "sha256": "ec9ef7ec75973b3877d76c3c6cf0bbebd75594bbc1246e05340b8a8d7fe45f0f"
+      }
+    ],
+    "error": null
+  },
+  "diagnostic_java_adapter": {
+    "executed": true,
+    "start_succeeded": true,
+    "root_return_code": 1,
+    "processes": [],
+    "windows": [],
+    "visible_window_count": 0,
+    "uia_status": "CAPTURED",
+    "uia_windows": [],
+    "uia_descendant_count": 0,
+    "ui_reachable": false,
+    "screenshot": {
+      "status": "CAPTURED",
+      "path": "diagnostic-java-adapter.png",
+      "width": 1024,
+      "height": 768,
+      "sha256": "b77d99756284842d27a8def1df1c793bd151b23e735ee197598e05a4ffc0b412",
+      "error": null
+    },
+    "captured_files": [
+      {
+        "source": "C:\\CDEValidatorForensics\\launch4j.log",
+        "captured_as": "captured-files/launch4j.log",
+        "size": 3804,
+        "sha256": "ec9ef7ec75973b3877d76c3c6cf0bbebd75594bbc1246e05340b8a8d7fe45f0f"
+      }
+    ],
+    "error": null,
+    "eligibility": "diagnostic_only_not_an_official_black_box_observation"
+  },
+  "safety": {
+    "credentials_exposed_to_child": false,
+    "removed_environment_names": [],
+    "firewall_ready_before_install": true,
+    "firewall_ready_for_launch": true,
+    "official_wrapper_process_started": true,
+    "official_wrapper_ui_reached": false,
+    "validation_invoked": false,
+    "native_validation_report_present": false
+  },
+  "observation_counters": {
+    "launch_forensics_runs": 1,
+    "completed_validation_runs": 0,
+    "admissible_black_box_observations": 0,
+    "calibration_informative_observations": 0,
+    "official_black_box_observations": 0
+  },
+  "assertions": {
+    "validation_invoked": false,
+    "native_validation_report_present": false,
+    "completed_validation_runs": 0,
+    "official_black_box_observations": 0
+  },
+  "errors": [],
+  "next_gate": "Use the recorded UI Automation model to select the frozen synthetic input and invoke one real validation transaction.",
+  "raw_evidence": {
+    "workflow_run_id": 33827971556,
+    "workflow_run_attempt": 1,
+    "artifact_id": "9920675156",
+    "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33827971556/artifacts/9920675156",
+    "artifact_digest": "4a3a0a7b3bb489e4b22a259ba37e41b2490a05358ee394510fdf886655d527c0",
+    "retention_days": 90
+  },
+  "boundary": "Installation and launch forensics do not constitute a validation transaction. The official observation count remains zero until a deterministic synthetic input is selected, validation is invoked, a terminal native result is captured and input integrity is conserved."
+}

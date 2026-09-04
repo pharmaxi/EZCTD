@@ -1,13 +1,15 @@
-# CDE eCTD validation software black-box status
+# CDE eCTD 官方验证器黑盒状态
 
-- Current state: **OFFICIAL_ASSETS_ACQUIRED_AND_STATICALLY_IDENTIFIED**
-- Official black-box observations: **0**
-- Software executed: **false**
+- 当前状态：**BYTE_IDENTICAL_ASCII_ALIAS_UI_REACHED**
+- 原始中文入口 UI 可达：**False**
+- 字节一致的 ASCII 别名 UI 可达：**True**
+- 修正绝对 classpath 的 Java 诊断 UI 可达：**False**
+- 完整验证运行：**0**
+- 可采信黑盒观察：**0**
+- `official_black_box_observations`：**0**
 
-The prior blocker was asset acquisition, not validator execution. `downloadFiles(4/5)` opens a second-stage attachment dialog; the v2 collector waited for a transfer that never began. V3 verifies the direct URLs in the current official `common.js`, downloads the bytes with the same browser session, and performs Windows static identity inspection.
+路径适配或界面打开都不是验证事务。只有选择固定合成输入、触发验证、达到终态并保存原生结果后，观察计数才能增加。
 
-The next admissible step is execution reconnaissance with an empty/synthetic workspace to determine installer/portable form, process tree, GUI or CLI entry point, required runtime, accepted input unit, output files, logs and exit behavior. It must not yet be counted as a PDF-rule calibration observation unless a complete input and raw validator result are preserved.
+## 下一门槛
 
-## Evidence boundary
-
-Official provenance and static identity only. No official validator result and no CDE compatibility claim.
+Use the recorded UI Automation model to select the frozen synthetic input and invoke one real validation transaction.
