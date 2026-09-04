@@ -1,0 +1,259 @@
+name: Execute synthetic CDE validator transaction v3
+
+on:
+  push:
+    branches:
+      - agent/official-validator-black-box-loop
+    paths:
+      - tools/regulatory/run_cde_validator_synthetic_transaction_v3.py
+      - tools/regulatory/finalize_cde_validator_transaction_evidence_v2.py
+      - .github/workflows/official-validator-synthetic-transaction-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: official-validator-synthetic-transaction-v3
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "33823274985"
+  OUTER_ZIP_SHA256: "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36"
+  INSTALLER_SHA256: "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+  APP_SHA256: "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163"
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
+jobs:
+  transaction:
+    permissions:
+      contents: read
+      actions: read
+    runs-on: windows-latest
+    timeout-minutes: 35
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      artifact_url: ${{ steps.upload.outputs.artifact-url }}
+      artifact_digest: ${{ steps.upload.outputs.artifact-digest }}
+    steps:
+      - name: Check out black-box loop branch without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-validator-black-box-loop
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UI automation dependencies and compile harness
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -m pip install --disable-pip-version-check psutil pywinauto pillow
+          python -X utf8 -m py_compile `
+            tools/regulatory/probe_cde_validator_install_and_launch.py `
+            tools/regulatory/build_black_box_probe_fixture.py `
+            tools/regulatory/prepare_cde_validator_transaction_runtime.py `
+            tools/regulatory/run_cde_validator_synthetic_transaction.py `
+            tools/regulatory/run_cde_validator_synthetic_transaction_v2.py `
+            tools/regulatory/run_cde_validator_synthetic_transaction_v3.py `
+            tools/regulatory/finalize_cde_validator_transaction_evidence.py `
+            tools/regulatory/finalize_cde_validator_transaction_evidence_v2.py `
+            tools/regulatory/stage_cde_validator_synthetic_transaction.py
+
+      - name: Download byte-pinned official validator source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Recover official installer with complete upstream hash verification
+        id: recover
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $outer = Get-ChildItem -LiteralPath 'build/acquisition-v3/raw' -Filter '*.zip' -File | Select-Object -First 1
+          if (-not $outer) { throw 'Official validator ZIP missing' }
+          $outerHash = (Get-FileHash -LiteralPath $outer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($outerHash -ne $env:OUTER_ZIP_SHA256) { throw "Outer ZIP hash mismatch: $outerHash" }
+
+          New-Item -ItemType Directory -Force -Path 'build/recovered-installer' | Out-Null
+          Expand-Archive -LiteralPath $outer.FullName -DestinationPath 'build/recovered-installer' -Force
+          $installer = Get-ChildItem -LiteralPath 'build/recovered-installer' -Filter '*.exe' -File -Recurse | Select-Object -First 1
+          if (-not $installer) { throw 'Installer missing after outer ZIP extraction' }
+          $installerHash = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($installerHash -ne $env:INSTALLER_SHA256) { throw "Installer hash mismatch: $installerHash" }
+          "installer=$($installer.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: Freeze and verify the deterministic empty-root case
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/build_black_box_probe_fixture.py `
+            --case 'rulepacks/cn-cde-ectd/v1.1/black-box-cases/cn-v11-probe-000-invalid-empty-root.json' `
+            --output 'build/fixture-contract'
+
+      - name: Prepare clean byte-identical installed runtime without launching the application
+        id: prepare
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/prepare_cde_validator_transaction_runtime.py `
+            --installer '${{ steps.recover.outputs.installer }}' `
+            --install-dir 'C:\CDEValidatorTransactionRuntime' `
+            --output 'build/runtime-preparation' `
+            --expected-installer-sha256 $env:INSTALLER_SHA256 `
+            --expected-app-sha256 $env:APP_SHA256 `
+            --github-output $env:GITHUB_OUTPUT
+
+      - name: Execute one bounded official-validator transaction with resilient control transport
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/run_cde_validator_synthetic_transaction_v3.py `
+            --application '${{ steps.prepare.outputs.application_alias }}' `
+            --original-application '${{ steps.prepare.outputs.original_application }}' `
+            --expected-app-sha256 $env:APP_SHA256 `
+            --case-definition 'rulepacks/cn-cde-ectd/v1.1/black-box-cases/cn-v11-probe-000-invalid-empty-root.json' `
+            --output 'build/official-validator-transaction-v3' `
+            --input-root 'C:\EZCTDProbeInput\0000' `
+            --report-root 'C:\EZCTDProbeReports' `
+            --terminal-timeout 180
+
+      - name: Conserve native output and finalize reached gates independently
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/finalize_cde_validator_transaction_evidence_v2.py `
+            --transaction 'build/official-validator-transaction-v3/synthetic-transaction.json' `
+            --report-root 'C:\EZCTDProbeReports' `
+            --application-dir '${{ steps.prepare.outputs.application_dir }}' `
+            --output-root 'build/official-validator-transaction-v3'
+
+      - name: Enforce counters and reached-gate evidence consistency
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'build/official-validator-transaction-v3/synthetic-transaction.json'
+          if (-not (Test-Path -LiteralPath $path)) { throw 'Finalized transaction report missing' }
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          $count = [int]$data.observation_counters.official_black_box_observations
+          if ($count -notin @(0, 1)) { throw "Unexpected observation count: $count" }
+          if ($data.observation_counters.stock_environment_official_observations -ne 0) {
+            throw 'Hosted-runner ASCII hardlink alias must not be represented as stock-environment parity'
+          }
+          if ($data.observation_counters.calibration_informative_observations -ne 0) {
+            throw 'Empty-root transaction cannot count as rule calibration'
+          }
+          $gates = $data.admissibility_gate_diagnostics.gates
+          if ($gates.official_binary_identity_fixed.state -ne 'PASS') { throw 'Pinned binary identity gate regressed' }
+          if ($gates.input_identity_fixed.state -ne 'PASS') { throw 'Frozen fixture identity gate regressed' }
+          if ($gates.outbound_firewall_ready.state -ne 'PASS') { throw 'Outbound firewall gate regressed' }
+          if ($count -eq 1) {
+            if (-not $data.admissible_official_black_box_observation) { throw 'Count is one but admissibility is false' }
+            if (-not $data.admissibility.native_evidence_conserved) { throw 'Native evidence was not conserved' }
+            if (-not $data.admissibility.input_unchanged) { throw 'Input changed during validation' }
+            if (-not $data.validation_invoked) { throw 'Validation control was not invoked' }
+            if ($data.unmet_admissibility_gates.Count -ne 0) { throw 'Count is one but one or more gates are unmet' }
+          }
+          Write-Host "status=$($data.status)"
+          Write-Host "official_black_box_observations=$count"
+          Write-Host "passed_gates=$($data.admissibility_gate_diagnostics.pass_gates -join ',')"
+          Write-Host "failed_gates=$($data.failed_admissibility_gates -join ',')"
+          Write-Host "not_reached_gates=$($data.not_reached_admissibility_gates -join ',')"
+          Write-Host "terminal_reason=$($data.native_result.terminal_reason)"
+
+      - name: Upload complete transaction evidence
+        id: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-synthetic-transaction-v3
+          path: |
+            build/official-validator-transaction-v3/
+            build/runtime-preparation/
+            build/fixture-contract/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 6
+
+  commit-evidence:
+    needs: transaction
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out latest black-box loop branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-validator-black-box-loop
+          fetch-depth: 0
+
+      - name: Download transaction evidence from this run
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-synthetic-transaction-v3
+          path: build/transaction-artifact
+          repository: laojia-a/EZCTD
+          run-id: ${{ github.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Locate finalized transaction report
+        id: locate
+        shell: bash
+        run: |
+          set -euo pipefail
+          report=$(find build/transaction-artifact -type f -name synthetic-transaction.json -print -quit)
+          test -n "$report"
+          echo "report=$report" >> "$GITHUB_OUTPUT"
+
+      - name: Stage bounded official-validator observation evidence
+        env:
+          RAW_ARTIFACT_ID: ${{ needs.transaction.outputs.artifact_id }}
+          RAW_ARTIFACT_URL: ${{ needs.transaction.outputs.artifact_url }}
+          RAW_ARTIFACT_DIGEST: ${{ needs.transaction.outputs.artifact_digest }}
+        run: |
+          python tools/regulatory/stage_cde_validator_synthetic_transaction.py \
+            --transaction '${{ steps.locate.outputs.report }}' \
+            --workflow-run-id '${{ github.run_id }}' \
+            --workflow-run-attempt '${{ github.run_attempt }}' \
+            --artifact-id "$RAW_ARTIFACT_ID" \
+            --artifact-url "$RAW_ARTIFACT_URL" \
+            --artifact-digest "$RAW_ARTIFACT_DIGEST"
+
+      - name: Commit transaction evidence and zero-or-one counters
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/black-box-observations \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No transaction evidence changes.'
+            exit 0
+          fi
+          git commit -m 'research(regulatory): record resilient validator transaction attempt'
+          for attempt in 1 2 3 4 5; do
+            git fetch origin agent/official-validator-black-box-loop
+            if git rebase origin/agent/official-validator-black-box-loop && \
+               git push origin HEAD:agent/official-validator-black-box-loop; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          exit 1
