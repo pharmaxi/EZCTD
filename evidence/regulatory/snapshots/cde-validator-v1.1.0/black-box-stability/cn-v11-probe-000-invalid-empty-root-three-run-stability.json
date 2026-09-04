@@ -1,0 +1,227 @@
+{
+  "schema_version": "0.1.0",
+  "status": "THREE_RUNS_STABLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+  "case": {
+    "case_id": "cn-v11-probe-000-invalid-empty-root",
+    "profile": "cn-cde-ectd-v3.2.2-v1.1",
+    "purpose": "Prove end-to-end transport into the official validator and conserve one native terminal result. This case is not a PDF-rule calibration case.",
+    "input_root": "C:/EZCTDProbeInput/0000",
+    "frozen_input_inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "validator_identity": {
+    "official_outer_zip_sha256": "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36",
+    "official_installer_sha256": "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8",
+    "official_application_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "execution_name": "CDEValidator.exe",
+    "execution_name_identity": "byte-identical NTFS hardlink alias of the installed official eCTD验证软件.exe",
+    "official_binary_modified": false,
+    "private_application_api_used": false,
+    "environment_class": "environment_adapted_hosted_windows",
+    "stock_environment_parity": false
+  },
+  "execution_controls": {
+    "clean_runtime_prepared_for_each_run": true,
+    "outbound_firewall_programs": [
+      "CDEValidator.exe",
+      "java.exe",
+      "javaw.exe"
+    ],
+    "outbound_firewall_ready_each_run": true,
+    "interaction_transport": "fresh UIA lookup plus physical coordinate click",
+    "raw_native_evidence_retained_in_actions_artifact": true
+  },
+  "observations": [
+    {
+      "workflow_run_id": 33830318274,
+      "workflow_run_attempt": 1,
+      "transaction_run_id": "cn-v11-probe-000-invalid-empty-root-20260904T024047Z",
+      "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+      "started_at": "2026-09-04T02:40:47.700728+00:00",
+      "finished_at": "2026-09-04T02:42:00.787906+00:00",
+      "artifact": {
+        "artifact_id": 9921489607,
+        "size": 505092,
+        "digest": "sha256:115e123c8b0e55fb819ca2fbbc80aa4b14cece4ea59913a2e104aebdcf265295"
+      },
+      "native_report": {
+        "file_name": "evReport--0000-20260904.html",
+        "size": 276382,
+        "sha256": "0e8adeffa3dbbf8b6a6fd14502094e3c57f77be926e3e43c66714f3277477d95"
+      },
+      "semantic_summary": {
+        "visible_rule_count": 151,
+        "severity_totals": {
+          "提示信息": 5,
+          "警告": 22,
+          "错误": 96
+        },
+        "normalized_visible_text_sha256": "83f52d56172e788bcbe9956d61ea962a3bff5925dfcca60f43d9c9958adda677",
+        "semantic_contract_sha256": "7121493fdb4719818d2e104f0a7f70d9babc45299825fd9700e02dfb247f78ee"
+      },
+      "pre_validation_warning": [
+        "不规范的资料路径",
+        "序列文件夹不是数字。仍要使用？"
+      ],
+      "final_native_terminal": [
+        "提示",
+        "执行成功",
+        "OK"
+      ],
+      "mandatory_gate_result": "8_OF_8_PASS",
+      "input_unchanged": true
+    },
+    {
+      "workflow_run_id": 33830318274,
+      "workflow_run_attempt": 2,
+      "transaction_run_id": "cn-v11-probe-000-invalid-empty-root-20260904T024620Z",
+      "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+      "started_at": "2026-09-04T02:46:20.393987+00:00",
+      "finished_at": "2026-09-04T02:47:39.346036+00:00",
+      "artifact": {
+        "artifact_id": 9921606846,
+        "size": 501682,
+        "digest": "sha256:8991e9cede9c17793bc3dbd6cb7a80fca89c1ab9d89163e66c09c61744a4d15e"
+      },
+      "native_report": {
+        "file_name": "evReport--0000-20260904.html",
+        "size": 276382,
+        "sha256": "50f4f96b7790dff4cf6a699c7a6446ea837459a067220d41ed4b7cc328ffea70"
+      },
+      "semantic_summary": {
+        "visible_rule_count": 151,
+        "severity_totals": {
+          "提示信息": 5,
+          "警告": 22,
+          "错误": 96
+        },
+        "normalized_visible_text_sha256": "83f52d56172e788bcbe9956d61ea962a3bff5925dfcca60f43d9c9958adda677",
+        "semantic_contract_sha256": "7121493fdb4719818d2e104f0a7f70d9babc45299825fd9700e02dfb247f78ee"
+      },
+      "pre_validation_warning": [
+        "不规范的资料路径",
+        "序列文件夹不是数字。仍要使用？"
+      ],
+      "final_native_terminal": [
+        "提示",
+        "执行成功",
+        "OK"
+      ],
+      "mandatory_gate_result": "8_OF_8_PASS",
+      "input_unchanged": true
+    },
+    {
+      "workflow_run_id": 33830318274,
+      "workflow_run_attempt": 3,
+      "transaction_run_id": "cn-v11-probe-000-invalid-empty-root-20260904T024959Z",
+      "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+      "started_at": "2026-09-04T02:49:59.421117+00:00",
+      "finished_at": "2026-09-04T02:51:19.841005+00:00",
+      "artifact": {
+        "artifact_id": 9921682707,
+        "size": 502190,
+        "digest": "sha256:e192f292daa49b3047f06dd0ffb8e021ab552dd4e747e0b4ea7158ca872f0ca5"
+      },
+      "native_report": {
+        "file_name": "evReport--0000-20260904.html",
+        "size": 276382,
+        "sha256": "e8c5926f3557ed460f4a417d898849c0601cbcfc04623c0f8c781db6027af620"
+      },
+      "semantic_summary": {
+        "visible_rule_count": 151,
+        "severity_totals": {
+          "提示信息": 5,
+          "警告": 22,
+          "错误": 96
+        },
+        "normalized_visible_text_sha256": "83f52d56172e788bcbe9956d61ea962a3bff5925dfcca60f43d9c9958adda677",
+        "semantic_contract_sha256": "7121493fdb4719818d2e104f0a7f70d9babc45299825fd9700e02dfb247f78ee"
+      },
+      "pre_validation_warning": [
+        "不规范的资料路径",
+        "序列文件夹不是数字。仍要使用？"
+      ],
+      "final_native_terminal": [
+        "提示",
+        "执行成功",
+        "OK"
+      ],
+      "mandatory_gate_result": "8_OF_8_PASS",
+      "input_unchanged": true
+    }
+  ],
+  "stability_assessment": {
+    "observation_count": 3,
+    "all_runs_admissible": true,
+    "all_runs_environment_adapted": true,
+    "same_official_application_sha256": true,
+    "same_frozen_input_identity": true,
+    "input_unchanged_in_every_run": true,
+    "all_mandatory_gates_pass_in_every_run": true,
+    "same_interaction_sequence": true,
+    "same_pre_validation_warning": true,
+    "same_final_native_terminal": true,
+    "same_native_report_size": true,
+    "same_visible_rule_count": true,
+    "same_severity_totals": true,
+    "same_normalized_visible_text_sha256": true,
+    "same_semantic_contract_sha256": true,
+    "raw_native_report_byte_identical": false,
+    "raw_byte_difference_interpretation": "Expected: the official native report embeds the execution date/time. Raw hashes are retained for provenance; repeatability is judged by the typed semantic contract and normalized visible text."
+  },
+  "counters_after_phase": {
+    "official_black_box_observations": 3,
+    "environment_adapted_official_observations": 3,
+    "stock_environment_official_observations": 0,
+    "calibration_informative_observations": 0
+  },
+  "self_audit": {
+    "accepted_conclusions": [
+      "The official application bytes can be launched through a byte-identical alias on the hosted Windows runner.",
+      "The complete select-input, select-output, validate, native-terminal and native-report transaction is repeatable for this frozen empty-root case.",
+      "The three native reports are semantically identical after removing volatile execution metadata."
+    ],
+    "rejected_overclaims": [
+      "The original Chinese-name wrapper has stock-environment parity on the hosted runner.",
+      "A valid China eCTD sequence has been produced.",
+      "Any individual PDF detector has been calibrated against the official validator.",
+      "The repeated empty-root result establishes acceptance compatibility."
+    ],
+    "known_ambiguities": [
+      "The validator warns that the selected 0000 sequence folder is not numeric, despite the apparent four-digit name. The run continues after explicit confirmation and produces a native report, so this is not a precondition-only observation; the warning still requires an isolated 0001 experiment.",
+      "The field official_wrapper_ui_reached in the aggregate status refers to the original Chinese-name wrapper and should not be read as contradicting successful byte-identical-alias execution."
+    ]
+  },
+  "next_experiments": [
+    {
+      "priority": 1,
+      "experiment": "Repeat an otherwise identical empty-root transaction under sequence folder 0001.",
+      "decision_use": "Determine whether the 0000 warning is a reserved-sequence rule, a path parser issue, or a harness artifact."
+    },
+    {
+      "priority": 2,
+      "experiment": "Build and validate a deterministic minimal V3.2.2/V1.1 sequence baseline from the frozen official technical package.",
+      "decision_use": "Remove unrelated structural noise before PDF-rule mutations."
+    },
+    {
+      "priority": 3,
+      "experiment": "Run baseline-pre, one controlled mutation, baseline-mid, additional controlled mutations, and baseline-post.",
+      "decision_use": "Calibrate rule identity and severity while detecting cache or state carry-over."
+    },
+    {
+      "priority": 4,
+      "experiment": "Reproduce with the original Chinese filename in a Chinese-locale/self-hosted disposable Windows environment.",
+      "decision_use": "Establish stock-environment parity separately from the current environment-adapted observations."
+    }
+  ],
+  "parser": {
+    "path": "tools/regulatory/parse_cde_validator_native_report.py",
+    "normalization_scope": [
+      "execution datetime",
+      "generated report filename",
+      "absolute local paths",
+      "HTML presentation markup and SVG glyph geometry",
+      "non-semantic whitespace"
+    ],
+    "validation": "The parser was exercised against all three immutable native-report artifacts and a focused synthetic unit test."
+  }
+}
