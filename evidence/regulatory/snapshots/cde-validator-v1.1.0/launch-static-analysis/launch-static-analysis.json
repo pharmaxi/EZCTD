@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-04T01:01:22.8416852Z",
+  "generated_at": "2026-09-04T01:03:11.5188596Z",
   "safety_scope": "Static launcher strings, small configuration files, JAR manifests and JAR entry names only. No installer, executable, Java class or JAR was executed. No bytecode was decompiled.",
   "application": {
     "path": "eCTD验证软件.exe",
