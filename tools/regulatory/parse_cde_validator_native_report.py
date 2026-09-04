@@ -48,6 +48,24 @@ def normalize_text(value: str) -> str:
     return "\n".join(collapse(line) for line in value.splitlines() if collapse(line))
 
 
+def normalize_semantic(value: Any) -> Any:
+    """Normalize volatile strings recursively before hashing typed results.
+
+    Parsed rule details are intentionally preserved verbatim in the public
+    payload.  The comparison contract, however, must not change merely because
+    a detail row includes this run's timestamp, generated report filename or
+    absolute local path.
+    """
+
+    if isinstance(value, str):
+        return normalize_text(value)
+    if isinstance(value, list):
+        return [normalize_semantic(item) for item in value]
+    if isinstance(value, dict):
+        return {key: normalize_semantic(item) for key, item in value.items()}
+    return value
+
+
 class ReportParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -237,14 +255,15 @@ def build_payload(report: Path) -> dict[str, Any]:
         "summary": summary,
         "rules": rules,
     }
+    normalized_semantic_contract = normalize_semantic(semantic_contract)
     semantic_json = json.dumps(
-        semantic_contract,
+        normalized_semantic_contract,
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
     )
     return {
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "source": {
             "file_name": report.name,
             "size": len(raw),
@@ -260,6 +279,7 @@ def build_payload(report: Path) -> dict[str, Any]:
                 "execution datetime",
                 "generated report filename",
                 "absolute local paths",
+                "volatile strings inside typed rule details",
                 "HTML markup, scripts, styles and SVG glyph geometry",
                 "non-semantic whitespace",
             ],
