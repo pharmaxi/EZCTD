@@ -1,0 +1,121 @@
+name: Inspect official CDE validator launch metadata
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/Inspect-CDEValidatorLaunchMetadata.ps1
+      - .github/workflows/official-validator-launch-metadata.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: official-validator-launch-metadata
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "33823274985"
+  OUTER_ZIP_SHA256: "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36"
+  INSTALLER_SHA256: "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+  APP_SHA256: "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163"
+
+jobs:
+  inspect:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - name: Download official acquisition artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Recover and statically extract payload
+        id: extract
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Get-ChildItem 'build/acquisition-v3/raw' -Filter '*.zip' -File | Select-Object -First 1
+          if (-not $zip) { throw 'Official ZIP missing' }
+          $zipHash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($zipHash -ne $env:OUTER_ZIP_SHA256) { throw "Outer ZIP hash mismatch: $zipHash" }
+          New-Item -ItemType Directory -Force -Path 'build/recovered' | Out-Null
+          Expand-Archive $zip.FullName 'build/recovered' -Force
+          $installer = Get-ChildItem 'build/recovered' -Filter '*.exe' -File -Recurse | Select-Object -First 1
+          $installerHash = (Get-FileHash $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($installerHash -ne $env:INSTALLER_SHA256) { throw "Installer hash mismatch: $installerHash" }
+          $sevenZip = (Get-Command 7z).Source
+          New-Item -ItemType Directory -Force -Path 'build/payload' | Out-Null
+          & $sevenZip x -y -aoa '-obuild/payload' -- $installer.FullName | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'NSIS payload extraction failed' }
+          $app = Get-ChildItem 'build/payload' -Filter 'eCTD*.exe' -File | Where-Object { $_.Name -notmatch '^uninst' } | Select-Object -First 1
+          if (-not $app) { throw 'Application entry point missing' }
+          $appHash = (Get-FileHash $app.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($appHash -ne $env:APP_SHA256) { throw "Application hash mismatch: $appHash" }
+
+      - name: Inspect launcher, configuration and JAR metadata without execution
+        shell: pwsh
+        run: |
+          ./tools/regulatory/Inspect-CDEValidatorLaunchMetadata.ps1 `
+            -PayloadDirectory 'build/payload' `
+            -OutputDirectory 'build/launch-static-analysis'
+
+      - name: Validate analysis
+        shell: pwsh
+        run: |
+          $data = Get-Content -Raw 'build/launch-static-analysis/launch-static-analysis.json' | ConvertFrom-Json
+          if ($data.application.sha256 -ne $env:APP_SHA256) { throw 'Application hash mismatch in report' }
+          if ($data.conclusions.root_application_entry_points -ne 1) { throw 'Root application entry point is ambiguous' }
+          if ($data.conclusions.selected_entry_point -ne 'eCTD验证软件.exe') { throw "Unexpected entry point: $($data.conclusions.selected_entry_point)" }
+          if (-not $data.conclusions.bundled_java) { throw 'Bundled Java was not detected' }
+          if ($data.conclusions.black_box_observations -ne 0) { throw 'Static launch analysis cannot count as observation' }
+          Get-Content -Raw 'build/launch-static-analysis/launch-static-analysis.md' | Write-Host
+
+      - name: Upload complete launch metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-launch-static-analysis
+          path: build/launch-static-analysis/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Stage bounded evidence
+        shell: pwsh
+        run: |
+          $target = 'evidence/regulatory/snapshots/cde-validator-v1.1.0/launch-static-analysis'
+          New-Item -ItemType Directory -Force -Path $target | Out-Null
+          Copy-Item 'build/launch-static-analysis/launch-static-analysis.json' $target -Force
+          Copy-Item 'build/launch-static-analysis/launch-static-analysis.md' $target -Force
+
+      - name: Commit evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add evidence/regulatory/snapshots/cde-validator-v1.1.0/launch-static-analysis
+          if (git diff --cached --quiet) { Write-Host 'No changes.'; exit 0 }
+          git commit -m 'research(regulatory): resolve official validator application entry point'
+          for ($attempt = 1; $attempt -le 5; $attempt++) {
+            git fetch origin agent/official-source-deep-dive
+            git rebase origin/agent/official-source-deep-dive
+            if ($LASTEXITCODE -eq 0) {
+              git push origin HEAD:agent/official-source-deep-dive
+              if ($LASTEXITCODE -eq 0) { exit 0 }
+            }
+            git rebase --abort 2>$null
+            Start-Sleep -Seconds ($attempt * 5)
+          }
+          throw 'Unable to push launch metadata evidence'
