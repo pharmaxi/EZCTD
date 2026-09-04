@@ -1,19 +1,21 @@
-# CDE eCTD validation software V1.1.0 asset inspection
+# CDE eCTD validation software V1.1.0 — portal acquisition v3
 
-- Status: **UNRESOLVED_NO_CONFIRMED_VALIDATOR_ASSET**
-- Files inspected: 3
-- Likely candidates: 0
-- Safety scope: static metadata only; nothing was executed or decompiled.
+- Status: **COMPLETE_OFFICIAL_PORTAL_ACQUISITION**
+- Portal: https://www.cde.org.cn/ectd/index
+- Common JavaScript: `https://www.cde.org.cn/ectd/js/common.js?v=20260817`
+- Common JavaScript SHA-256: `ebd564a8c9c188eae38f09cf22336f968421d1997cf2ed823ff5c48221b25de5`
+- Validator executed: **false**
+- Official black-box observations: **0**
 
-## Candidate summary
+## Root-cause correction
 
-| File | Size | SHA-256 | Signature | Product version | Candidate |
-|---|---:|---|---|---|---:|
-| 001-xhtml1-transitional.dtd | 32111 | `28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93` | n/a | n/a | False |
-| 002-183312.pdf | 525655 | `3dba8a9bb32e6af6cea585aa742217afdeb95ace3a5e2de60ec557f255e7fe3d` | n/a | n/a | False |
-| 003-183313.pdf | 428841 | `9d8b9e8baae0f891d833946a0cde78332c39f8072974387ecdda6ca16c884f7a` | n/a | n/a | False |
+`downloadFiles(4/5)` opens a LayUI attachment dialog. It does not initiate the file transfer. The v2 collector waited for a download that could never start and therefore returned `candidates=[]`. V3 verifies the exact direct URLs inside the currently served official `common.js`, then downloads those bytes with the same browser session.
 
-## Interpretation
+| Role | Official control | Kind | Bytes | SHA-256 |
+|---|---|---:|---:|---|
+| `validator_software_v1_1_0` | `downloadFiles(4)` | zip | 162000248 | `d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36` |
+| `validator_manual_v1_1_0` | `downloadFiles(5)` | pdf | 1124051 | `30eef1b42d6fc980b243bcc667291eb7abc9ddc2c4dc33a5c8a67cb1368f583b` |
 
-UNRESOLVED_NO_CONFIRMED_VALIDATOR_ASSET does not mean the official asset does not exist. CDE downloads can be dynamically linked or require manual navigation. Only a candidate with official provenance, matching product/version metadata and recorded hash may be used in P0-B0-B.
+## Boundary
 
+This evidence proves official-portal provenance and byte-valid acquisition only. Static identity inspection and controlled execution remain separate gates; no CDE compatibility claim is made here.

@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-04T00:50:20.8634594Z",
+  "generator": "tools/regulatory/Inspect-CDEValidatorAssets.ps1",
+  "status": "CANDIDATE_FOUND",
+  "safety_scope": "Static metadata, hashes, Authenticode, version resources and archive listings only. No installer or executable was launched. No decompilation was performed.",
+  "expected_product": {
+    "name": "CDE eCTD validation software",
+    "target_version": "1.1.0",
+    "effective_date": "2026-03-01"
+  },
+  "source_directory": "build/acquisition-v3/raw",
+  "source_exists": true,
+  "files_inspected": 2,
+  "likely_candidates": 2,
+  "records": [
+    {
+      "source_path": "eCTD验证软件V1.1.0.zip",
+      "file_name": "eCTD验证软件V1.1.0.zip",
+      "size": 162000248,
+      "sha256": "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36",
+      "extension": ".zip",
+      "authenticode": null,
+      "version_info": null,
+      "archive": {
+        "status": "LISTED",
+        "members": [
+          {
+            "path": "D:\\a\\EZCTD\\EZCTD\\build\\acquisition-v3\\raw\\eCTD____V1.1.0.zip",
+            "size": null,
+            "packed_size": null,
+            "modified": null,
+            "attributes": null
+          },
+          {
+            "path": "eCTD_______.exe",
+            "size": 162554346,
+            "packed_size": 161999994,
+            "modified": "2026-01-15 08:31:28.9025833",
+            "attributes": "A"
+          }
+        ],
+        "extraction_status": "EXTRACTED_FOR_METADATA_ONLY",
+        "extracted_inventory": [
+          {
+            "path": "eCTD验证软件安装包.exe",
+            "size": 162554346,
+            "sha256": "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8",
+            "extension": ".exe",
+            "authenticode": {
+              "status": "NotSigned",
+              "signer_subject": null,
+              "signer_thumbprint": null
+            },
+            "version_info": {
+              "product_name": null,
+              "product_version": null,
+              "file_version": null,
+              "company_name": null,
+              "original_filename": null
+            }
+          }
+        ]
+      },
+      "likely_validator_asset": true,
+      "notes": []
+    },
+    {
+      "source_path": "eCTD验证软件操作手册V1.1.0.pdf",
+      "file_name": "eCTD验证软件操作手册V1.1.0.pdf",
+      "size": 1124051,
+      "sha256": "30eef1b42d6fc980b243bcc667291eb7abc9ddc2c4dc33a5c8a67cb1368f583b",
+      "extension": ".pdf",
+      "authenticode": null,
+      "version_info": null,
+      "archive": {
+        "status": "NOT_ARCHIVE",
+        "members": [],
+        "extraction_status": "NOT_ATTEMPTED",
+        "extracted_inventory": []
+      },
+      "likely_validator_asset": true,
+      "notes": []
+    }
+  ],
+  "unresolved": null
+}

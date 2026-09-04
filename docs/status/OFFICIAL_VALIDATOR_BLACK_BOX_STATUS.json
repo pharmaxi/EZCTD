@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.2.0",
+  "status": "OFFICIAL_ASSETS_ACQUIRED_AND_STATICALLY_IDENTIFIED",
+  "official_black_box_observations": 0,
+  "software_executed": false,
+  "acquisition_method": "official_control_plus_current_same_origin_javascript",
+  "common_js": {
+    "url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+    "final_url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+    "status": 200,
+    "content_type": "application/javascript",
+    "etag": null,
+    "last_modified": "Mon, 17 Aug 2026 09:04:23 GMT",
+    "size": 16914,
+    "sha256": "ebd564a8c9c188eae38f09cf22336f968421d1997cf2ed823ff5c48221b25de5"
+  },
+  "software": {
+    "file_name": "eCTD验证软件V1.1.0.zip",
+    "kind": "zip",
+    "size": 162000248,
+    "sha256": "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36",
+    "sm3": "b5f687f3edd9042d03bbb5f2d3597ed7971dedb0cb61928d0831ce4b8dc1e910"
+  },
+  "manual": {
+    "file_name": "eCTD验证软件操作手册V1.1.0.pdf",
+    "kind": "pdf",
+    "size": 1124051,
+    "sha256": "30eef1b42d6fc980b243bcc667291eb7abc9ddc2c4dc33a5c8a67cb1368f583b",
+    "sm3": "039ee11c2e19e5d8a4eea0f4b204ffc82154a4f39c4f5dcba7ef9dac774417b2"
+  },
+  "windows_static": {
+    "status": "CANDIDATE_FOUND",
+    "files_inspected": 2,
+    "likely_candidates": 2
+  },
+  "next_gate": "Controlled execution reconnaissance on an isolated Windows runner; no dossier calibration until launch mode, input contract and output locations are observed.",
+  "boundary": "Official provenance and static identity only. No official validator result and no CDE compatibility claim."
+}
