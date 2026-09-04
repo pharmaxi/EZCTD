@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "cn-v11-probe-000-invalid-empty-root",
+  "profile": "cn-cde-ectd-v3.2.2-v1.1",
+  "purpose": "Prove one complete official-validator transaction before rule-specific calibration.",
+  "input": {
+    "kind": "directory",
+    "file_count": 0,
+    "files": [],
+    "inventory_digest_algorithm": "sha256-of-tab-separated-inventory-lines",
+    "inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "expected": {
+    "terminal_result_required": true,
+    "native_result_required": true,
+    "specific_rule_expected": null,
+    "outcome_category": "input_rejected_or_validation_completed_with_findings",
+    "calibration_informative": false
+  },
+  "counting": {
+    "may_increment_completed_validation_runs": true,
+    "may_increment_admissible_black_box_observations": true,
+    "may_increment_official_black_box_observations": true,
+    "may_increment_calibration_informative_observations": false,
+    "preconditions": [
+      "official wrapper identity matches the frozen SHA-256 chain",
+      "the empty input directory is selected in the official application",
+      "validation is actually invoked",
+      "a terminal native result is captured",
+      "the input inventory digest remains unchanged",
+      "raw evidence and artifact digest are preserved"
+    ]
+  },
+  "data_classification": "fully_synthetic_no_documents_no_personal_data",
+  "runtime_generation": "The directory is created empty at runtime; no placeholder file may be inserted into it."
+}
