@@ -1,23 +1,23 @@
 # CDE eCTD 官方验证器黑盒状态
 
-- 当前状态：**SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION**
-- 验证事务尝试：**2**
-- 完整验证运行：**0**
-- 可采信黑盒观察：**0**
-- 环境适配的官方二进制观察：**0**
+- 当前状态：**ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION**
+- 验证事务尝试：**3**
+- 完整验证运行：**1**
+- 可采信黑盒观察：**1**
+- 环境适配的官方二进制观察：**1**
 - 默认环境观察：**0**
 - 规则校准观察：**0**
-- `official_black_box_observations`：**0**
+- `official_black_box_observations`：**1**
 
 ## 最近一次事务
 
-- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T022107Z`
+- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T024047Z`
 - Case：`cn-v11-probe-000-invalid-empty-root`
-- 分类：`non_admissible_official_validator_transaction_attempt`
-- 可采信：`False`
-- 原生终态：`None`
-- 原生报告：`False`
-- 输入未变化：`None`
+- 分类：`environment_adapted_official_binary_black_box_observation`
+- 可采信：`True`
+- 原生终态：`native_terminal_dialog`
+- 原生报告：`True`
+- 输入未变化：`True`
 
 ## 当前解释
 
@@ -25,4 +25,4 @@
 
 ## 下一门槛
 
-Repair only the failed admissibility gates using the preserved raw evidence; do not increment counters.
+Repeat the same frozen case to test stability, then build a minimal sequence baseline before rule-specific mutations.
