@@ -1,4 +1,4 @@
-# launch-recon-v3-trigger: 2026-09-04
+# launch-recon-v3-trigger: 2026-09-04-r2
 name: Reconnoitre official CDE validator launch v3
 
 on:
@@ -163,7 +163,7 @@ jobs:
         env:
           RAW_ARTIFACT_ID: ${{ needs.reconnaissance.outputs.artifact_id }}
           RAW_ARTIFACT_URL: ${{ needs.reconnaissance.outputs.artifact_url }}
-          RAW_ARTIFACT_DIGEST: ${{ needs.reconnaissance.outputs.artifact-digest }}
+          RAW_ARTIFACT_DIGEST: ${{ needs.reconnaissance.outputs.artifact_digest }}
         run: |
           python tools/regulatory/stage_validator_launch_recon.py \
             --result build/launch-recon-v3/launch-recon-result.json \
