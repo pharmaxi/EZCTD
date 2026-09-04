@@ -1,7 +1,7 @@
 # CDE eCTD 官方验证器黑盒状态
 
 - 当前状态：**SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION**
-- 验证事务尝试：**1**
+- 验证事务尝试：**2**
 - 完整验证运行：**0**
 - 可采信黑盒观察：**0**
 - 环境适配的官方二进制观察：**0**
@@ -11,7 +11,7 @@
 
 ## 最近一次事务
 
-- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T021541Z`
+- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T022107Z`
 - Case：`cn-v11-probe-000-invalid-empty-root`
 - 分类：`non_admissible_official_validator_transaction_attempt`
 - 可采信：`False`

@@ -1041,13 +1041,45 @@
         "artifact_digest": "4aa29661aafce46a27b729c9adcfbd17345982177407198417a2102954bda043",
         "retention_days": 90
       }
+    },
+    {
+      "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T022107Z",
+      "case_id": "cn-v11-probe-000-invalid-empty-root",
+      "status": "SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION",
+      "classification": "non_admissible_official_validator_transaction_attempt",
+      "admissible": false,
+      "completed_validation_runs": 0,
+      "official_black_box_observations": 0,
+      "environment_adapted_official_observations": 0,
+      "stock_environment_official_observations": 0,
+      "calibration_informative_observations": 0,
+      "terminal_reason": null,
+      "native_report_present": false,
+      "input_unchanged": null,
+      "failed_admissibility_gates": [
+        "official_binary_identity_fixed",
+        "input_identity_fixed",
+        "validation_control_invoked",
+        "native_terminal_result_captured",
+        "input_unchanged",
+        "outbound_firewall_ready",
+        "native_evidence_conserved"
+      ],
+      "raw_evidence": {
+        "workflow_run_id": 33829138583,
+        "workflow_run_attempt": 1,
+        "artifact_id": "9921079478",
+        "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33829138583/artifacts/9921079478",
+        "artifact_digest": "3ef4e1efe064c3deeb47d0c5100115ada062ec5f28e6207e8d1e9efda6111a22",
+        "retention_days": 90
+      }
     }
   ],
-  "transaction_attempt_count": 1,
+  "transaction_attempt_count": 2,
   "environment_adapted_official_observations": 0,
   "stock_environment_official_observations": 0,
   "latest_official_validator_transaction": {
-    "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T021541Z",
+    "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T022107Z",
     "case_id": "cn-v11-probe-000-invalid-empty-root",
     "status": "SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION",
     "classification": "non_admissible_official_validator_transaction_attempt",
@@ -1070,11 +1102,11 @@
       "native_evidence_conserved"
     ],
     "raw_evidence": {
-      "workflow_run_id": 33828799828,
+      "workflow_run_id": 33829138583,
       "workflow_run_attempt": 1,
-      "artifact_id": "9920921926",
-      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33828799828/artifacts/9920921926",
-      "artifact_digest": "4aa29661aafce46a27b729c9adcfbd17345982177407198417a2102954bda043",
+      "artifact_id": "9921079478",
+      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33829138583/artifacts/9921079478",
+      "artifact_digest": "3ef4e1efe064c3deeb47d0c5100115ada062ec5f28e6207e8d1e9efda6111a22",
       "retention_days": 90
     }
   }
