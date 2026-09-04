@@ -1,17 +1,17 @@
 # CDE eCTD 官方验证器黑盒状态
 
 - 当前状态：**ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION**
-- 验证事务尝试：**4**
-- 完整验证运行：**2**
-- 可采信黑盒观察：**2**
-- 环境适配的官方二进制观察：**2**
+- 验证事务尝试：**5**
+- 完整验证运行：**3**
+- 可采信黑盒观察：**3**
+- 环境适配的官方二进制观察：**3**
 - 默认环境观察：**0**
 - 规则校准观察：**0**
-- `official_black_box_observations`：**2**
+- `official_black_box_observations`：**3**
 
 ## 最近一次事务
 
-- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T024620Z`
+- 运行：`cn-v11-probe-000-invalid-empty-root-20260904T024959Z`
 - Case：`cn-v11-probe-000-invalid-empty-root`
 - 分类：`environment_adapted_official_binary_black_box_observation`
 - 可采信：`True`
