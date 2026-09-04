@@ -1,7 +1,7 @@
 {
   "schema_version": "0.7.0",
   "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
-  "official_black_box_observations": 3,
+  "official_black_box_observations": 4,
   "software_executed": true,
   "acquisition_method": "official_control_plus_current_same_origin_javascript",
   "common_js": {
@@ -37,8 +37,8 @@
   "boundary": "This result uses byte-identical official application bytes through an ASCII NTFS alias to work around Launch4j filename encoding on the hosted non-Chinese Windows runner. It is an official-binary black-box observation when admissible, but it is not evidence of stock-environment parity and is not yet a rule-calibration observation.",
   "official_wrapper_ui_reached": false,
   "diagnostic_java_adapter_ui_reached": false,
-  "completed_validation_runs": 3,
-  "admissible_black_box_observations": 3,
+  "completed_validation_runs": 4,
+  "admissible_black_box_observations": 4,
   "calibration_informative_observations": 0,
   "latest_launch_forensics": {
     "run_id": "cde-validator-forensics-20260904T020228Z",
@@ -1145,14 +1145,38 @@
         "artifact_digest": "e192f292daa49b3047f06dd0ffb8e021ab552dd4e747e0b4ea7158ca872f0ca5",
         "retention_days": 90
       }
+    },
+    {
+      "run_id": "cn-v11-probe-001-invalid-empty-root-0001-20260904T040147Z",
+      "case_id": "cn-v11-probe-001-invalid-empty-root-0001",
+      "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+      "classification": "environment_adapted_official_binary_black_box_observation",
+      "admissible": true,
+      "completed_validation_runs": 1,
+      "official_black_box_observations": 1,
+      "environment_adapted_official_observations": 1,
+      "stock_environment_official_observations": 0,
+      "calibration_informative_observations": 0,
+      "terminal_reason": "native_terminal_dialog",
+      "native_report_present": true,
+      "input_unchanged": true,
+      "failed_admissibility_gates": [],
+      "raw_evidence": {
+        "workflow_run_id": 33835247411,
+        "workflow_run_attempt": 1,
+        "artifact_id": "9923087415",
+        "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33835247411/artifacts/9923087415",
+        "artifact_digest": "2dc41a3e927d940f0c1f49191397b0c5132c466278e892ec366e34936148f555",
+        "retention_days": 90
+      }
     }
   ],
-  "transaction_attempt_count": 5,
-  "environment_adapted_official_observations": 3,
+  "transaction_attempt_count": 6,
+  "environment_adapted_official_observations": 4,
   "stock_environment_official_observations": 0,
   "latest_official_validator_transaction": {
-    "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T024959Z",
-    "case_id": "cn-v11-probe-000-invalid-empty-root",
+    "run_id": "cn-v11-probe-001-invalid-empty-root-0001-20260904T040147Z",
+    "case_id": "cn-v11-probe-001-invalid-empty-root-0001",
     "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
     "classification": "environment_adapted_official_binary_black_box_observation",
     "admissible": true,
@@ -1166,11 +1190,11 @@
     "input_unchanged": true,
     "failed_admissibility_gates": [],
     "raw_evidence": {
-      "workflow_run_id": 33830318274,
-      "workflow_run_attempt": 3,
-      "artifact_id": "9921682707",
-      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33830318274/artifacts/9921682707",
-      "artifact_digest": "e192f292daa49b3047f06dd0ffb8e021ab552dd4e747e0b4ea7158ca872f0ca5",
+      "workflow_run_id": 33835247411,
+      "workflow_run_attempt": 1,
+      "artifact_id": "9923087415",
+      "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33835247411/artifacts/9923087415",
+      "artifact_digest": "2dc41a3e927d940f0c1f49191397b0c5132c466278e892ec366e34936148f555",
       "retention_days": 90
     }
   }

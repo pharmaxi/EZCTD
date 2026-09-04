@@ -1,0 +1,1548 @@
+{
+  "schema_version": "0.2.0",
+  "source": {
+    "file_name": "evReport--0001-20260904.html",
+    "size": 277303,
+    "sha256": "2db393c7bb6c5f72c36f367b7498904b8fee41f3a493ea954c3b588ad780dc2e"
+  },
+  "metadata": {
+    "申请编号": "",
+    "序列号": "缺失区域性骨架文件！",
+    "相关序列": "缺失区域性骨架文件！",
+    "申请类型": "缺失区域性骨架文件！",
+    "产品类型": "缺失区域性骨架文件！",
+    "验证标准": "中国eCTD验证标准 V1.1",
+    "执行日期/时间": "2026-09-04 04:02:25"
+  },
+  "sections": [
+    "1 - 基础识别",
+    "2 - 文件/文件夹",
+    "3 - ICH 骨架文件",
+    "4 - 区域性管理信息",
+    "4.1 - 基础信息",
+    "4.2 - 信封信息",
+    "4.3 - 内容完整性",
+    "5 - 研究标签文件（STF）",
+    "6 - PDF分析"
+  ],
+  "summary": {
+    "sections": [
+      {
+        "section": "1-基础识别",
+        "提示信息": 4,
+        "警告": 0,
+        "错误": 0
+      },
+      {
+        "section": "2-文件/文件夹",
+        "提示信息": 0,
+        "警告": 0,
+        "错误": 6
+      },
+      {
+        "section": "3-ICH 骨架文件",
+        "提示信息": 0,
+        "警告": 6,
+        "错误": 33
+      },
+      {
+        "section": "4-区域性管理信息",
+        "提示信息": 1,
+        "警告": 3,
+        "错误": 53
+      },
+      {
+        "section": "4.1-基础信息",
+        "提示信息": 0,
+        "警告": 3,
+        "错误": 29
+      },
+      {
+        "section": "4.2-信封信息",
+        "提示信息": 0,
+        "警告": 0,
+        "错误": 14
+      },
+      {
+        "section": "4.3-内容完整性",
+        "提示信息": 1,
+        "警告": 0,
+        "错误": 8
+      },
+      {
+        "section": "5-研究标签文件（STF）",
+        "提示信息": 0,
+        "警告": 13,
+        "错误": 5
+      },
+      {
+        "section": "6-PDF分析",
+        "提示信息": 0,
+        "警告": 0,
+        "错误": 0
+      }
+    ],
+    "totals": {
+      "提示信息": 5,
+      "警告": 22,
+      "错误": 97
+    }
+  },
+  "rule_count": 151,
+  "rules": [
+    {
+      "code": "1.1",
+      "severity": "提示信息",
+      "requirement": "显示当前序列中包含的所有文件的数量。",
+      "declared_detail_count": 1,
+      "details": [
+        "当前序列中包含的所有文件的数量： 文件数量：0"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "1.2",
+      "severity": "提示信息",
+      "requirement": "显示当前序列所有文件的总容量大小。",
+      "declared_detail_count": 1,
+      "details": [
+        "当前序列中包含的所有文件的大小： 文件大小：0.000000 MB"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "1.3",
+      "severity": "提示信息",
+      "requirement": "显示当前序列中空缺的目录结构清单。",
+      "declared_detail_count": 2,
+      "details": [
+        "无法加载的骨架文件:ICH 骨架文件 (index.xml) 无法加载的区域性骨架文件: 区域性骨架文件 (cn-regional.xml)"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "2.1",
+      "severity": "通过",
+      "requirement": "序列文件夹目录结构中不允许存在空文件夹（文件夹没有文件或子文件夹）。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.2",
+      "severity": "通过",
+      "requirement": "超出允许大小的文件会提示错误信息。普通单个文件最大允许200MB，单个SAS XPT文件可支持4GB。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.3",
+      "severity": "错误",
+      "requirement": "m1至m5文件夹目录下的所有文件必须被骨架文件（index.xml或cn-regional.xml）引用，否则提示错误信息。",
+      "declared_detail_count": 2,
+      "details": [
+        "无法加载的骨架文件:ICH 骨架文件 (index.xml) 无法加载的区域性骨架文件: 区域性骨架文件 (cn-regional.xml)"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "2.4",
+      "severity": "通过",
+      "requirement": "所有被引用文件必须有且仅有一个文件扩展名，文件扩展名必须在《eCTD技术规范V1.1》规定的可接受的文件类型列表内。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.5",
+      "severity": "通过",
+      "requirement": "文件和文件夹的命名规则必须符合《eCTD技术规范V1.1》第3.3.2章节的规定。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.6",
+      "severity": "错误",
+      "requirement": "m1文件夹必须存在并且必须仅包含子文件夹而不是单个文件。",
+      "declared_detail_count": 2,
+      "details": [
+        "缺失文件夹： 序号文件夹下缺失m1文件夹 m1文件夹下缺失cn文件夹。"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "2.7",
+      "severity": "错误",
+      "requirement": "util文件夹必须存在并检查该文件夹中的下列文件：- ich-ectd-3-2.dtd(checksum必须符合ICH发布的值)- cn-regional-1-0.xsd(checksum必须符合NMPA发布的值)- xml.xsd(checksum必须符合NMPA发布的值)- xlink.xsd(checksum必须符合NMPA发布的值)- ich-stf-v2-2.dtd(checksum必须符合ICH发布的值)- ectd-2-0.xsl(checksum必须符合ICH发布的值)- cn-regional-1-1.xsl(checksum必须符合NMPA发布的值)- ich-stf-stylesheet-2-3.xsl(checksum必须符合ICH发布的值)- ich-stf-stylesheet-2-2a.xsl(checksum必须符合ICH发布的值)- valid-values.xml(checksum必须符合ICH发布的值)请注意，只有在当前序列使用到STF时才需要检查ich-stf-v2-2.dtd、stf样式表和valid-values.xml。另外，在STF中，ich-stf-stylesheet-2-3.xsl和ich-stf-stylesheet-2-2a.xsl样式表均可以被引用，此项验证标准仅检查在STF中被引用到的样式表是否在util\\style文件夹中存在以及其checksum是否符合规范。",
+      "declared_detail_count": 1,
+      "details": [
+        "缺失文件夹： util文件夹不存在"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "2.8",
+      "severity": "通过",
+      "requirement": "根文件夹（申请序列文件夹）除《eCTD技术规范V1.1》明确允许的文件外，不能有其他文件。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.9",
+      "severity": "通过",
+      "requirement": "序列文件夹名称必须仅包含4个数字。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "2.10",
+      "severity": "错误",
+      "requirement": "在注册文件生命周期内的每次提交都必须有一个序列号，初始序列号必须从0000开始，依次增加1（例如，0000，0001，0002，0003，依次类推）。序列号不允许跳号。如果序列号0003不存在，即便0004中不引用0003的内容，验证序列号为0004的提交时依然会提示错误信息。",
+      "declared_detail_count": 1,
+      "details": [
+        "初始序列号必须从0000开始： 0001"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.1",
+      "severity": "错误",
+      "requirement": "序列的根文件夹必须包含index.xml文件。",
+      "declared_detail_count": 1,
+      "details": [
+        "骨架/索引文件必须存在： 根目录下不包含索引文件！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.2",
+      "severity": "错误",
+      "requirement": "如何创建有效的引用请参考http://www.w3.org/TR/xml/ 和 http://www.ietf.org/rfc/rfc3986.txt（2005版本 第22页，第3.3章节）。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.3",
+      "severity": "错误",
+      "requirement": "index.xml文件必须根据DTD文件ich-ectd-3-2.dtd给定的规则创建并且是有效的。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.4",
+      "severity": "错误",
+      "requirement": "XML叶元素中的文件引用链接必须有效，即引用的目标文件必须存在。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.5",
+      "severity": "错误",
+      "requirement": "ICH骨架文件中的叶元素文件在同一个序列中不能作为“被修改文件对象（modified-file）”被多次引用。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.6",
+      "severity": "错误",
+      "requirement": "当执行“替换（replace）”或“增补（append）”操作时，新内容必须与之前的内容不同（即checksum不能相同）。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.7",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“新建（new）”、“替换（replace）”或“增补（append）”的所有叶元素，必须有“文件引用（xlink:href）”值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.8",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“删除（delete）”的所有叶元素，不能有“文件引用（xlink:href）”值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.9",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“替换（replace）”、“删除（delete）”或“增补（append）”的所有叶元素，对应的“被修改文件对象（modified-file）”必须有值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.10",
+      "severity": "错误",
+      "requirement": "初始序列（即序列号为0000的序列）中所有内容文件的“操作（operation）”属性必须为“新建（new）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.11",
+      "severity": "错误",
+      "requirement": "XML叶元素中的被修改文件的引用链接必须是有效的，即“被修改文件对象（modified-file）”对应的文件确实存在。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.12",
+      "severity": "错误",
+      "requirement": "ICH骨架文件中引用文件使用的是相对路径，不允许使用绝对路径。在“文件引用（ xlink:href ）”和“被修改文件对象（modified - file）”属性中只允许使用相对路径引用，并且路径中只允许使用正斜杠 \"/\"，不允许使用反斜杠 \"\\\"。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.13",
+      "severity": "错误",
+      "requirement": "“checksum-type”属性必须设置为“md5”或“MD5”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.14",
+      "severity": "错误",
+      "requirement": "所有文件的MD5 checksum必须和骨架文件中提供的checksum值保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.15",
+      "severity": "错误",
+      "requirement": "骨架文件的MD5 checksum必须和MD5文本文件（index-md5.txt）中提供的值保持一致。",
+      "declared_detail_count": 2,
+      "details": [
+        "获取骨架文件信息失败！ 读取index-md5.txt文件失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.16",
+      "severity": "错误",
+      "requirement": "扩展节点仅允许在产品类型为生物制品的序列的3.2.R章节使用。如产品类型为生物制品的序列存在3.2.R章节，则必须使用扩展节点。",
+      "declared_detail_count": 2,
+      "details": [
+        "获取骨架文件信息失败！ 获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.17",
+      "severity": "警告",
+      "requirement": "对于生物制品，3.2.R章节扩展节点标题的构建和名称定义必须遵循《eCTD技术规范V1.1》第3.2章节中的规定。",
+      "declared_detail_count": 2,
+      "details": [
+        "获取骨架文件信息失败！ 获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.18",
+      "severity": "错误",
+      "requirement": "所有叶元素必须有子元素title，叶标题不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.19",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性为“删除（delete）”的叶元素，其叶标题必须和被删除的叶标题保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.20",
+      "severity": "警告",
+      "requirement": "叶标题开头和结尾不能为空格。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.21",
+      "severity": "错误",
+      "requirement": "名称以“m”开始的元素必须有叶元素。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.22",
+      "severity": "错误",
+      "requirement": "元素“m1-administrative-information-and-prescribing-information”必须存在。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.23",
+      "severity": "警告",
+      "requirement": "不建议在STF定义范围外使用“增补（append）”。在STF定义范围外使用“增补（append）”操作，需要在说明函中进行说明。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.24",
+      "severity": "错误",
+      "requirement": "该规则适用于ICH模块二至模块五的叶元素。当对现有文件进行修订时，新的叶元素应在骨架文件中的相同位置进行提交，并以增补、替换或删除的方式体现。文件位置指的是文件在目录结构中的位置。该位置由CTD目录结构以及eCTD中的部分属性来定义。例如，申请人不能使用说明函章节修改的内容替换申请表章节中的内容。另外，申请人可使用eCTD属性创建自定义章节。 例如，m3-2-s-drug-substance中的每个“活性成分（substance）”或“生产商（manufacturer）”属性，或m3-2-p-drug-product中的“产品名称（product-name）”属性均可创建一个新的CTD章节，申请人同样不能使用其中一个章节的内容替换其他章节的内容。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.25",
+      "severity": "错误",
+      "requirement": "适应症属性在2.7.3和5.3.5章节中使用时为必填项，值不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.26",
+      "severity": "错误",
+      "requirement": "生产商属性在2.3.S和3.2.S章节中使用时为必填项，值不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.27",
+      "severity": "错误",
+      "requirement": "活性成分属性在2.3.S和3.2.S章节中使用时为必填项，值不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.28",
+      "severity": "警告",
+      "requirement": "属性值开头和结尾不能为空格。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.29",
+      "severity": "错误",
+      "requirement": "骨架文件（index.xml）中不允许包含跨申请引用。当在骨架文件中引用另一个序列的内容时，只能引用同一申请中早先已提交序列的内容。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.30",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行增补操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.31",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行删除操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.32",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行第二次替换操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.33",
+      "severity": "错误",
+      "requirement": "已经被删除的叶元素不能再做其他任何操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.34",
+      "severity": "错误",
+      "requirement": "不允许对一个操作属性为增补的叶元素使用增补操作。该规则不适用于STF的情况。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.35",
+      "severity": "错误",
+      "requirement": "对于STF叶元素，增补操作必须针对该文件最新版本来进行。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "3.36",
+      "severity": "警告",
+      "requirement": "对ICH骨架文件叶元素进行替换操作时，被替换的文件和替换后的文件应具有相同的语言属性。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.1",
+      "severity": "错误",
+      "requirement": "m1\\cn文件夹中必须包含cn-regional.xml文件。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.2",
+      "severity": "错误",
+      "requirement": "如何创建有效的引用请参考http://www.w3.org/TR/xml/ 和 http://www.ietf.org/rfc/rfc3986.txt（2005版本 第22页，第3.3章节）。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.3",
+      "severity": "错误",
+      "requirement": "使用申请文件夹中（util/dtd目录）给定的Schema对区域骨架文件进行验证。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.4",
+      "severity": "错误",
+      "requirement": "当前申请已使用较新版本Schema时，不允许返回早期版本。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.5",
+      "severity": "错误",
+      "requirement": "XML叶元素中的文件引用链接必须有效，即引用的目标文件必须存在。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.6",
+      "severity": "错误",
+      "requirement": "区域骨架文件中的叶元素文件在同一个序列中不能作为“被修改文件对象（modified-file）”被多次引用。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.7",
+      "severity": "错误",
+      "requirement": "当执行“替换（replace）”或“增补（append）”操作时，新内容必须与之前的内容不同（即checksum不能相同）。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.8",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“新建（new）”、“替换（replace）”或“增补（append）”的所有叶元素，必须有“文件引用（xlink:href）”值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.9",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“删除（delete）”的所有叶元素，不能有“文件引用（xlink:href）”值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.10",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性值为“替换（replace）”、“删除（delete）”或“增补（append）”的所有叶元素，对应的“被修改文件对象（modified-file）”必须有值。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.11",
+      "severity": "错误",
+      "requirement": "初始序列（即序列号为0000的序列）中所有内容文件的“操作（operation）”属性必须为“新建（new）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.12",
+      "severity": "错误",
+      "requirement": "“checksum-type”属性必须设置为“md5”或“MD5”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.13",
+      "severity": "错误",
+      "requirement": "所有文件的MD5 checksum必须和区域骨架文件中提供的checksum值保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.14",
+      "severity": "错误",
+      "requirement": "所有说明函的“操作（operation）”属性值必须为“新建（new）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.15",
+      "severity": "错误",
+      "requirement": "序列类型为“首次提交”，且提交序列中包含申请表文件时，其“操作（operation）”属性值必须为“新建（new）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.16",
+      "severity": "错误",
+      "requirement": "不允许在区域骨架文件结构中使用“扩展节点（Node Extension）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.17",
+      "severity": "错误",
+      "requirement": "所有叶元素必须有子元素title，叶标题不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.18",
+      "severity": "错误",
+      "requirement": "“操作（operation）”属性为“删除（delete）”的叶元素，其叶标题必须和被删除的叶标题保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.19",
+      "severity": "警告",
+      "requirement": "叶标题开头和结尾不能为空格。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.20",
+      "severity": "错误",
+      "requirement": "名称以“cn-”开始的元素必须有叶元素。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.21",
+      "severity": "错误",
+      "requirement": "申请文件夹名称必须和信封信息中的申请编号保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.22",
+      "severity": "错误",
+      "requirement": "序列文件夹名称必须和信封信息中的序列号保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.23",
+      "severity": "错误",
+      "requirement": "模块一输出文件夹基本结构必须遵循《eCTD技术规范V1.1》第4章节中的规定。",
+      "declared_detail_count": 2,
+      "details": [
+        "序号文件夹下缺失m1文件夹。 m1文件夹下缺失\"cn\"文件夹。"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.24",
+      "severity": "错误",
+      "requirement": "区域骨架文件（cn-regional.xml）中不允许包含跨申请引用。当在区域骨架文件中引用另一个序列的内容时，只能引用同一申请中早先已提交序列的内容。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.25",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行增补操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.26",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行删除操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.27",
+      "severity": "错误",
+      "requirement": "已经被一个叶元素替换的叶元素不能再进行第二次替换操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.28",
+      "severity": "错误",
+      "requirement": "已经被删除的叶元素不能再做其他任何操作。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.29",
+      "severity": "错误",
+      "requirement": "不允许对一个操作属性为增补的叶元素使用增补操作。该规则不适用于STF的情况。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.30",
+      "severity": "警告",
+      "requirement": "不建议在区域骨架文件中使用“增补（append）”操作属性。在区域骨架文件中使用“增补（append）”操作，需要在说明函中进行说明。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.1.31",
+      "severity": "警告",
+      "requirement": "对区域骨架文件叶元素进行替换操作时，被替换的文件和替换后的文件应具有相同的语言属性。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.1",
+      "severity": "错误",
+      "requirement": "申请编号必须符合《eCTD技术规范V1.1》中的的编码规则。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.2",
+      "severity": "错误",
+      "requirement": "申请类型必须参考“cv-application-type.xml”中的定义。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.3",
+      "severity": "错误",
+      "requirement": "产品类型必须参考“cv-product-type.xml”中的定义。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.4",
+      "severity": "错误",
+      "requirement": "原始编号不能为空。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.5",
+      "severity": "错误",
+      "requirement": "相关序列必须是4位数字，且小于或等于当前序列的序列号。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.6",
+      "severity": "错误",
+      "requirement": "注册行为类型必须参考“cv-regulatory-activity-type.xml”中的定义。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.7",
+      "severity": "错误",
+      "requirement": "序列号必须由四位数字组成。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.8",
+      "severity": "错误",
+      "requirement": "序列类型必须参考“cv-sequence-type.xml”中的定义。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.9",
+      "severity": "错误",
+      "requirement": "序列描述不能为空，且总长度不能超过120个中文字符。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.10",
+      "severity": "错误",
+      "requirement": "提交序列的申请类型、注册行为类型、序列类型之间的关联关系必须参考“depend-apt-rat-sqt.xml”中的定义。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.11",
+      "severity": "错误",
+      "requirement": "如果序列类型不是首次提交或格式转换，则相关序列不应与当前序列号相同。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.12",
+      "severity": "错误",
+      "requirement": "如果序列类型是首次提交或格式转换，则相关序列应与当前序列号相同。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.13",
+      "severity": "错误",
+      "requirement": "初始序列中使用的申请级别的信封元素，即申请编号、申请类型、产品类型、原始编号的值在整个生命周期中不能更改。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.2.14",
+      "severity": "错误",
+      "requirement": "对于属于同一个注册行为的所有序列，其注册行为类型的值必须相同。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.1",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列必须包含以下元素 cn-1-0，cn-1-2，cn-1-3，cn-1-3-1，cn-1-3-1-2，cn-1-3-2，cn-1-3-2-2，cn-1-3-3，cn-1-3-8，cn-1-3-8-1，cn-1-3-8-2，cn-1-11。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.2",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列不能包含以下元素 cn-1-3-1-1，cn-1-3-2-1，cn-1-3-4，cn-1-3-4-1，cn-1-3-4-2，cn-1-3-4-3。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.3",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列必须包含以下元素 cn-1-0，cn-1-2，cn-1-3，cn-1-3-1，cn-1-3-1-2，cn-1-3-2，cn-1-3-2-2，cn-1-3-3，cn-1-3-8，cn-1-3-8-1，cn-1-3-8-2，cn-1-11。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.4",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列不能包含以下元素 cn-1-3-1-1，cn-1-3-2-1，cn-1-3-4，cn-1-3-4-1，cn-1-3-4-2，cn-1-3-4-3，cn-1-12。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.5",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列必须包含以下元素 cn-1-0，cn-1-2，cn-1-3，cn-1-3-1，cn-1-3-1-1，cn-1-3-2，cn-1-3-2-1，cn-1-3-4，cn-1-3-4-1，cn-1-3-4-2，cn-1-3-4-3，cn-1-3-8，cn-1-3-8-1，cn-1-3-8-2，cn-1-11。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.6",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列不能包含以下元素 cn-1-3-1-2，cn-1-3-2-2，cn-1-3-5，cn-1-3-6。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.7",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列必须包含以下两个元素之一 cn-1-8-1，cn-1-8-2。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.8",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列不能同时包含以下两个元素 cn-1-8-1，cn-1-8-2。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.9",
+      "severity": "提示信息",
+      "requirement": "针对以下元素，其包含的叶元素数量建议不超过一个，如该元素中包含多个PDF文件，建议合并为一个文件提交 cn-1-1，cn-1-3-2-1，cn-1-3-2-2，cn-1-3-8-8，cn-1-4-1，cn-1-4-2，cn-1-4-3，cn-1-4-4，cn-1-4-5，cn-1-4-6，cn-1-4-7，cn-1-6-1，cn-1-6-3，cn-1-10-1，cn-1-10-2，cn-1-10-3，cn-1-12。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.10",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列必须包含以下元素cn-1-0，cn-1-2，cn-1-3，cn-1-3-2，cn-1-3-2-2，cn-1-3-3，cn-1-3-8，cn-1-3-8-1，cn-1-3-8-2，cn-1-11。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "4.3.11",
+      "severity": "错误",
+      "requirement": "针对上述类型，提交序列不能包含以下元素cn-1-3-1-1，cn-1-3-2-1，cn-1-3-4，cn-1-3-4-1，cn-1-3-4-2，cn-1-3-4-3。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取区域性骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.1",
+      "severity": "错误",
+      "requirement": "STF文件必须根据ich-stf-v2-2.dtd创建并保证有效性。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.2",
+      "severity": "错误",
+      "requirement": "“文件引用（xlink:href）”对应的被引用文件必须存在。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.3",
+      "severity": "警告",
+      "requirement": "不建议使用“content-block”元素。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.4",
+      "severity": "错误",
+      "requirement": "文件引用（xlink:href）的值不能包含反斜杠（\"\\\"）。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.5",
+      "severity": "警告",
+      "requirement": "研究标识/类别（study-identifier>>category）值不能是空的。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.6",
+      "severity": "警告",
+      "requirement": "研究标识/研究ID（study-identifier>>study-id）值不能是空的。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.7",
+      "severity": "警告",
+      "requirement": "研究标识/标题（study-identifier>>title）的值必须与骨架文件（index.xml）中相应STF叶标题保持一致。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.8",
+      "severity": "警告",
+      "requirement": "根据“valid-values.xml”文件（版本6）定义的内容检查STF文件的标签属性（tag）值和类别属性（category）值是否有效。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.9",
+      "severity": "警告",
+      "requirement": "对STF叶元素进行增补操作时，其“被修改文件对象（modified-file）”必须是另一个STF叶元素。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.10",
+      "severity": "警告",
+      "requirement": "见《ICH eCTD STF标准文件 V2.6.1》类别（category）为研究组织提供了一个额外的级别，该级别是eCTD DTD目前不能提供的。该元素仅与下列CTD章节的研究有关：4.2.3.1，4.2.3.2，4.2.3.4.1，5.3.5.1。在上述章节，需提供类别（category）信息。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.11",
+      "severity": "警告",
+      "requirement": "STF中的引用对象必须是有目标内容的文件，而不是另一个STF。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.12",
+      "severity": "警告",
+      "requirement": "不关联任何叶元素的STF会提示警告信息。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.13",
+      "severity": "警告",
+      "requirement": "在申请的全生命周期内，同一个STF的“study-id”值必须保持不变。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.14",
+      "severity": "警告",
+      "requirement": "STF只存在于模块四（4.2.x章节）和模块五（5.3.1.x-5.3.5.x章节）中。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.15",
+      "severity": "警告",
+      "requirement": "每个“doc-content”元素有且仅有1个“文件标签（file-tag）”。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.16",
+      "severity": "错误",
+      "requirement": "如果当前序列使用了STF，5.3.7章节将禁止被使用。病例报告表必须在STF中被引用和展现。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.17",
+      "severity": "错误",
+      "requirement": "第4.2章节中的叶元素必须使用STF引用。第5.3.1至5.3.5章节中的叶元素必须使用STF引用。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.18",
+      "severity": "警告",
+      "requirement": "模块五（5.3章节）中xpt格式的临床数据集文件的有效文件标签有：data-tabulation-dataset-legacy；data-tabulation-dataset-sdtm；analysis-dataset-adam；analysis-dataset-legacy XML格式的数据说明文件（define.xml）的有效文件标签有：data-tabulation-data-definition；analysis-data-definition。",
+      "declared_detail_count": 1,
+      "details": [
+        "获取骨架文件信息失败！"
+      ],
+      "observed_detail_rows": 1
+    },
+    {
+      "code": "5.19",
+      "severity": "通过",
+      "requirement": "申请人提交的原始数据库中都应包含dm数据集和对应的数据说明文件，分析数据库中都应包含adsl数据集和对应的数据说明文件。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "5.20",
+      "severity": "通过",
+      "requirement": "对于模块五（5.3章节）中的同一研究，不应存在相同名称的数据集。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.1",
+      "severity": "通过",
+      "requirement": "针对被破坏或不可读的PDF文件（因内容无效，或页码数为0）进行检查，并提示错误信息。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.2",
+      "severity": "通过",
+      "requirement": "PDF文件中必须使用指向相对路径的书签，不允许使用指向绝对路径的书签。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.3",
+      "severity": "通过",
+      "requirement": "PDF文件中不允许使用包含网页链接、电子邮箱地址或其他外部链接的书签。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.4",
+      "severity": "通过",
+      "requirement": "不允许使用GoTo，GoToR和Launch以外的操作类型的书签。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.5",
+      "severity": "通过",
+      "requirement": "不允许在PDF文件中使用失效的书签（例如：未分配任何操作的书签）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.6",
+      "severity": "通过",
+      "requirement": "PDF文件中不允许包含损坏的书签（例如：书签指向地址不存在）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.7",
+      "severity": "通过",
+      "requirement": "不允许有指定多个动作的书签（例如，打开两个不同的页面）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.8",
+      "severity": "通过",
+      "requirement": "所有的书签的放大率设置应为承前缩放（Inherit Zoom）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.9",
+      "severity": "通过",
+      "requirement": "PDF文件中的超文本链接必须使用相对路径，不允许使用绝对路径。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.10",
+      "severity": "通过",
+      "requirement": "PDF文件中不允许使用包含网页链接、电子邮箱地址或其他外部链接的超文本链接。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.11",
+      "severity": "通过",
+      "requirement": "不允许在PDF文件使用除GoTo, GoToR和Launch以外动作类型的超文本链接。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.12",
+      "severity": "通过",
+      "requirement": "不允许在PDF文件中使用失效的超文本链接（例如：未指定任何操作的超文本链接）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.13",
+      "severity": "通过",
+      "requirement": "PDF文件中不允许包含损坏的超文本链接（例如：超文本链接指向地址不存在）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.14",
+      "severity": "通过",
+      "requirement": "不允许设置有多个指定动作(例如，打开两个不同的页面)的超文本链接。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.15",
+      "severity": "通过",
+      "requirement": "所有超文本链接的放大率设置应为承前缩放（Inherit Zoom）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.16",
+      "severity": "通过",
+      "requirement": "允许的PDF文件版本为1.4，1.5，1.6，1.7，PDF/A-1，PDF/A-2。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.17",
+      "severity": "通过",
+      "requirement": "PDF文件中不能嵌入任何附件。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.18",
+      "severity": "提示信息",
+      "requirement": "除了超文本链接以外，PDF文件中不能包含其他注释。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.19",
+      "severity": "通过",
+      "requirement": "不能提交有安全设置的PDF文件，例如限制选择文本或图形等。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.20",
+      "severity": "通过",
+      "requirement": "根据《ICH eCTD技术规范V3.2.2》：有书签的文件在初始视图中应显示书签。放大率和页面布局应设置为默认。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.21",
+      "severity": "通过",
+      "requirement": "不能提交使用密码保护且无法打开的文件。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.22",
+      "severity": "提示信息",
+      "requirement": "不能提交未启用“快速Web查看（Fast Web View）”情况下创建的PDF文件。1.0说明函、1.2申请表（含自查表）、1.3.8产品相关证明性文件（如适用）、1.10上市后变更（如适用）、1.11申请人/生产企业证明性文件、1.12小微企业证明文件（如适用）、参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.23",
+      "severity": "通过",
+      "requirement": "除外文参考资料、参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和申请表之外，大于5页的文件必须有书签。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.24",
+      "severity": "通过",
+      "requirement": "PDF文件不能包含JavaScript，3D内容或动态内容（音频/视频）。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.25",
+      "severity": "通过",
+      "requirement": "PDF文件中的文本必须可搜索。 如果是扫描页面，则应使用OCR提供可搜索的文本。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    },
+    {
+      "code": "6.26",
+      "severity": "通过",
+      "requirement": "PDF文件应尽量使用标准字体。如果包含非标准字体，则需在文件中嵌入该非标准字体。标准字体列表如下：宋体、黑体、Times New Roman、Times New Roman Italic、Times New Roman Bold、Times New Roman Bold Italic、Arial、Arial Italic、Arial Bold、Arial Bold Italic、Courier New、Courier New Italic、Courier New Bold、Courier New Bold Italic、Symbol、Zapf Dingbats。参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和外文参考资料不做此要求。",
+      "declared_detail_count": 0,
+      "details": [],
+      "observed_detail_rows": 0
+    }
+  ],
+  "normalization": {
+    "removed_or_replaced": [
+      "execution datetime",
+      "generated report filename",
+      "absolute local paths",
+      "volatile strings inside typed rule details",
+      "HTML markup, scripts, styles and SVG glyph geometry",
+      "non-semantic whitespace"
+    ],
+    "normalized_visible_text_sha256": "f15431175215360ba7704e9ad079e8f7fce2fe1b4a1bfc8d48196aa53089574a",
+    "semantic_contract_sha256": "9c8b9adef18939afdc8d037cdbb2b5e4fb7ab245716bf87606e91a3adbb52d97"
+  }
+}

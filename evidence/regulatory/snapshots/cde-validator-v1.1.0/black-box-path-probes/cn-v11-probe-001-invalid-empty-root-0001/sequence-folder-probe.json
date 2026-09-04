@@ -1,0 +1,77 @@
+{
+  "schema_version": "0.1.0",
+  "experiment": "isolated_sequence_folder_name_0000_to_0001",
+  "single_changed_variable": {
+    "name": "selected sequence folder name",
+    "control": "0000",
+    "probe": "0001"
+  },
+  "probe": {
+    "run_id": "cn-v11-probe-001-invalid-empty-root-0001-20260904T040147Z",
+    "case_id": "cn-v11-probe-001-invalid-empty-root-0001",
+    "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+    "admissible": true,
+    "input_directory": "C:\\EZCTDProbeInput\\0001",
+    "input_unchanged": true,
+    "validation_invoked": true,
+    "native_report_present": true,
+    "sequence_folder_warning_present": true,
+    "confirmed_native_dialogs": [
+      {
+        "at": "2026-09-04T04:02:26.560794+00:00",
+        "button": "OK",
+        "texts": [
+          "Warning",
+          "System",
+          "Close",
+          "不规范的资料路径",
+          "序列文件夹不是数字。仍要使用？",
+          "OK"
+        ],
+        "sequence_folder_warning": true
+      }
+    ],
+    "final_native_terminal": [
+      "提示",
+      "System",
+      "Close",
+      "执行成功",
+      "OK"
+    ],
+    "native_report_semantics": {
+      "rule_count": 151,
+      "severity_totals": {
+        "提示信息": 5,
+        "警告": 22,
+        "错误": 97
+      },
+      "normalized_visible_text_sha256": "f15431175215360ba7704e9ad079e8f7fce2fe1b4a1bfc8d48196aa53089574a",
+      "semantic_contract_sha256": "9c8b9adef18939afdc8d037cdbb2b5e4fb7ab245716bf87606e91a3adbb52d97",
+      "reported_sequence": "缺失区域性骨架文件！"
+    }
+  },
+  "control": {
+    "case_id": "cn-v11-probe-000-invalid-empty-root",
+    "observation_count": 3,
+    "sequence_folder_warning_present_in_all_runs": true,
+    "rule_count": 151,
+    "severity_totals": {
+      "提示信息": 5,
+      "警告": 22,
+      "错误": 96
+    }
+  },
+  "comparison": {
+    "warning_persists_with_0001": true,
+    "same_rule_count_as_control": true,
+    "same_severity_totals_as_control": false,
+    "semantic_hash_directly_comparable": false,
+    "semantic_hash_comparison_note": "The frozen control hashes were produced before parser schema 0.2.0; reprocess raw control artifacts with the same parser before asserting exact semantic-hash equality."
+  },
+  "conclusion": "WARNING_PERSISTS_WITH_0001",
+  "counters": {
+    "official_black_box_observation_increment_if_admissible": 1,
+    "calibration_informative_observation_increment": 0
+  },
+  "boundary": "Path-selection behavior experiment only; not evidence of a valid eCTD sequence, submission acceptance, detector calibration or stock-environment parity."
+}
