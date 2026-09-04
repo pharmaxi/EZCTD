@@ -1,0 +1,739 @@
+{
+  "schema_version": "0.1.0",
+  "status": "DIAGNOSTIC_CAPTURE_COMPLETE",
+  "portal": "https://www.cde.org.cn/ectd/index",
+  "software_executed": false,
+  "official_black_box_observations": 0,
+  "downloaded_target_count": 0,
+  "functions": {
+    "downloadEctdFiles": {
+      "length": 3018,
+      "sha256": "afb4410ca2133510c99c725b4e8386054582fbc1cf7584d24bbdd17c554abbf0",
+      "source": null
+    },
+    "downloadFile": {
+      "length": 124,
+      "sha256": "87a8ec05d9221daacc418c4b8e9a8d3183f029466ccc6262ac0242a538a731ce",
+      "source": "function(...args) {\n              push(`call:${name}`, args);\n              return original.apply(this, args);\n            }"
+    },
+    "downloadFiles": {
+      "length": 124,
+      "sha256": "87a8ec05d9221daacc418c4b8e9a8d3183f029466ccc6262ac0242a538a731ce",
+      "source": "function(...args) {\n              push(`call:${name}`, args);\n              return original.apply(this, args);\n            }"
+    },
+    "downloadIchFiles": {
+      "length": 3774,
+      "sha256": "672ba40a27e1db71ca790e6308672899434654bc234c48069f643349d4defd3e",
+      "source": null
+    }
+  },
+  "scripts": [
+    {
+      "url": "https://www.cde.org.cn/ectd/js/jquery.min.js",
+      "final_url": "https://www.cde.org.cn/ectd/js/jquery.min.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 86689,
+      "sha256": "a00831b984b3493cb9c77d59967f04df3014de387a06630381f739debe995a7b",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/plugins/layui/layui.js",
+      "final_url": "https://www.cde.org.cn/ectd/plugins/layui/layui.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 291286,
+      "sha256": "92c7997b3dce6ab2368b1bdb34ff4b67ac77957898a126c7eba452a8080bec95",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/js/template-web.js",
+      "final_url": "https://www.cde.org.cn/ectd/js/template-web.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 17266,
+      "sha256": "1c37df30a86dc1e5599f830accca45cb83cac683d8e5ee3985d01d6fd2be4a9e",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/js/setting.js?v=20260205",
+      "final_url": "https://www.cde.org.cn/ectd/js/setting.js?v=20260205",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 417,
+      "sha256": "07369a5e60446a6ba4afcbf9eba8ec214127ea088d919ea9da1cf955a0a46a95",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+      "final_url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 16914,
+      "sha256": "ebd564a8c9c188eae38f09cf22336f968421d1997cf2ed823ff5c48221b25de5",
+      "contains_downloadFiles": true,
+      "contains_downloadFile": true,
+      "download_related_excerpt": [
+        "function downloadFiles(type) {",
+        "            url: '/ectd/guideDownLoads/eCTDYZSCV1.1.0.pdf?name=eCTD验证软件操作手册V1.1.0.pdf',",
+        "            url: '/ectd/guideDownLoads/eCTDYZV1.1.0.zip?name=eCTD验证软件V1.1.0.zip',",
+        "              url: '/ectd/guideDownLoads/eCTDJSGFV1.1.pdf?name=eCTD技术规范V1.1.0.pdf',",
+        "              url: '/ectd/guideDownLoads/eCTDJSGFV1.1FJ.zip?name=eCTD技术规范V1.1附件包.zip',",
+        "          enFile: '/ectd/guideDownLoads/ICH Electronic Common Technical Document(eCTD v4.0) Implementation Guide v1.6.pdf',",
+        "          zhFile: '/ectd/guideDownLoads/ICH电子通用技术文档（eCTD）v4.0 实施指南 v1.6.pdf',",
+        "          enFile: '/ectd/guideDownLoads/ICH eCTD v4.0 Controlled Vocabulary v6.xlsx',",
+        "          enFile: '/ectd/guideDownLoads/eCTD v4 IWG Question and Answer and Specification Change Request Document v1.9.xlsx',",
+        "          zhFile: '/ectd/guideDownLoads/eCTD v4.0 IWG 问答和规范变更要求文档 v1.9.xlsx',",
+        "          enFile: '/ectd/guideDownLoads/ICH Electronic Common Technical Document Specification V3.2.2.pdf',",
+        "          zhFile: '/ectd/guideDownLoads/ICH eCTD技术规范V3.2.2.pdf',",
+        "          enFile: '/ectd/guideDownLoads/ICH The eCTD Backbone File Specification for Study Tagging Files V2.6.1.pdf',",
+        "          zhFile: '/ectd/guideDownLoads/ICH研究标签文件的eCTD骨架文件技术规范V2.6.1.pdf',",
+        "          enFile: '/ectd/guideDownLoads/ICH Specification for Submission Formats for eCTD V1.3.pdf',",
+        "          zhFile: '/ectd/guideDownLoads/ICH eCTD文件格式规范V1.3.pdf',",
+        "          enFile: '/ectd/guideDownLoads/eCTD IWG Question and Answer and Specification Change Request Document V1.33.xlsx',",
+        "          zhFile: '/ectd/guideDownLoads/ICH eCTD IWG问题解答和规范变更要求文件V1.33.xlsx',",
+        "function downloadFile(urls, name) {"
+      ]
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/js/index.js?v=20260205",
+      "final_url": "https://www.cde.org.cn/ectd/js/index.js?v=20260205",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 6120,
+      "sha256": "cee5b76fe1b472210e2dcacea58e3d1802bf39dc4d83cad70131912efdab7caf",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    },
+    {
+      "url": "https://www.cde.org.cn/ectd/js/scroll.js",
+      "final_url": "https://www.cde.org.cn/ectd/js/scroll.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "size": 1146,
+      "sha256": "00e121ee942649d2b21d968cf59134881ccec01e7a9627deacb6b8825ee5779b",
+      "contains_downloadFiles": false,
+      "contains_downloadFile": false,
+      "download_related_excerpt": []
+    }
+  ],
+  "targets": [
+    {
+      "role": "validator_software_v1_1_0",
+      "label": "eCTD验证软件",
+      "onclick": "downloadFiles(4)",
+      "status": "NO_FILE_DOWNLOADED_DIAGNOSTICS_CAPTURED",
+      "file_name": null,
+      "kind": null,
+      "size": null,
+      "sha256": null,
+      "expected_kind_match": null,
+      "chosen_nested_control": {
+        "className": "",
+        "download": null,
+        "href": "https://www.cde.org.cn/main/news/viewInfoCommon/3c23f1daf2e8c5400836cd5f4ac93cbd",
+        "id": null,
+        "index": 31,
+        "onclick": null,
+        "rect": {
+          "height": 15,
+          "width": 537.46875,
+          "x": 835,
+          "y": 500
+        },
+        "tag": "A",
+        "text": "关于公开征求《eCTD实施指南V1.1（征求意见稿）》及《eCTD验证标准V1.1（征求意见稿）》意见的通知",
+        "visible": true
+      },
+      "nested_candidates": [
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/7aa53c791152501c725436c6aad28b57",
+          "id": null,
+          "index": 7,
+          "onclick": null,
+          "rect": {
+            "height": 55,
+            "width": 117.125,
+            "x": 519.671875,
+            "y": -377
+          },
+          "tag": "A",
+          "text": "工作通知",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/fc528384dbd9f6691ff56f7e1167b4ad",
+          "id": null,
+          "index": 9,
+          "onclick": null,
+          "rect": {
+            "height": 55,
+            "width": 195.234375,
+            "x": 861.578125,
+            "y": -377
+          },
+          "tag": "A",
+          "text": "eCTD相关指导原则",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/7aa53c791152501c725436c6aad28b57",
+          "id": null,
+          "index": 23,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 37.734375,
+            "x": 1448.265625,
+            "y": 211
+          },
+          "tag": "A",
+          "text": "更多>>",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+          "id": null,
+          "index": 24,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 247.34375,
+            "x": 835,
+            "y": 262
+          },
+          "tag": "A",
+          "text": "关于公开征求《eCTD v4.0指导原则》意见的通知",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/news/viewInfoCommon/110c135cf9363f65a8fe00cc1a0fc516",
+          "id": null,
+          "index": 27,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 154,
+            "x": 835,
+            "y": 364
+          },
+          "tag": "A",
+          "text": "关于更新eCTD验证软件的通知",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/main/news/viewInfoCommon/3c23f1daf2e8c5400836cd5f4ac93cbd",
+          "id": null,
+          "index": 31,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 537.46875,
+            "x": 835,
+            "y": 500
+          },
+          "tag": "A",
+          "text": "关于公开征求《eCTD实施指南V1.1（征求意见稿）》及《eCTD验证标准V1.1（征求意见稿）》意见的通知",
+          "visible": true
+        },
+        {
+          "className": "fileLink",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 32,
+          "onclick": "downloadFiles(4)",
+          "rect": {
+            "height": 16,
+            "width": 185.75,
+            "x": 315.640625,
+            "y": 620
+          },
+          "tag": "A",
+          "text": "eCTD验证软件",
+          "visible": true
+        },
+        {
+          "className": "toMore",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/fc528384dbd9f6691ff56f7e1167b4ad",
+          "id": null,
+          "index": 42,
+          "onclick": null,
+          "rect": {
+            "height": 16,
+            "width": 37.578125,
+            "x": 1453.421875,
+            "y": 565
+          },
+          "tag": "A",
+          "text": "更多>>",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 43,
+          "onclick": "downloadEctdFiles(1)",
+          "rect": {
+            "height": 15,
+            "width": 148.953125,
+            "x": 835,
+            "y": 619
+          },
+          "tag": "A",
+          "text": "eCTD技术规范V1.1及附件包",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 45,
+          "onclick": "downloadEctdFiles(3)",
+          "rect": {
+            "height": 15,
+            "width": 105.390625,
+            "x": 835,
+            "y": 653
+          },
+          "tag": "A",
+          "text": "eCTD验证标准V1.1",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 46,
+          "onclick": "downloadEctdFiles(4)",
+          "rect": {
+            "height": 15,
+            "width": 105.390625,
+            "x": 1168,
+            "y": 653
+          },
+          "tag": "A",
+          "text": "eCTD验证标准V1.0",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 47,
+          "onclick": "downloadEctdFiles(5)",
+          "rect": {
+            "height": 15,
+            "width": 105.390625,
+            "x": 835,
+            "y": 687
+          },
+          "tag": "A",
+          "text": "eCTD实施指南V1.1",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://beian.mps.gov.cn/#/query/webSearch?code=11011502037534",
+          "id": null,
+          "index": 62,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 184.3125,
+            "x": 898.046875,
+            "y": 1467.21875
+          },
+          "tag": "A",
+          "text": "京公网安备11011502037534号",
+          "visible": true
+        },
+        {
+          "className": "layui-layer layui-layer-page",
+          "download": null,
+          "href": null,
+          "id": "layui-layer1",
+          "index": 63,
+          "onclick": null,
+          "rect": {
+            "height": 240,
+            "width": 420,
+            "x": 686,
+            "y": 508.5
+          },
+          "tag": "DIV",
+          "text": "下载附件 附件1：eCTD验证软件V1.1.0.zip 关闭",
+          "visible": true
+        },
+        {
+          "className": "layui-layer-content",
+          "download": null,
+          "href": null,
+          "id": null,
+          "index": 64,
+          "onclick": null,
+          "rect": {
+            "height": 141,
+            "width": 420,
+            "x": 686,
+            "y": 550.5
+          },
+          "tag": "DIV",
+          "text": "附件1：eCTD验证软件V1.1.0.zip",
+          "visible": true
+        },
+        {
+          "className": "fileLink",
+          "download": "eCTD验证软件V1.1.0.zip",
+          "href": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZV1.1.0.zip?name=eCTD%E9%AA%8C%E8%AF%81%E8%BD%AF%E4%BB%B6V1.1.0.zip",
+          "id": null,
+          "index": 65,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 136.5,
+            "x": 740.671875,
+            "y": 564.5
+          },
+          "tag": "A",
+          "text": "eCTD验证软件V1.1.0.zip",
+          "visible": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "role": "validator_manual_v1_1_0",
+      "label": "eCTD验证软件操作手册",
+      "onclick": "downloadFiles(5)",
+      "status": "NO_FILE_DOWNLOADED_DIAGNOSTICS_CAPTURED",
+      "file_name": null,
+      "kind": null,
+      "size": null,
+      "sha256": null,
+      "expected_kind_match": null,
+      "chosen_nested_control": {
+        "className": "",
+        "download": null,
+        "href": "https://www.cde.org.cn/main/news/viewInfoCommon/3c23f1daf2e8c5400836cd5f4ac93cbd",
+        "id": null,
+        "index": 31,
+        "onclick": null,
+        "rect": {
+          "height": 15,
+          "width": 537.46875,
+          "x": 835,
+          "y": 469
+        },
+        "tag": "A",
+        "text": "关于公开征求《eCTD实施指南V1.1（征求意见稿）》及《eCTD验证标准V1.1（征求意见稿）》意见的通知",
+        "visible": true
+      },
+      "nested_candidates": [
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/7aa53c791152501c725436c6aad28b57",
+          "id": null,
+          "index": 7,
+          "onclick": null,
+          "rect": {
+            "height": 55,
+            "width": 117.125,
+            "x": 519.671875,
+            "y": -408
+          },
+          "tag": "A",
+          "text": "工作通知",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/fc528384dbd9f6691ff56f7e1167b4ad",
+          "id": null,
+          "index": 9,
+          "onclick": null,
+          "rect": {
+            "height": 55,
+            "width": 195.234375,
+            "x": 861.578125,
+            "y": -408
+          },
+          "tag": "A",
+          "text": "eCTD相关指导原则",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/7aa53c791152501c725436c6aad28b57",
+          "id": null,
+          "index": 23,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 37.734375,
+            "x": 1448.265625,
+            "y": 180
+          },
+          "tag": "A",
+          "text": "更多>>",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+          "id": null,
+          "index": 24,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 247.34375,
+            "x": 835,
+            "y": 231
+          },
+          "tag": "A",
+          "text": "关于公开征求《eCTD v4.0指导原则》意见的通知",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/news/viewInfoCommon/110c135cf9363f65a8fe00cc1a0fc516",
+          "id": null,
+          "index": 27,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 154,
+            "x": 835,
+            "y": 333
+          },
+          "tag": "A",
+          "text": "关于更新eCTD验证软件的通知",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://www.cde.org.cn/main/news/viewInfoCommon/3c23f1daf2e8c5400836cd5f4ac93cbd",
+          "id": null,
+          "index": 31,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 537.46875,
+            "x": 835,
+            "y": 469
+          },
+          "tag": "A",
+          "text": "关于公开征求《eCTD实施指南V1.1（征求意见稿）》及《eCTD验证标准V1.1（征求意见稿）》意见的通知",
+          "visible": true
+        },
+        {
+          "className": "fileLink",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 32,
+          "onclick": "downloadFiles(4)",
+          "rect": {
+            "height": 16,
+            "width": 185.75,
+            "x": 315.640625,
+            "y": 589
+          },
+          "tag": "A",
+          "text": "eCTD验证软件",
+          "visible": true
+        },
+        {
+          "className": "fileLink",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 34,
+          "onclick": "downloadFiles(5)",
+          "rect": {
+            "height": 16,
+            "width": 185.75,
+            "x": 315.640625,
+            "y": 620
+          },
+          "tag": "A",
+          "text": "eCTD验证软件操作手册",
+          "visible": true
+        },
+        {
+          "className": "toMore",
+          "download": null,
+          "href": "https://www.cde.org.cn/ectd/listpage/fc528384dbd9f6691ff56f7e1167b4ad",
+          "id": null,
+          "index": 42,
+          "onclick": null,
+          "rect": {
+            "height": 16,
+            "width": 37.578125,
+            "x": 1453.421875,
+            "y": 534
+          },
+          "tag": "A",
+          "text": "更多>>",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 43,
+          "onclick": "downloadEctdFiles(1)",
+          "rect": {
+            "height": 15,
+            "width": 148.953125,
+            "x": 835,
+            "y": 588
+          },
+          "tag": "A",
+          "text": "eCTD技术规范V1.1及附件包",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 45,
+          "onclick": "downloadEctdFiles(3)",
+          "rect": {
+            "height": 15,
+            "width": 105.390625,
+            "x": 835,
+            "y": 622
+          },
+          "tag": "A",
+          "text": "eCTD验证标准V1.1",
+          "visible": true
+        },
+        {
+          "className": "text_link",
+          "download": null,
+          "href": "javascript:void(0);",
+          "id": null,
+          "index": 47,
+          "onclick": "downloadEctdFiles(5)",
+          "rect": {
+            "height": 15,
+            "width": 105.390625,
+            "x": 835,
+            "y": 656
+          },
+          "tag": "A",
+          "text": "eCTD实施指南V1.1",
+          "visible": true
+        },
+        {
+          "className": "",
+          "download": null,
+          "href": "https://beian.mps.gov.cn/#/query/webSearch?code=11011502037534",
+          "id": null,
+          "index": 62,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 184.3125,
+            "x": 898.046875,
+            "y": 1436.21875
+          },
+          "tag": "A",
+          "text": "京公网安备11011502037534号",
+          "visible": true
+        },
+        {
+          "className": "layui-layer layui-layer-page",
+          "download": null,
+          "href": null,
+          "id": "layui-layer2",
+          "index": 63,
+          "onclick": null,
+          "rect": {
+            "height": 240,
+            "width": 420,
+            "x": 686,
+            "y": 508.5
+          },
+          "tag": "DIV",
+          "text": "下载附件 附件1：eCTD验证软件操作手册V1.1.0.pdf 关闭",
+          "visible": true
+        },
+        {
+          "className": "layui-layer-content",
+          "download": null,
+          "href": null,
+          "id": null,
+          "index": 64,
+          "onclick": null,
+          "rect": {
+            "height": 141,
+            "width": 420,
+            "x": 686,
+            "y": 550.5
+          },
+          "tag": "DIV",
+          "text": "附件1：eCTD验证软件操作手册V1.1.0.pdf",
+          "visible": true
+        },
+        {
+          "className": "fileLink",
+          "download": "eCTD验证软件操作手册V1.1.0.pdf",
+          "href": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZSCV1.1.0.pdf?name=eCTD%E9%AA%8C%E8%AF%81%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8CV1.1.0.pdf",
+          "id": null,
+          "index": 65,
+          "onclick": null,
+          "rect": {
+            "height": 15,
+            "width": 181.609375,
+            "x": 740.671875,
+            "y": 564.5
+          },
+          "tag": "A",
+          "text": "eCTD验证软件操作手册V1.1.0.pdf",
+          "visible": true
+        }
+      ],
+      "error": null
+    }
+  ],
+  "errors": [],
+  "boundary": "Diagnostic browser observation only. No downloaded executable was launched and no official validation result was produced."
+}
