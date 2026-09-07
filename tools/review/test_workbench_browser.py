@@ -9,12 +9,13 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import sys
 import threading
 import time
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 from ezctd.cli import _default_rulepack
 from ezctd.safe_io import sha256_file
 from ezctd.workspace import Workspace
@@ -52,29 +53,31 @@ def main():
                     external.append(request.request.url);request.abort()
             context.route('**/*',route)
             page.goto(server.origin+'/#key='+server.token)
-            page.wait_for_function("document.getElementById('files').children.length === 8")
+            expect(page.locator('.file-row')).to_have_count(8)
             page.locator('.file-open').filter(has_text='m5/5.3.1.2/fasting').click()
             page.locator('#page-canvas').wait_for(state='visible')
-            page.wait_for_function("document.getElementById('page-text').value.includes('12.50')")
+            expect(page.locator('#page-text')).to_have_value(re.compile('12\\.50'))
             checks.append('real_pdf_page_rendered_and_text_extracted')
             page.fill('#search-query','12.50');page.click('#search-page')
-            page.wait_for_function("document.getElementById('search-count').textContent.includes('1')")
+            expect(page.locator('#search-count')).to_contain_text('1 处')
             checks.append('numeric_query_highlighted_with_native_coordinates')
-            page.click('#next');page.wait_for_function("document.getElementById('page-number').value === '2' && !document.getElementById('page-canvas').hidden")
+            page.click('#next');expect(page.locator('#page-number')).to_have_value('2')
+            expect(page.locator('#reader-status')).to_contain_text('×')
+            expect(page.locator('#page-canvas')).to_be_visible()
             page.click('[data-tab=nav]');page.locator('.bookmark').first.click()
-            page.wait_for_function("document.getElementById('page-number').value === '1'")
+            expect(page.locator('#page-number')).to_have_value('1')
             checks.append('page_navigation_and_bookmark_targets')
             page.click('#search-doc');page.wait_for_selector('.search-hit')
             assert page.locator('.search-hit').count()==3
             checks.append('full_document_search_three_pages')
             page.click('[data-tab=issues]');page.fill('#node-id','5.3.1.2')
             page.select_option('#document-role','clinical-report');page.select_option('#language','zh');page.click('#save-context')
-            page.wait_for_function("document.getElementById('notice').textContent.includes('上下文已更新')")
-            page.click('#scan-all');page.wait_for_function("!document.getElementById('job-results').hidden",timeout=120000)
+            expect(page.locator('#notice')).to_contain_text('上下文已更新')
+            page.click('#scan-all');expect(page.locator('#job-results')).to_be_visible(timeout=120000)
             checks.append('actual_eight_pdf_scan_with_bad_and_password_inputs')
             fixture=args.output/'synthetic-report.html';raw=report.report_bytes('./m5/5.3.1.2/fasting/clinical-report.pdf');fixture.write_bytes(raw)
             page.locator('#report-file').set_input_files(str(fixture))
-            page.wait_for_function("document.getElementById('notice').textContent.includes('1 条路径候选')")
+            expect(page.locator('#notice')).to_contain_text('1 条路径候选')
             assert page.evaluate('window.PWNED') is None
             assert workspace.report['source_sha256']==hashlib.sha256(raw).hexdigest()
             checks.append('report_import_inert_and_bom_preserved')
@@ -82,11 +85,11 @@ def main():
             for text in ['m5/5.3.1.2/fasting','m2/2.5','references','certificates']:
                 page.locator('.file-row').filter(has_text=text).locator('input[type=checkbox]').check()
             page.click('#plan');page.wait_for_selector('#task-dialog[open]',timeout=120000)
-            page.wait_for_function("document.getElementById('apply-plan').textContent.includes('2')")
+            expect(page.locator('#apply-plan')).to_contain_text('2 份副本')
             page.screenshot(path=str(args.output/'workbench-plan.png'),full_page=True)
             checks.append('plan_two_eligible_one_signature_block_one_noop')
             page.click('#apply-plan');page.wait_for_selector('#task-dialog[open]',timeout=120000)
-            page.wait_for_function("document.getElementById('dialog-rows').textContent.includes('副本已复验')")
+            expect(page.locator('#dialog-rows')).to_contain_text('副本已复验')
             assert page.locator('#dialog-rows tr').count()==3
             assert len(list((workspace.output/'copies').rglob('*.pdf')))==2
             checks.append('two_real_linearized_copies_published_with_proof')
