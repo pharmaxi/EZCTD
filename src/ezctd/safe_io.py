@@ -56,22 +56,26 @@ def validate_new_output(path: Path, *, inputs: Iterable[Path] = (),
     return target
 
 
-def write_new_text(path: Path, text: str, *, inputs: Iterable[Path] = (),
-                   input_roots: Iterable[Path] = ()) -> Path:
+def write_new_bytes(path: Path, data: bytes, *, inputs: Iterable[Path] = (),
+                    input_roots: Iterable[Path] = ()) -> Path:
     protected = tuple(inputs)
     roots = tuple(input_roots)
     target = validate_new_output(path, inputs=protected, input_roots=roots)
     target.parent.mkdir(parents=True, exist_ok=True)
     validate_new_output(target, inputs=protected, input_roots=roots)
-    fd, temporary = tempfile.mkstemp(prefix='.ezctd-report-', dir=target.parent)
+    fd, temporary = tempfile.mkstemp(prefix='.ezctd-output-', dir=target.parent)
     try:
-        with os.fdopen(fd, 'w', encoding='utf-8', newline='\n') as handle:
-            handle.write(text)
+        with os.fdopen(fd, 'wb') as handle:
+            handle.write(data)
             handle.flush()
             os.fsync(handle.fileno())
         validate_new_output(target, inputs=protected, input_roots=roots)
-        # Unlike POSIX rename/replace, link fails if a destination appeared.
         os.link(temporary, target)
     finally:
         os.unlink(temporary)
     return target
+
+
+def write_new_text(path: Path, text: str, *, inputs: Iterable[Path] = (),
+                   input_roots: Iterable[Path] = ()) -> Path:
+    return write_new_bytes(path, text.encode('utf-8'), inputs=inputs, input_roots=input_roots)

@@ -4,16 +4,20 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ezctd"
-version = "0.1.0.dev0"
-description = "Evidence-first read-only PDF preflight experiments for CDE eCTD"
+version = "0.2.1.dev0"
+description = "Local clinical CRO PDF inspection, page services and safe batch workbench"
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "Proprietary - private research repository" }
 authors = [{ name = "EZCTD project" }]
 dependencies = [
-  "pikepdf>=9,<11",
-  "pypdfium2>=4,<6",
+  "pikepdf>=10.5,<11",
+  "pypdfium2>=5.8,<6",
+  "Pillow>=11,<13",
 ]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
 
 [project.scripts]
 ezctd = "ezctd.cli:main"

@@ -14,6 +14,7 @@ class PdfContext:
     node_id: str | None = None
     document_role: str | None = None
     language: str | None = None
+    allowed_read_roots: tuple[Path, ...] = ()
 
     @property
     def relative_path(self) -> str:
@@ -76,7 +77,8 @@ class ScanResult:
     engine_status: str = "EXPERIMENTAL_CONTRACT_NOT_CDE_EQUIVALENCE"
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        from .assurance import assess_result
+        return assess_result({
             "profile_id": self.profile_id,
             "file": self.file,
             "context": self.context,
@@ -84,4 +86,4 @@ class ScanResult:
             "findings": [finding.to_dict() for finding in self.findings],
             "observations": self.observations,
             "engine_status": self.engine_status,
-        }
+        })

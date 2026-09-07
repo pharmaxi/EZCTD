@@ -13,26 +13,12 @@ import pikepdf
 import pypdfium2 as pdfium
 
 from .applicability import resolve as resolve_applicability
+from .read_scope import ReadScope
+from .pdf_resources import collect_page_resources, CDE_STANDARD_FONT_NAMES
 from .catalog import RuleCatalog
 from .models import Evidence, Finding, PdfContext, ScanDiagnostics, ScanResult
 
 ALLOWED_ACTIONS = {"/GoTo", "/GoToR", "/Launch"}
-BASE14_FONTS = {
-    "Courier",
-    "Courier-Bold",
-    "Courier-Oblique",
-    "Courier-BoldOblique",
-    "Helvetica",
-    "Helvetica-Bold",
-    "Helvetica-Oblique",
-    "Helvetica-BoldOblique",
-    "Times-Roman",
-    "Times-Bold",
-    "Times-Italic",
-    "Times-BoldItalic",
-    "Symbol",
-    "ZapfDingbats",
-}
 URI_SCHEME = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
 WINDOWS_ABSOLUTE = re.compile(r"^[A-Za-z]:[\\/]|^[\\/]{2}")
 FONT_OPERATOR = re.compile(rb"/([^\s<>\[\]()/%]+)\s+[-+]?(?:\d+(?:\.\d*)?|\.\d+)\s+Tf\b")
@@ -242,62 +228,73 @@ def _destination_zoom(pdf: pikepdf.Pdf, destination: Any) -> tuple[str | None, A
     mode = _name(resolved[1])
     if mode == "/XYZ":
         zoom = resolved[4] if len(resolved) > 4 else None
-        return mode, zoom, "inherit" if zoom is None else "explicit"
+        return mode, zoom, "inherit" if zoom is None or zoom == 0 else "explicit"
     if mode is not None:
         return mode, None, "fit-mode"
     return None, None, "unknown"
 
 
-def _destination_valid(pdf: pikepdf.Pdf, destination: Any, external_file: Path | None = None) -> tuple[bool, str]:
-    resolved = _resolve_named_destination(pdf, destination)
-    if resolved is None:
-        return False, "named destination not found or destination missing"
-    if not isinstance(resolved, pikepdf.Array) or len(resolved) < 2:
-        return False, "destination is not an explicit destination array"
-    first = resolved[0]
+def _destination_valid(pdf: pikepdf.Pdf, destination: Any, external_file: Path | None = None,
+                       read_scope: ReadScope | None = None) -> tuple[bool | None, str]:
     if external_file is not None:
-        if not external_file.exists():
-            return False, "target file does not exist"
-        if isinstance(first, int):
-            try:
-                with pikepdf.open(external_file) as target:
-                    if first < 0 or first >= len(target.pages):
-                        return False, "target page index is out of range"
-            except Exception as exc:
-                return False, f"target file cannot be opened: {type(exc).__name__}"
-        return True, "external target exists"
-    page_refs = {_object_ref(page.obj) for page in pdf.pages}
+        if read_scope is None:
+            return None, "target not authorized"
+        try:
+            authorized = read_scope.authorize(external_file)
+        except (ValueError, OSError):
+            return None, "target not provided or outside selected read roots"
+        try:
+            with pikepdf.open(authorized) as target:
+                resolved = _resolve_named_destination(target, destination)
+                if not isinstance(resolved, pikepdf.Array) or len(resolved) < 2:
+                    return False, "remote destination missing or malformed"
+                if isinstance(destination, (pikepdf.String, pikepdf.Name, str)):
+                    # A remote name resolves to a LOCAL destination in the target PDF.
+                    return _destination_valid(target, resolved)
+                if not isinstance(resolved[0], int):
+                    return False, "remote explicit destination needs a numeric page index"
+                return 0 <= resolved[0] < len(target.pages), "remote page index"
+        except Exception as exc:
+            return None, f"target could not be inspected: {type(exc).__name__}"
+    resolved = _resolve_named_destination(pdf, destination)
+    if not isinstance(resolved, pikepdf.Array) or len(resolved) < 2:
+        return False, "named destination missing or malformed"
+    first = resolved[0]
     if isinstance(first, int):
-        return (0 <= first < len(pdf.pages), "numeric page index")
-    if _object_ref(first) in page_refs:
-        return True, "page object exists"
-    return False, "target page object is not in the page tree"
+        return False, "local destination must reference a page object, not a numeric index"
+    return _object_ref(first) in {_object_ref(p.obj) for p in pdf.pages}, "local page reference"
+
+
+def _inspect_destination(pdf, context, item, scope):
+    destination = _destination_for(item)
+    action = _dict_get(item, "/A")
+    if _action_type(action) == "/GoToR":
+        resolved = scope.resolve_reference(context.file_path, _action_filespec(action))
+        if resolved.state != "AVAILABLE":
+            return None, resolved.state, None, None, "unresolved"
+        valid, reason = _destination_valid(pdf, destination, resolved.path, scope)
+        if valid is not True:
+            return valid, reason, None, None, "unresolved"
+        with pikepdf.open(scope.authorize(resolved.path)) as target:
+            mode, zoom, zoom_state = _destination_zoom(target, destination)
+        return valid, reason, mode, zoom, zoom_state
+    valid, reason = _destination_valid(pdf, destination)
+    mode, zoom, zoom_state = _destination_zoom(pdf, destination)
+    return valid, reason, mode, zoom, zoom_state
 
 
 def _path_kind(raw: str | None) -> str:
     if not raw:
         return "missing"
     value = raw.strip()
+    if WINDOWS_ABSOLUTE.match(value):
+        return "windows-absolute"
     if URI_SCHEME.match(value):
         scheme = urlparse(value).scheme.lower()
         return "file-uri" if scheme == "file" else "uri"
-    if WINDOWS_ABSOLUTE.match(value):
-        return "windows-absolute"
     if value.startswith("/"):
         return "posix-absolute"
     return "relative"
-
-
-def _relative_target(context: PdfContext, raw: str) -> tuple[Path, bool]:
-    normalized = raw.replace("\\", "/")
-    pure = PurePosixPath(normalized)
-    target = (context.file_path.parent / Path(*pure.parts)).resolve()
-    try:
-        target.relative_to(context.submission_root.resolve())
-        inside = True
-    except ValueError:
-        inside = False
-    return target, inside
 
 
 def _external_target(context: PdfContext, action: Any) -> tuple[bool, str, str | None]:
@@ -310,10 +307,8 @@ def _external_target(context: PdfContext, action: Any) -> tuple[bool, str, str |
         kind = _path_kind(raw)
         if kind in {"uri", "file-uri", "windows-absolute", "posix-absolute"}:
             return True, f"{action_type} {kind}", raw
-        if raw:
-            _, inside = _relative_target(context, raw)
-            if not inside:
-                return True, f"{action_type} path escapes submission root", raw
+        # A relative target outside a partial CRO delivery is not automatically
+        # outside the applicant's complete submission. Do not classify or read it.
     return False, "not identified as external", _action_filespec(action)
 
 
@@ -370,22 +365,22 @@ def _qpdf_check(path: Path) -> tuple[str, str]:
 
 
 def _pdfium_probe(path: Path, password: str | None = None) -> tuple[str, str]:
+    from contextlib import closing
     try:
         kwargs: dict[str, Any] = {}
         if password is not None:
             kwargs["password"] = password
-        document = pdfium.PdfDocument(str(path), **kwargs)
-        if len(document) == 0:
-            document.close()
-            return "FAIL", "PDFium reports zero pages"
-        for index in sorted({0, len(document) - 1}):
-            page = document[index]
-            bitmap = page.render(scale=0.25)
-            image = bitmap.to_pil()
-            image.load()
-            page.close()
-        document.close()
-        return "PASS", "first/last pages rendered"
+        with closing(pdfium.PdfDocument(str(path), **kwargs)) as document:
+            if len(document) == 0:
+                return "FAIL", "PDFium reports zero pages"
+            for index in sorted({0, len(document) - 1}):
+                with closing(document[index]) as page:
+                    width, height = page.get_size()
+                    if width <= 0 or height <= 0 or width * height * 0.0625 > 16_000_000:
+                        return "LIMIT", "PDFium diagnostic render size limit"
+                    with closing(page.render(scale=0.25)) as bitmap:
+                        bitmap.to_pil().load()
+        return "PASS", "first/last pages rendered; not an all-page validation"
     except Exception as exc:
         return "FAIL", f"{type(exc).__name__}: {exc}"
 
@@ -421,6 +416,8 @@ class ExperimentalPdfObserver:
         self.catalog = catalog
 
     def scan(self, context: PdfContext) -> ScanResult:
+        scope = ReadScope(context.allowed_read_roots or (context.submission_root,))
+        scope.authorize(context.file_path)
         findings: dict[str, Finding] = {}
         observations: dict[str, Any] = {
             "file_size": context.file_path.stat().st_size,
@@ -455,7 +452,8 @@ class ExperimentalPdfObserver:
             else:
                 findings[rule_id].evidence.extend(evidence)
 
-        header = context.file_path.read_bytes()[:32]
+        with context.file_path.open("rb") as source_stream:
+            header = source_stream.read(32)
         match = PDF_HEADER.search(header)
         observations["header_version"] = match.group(1).decode("ascii") if match else None
         qpdf_status, qpdf_detail = _qpdf_check(context.file_path)
@@ -523,12 +521,19 @@ class ExperimentalPdfObserver:
         try:
             page_count = len(pdf.pages)
             observations["page_count"] = page_count
+            observations["digital_signature_signals"] = [
+                _object_ref(obj) for obj in pdf.objects
+                if _dict_get(obj, "/ByteRange") is not None or _name(_dict_get(obj, "/FT")) == "/Sig"
+            ]
+            observations["page_boxes"] = [{"page": i, "MediaBox": [float(x) for x in page.mediabox],
+                                             "CropBox": [float(x) for x in page.cropbox], "Rotate": int(page.obj.get("/Rotate", 0))}
+                                            for i, page in enumerate(pdf.pages, 1)]
             if page_count == 0:
                 add("6.1", "PDF has zero pages.", [Evidence("page_count", 0)])
 
             pdfium_status, pdfium_detail = _pdfium_probe(context.file_path, password="" if encrypted else None)
             observations["pdfium_detail"] = pdfium_detail
-            if pdfium_status != "PASS" and page_count > 0:
+            if pdfium_status == "FAIL" and page_count > 0:
                 add(
                     "6.1",
                     "PDF parses structurally but cannot be rendered by the independent PDFium probe.",
@@ -562,15 +567,6 @@ class ExperimentalPdfObserver:
                         "Bookmark file target is not a relative path.",
                         [Evidence("bookmark-path", {"path": filespec, "kind": path_kind}, object_ref=object_ref)],
                     )
-                elif action_type in {"/GoToR", "/Launch"} and filespec:
-                    _, inside = _relative_target(context, filespec)
-                    if not inside:
-                        add(
-                            "6.2",
-                            "Bookmark relative path escapes the submission root.",
-                            [Evidence("bookmark-path", filespec, object_ref=object_ref)],
-                            confidence="medium",
-                        )
 
                 is_external, reason, raw_target = _external_target(context, action)
                 if is_external:
@@ -592,22 +588,17 @@ class ExperimentalPdfObserver:
 
                 destination = _destination_for(item)
                 if destination is not None:
-                    external_file: Path | None = None
-                    if action_type == "/GoToR" and filespec:
-                        if _path_kind(filespec) == "relative":
-                            external_file, _ = _relative_target(context, filespec)
-                        else:
-                            external_file = Path(PureWindowsPath(filespec)) if WINDOWS_ABSOLUTE.match(filespec) else Path(filespec)
-                    valid, reason = _destination_valid(pdf, destination, external_file)
-                    if not valid:
+                    valid, reason, mode, zoom, zoom_state = _inspect_destination(pdf, context, item, scope)
+                    if valid is None:
+                        observations.setdefault("unresolved_targets", []).append({"object_ref": object_ref, "state": reason})
+                    if valid is False:
                         add(
                             "6.6",
                             "Bookmark target is missing or damaged.",
                             [Evidence("bookmark-destination", reason, object_ref=object_ref)],
                         )
 
-                    mode, zoom, zoom_state = _destination_zoom(pdf, destination)
-                    if zoom_state != "inherit":
+                    if valid is not None and zoom_state != "inherit":
                         add(
                             "6.8",
                             "Bookmark destination does not use Inherit Zoom.",
@@ -647,15 +638,6 @@ class ExperimentalPdfObserver:
                         "Hyperlink file target is not a relative path.",
                         [Evidence("link-path", {"path": filespec, "kind": path_kind}, object_ref=object_ref, page=page_number)],
                     )
-                elif action_type in {"/GoToR", "/Launch"} and filespec:
-                    _, inside = _relative_target(context, filespec)
-                    if not inside:
-                        add(
-                            "6.9",
-                            "Hyperlink relative path escapes the submission root.",
-                            [Evidence("link-path", filespec, object_ref=object_ref, page=page_number)],
-                            confidence="medium",
-                        )
 
                 is_external, reason, raw_target = _external_target(context, action)
                 if is_external:
@@ -681,21 +663,16 @@ class ExperimentalPdfObserver:
 
                 destination = _destination_for(annot)
                 if destination is not None:
-                    external_file = None
-                    if action_type == "/GoToR" and filespec:
-                        if _path_kind(filespec) == "relative":
-                            external_file, _ = _relative_target(context, filespec)
-                        else:
-                            external_file = Path(PureWindowsPath(filespec)) if WINDOWS_ABSOLUTE.match(filespec) else Path(filespec)
-                    valid, reason = _destination_valid(pdf, destination, external_file)
-                    if not valid:
+                    valid, reason, mode, zoom, zoom_state = _inspect_destination(pdf, context, annot, scope)
+                    if valid is None:
+                        observations.setdefault("unresolved_targets", []).append({"object_ref": object_ref, "state": reason})
+                    if valid is False:
                         add(
                             "6.13",
                             "Hyperlink target is missing or damaged.",
                             [Evidence("link-destination", reason, object_ref=object_ref, page=page_number)],
                         )
-                    mode, zoom, zoom_state = _destination_zoom(pdf, destination)
-                    if zoom_state != "inherit":
+                    if valid is not None and zoom_state != "inherit":
                         add(
                             "6.15",
                             "Hyperlink destination does not use Inherit Zoom.",
@@ -804,36 +781,32 @@ class ExperimentalPdfObserver:
                 )
 
             font_evidence: list[Evidence] = []
+            observations["fonts"] = []
+            observations["resource_inspection_issues"] = []
             for page_number, page in enumerate(pdf.pages, 1):
-                used_names = {name.decode("latin-1") for name in FONT_OPERATOR.findall(_page_content_bytes(page))}
-                resources = _dict_get(page.obj, "/Resources")
-                fonts = _dict_get(resources, "/Font")
-                if fonts is None:
-                    continue
-                for resource_name in sorted(used_names):
-                    font = _dict_get(fonts, f"/{resource_name}")
-                    if font is None:
-                        continue
+                resources = collect_page_resources(page)
+                observations["resource_inspection_issues"].extend(resources["issues"])
+                for entry in resources["fonts"]:
+                    font = entry["font"]
                     base_font = _base_font_name(font)
-                    if base_font in BASE14_FONTS:
-                        continue
-                    if not _font_embedded(font):
-                        font_evidence.append(
-                            Evidence(
-                                "unembedded-nonstandard-font",
-                                {"resource": resource_name, "base_font": base_font, "subtype": _name(_dict_get(font, "/Subtype"))},
-                                object_ref=_object_ref(font),
-                                page=page_number,
-                            )
-                        )
+                    record = {"page": page_number, "resource": entry["name"],
+                              "object_ref": _object_ref(font), "raw_basefont": str(font.get("/BaseFont", "")),
+                              "basefont_without_subset": base_font, "embedded": _font_embedded(font),
+                              "cde_name_exact_match": base_font in CDE_STANDARD_FONT_NAMES}
+                    observations["fonts"].append(record)
+                    if not record["embedded"] and not record["cde_name_exact_match"]:
+                        font_evidence.append(Evidence("unembedded-name-not-in-cde-list", record,
+                                                      object_ref=_object_ref(font), page=page_number))
             if font_evidence:
-                add("6.26", "A used non-standard font lacks an embedded font program.", font_evidence)
+                add("6.26", "Unembedded font names need review against the CDE list; aliases are not automatically equivalent.",
+                    font_evidence, confidence="medium")
 
             diagnostics = ScanDiagnostics("PASS", qpdf_status, pdfium_status, encrypted, False, warnings)
         finally:
             pdf.close()
 
-        observations["rules_evaluated"] = [f"6.{number}" for number in range(1, 27)]
+        observations["legacy_rule_catalog_size"] = 26
+        observations["rules_evaluated"] = []  # populated only by explicit per-rule assurance
         return ScanResult(
             self.catalog.profile_id,
             context.relative_path,

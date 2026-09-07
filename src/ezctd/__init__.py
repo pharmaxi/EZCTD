@@ -2,7 +2,6 @@
 
 from .catalog import RuleCatalog, RuleMetadata
 from .models import Evidence, Finding, PdfContext, ScanDiagnostics, ScanResult
-from .pdf_observer import ExperimentalPdfObserver
 
 __all__ = [
     "Evidence",
@@ -14,3 +13,11 @@ __all__ = [
     "ScanDiagnostics",
     "ScanResult",
 ]
+
+
+def __getattr__(name: str):
+    # Importers and the parent process do not load native PDF engines.
+    if name == "ExperimentalPdfObserver":
+        from .pdf_observer import ExperimentalPdfObserver
+        return ExperimentalPdfObserver
+    raise AttributeError(name)

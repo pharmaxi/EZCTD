@@ -13,6 +13,7 @@ REFERENCE_EXEMPT_RULES = {f"6.{number}" for number in range(2, 21)} | {"6.24", "
 class Applicability:
     applicable: bool
     reason: str
+    known: bool = True
 
 
 def _is_foreign_reference(context: PdfContext) -> bool:
@@ -38,7 +39,7 @@ def resolve(rule_id: str, context: PdfContext) -> Applicability:
     if rule_id in REFERENCE_EXEMPT_RULES and _is_reference_context(context):
         return Applicability(False, "official reference/foreign-reference exemption")
 
-    if rule_id == "6.22" and (node in FAST_WEB_VIEW_EXEMPT_NODES or _is_reference_context(context)):
+    if rule_id == "6.22" and (any(node == item or node.startswith(item + ".") for item in FAST_WEB_VIEW_EXEMPT_NODES) or _is_reference_context(context)):
         return Applicability(False, "official Fast Web View node/reference exemption")
 
     if rule_id == "6.23":
@@ -47,4 +48,6 @@ def resolve(rule_id: str, context: PdfContext) -> Applicability:
         if node == "1.2" or role in {"application-form", "application"}:
             return Applicability(False, "official application-form exemption")
 
+    if rule_id not in {"6.1", "6.21"} and (not node or not context.language):
+        return Applicability(True, "partial CRO context; node or language not confirmed", known=False)
     return Applicability(True, "no implemented exemption matched")

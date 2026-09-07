@@ -59,7 +59,7 @@ def test_reject_linked_parent(tmp_path):
 def test_publish_complete_new_file_and_reject_second_write(tmp_path):
     output = tmp_path / 'out' / 'report.json'
     write_new_text(output, '{"ok":true}')
-    assert json.loads(output.read_text()) == {'ok': True}
+    assert json.loads(output.read_text(encoding="utf-8")) == {'ok': True}
     with pytest.raises(UnsafeOutputError): write_new_text(output, 'bad')
     assert len(list(output.parent.iterdir())) == 1
 
@@ -133,22 +133,18 @@ def test_import_cli_preserves_input_and_uses_no_pdf_dependencies(tmp_path):
     source.write_bytes(sample_report()); before = source.read_bytes(); out = tmp_path / 'out.json'
     assert main(['import-cde-report', str(source), '--output', str(out)]) == 0
     assert source.read_bytes() == before
-    p = json.loads(out.read_text()); assert p['input_integrity']['unchanged'] is True
+    p = json.loads(out.read_text(encoding="utf-8")); assert p['input_integrity']['unchanged'] is True
     assert p['detail_totals_reconciled'] == {'提示信息': 0, '警告': 0, '错误': 1}
 
 
-def test_unqualified_clean_scan_not_success_code(tmp_path, monkeypatch):
-    catalog = types.ModuleType('ezctd.catalog')
-    catalog.RuleCatalog = type('Catalog', (), {'from_json': staticmethod(lambda p: object())})
-    model = types.ModuleType('ezctd.models'); model.PdfContext = lambda **kw: kw
-    observer = types.ModuleType('ezctd.pdf_observer')
-    observer.ExperimentalPdfObserver = lambda c: types.SimpleNamespace(scan=lambda ctx: types.SimpleNamespace(to_dict=lambda: {'findings': []}))
-    for name, module in [('catalog', catalog), ('models', model), ('pdf_observer', observer)]:
-        monkeypatch.setitem(sys.modules, 'ezctd.' + name, module)
-    folder = tmp_path / 'input'; folder.mkdir(); source = folder / 'sample.pdf'; source.write_bytes(b'unit-test-stub')
+def test_unqualified_clean_scan_not_success_code(tmp_path, pdf_factory):
+    # Actual native worker: missing submission context is not a clean result.
+    source = pdf_factory(tmp_path / 'input' / 'sample.pdf')
     out = tmp_path / 'out.json'
-    assert main(['scan-pdf', str(source), '--rulepack', str(tmp_path / 'dummy'), '--output', str(out)]) == 3
-    assert json.loads(out.read_text())['compliance_conclusion'] == 'NOT_ESTABLISHED'
+    assert main(['scan-pdf', str(source), '--output', str(out)]) == 3
+    result = json.loads(out.read_text(encoding='utf-8'))
+    assert result['compliance_conclusion'] == 'NOT_ESTABLISHED'
+    assert any(row['status'] == 'INDETERMINATE' for row in result['rule_evaluations'])
 
 
 def test_missing_input_explicit_error(tmp_path):
