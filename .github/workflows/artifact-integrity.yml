@@ -1,40 +1,68 @@
 name: Artifact integrity
-
 on:
   push:
     branches: [main, "agent/**"]
   pull_request:
     branches: [main]
-
 permissions:
   contents: read
-
 jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements-corpus.txt
-
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Validate planning artifacts
         run: python scripts/validate_artifacts.py
-
       - name: Validate P0-B0 rule matrix
         run: python scripts/validate_p0b0_matrix.py
-
       - name: Install synthetic corpus dependencies
-        run: python -m pip install --disable-pip-version-check -r requirements-corpus.txt
-
+        run: python -m pip install -r requirements-corpus.txt
       - name: Generate P0-B0 smoke corpus
         run: python tools/corpus/build_pdf_fixtures.py --output tests/corpus/generated-smoke --mode smoke
-
       - name: Inspect generated PDF structures
         run: python scripts/inspect_p0b0_smoke.py
+  cro-core:
+    if: github.ref == 'refs/heads/agent/cro-pdf-safety-intake'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install core and focused test dependencies
+        run: python -m pip install -e . pytest Pillow "pikepdf==10.5.0"
+      - name: Prepare evidence directory
+        run: python -c "from pathlib import Path; Path('build/cro-core').mkdir(parents=True, exist_ok=True)"
+      - name: Focused safety and PDF core tests
+        run: python -m pytest -q tests/cro_pdf --junitxml=build/cro-core/junit.xml
+      - name: Preserve tested source and dependency versions
+        if: always()
+        shell: bash
+        run: |
+          git archive HEAD -o build/cro-core/source.zip
+          git rev-parse HEAD > build/cro-core/source-commit.txt
+          python -m pip freeze > build/cro-core/dependencies.txt
+      - name: Export public binary wheel for isolated Linux development
+        if: runner.os == 'Linux'
+        run: python -m pip download --no-deps --only-binary=:all: --platform manylinux_2_28_x86_64 --python-version 313 --implementation cp --abi cp313 --dest build/cro-core/wheels "pikepdf==10.5.0"
+      - name: Preserve core test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cro-pdf-core-${{ runner.os }}
+          path: build/cro-core/
+          retention-days: 30
+          if-no-files-found: error
