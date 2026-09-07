@@ -23,7 +23,7 @@ MAX_HITS = 500
 
 
 def page_operation(path: Path, *, page_number: int, query: str | None = None,
-                   render: bool = False, dpi: int = 120) -> dict:
+                   render: bool = False, dpi: int = 120, include_text: bool = False) -> dict:
     source = selected_path(path)
     if page_number < 1:
         raise ValueError('Physical page number is 1-based')
@@ -54,20 +54,7 @@ def page_operation(path: Path, *, page_number: int, query: str | None = None,
                 'input_sha256': before,
                 'compliance_conclusion': 'NOT_ESTABLISHED',
             }
-            if render:
-                if not all(math.isfinite(v) and v > 0 for v in (width, height)):
-                    raise ValueError('Invalid page dimensions')
-                w = math.ceil(width * dpi / 72)
-                h = math.ceil(height * dpi / 72)
-                if not all(math.isfinite(v) and v > 0 for v in (width, height)) or w * h > MAX_PIXELS:
-                    raise ValueError('Rendered page exceeds the pixel limit')
-                with closing(page.render(scale=dpi / 72)) as bitmap:
-                    image = bitmap.to_pil()
-                    buffer = BytesIO()
-                    image.save(buffer, format='PNG')
-                    result.update({'width_px': image.width, 'height_px': image.height,
-                                   'dpi': dpi, 'png_base64': base64.b64encode(buffer.getvalue()).decode('ascii')})
-            else:
+            if not render or include_text:
                 with closing(page.get_textpage()) as textpage:
                     if textpage.count_chars() > MAX_TEXT_CHARS:
                         raise ValueError('Page exceeds the text extraction limit')
@@ -86,6 +73,28 @@ def page_operation(path: Path, *, page_number: int, query: str | None = None,
                                 boxes = [list(textpage.get_charbox(i)) for i in range(start, start + count)]
                                 result['search_matches'].append({'char_index': start, 'char_count': count,
                                                                  'rectangles': boxes})
+            if render:
+                if not all(math.isfinite(v) and v > 0 for v in (width, height)):
+                    raise ValueError('Invalid page dimensions')
+                w = math.ceil(width * dpi / 72)
+                h = math.ceil(height * dpi / 72)
+                if not all(math.isfinite(v) and v > 0 for v in (width, height)) or w * h > MAX_PIXELS:
+                    raise ValueError('Rendered page exceeds the pixel limit')
+                with closing(page.render(scale=dpi / 72)) as bitmap:
+                    image = bitmap.to_pil()
+                    buffer = BytesIO()
+                    image.save(buffer, format='PNG')
+                    converter = bitmap.get_posconv(page)
+                    for match in result.get('search_matches', []):
+                        converted = []
+                        for left, bottom, right, top in match['rectangles']:
+                            corners = [converter.to_bitmap(x, y) for x, y in
+                                       ((left, bottom), (left, top), (right, bottom), (right, top))]
+                            xs, ys = zip(*corners)
+                            converted.append([min(xs), min(ys), max(xs), max(ys)])
+                        match['rectangles_px'] = converted
+                    result.update({'width_px': image.width, 'height_px': image.height,
+                                   'dpi': dpi, 'png_base64': base64.b64encode(buffer.getvalue()).decode('ascii')})
     after = sha256_file(source)
     if after != before:
         raise RuntimeError('Input changed while reading; discard this page result')

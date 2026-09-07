@@ -1,7 +1,8 @@
-"""Bounded disposable processes; not a security sandbox.
+"""Disposable native workers with cancellation, wall time and output limits.
 
-Native crashes and wall-clock timeouts do not terminate the batch parent.
-No shell interpolation and no arbitrary worker module selection are exposed.
+No shell interpolation. This is failure isolation, not an OS security sandbox.
+The parent never loads PDF engines. Temporary stdout/stderr are bounded while
+workers run, not only after they exit.
 """
 from __future__ import annotations
 
@@ -11,36 +12,67 @@ import signal
 import subprocess
 import sys
 import tempfile
+import time
 
 MAX_OUTPUT = 48 * 1024 * 1024
+MAX_STDERR = 2 * 1024 * 1024
 
 
-def run_worker(request: dict, *, timeout: float = 60) -> dict:
+def _terminate(proc) -> None:
+    if proc.poll() is not None:
+        return
+    if os.name == 'nt':
+        try:
+            subprocess.run(['taskkill', '/PID', str(proc.pid), '/T', '/F'],
+                           capture_output=True, timeout=10, check=False)
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+    else:
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    if proc.poll() is None:
+        proc.kill()
+    proc.wait(timeout=10)
+
+
+def run_worker(request: dict, *, timeout: float = 60, cancel_event=None) -> dict:
     if not 0 < timeout <= 600:
         raise ValueError('Worker timeout must be greater than zero and at most 600 seconds')
+    data = json.dumps(request, allow_nan=False).encode('utf-8')
+    if len(data) > 65536:
+        raise ValueError('Worker request exceeds 64 KiB')
+    if cancel_event is not None and cancel_event.is_set():
+        return {'worker_status': 'CANCELLED', 'message': 'Cancelled before worker launch'}
     flags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0
+    started = time.monotonic()
     with tempfile.TemporaryFile() as output, tempfile.TemporaryFile() as errors:
         proc = subprocess.Popen([sys.executable, '-m', 'ezctd.worker'], stdin=subprocess.PIPE,
                                 stdout=output, stderr=errors, start_new_session=os.name != 'nt',
                                 creationflags=flags)
+        pending = data
         try:
-            proc.communicate(json.dumps(request).encode('utf-8'), timeout=timeout)
-        except subprocess.TimeoutExpired:
-            if os.name == 'nt':
-                subprocess.run(['taskkill', '/PID', str(proc.pid), '/T', '/F'],
-                               capture_output=True, timeout=10, check=False)
-            else:
-                os.killpg(proc.pid, signal.SIGKILL)
-            proc.kill()
-            proc.wait(timeout=10)
-            return {'worker_status': 'TIMEOUT', 'message': 'Native worker exceeded its time limit'}
+            while True:
+                reason = None
+                if cancel_event is not None and cancel_event.is_set():
+                    reason = ('CANCELLED', 'Cancelled; unverified output is not published')
+                elif time.monotonic() - started >= timeout:
+                    reason = ('TIMEOUT', 'Native worker exceeded its time limit')
+                elif os.fstat(output.fileno()).st_size > MAX_OUTPUT or os.fstat(errors.fileno()).st_size > MAX_STDERR:
+                    reason = ('OUTPUT_LIMIT', 'Worker output exceeded the configured limit')
+                if reason:
+                    _terminate(proc)
+                    return {'worker_status': reason[0], 'message': reason[1]}
+                try:
+                    proc.communicate(pending, timeout=min(0.1, max(0.001, timeout - (time.monotonic() - started))))
+                    break
+                except subprocess.TimeoutExpired:
+                    pending = None
         except BaseException:
-            if os.name != 'nt':
-                os.killpg(proc.pid, signal.SIGKILL)
-            proc.kill()
-            proc.wait(timeout=10)
+            _terminate(proc)
             raise
-        if output.tell() > MAX_OUTPUT:
+        if os.fstat(output.fileno()).st_size > MAX_OUTPUT or os.fstat(errors.fileno()).st_size > MAX_STDERR:
             return {'worker_status': 'OUTPUT_LIMIT', 'message': 'Worker output exceeded the configured limit'}
         output.seek(0)
         try:

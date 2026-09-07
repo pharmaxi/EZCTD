@@ -16,6 +16,9 @@ def _default_rulepack() -> Path:
     for candidate in (Path.cwd() / relative, Path(__file__).resolve().parents[2] / relative):
         if candidate.is_file():
             return candidate
+    bundled = Path(__file__).parent / 'data' / 'cde_ectd_v1_1.json'
+    if bundled.is_file():
+        return bundled
     raise FileNotFoundError('verified CDE V1.1 rulepack not found; pass --rulepack')
 
 
@@ -37,6 +40,14 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument('--rulepack', type=Path)
         command.add_argument('--timeout', type=float, default=60)
         command.add_argument('--output', type=Path, required=command is batch)
+    for name in ('inspect-copy', 'linearize-copy'):
+        copy = sub.add_parser(name, help='Inspect guards or produce one verified unsigned PDF copy')
+        copy.add_argument('pdf', type=Path)
+        copy.add_argument('--output', type=Path, required=name == 'linearize-copy')
+        copy.add_argument('--timeout', type=float, default=300)
+        if name == 'linearize-copy':
+            copy.add_argument('--expected-sha256', required=True)
+            copy.add_argument('--approve', action='store_true')
     report = sub.add_parser('import-cde-report', help='Import section 6; never open linked files')
     report.add_argument('report', type=Path)
     report.add_argument('--output', type=Path, required=True)
@@ -70,6 +81,25 @@ def _stdout(text: str) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command in ('inspect-copy', 'linearize-copy'):
+            from .copy_service import inspect_linearization, linearize_copy
+            source = selected_path(args.pdf)
+            roots = (source.parent,)
+            expected = sha256_file(source)
+            if args.command == 'linearize-copy':
+                if not args.approve:
+                    raise ValueError('Explicit --approve is required after reviewing inspect-copy output')
+                if args.expected_sha256 != expected:
+                    raise ValueError('Input differs from reviewed identity')
+                result = linearize_copy(source, args.output, roots=roots, expected=expected, timeout=args.timeout)
+            else:
+                result = inspect_linearization(source, roots=roots, expected=expected, timeout=args.timeout)
+            text = json.dumps(result, ensure_ascii=False, indent=2) + '\n'
+            if args.command == 'inspect-copy' and args.output:
+                write_new_text(args.output, text, inputs=(source,), input_roots=roots)
+            else:
+                _stdout(text)
+            return 0 if result.get('eligibility') != 'BLOCKED' else 3
         if args.command == 'scan-directory':
             from .batch import scan_directory, render_batch_html
             root = selected_path(args.root, directory=True)

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ezctd"
-version = "0.2.1.dev0"
+version = "0.3.0.dev0"
 description = "Local clinical CRO PDF inspection, page services and safe batch workbench"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -18,9 +18,11 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]
+ui-test = ["playwright>=1.50,<2"]
 
 [project.scripts]
 ezctd = "ezctd.cli:main"
+ezctd-workbench = "ezctd.workbench:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ezctd"]
