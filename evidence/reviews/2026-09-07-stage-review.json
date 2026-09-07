@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "review_date": "2026-09-07",
+  "reviewed_commit": "8d2bf4457c6423c02dcddf4cb92f3bd6e72b294a",
+  "application_modified": false,
+  "official_validator_executed_this_review": false,
+  "full_scanner_test_rerun": false,
+  "full_scanner_test_limitation": "pikepdf missing; pip failed due to network name resolution",
+  "cumulative_official_observations_from_repository": 4,
+  "raw_transactions_independently_rechecked_this_review": 2,
+  "pdf_rule_calibration_pairs": 0,
+  "pull_requests_all_states_query_result": [],
+  "matrix_header_counts": {"cases":163,"implemented_fixture_recipes":130,"specified_fixture_recipes":22,"blocked_fixture_recipes":11},
+  "matrix_count_status": "METADATA_READ_NOT_EXECUTION_PROOF",
+  "cli_boundary_test": {
+    "source_git_blob_sha1": "83cfc668889675be12b2b090a6b62422d8657626",
+    "source_identity_verified": true,
+    "test_level": "CLI_UNIT_ISOLATION_WITH_STUBBED_PARSER",
+    "full_pdf_scanner_executed": false,
+    "all_test_inputs_synthetic_temporary": true,
+    "input_before_sha256": "25c2255cff34a857d96558f1c79e7d271e0b6d4887d1ede7896e70c11911f30e",
+    "input_after_sha256": "688fd48dbcc188f5d75f26c7d1165338ce5398d9df2e5e0b399fca66818ac236",
+    "cases": [
+      {"case":"same_path","status":"DEFECT_REPRODUCED","input_changed":true,"exit_code":0},
+      {"case":"hardlink_alias","status":"DEFECT_REPRODUCED","input_changed":true,"exit_code":0},
+      {"case":"symlink_alias","status":"DEFECT_REPRODUCED","input_changed":true,"exit_code":0}
+    ]
+  },
+  "findings": [
+    {"id":"F01","priority":"critical","evidence":"isolated_cli_reproduction","title":"CLI report output overwrites input PDF"},
+    {"id":"F02","priority":"high","evidence":"static_code_review","title":"Out-of-scope PDF target can still be read"},
+    {"id":"F03","priority":"high","evidence":"code_and_official_rule","title":"PDF Base-14 substituted for CDE font policy"},
+    {"id":"F04","priority":"high","evidence":"static_code_review","title":"Incomplete evaluation reported as all rules evaluated"},
+    {"id":"F05","priority":"high","evidence":"static_code_review","title":"Remote named destination resolved in source PDF"},
+    {"id":"F06","priority":"high","evidence":"official_rule_and_experiment_plan","title":"ANDA completeness and cover-letter exemption invalidate universal fixture"},
+    {"id":"F07","priority":"high","evidence":"official_rule_and_dependency_reasoning","title":"Mutations require checksum propagation, not unchanged XML"},
+    {"id":"F08","priority":"medium","evidence":"code_and_primary_documentation","title":"XYZ zoom zero incorrectly treated as explicit zoom"},
+    {"id":"F09","priority":"high","evidence":"raw_artifacts","title":"Empty inputs do not demonstrate PDF rule reachability"},
+    {"id":"F10","priority":"high","evidence":"live_repository_and_raw_artifacts","title":"Status drift, unsupported PR claim and incorrect historical digest"},
+    {"id":"F11","priority":"medium","evidence":"architecture_review","title":"Automation growth outpaces usable product"}
+  ],
+  "finding_disposition": "OPEN_NOT_FIXED",
+  "raw_artifacts": [
+    {"case":"0000","workflow_run":33830318274,"transaction_id":"cn-v11-probe-000-invalid-empty-root-20260904T024959Z","archive_sha256":"e192f292daa49b3047f06dd0ffb8e021ab552dd4e747e0b4ea7158ca872f0ca5","native_report_sha256":"e8c5926f3557ed460f4a417d898849c0601cbcfc04623c0f8c781db6027af620","native_totals":{"info":5,"warning":22,"error":96},"file_count":0,"pdf_section_messages":0},
+    {"case":"0001","workflow_run":33835247411,"artifact_id":9923087415,"archive_sha256":"2dc41a3e927d940f0c1f49191397b0c5132c466278e892ec366e34936148f555","native_report_sha256":"2db393c7bb6c5f72c36f367b7498904b8fee41f3a493ea954c3b588ad780dc2e","native_totals":{"info":5,"warning":22,"error":97},"file_count":0,"pdf_section_messages":0,"additional_rule":"2.10"}
+  ]
+}
