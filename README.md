@@ -1,84 +1,78 @@
-# EZCTD
+# EZCTD · 临床 CRO PDF 工作台
 
-**面向中国药品注册申报资料的本地、离线、规则驱动型 PDF 预检与安全批量修复工具。**
+**把实际持有的临床 PDF 做好：能看、能解析、能定位、能批量修改，并保留没有误改的证据。**
 
-> 当前阶段：立项与规则研究（P0 前置）  
-> 当前成果版本：v0.1 planning baseline  
-> 仓库属性：Private  
-> 当前不构成官方 CDE 验证器，也不保证资料通过受理或技术审评。
+重点是模块 **5、2.5、2.7**，可附带 CRO 实际提供的证明材料。无需完整申报资料、`index.xml`、`cn-regional.xml` 或有效 `0000` 序列。完整 eCTD 组装、生命周期和其他模块不再是本产品的开发前置条件。
 
-## 项目定位
+> 当前版本：`0.2.1.dev0`，原型开发中。当前工程分支：`agent/cro-pdf-safety-intake`。  
+> 已有：安全报告导入、独立进程批量只读扫描、逐规则状态、页面文本/搜索定位和 PNG 预览。  
+> 尚无：完整桌面界面、已发布的批量 PDF 修改器、Windows/NAS 产品级安全认证、官方规则等价性声明。
 
-EZCTD 首先解决申报 PDF 的实际批量处理问题：
-
-```text
-导入资料目录
-→ 按指定规则包扫描
-→ 定位 PDF、书签、链接、字体、OCR、签名及页面问题
-→ 生成分级修复计划
-→ 在独立输出目录执行
-→ 结构复验与页面渲染复验
-→ 输出可追溯报告
-→ 使用 CDE 官方软件最终交叉验证
-```
-
-完整 eCTD Publisher、生命周期管理、Word Sharper 和文档管理系统均不属于首个版本范围。
-
-## 当前成果
-
-| 路径 | 内容 | 状态 |
-|---|---|---|
-| `docs/prd/RegPDF_Workbench_CDE_eCTD_PRD_v0.1.md` | 初步完整 PRD：产品边界、监管基线、技术架构、难点、可行性、路线和测试策略 | Baseline |
-| `rulepacks/cn-cde-ectd/v1.1/cde_ectd_pdf_rules_v1.1_draft.json` | CDE/eCTD PDF 规则草案，共 26 条 | Draft / 待逐条回源验证 |
-| `PROJECT_STATUS.md` | 当前阶段、已完成事项和下一阶段入口 | Active |
-| `scripts/validate_artifacts.py` | 校验 PRD 与规则 JSON 的结构和一致性 | Active |
-
-## 核心原则
-
-1. **原件默认不覆盖。** 所有修改写入独立输出目录。
-2. **扫描、计划、批准、执行、复验分离。** 禁止扫描时直接修改。
-3. **签名文件默认只读。** 修改完成后再签章。
-4. **官方严重程度与产品修改风险分开。** “提示”不等于可以安全自动修改。
-5. **规则必须版本化并保留来源。** 正式规则、草案、行业偏好和产品护栏不能混称。
-6. **不能为追求“全绿”而删除语义不明的内容。**
-7. **本工具用于预检查和修复，最终仍以当前适用的 CDE 官方工具及正式要求为准。**
-
-## 第一开发目标
-
-首个纵向切片：
+## 从实际工作开始
 
 ```text
-只读 CLI Scanner
-→ 15–20 条证据充分的规则
-→ qpdf/pikepdf 结构分析
-→ PDFium 页面渲染
-→ 签名与加密阻断
-→ JSON/HTML 报告
-→ 与 CDE 官方验证结果建立映射
+临床 PDF 文件夹
+→ 可选导入官方 HTML 第 6 章
+→ 当前 PDF 重新扫描与页面定位
+→ 资料角色/适用性确认
+→ 批量修改计划（下一交付）
+→ 独立 PDF 副本及结构/视觉复验（下一交付）
+→ 交付申办方或资料整合方
 ```
 
-达到检测稳定后，才进入 Safe Batch Fixer。
+旧报告观察、当前文件检查、实际修改结果是三个不同对象。旧报告没有 PDF 哈希时，路径匹配只能视为候选。未提供的引用目标，不直接当作损坏；只有明确选择的读取目录才可以被访问。
 
-## 本地校验
+## 安装与现有命令
+
+在工程分支的源码根目录，使用 Python 3.12 或 3.13：
 
 ```bash
-python scripts/validate_artifacts.py
+python -m pip install -e ".[test]"
+python -m pytest -q tests/cro_pdf
+
+# 独立于 PDF 引擎，静态导入报告；不执行报告脚本或打开报告链接
+python -m ezctd import-cde-report /work/report.html --output /results/import.json
+
+# 不需要 XML；JSON 与 HTML 必须放在输入目录之外
+python -m ezctd scan-directory /work/clinical --output /results/scan.json --html /results/scan.html
+
+# 正式节点、角色和语言由用户确认；不从文件名静默推定
+python -m ezctd scan-pdf /work/clinical/report.pdf --node-id 5.3.1.2 --document-role clinical-report --language zh --output /results/one.json
+
+# 物理页码从 1 开始，搜索结果返回 PDF 字符坐标
+python -m ezctd inspect-page /work/clinical/report.pdf --page 2 --query 12.50 --output /results/page.json
+python -m ezctd render-page /work/clinical/report.pdf --page 2 --dpi 120 --output /results/page.png
 ```
 
-预期输出应确认：
+Windows 使用自己的盘符路径替换示例路径。命令显示的 `0` 只代表该项操作或有限检查成功，不代表申报合格；`1` 为存在明确本地问题，`2` 为入口/任务失败，`3` 为仍有未判定项，`130` 为取消。
 
-- PRD 存在且非空；
-- 规则 JSON 可解析；
-- 规则数为 26 且 ID 唯一；
-- 规则 profile 与当前研究基线一致。
+默认每个 PDF 独立进程，超时 60 秒，可通过 `--timeout` 设置为不超过 600 秒。当前不提供 OS 级内存/网络沙箱；扫描器的应用读取边界不等于抵御未知原生库漏洞。首次使用只处理合成或可丢弃副本。
 
-## 仓库约束
+## 部分资料上下文
 
-- 不提交真实申报资料、受试者信息、未脱敏项目文件、证书私钥或密码。
-- `evidence/` 仅存公开监管来源的登记信息、哈希和允许保存的公开文件。
-- 真实兼容性测试资料放在本地受控目录，不进入 Git。
-- 当前 PRD 中仍保留早期工作名 `RegPDF Workbench`；仓库与项目总名确定为 `EZCTD`，后续在正式规格冻结时统一命名。
+`scan-directory --context-map map.json` 使用**精确相对路径**，不是仅文件名：
 
-## 状态入口
+```json
+{
+  "fasting/report.pdf": {"node_id": "5.3.1.2", "document_role": "clinical-report", "language": "zh"},
+  "fed/report.pdf": {"node_id": "5.3.1.2", "document_role": "clinical-report", "language": "zh"}
+}
+```
 
-详见 [`PROJECT_STATUS.md`](PROJECT_STATUS.md) 和 [`docs/decisions/0001-project-scope-and-name.md`](docs/decisions/0001-project-scope-and-name.md)。
+`--reference-root` 可重复指定用户明确提供的只读依赖目录。它是读取授权，不证明完整申报范围。绝对路径、UNC 与 URI 不自动访问；链接路径未提供时单独报告。
+
+## 结果边界
+
+每个文件为 26 条规则分别保存 `PASS / FAIL / NOT_APPLICABLE / INDETERMINATE / NOT_RUN`。这里的 PASS 是本地有限条件完成，不是 CDE 官方通过。未证明穷尽的字体、可搜索性、动作链等检查保留未决状态，不再把无发现当作全部合格。
+
+页面预览和搜索是实际 PDFium 引擎能力，但尚不是桌面阅读器。坐标属于 PDF 页面空间，不是屏幕像素；物理页、页面标签和正文页码不能混用。当前没有修改任何用户真实临床 PDF。
+
+## 当前文档入口
+
+- [当前状态](PROJECT_STATUS.md)：事实、验证范围和未完成项。
+- [产品规格](docs/product/CRO_PDF_WORKBENCH_V0_2.md)：功能全景和 CRO 数据边界。
+- [交付路线](docs/roadmap/CRO_DELIVERY.md)：目录扫描 → 页面工作台 → 安全副本批处理。
+- [开发约束](AGENTS.md)：安全、测试和不得扩大的范围。
+- [阶段复盘](docs/reviews/2026-09-07-stage-retrospective.md)：此前发现及纠偏依据。
+
+历史 eCTD 研究、官方原始结果与技术包哈希保留，不改写为产品通过证据。真实报告、受试者标识、真实 PDF、证书私钥和密码不进入仓库；`.gitignore` 不是访问控制。

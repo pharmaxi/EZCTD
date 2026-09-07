@@ -1,6 +1,15 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.1.dev0] - 2026-09-07
+
+- 用户确认 CRO 部分资料方向，更新 README、AGENTS、当前规格与交付顺序；旧 P0 研究文档明确历史身份。
+- 加入目录独立进程扫描、逐规则完成状态、页面文本/搜索/渲染服务及中文 HTML/JSON。
+- 修正已知读取范围、远程命名目的地、缩放零值和字体名单问题；保留复杂语义未决状态。
+- 扩展真实引擎合成测试；修正 Windows UTF-8 测试读取；统一到既有 Artifact integrity CI。
+- 6 个语法无效的旧实验 workflow 原字节移入 archived-workflows；本轮重复草稿 workflow 删除。
+- 未交付桌面 GUI 和实际 PDF 修改器，未运行官方验证器或处理真实临床 PDF。
+
+## [Historical planning snapshot] - 2026-09-03
 
 ### Added
 
@@ -16,7 +25,7 @@
 - 增加 CDE eCTD验证软件 V1.1.0 黑盒验证协议、PowerShell证据采集脚本和观察JSON Schema。
 - 增加 P0-B0 Agent Loop 与第一次阶段复盘。
 
-### Known gaps
+### 当时记录的缺口（非当前状态）
 
 - CDE技术规范V1.1 RAR、目录映射XLSX、官方验证器V1.1.0安装包及手册尚未固化哈希。
 - 尚未完成官方验证器实测，所有`observed_cde`字段保持为空。
