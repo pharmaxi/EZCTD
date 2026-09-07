@@ -57,7 +57,8 @@ jobs:
           python -m pip freeze > build/cro-core/dependencies.txt
       - name: Export public binary wheel for isolated Linux development
         if: runner.os == 'Linux'
-        run: python -m pip download --no-deps --only-binary=:all: --platform manylinux_2_28_x86_64 --python-version 313 --implementation cp --abi cp313 --dest build/cro-core/wheels "pikepdf==10.5.0"
+        run: |
+          python -m pip download --no-deps --only-binary=:all: --platform manylinux_2_28_x86_64 --python-version 313 --implementation cp --abi cp313 --dest build/cro-core/wheels "pikepdf==10.5.0"
       - name: Preserve core test evidence
         if: always()
         uses: actions/upload-artifact@v4
