@@ -6,11 +6,24 @@ const state = {files: [], selected: new Set(), current: null, page: 1, count: 0,
   sequence: 0, lastJob: null, plan: null, session: null, polling: false};
 const statusLabels = {PASS: '本地条件满足', FAIL: '发现问题', NOT_APPLICABLE: '不适用',
   INDETERMINATE: '无法判定', NOT_RUN: '未运行'};
-const blockers = {SIGNATURE_SIGNAL: '发现数字签名信号', DOCUMENT_PERMISSIONS_SIGNAL: '存在文档权限信号',
+const blockers = {SIGNATURE_OR_PRIOR_REVISION_BYTE_SIGNAL: '发现签名或历史修订字节信号', SIGNATURE_SIGNAL: '发现数字签名信号', DOCUMENT_PERMISSIONS_SIGNAL: '存在文档权限信号',
   ENCRYPTED_OR_PERMISSION_RESTRICTED: '加密或权限限制', PASSWORD_REQUIRED: '需要密码',
   INTERACTIVE_FORM_OR_PORTFOLIO_NOT_SUPPORTED: '表单或文档组合不在本次处理范围',
   ACTIVE_CONTENT_NOT_SUPPORTED: '动态内容需单独复核', ATTACHMENTS_NOT_SUPPORTED_FOR_REWRITE: '含附件，暂不重写',
   SOURCE_SYNTAX_WARNINGS: '源文件结构警告', PAGE_LIMIT_OR_EMPTY_DOCUMENT: '页数超限或空文档'};
+
+const reasonLabels = {
+  'Exhaustive rule coverage has not been demonstrated': '当前检查尚未覆盖本条规则的全部情况。',
+  'Candidate finding requires semantic or technical review': '发现待复核项，需确认其技术含义和适用性。',
+  'Bounded local property check completed': '已完成本地有限属性检查。',
+  'Explicit local condition observed; official calibration not established': '已发现明确本地问题；尚未完成官方等价校准。'
+};
+const findingLabels = {
+  'PDF is not linearized for Fast Web View.': 'PDF 尚未启用快速 Web 查看。',
+  'Bookmark destination does not use Inherit Zoom.': '书签目标未使用承前缩放，需复核。',
+  'PDF initial view is inconsistent with the current experimental interpretation of bookmark visibility/default magnification/layout.': '初始视图与当前实验性解释不一致：涉及书签显示、默认缩放或布局，需复核。',
+  'Unembedded font names need review against the CDE list; aliases are not automatically equivalent.': '未嵌入字体需对照 CDE 名单复核；字体别名不能自动视为等价。'
+};
 
 function el(tag, text, cls) {
   const node = document.createElement(tag);
@@ -165,15 +178,22 @@ async function loadDetails() {
     if (!data.scan) $('issues').append(el('p', '尚未扫描。空列表不等于通过。', 'muted'));
     else {
       $('issues').append(el('h3', '本地逐规则检查'));
-      for (const evaluation of data.scan.rule_evaluations || []) {
+      const evaluations = data.scan.rule_evaluations || [];
+      const findings = data.scan.findings || [];
+      const rank = item => item.status === 'FAIL' ? 0 : item.status === 'NOT_RUN' ? 1 :
+        item.status === 'INDETERMINATE' ? (findings.some(f => f.rule_id === item.rule_id) ? 2 : 3) :
+        item.status === 'PASS' ? 4 : 5;
+      const ordered = [...evaluations].sort((a, b) => rank(a) - rank(b) || a.rule_id.localeCompare(b.rule_id, undefined, {numeric: true}));
+      $('issues').append(el('p', `${evaluations.filter(e => e.status === 'FAIL').length} 项问题 · ${evaluations.filter(e => e.status === 'INDETERMINATE').length} 项无法判定 · ${evaluations.filter(e => e.status === 'NOT_RUN').length} 项未运行。问题与待复核发现优先；完整状态仍保留。`, 'muted'));
+      for (const evaluation of ordered) {
         const row = el('div', undefined, 'rule-row');
         const heading = el('header');
         heading.append(el('b', evaluation.rule_id), el('span', statusLabels[evaluation.status] || evaluation.status,
           'state ' + (evaluation.status === 'FAIL' ? 'fail' : evaluation.status === 'PASS' ? 'pass' : 'pending')));
-        row.append(heading, el('p', evaluation.reason));
+        row.append(heading, el('p', reasonLabels[evaluation.reason] || evaluation.reason));
         const finding = (data.scan.findings || []).find(item => item.rule_id === evaluation.rule_id);
         if (finding) {
-          row.append(el('p', finding.message));
+          row.append(el('p', findingLabels[finding.message] || finding.message));
           for (const e of finding.evidence || []) {
             if (Number.isInteger(e.page) && e.page > 0) row.append(locateButton(e.page));
           }
@@ -183,6 +203,7 @@ async function loadDetails() {
         $('issues').append(row);
       }
     }
+    if (!data.report_items.length) $('report-issues').append(el('p', '当前文件没有原报告路径候选。可导入报告；没有观察不等于通过。', 'muted'));
     if (data.report_items.length) {
       $('report-issues').append(el('h3', '原报告观察 · 独立保留', 'report-heading'),
         el('p', '仅按完整相对路径形成候选；未证明报告中的文件与当前版本字节相同。坐标也尚未核实。', 'muted'));
@@ -307,6 +328,7 @@ $('report-file').addEventListener('change', safe(async event => {
   for (let i = 0; i < bytes.length; i += 32768) parts.push(String.fromCharCode(...bytes.subarray(i, i + 32768)));
   const result = await api('report', {report_base64: btoa(parts.join(''))});
   await refresh(); await loadDetails();
+  tab('report');
   const b = result.binding_summary;
   notice(`原报告已作为数据导入：${b.matched_observations} 条路径候选，${b.unmatched_observations} 条未提供或未映射。历史 PDF 字节身份尚未证明。` +
     (result.parse_state !== 'PARSED_COUNTS_RECONCILED' ? ' 报告解析不完整，不能视为全量导入。' : ''));

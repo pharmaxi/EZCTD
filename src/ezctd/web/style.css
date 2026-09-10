@@ -2,3 +2,16 @@
 
 /* The PDF may be wider than the viewport at explicit zoom; do not clip its left edge. */
 .page-stage{display:block;text-align:center}.page-stage canvas{margin:0 auto}#page-empty{margin:80px auto}
+
+/* Keep the reader and status within the actual desktop viewport. */
+@media(min-width:961px){
+  body{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+  body>header,.commandbar,.notice,.job-strip,body>footer{flex-shrink:0}
+  main,body:has(.job-strip:not([hidden])) main{flex:1;min-height:0;height:auto}
+}
+.rule-row p{font-size:13px;line-height:1.65;color:#4b5e75}
+.rule-row .state{font-weight:600}
+.rule-row:has(.state.fail){border-left:3px solid #af4239;padding-left:10px;background:#fff8f6}
+#report-issues .report-heading{margin-top:0;padding-top:0;border-top:0}
+
+#dialog-rows th:nth-child(2),#dialog-rows td:nth-child(2){min-width:110px;white-space:nowrap}
