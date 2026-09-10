@@ -1,0 +1,1371 @@
+{
+  "keys": [
+    "cv-application-type",
+    "cv-regulatory-activity-type",
+    "cv-sequence-type"
+  ],
+  "version": "1.1",
+  "valid_from": "2026-3-1",
+  "triples": [
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat5",
+      "regulatory_activity_label": {
+        "zh": "新适应症和联合用药",
+        "en": "New Indication and Drug Combination"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat5",
+      "regulatory_activity_label": {
+        "zh": "新适应症和联合用药",
+        "en": "New Indication and Drug Combination"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat5",
+      "regulatory_activity_label": {
+        "zh": "新适应症和联合用药",
+        "en": "New Indication and Drug Combination"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat7",
+      "regulatory_activity_label": {
+        "zh": "研发期间安全性报告",
+        "en": "Development Safety Report"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat7",
+      "regulatory_activity_label": {
+        "zh": "研发期间安全性报告",
+        "en": "Development Safety Report"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat7",
+      "regulatory_activity_label": {
+        "zh": "研发期间安全性报告",
+        "en": "Development Safety Report"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt4",
+      "sequence_label": {
+        "zh": "格式转换",
+        "en": "Reformat"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt1",
+      "application_label": {
+        "zh": "临床试验申请",
+        "en": "Investigational New Drug"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt4",
+      "sequence_label": {
+        "zh": "格式转换",
+        "en": "Reformat"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt2",
+      "application_label": {
+        "zh": "新药申请",
+        "en": "New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat6",
+      "regulatory_activity_label": {
+        "zh": "新适应症",
+        "en": "New Indication"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt4",
+      "sequence_label": {
+        "zh": "格式转换",
+        "en": "Reformat"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt3",
+      "application_label": {
+        "zh": "仿制药申请",
+        "en": "Abbreviated New Drug Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat1",
+      "regulatory_activity_label": {
+        "zh": "首次申请",
+        "en": "Original Application"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat2",
+      "regulatory_activity_label": {
+        "zh": "补充申请",
+        "en": "Supplement"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat3",
+      "regulatory_activity_label": {
+        "zh": "备案",
+        "en": "Record"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat4",
+      "regulatory_activity_label": {
+        "zh": "报告",
+        "en": "Report"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt1",
+      "sequence_label": {
+        "zh": "首次提交",
+        "en": "Original"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat8",
+      "regulatory_activity_label": {
+        "zh": "再注册",
+        "en": "Renewal"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt4",
+      "sequence_label": {
+        "zh": "格式转换",
+        "en": "Reformat"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt2",
+      "sequence_label": {
+        "zh": "回复",
+        "en": "Response"
+      }
+    },
+    {
+      "application_type": "cnapt4",
+      "application_label": {
+        "zh": "原料药申请",
+        "en": "Drug Substance Application"
+      },
+      "regulatory_activity_type": "cnrat9",
+      "regulatory_activity_label": {
+        "zh": "基线",
+        "en": "Baseline"
+      },
+      "sequence_type": "cnsqt3",
+      "sequence_label": {
+        "zh": "撤回",
+        "en": "Withdrawal"
+      }
+    }
+  ],
+  "count": 75,
+  "activity_sets_by_application": {
+    "cnapt1": [
+      "cnrat1",
+      "cnrat2",
+      "cnrat5",
+      "cnrat7",
+      "cnrat9"
+    ],
+    "cnapt2": [
+      "cnrat1",
+      "cnrat2",
+      "cnrat3",
+      "cnrat4",
+      "cnrat6",
+      "cnrat8",
+      "cnrat9"
+    ],
+    "cnapt3": [
+      "cnrat1",
+      "cnrat2",
+      "cnrat3",
+      "cnrat4",
+      "cnrat6",
+      "cnrat8",
+      "cnrat9"
+    ],
+    "cnapt4": [
+      "cnrat1",
+      "cnrat2",
+      "cnrat3",
+      "cnrat4",
+      "cnrat8",
+      "cnrat9"
+    ]
+  },
+  "sequence_sets_by_activity": {
+    "cnrat1": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat2": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat5": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat7": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat9": [
+      "cnsqt2",
+      "cnsqt3",
+      "cnsqt4"
+    ],
+    "cnrat3": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat4": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat6": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ],
+    "cnrat8": [
+      "cnsqt1",
+      "cnsqt2",
+      "cnsqt3"
+    ]
+  },
+  "source_sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867",
+  "source_path": "depend-apt-rat-sqt.xml"
+}

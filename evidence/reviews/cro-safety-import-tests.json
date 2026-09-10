@@ -1,0 +1,30 @@
+{
+  "basis_commit": "6e31eeede51a766e2c65f4700e46e85c71659070",
+  "test_scope": "standard-library importer and output boundary; PDF engine NOT exercised",
+  "test_command": "PYTHONPATH=src pytest -q tests/cro_pdf",
+  "passed": 24,
+  "failed": 0,
+  "skipped": 0,
+  "python": "3.13.5",
+  "platform": "Linux",
+  "source_sha256": {
+    "src/ezctd/safe_io.py": "62de4b4707fc55170835e1541e40dfae6d1d0afc139dca51da97afa6b9fad50d",
+    "src/ezctd/cde_report.py": "508fd56c9a9f395913e0f8c393c10f836754a485e549b091b151f62bfeee8882",
+    "src/ezctd/cli.py": "22b67ba887daa1c8b6dd385f2e54626b9f94c81a35c42a906b0002bb3ef71a78",
+    "tests/cro_pdf/test_safe_entry_and_report.py": "1b40b304aec8c49167f9cead91f1d416f5bff3f3040a6b1564d739b7634fee1e"
+  },
+  "actual_report_parse": "PARSED_COUNTS_RECONCILED",
+  "independent_extraction_match": true,
+  "official_validator_run": false,
+  "windows_nas_tests_run": false,
+  "application_ready_for_real_inputs": false,
+  "open_items": [
+    "F02 out-of-scope reads",
+    "F03 font interpretation",
+    "F04 per-rule completion state",
+    "F05 remote named destination",
+    "F08 XYZ zero zoom",
+    "full PDF-engine regression",
+    "Windows/NAS output and race validation"
+  ]
+}

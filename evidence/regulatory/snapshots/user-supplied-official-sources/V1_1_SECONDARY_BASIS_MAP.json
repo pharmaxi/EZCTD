@@ -1,0 +1,267 @@
+{
+  "schema_version": "0.1.0",
+  "source_id": "CDE-CN-V1.1-SPEC-PDF",
+  "source_sha256": "fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b",
+  "term_hits": {
+    "pdf_file_format": [
+      {
+        "pdf_page": 20,
+        "matched_terms": [
+          "PDF 文件"
+        ],
+        "context": "eCTD 技术规范 V3.2.2》执行。 3.3 文件和文件夹 3.3.1 内容文件的格式 对于 eCTD 申报资料，适用的文件格式有以下五种： 1. 便携文件格式（PDF）- .pdf 文件扩展名 例如：审评内容文件 2. 可扩展标记语言 （XML）- .xml 文件扩展名 例如：eCTD 骨架文件 3. SAS XPORT 传输文件 - .xpt 文件扩展名 例如：临床试验数据文件 4. 文本文件（TXT）- .txt 文件扩展名 例如：程序代码文件 5. 可扩展样式表语言文件（XSL）- .xsl 文件扩展名 16 / 40"
+      },
+      {
+        "pdf_page": 24,
+        "matched_terms": [
+          "PDF 文件"
+        ],
+        "context": " 3.4 PDF 电子提交标准 PDF 是 eCTD 申报资料的主要文件格式。 《ICH eCTD 文 件格式规范 V1.3》 （参见本文档第五章节）为创建用于 eCTD 提交的 PDF 文件提出了建议，主要包括以下方面：限制、版 本、文件大小、字体、字体大小、字体颜色、页面方向、页 面大小和页边距、页眉和页脚、电子文件来源、创建 PDF 文 档和图像的建议、压缩图像减少文件大小、图像颜色匹配、 ICC 配置文件、文档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考"
+      },
+      {
+        "pdf_page": 30,
+        "matched_terms": [
+          "PDF 文件"
+        ],
+        "context": "研究报告可参考《ICH E3 临床研究报告的结构和 内容》的要求，并使用适当的 STF 文件标签来展现文档的内 容。未按照 ICH E3 相关指南编制的临床研究报告可提交单 独的 PDF 文件，并使用“legacy-clinical-study-report”标签进行 标记。 临床研究报告相关的临床试验数据集应在 eCTD 申报资 料中一并提交，在骨架文件中应位于相应的临床研究报告之 后，并使用适当的 STF 标签进行标识。更多 eCTD 中临床试 验数据集及相关资料的申报要求详见《药物临床试验数据递 交指导原则（试行）》 。 模块五中的 5.2 所有临床研究列表、5.3.6 上市后报告和 26 / 40"
+      },
+      {
+        "pdf_page": 40,
+        "matched_terms": [
+          "文件格式规范"
+        ],
+        "context": "TD 骨架文件技术规范 V2.6.1》 4. ICH Specification for Submission Formats for eCTD V1.3 ——《ICH eCTD 文件格式规范 V1.3》 5. ICH eCTD IWG Question and Answer and Specification 2 相 关 参 考 文 件 可 参 见 ICH 网 站 （ https://www.ich.org/ ） 、 药 品 审 评 中 心 网 站 （https://www.cde.org.cn/） 36 / 40"
+      }
+    ],
+    "five_page_bookmark": [
+      {
+        "pdf_page": 24,
+        "matched_terms": [
+          "超过五页",
+          "五页"
+        ],
+        "context": " 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本链接 进行导航。申请人创建的跨文档超文本链接至少应包 括：由模块一的上市后变更/研究等项目到模块二至 20 / 40"
+      }
+    ],
+    "cross_document_links": [
+      {
+        "pdf_page": 24,
+        "matched_terms": [
+          "跨文档",
+          "超文本链接"
+        ],
+        "context": "体、字体大小、字体颜色、页面方向、页 面大小和页边距、页眉和页脚、电子文件来源、创建 PDF 文 档和图像的建议、压缩图像减少文件大小、图像颜色匹配、 ICC 配置文件、文档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本"
+      },
+      {
+        "pdf_page": 25,
+        "matched_terms": [
+          "超文本链接"
+        ],
+        "context": "eCTD 技术规范 V1.1 模块五中的具体内容之间的超文本链接、由模块二的 概述和总结文件到模块三至模块五的详细信息之间 的超文本链接、由临床研究报告到对应附件（如图表） 之间的超文本链接、PDF 格式的临床数据集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4）"
+      }
+    ],
+    "cross_application_links": [
+      {
+        "pdf_page": 23,
+        "matched_terms": [
+          "跨申请"
+        ],
+        "context": "中的文件和引 用同一申请中前序序列中的文件。申请人如需要在同一个申 请中提交相同的文件，无需重复提交实体文件，只需在骨架 文件中对应章节生成叶元素并引用相应实体文件的位置。 不支持跨申请引用，即不允许引用另一个申请中提交的 文件。 更多关于文件复用的说明请参考《ICH eCTD 技术规范 19 / 40"
+      },
+      {
+        "pdf_page": 25,
+        "matched_terms": [
+          "跨申请"
+        ],
+        "context": "报告到对应附件（如图表） 之间的超文本链接、PDF 格式的临床数据集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+      }
+    ],
+    "chinese_font": [
+      {
+        "pdf_page": 25,
+        "matched_terms": [
+          "宋体"
+        ],
+        "context": "集数据说明 文件至相应 xpt 文件的超文本链接等。为避免超文本 链接失效或定位错误，申请人不应在申报资料中创建 跨申请超文本链接。 3. 针对中文申报资料的要求： （1） 字体：宋体 （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+      }
+    ],
+    "link_appearance": [
+      {
+        "pdf_page": 25,
+        "matched_terms": [
+          "蓝色文字",
+          "蓝色框"
+        ],
+        "context": " （2） 字号 1） 正文：不小于小四号字 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+      }
+    ],
+    "foreign_reference": [
+      {
+        "pdf_page": 3,
+        "matched_terms": [
+          "外文参考资料"
+        ],
+        "context": "........ 19 3.4 PDF 电子提交标准 ....................................................... 20 3.5 外文参考资料的要求 ................................................ 21 3.5.1 语言属性的设置 .................................................. 22 3.5.2 语言属性的生命周期管理 .................................. 24 3.6 eCTD 骨架属性和元数据 ................"
+      },
+      {
+        "pdf_page": 24,
+        "matched_terms": [
+          "外文参考资料"
+        ],
+        "context": "档导航（超文本链接、书签和目录） 、页码、 初始视图设置、优化、安全、使用 Acrobat 插件。 除参考上述规范外，申请人还应遵循以下要求： 1. 如果提交的单个申报资料文件（除外文参考资料、参 考文献和申请表之外）内容超过五页，需要提供对应 的目录（正文目录、表格目录、图表目录）和书签来 辅助导航。 2. 在不能使用目录和书签进行文档导航的情况下可使 用超文本链接来帮助定位。例如，位于不同页的相关 章节、文献、附件、表格及图表可以创建超文本链接 进行导航。申请人创建的跨文档超文本链接至少应包 括：由模块一的上市后变更/研究等项目到模块二至 20 / 40"
+      },
+      {
+        "pdf_page": 25,
+        "matched_terms": [
+          "外文参考资料"
+        ],
+        "context": " 2） 表格：不小于五号字 3） 目录：小四号字 4） 脚注：五号字 （3） 字体颜色 1） 叙述性文字：黑色 2） 超文本链接：建议使用蓝色文字或黑色文 字带蓝色框表示 3.5 外文参考资料的要求 申请人提交的全部申报资料应当使用中文并附原文，其 21 / 40"
+      },
+      {
+        "pdf_page": 26,
+        "matched_terms": [
+          "外文参考资料"
+        ],
+        "context": "eCTD 技术规范 V1.1 他文种的资料可附后作为参考。中文译文应当与原文内容一 致。 在 eCTD 骨架文件中，外文参考资料应放置在对应的中 文申报资料同级目录结构中，即同一目录元素下的不同叶元 素中。中文申报资料在前并使用中文叶标题进行标识，外文 参考资料在后并使用外文叶标题进行标识，申请人可使用 “xml:lang”属性对中文申报资料及其外文参考资料进行区分。 中外文申报资料在骨架文件中的内容示例如下图 3 所示： 图 3.中外文申报资料骨架文件示例 3.5.1 语言属性的设置 在 eCTD 骨架文件中，每个叶元素都代表一个对应的文 件。叶元"
+      },
+      {
+        "pdf_page": 28,
+        "matched_terms": [
+          "外文参考资料"
+        ],
+        "context": "期管理 使用 eCTD 生命周期操作“替换”，将前序序列中提交的 文件替换为新文件时，被替换的文件和新文件应具有相同的 语言属性。即中文申报资料只能被另一份中文申报资料所替 换，而外文参考资料只能被另一份外文参考资料所替换。 3.6 eCTD 骨架属性和元数据 eCTD 骨架属性指申报资料模块一至模块五章节的相关 属性的集合，包括了本文档 4.3 章节中定义的信封元素属性 以及《ICH eCTD 技术规范 V3.2.2》中定义的模块二至模块 五的属性。 24 / 40"
+      }
+    ],
+    "electronic_seal": [
+      {
+        "pdf_page": 3,
+        "matched_terms": [
+          "电子签章"
+        ],
+        "context": "...... 26 3.9 生命周期操作 ............................................................ 27 3.10 电子签章 .................................................................... 27 3.11 eCTD 提交方式.......................................................... 27 4. 模块一的总体架构 ......................................................."
+      },
+      {
+        "pdf_page": 31,
+        "matched_terms": [
+          "电子签章"
+        ],
+        "context": "型。 申请人对 STF 以外的文件进行增补操作，将导致申报资 料验证时出现警告信息，对此申请人应在说明函中做出解释。 对 STF 进行增补操作，验证时不会出现警告信息。 3.10 电子签章 符合《中华人民共和国电子签名法》要求的电子签章与 手写签名或者盖章具有同等的法律效力。eCTD 申请中将接 受上述电子签章的使用。 3.11 eCTD 提交方式 申请人准备的 eCTD 申报资料需通过网络传输方式或物 理电子媒介提交。目前物理电子媒介只接受一次写入型光盘 作为存储介质，包括 CD-R、DVD+R、DVD-R 这三类。 27 / 40"
+      }
+    ],
+    "md5": [
+      {
+        "pdf_page": 5,
+        "matched_terms": [
+          "MD5",
+          "md5"
+        ],
+        "context": "请首次提交的全 套申报资料输出文件夹的结构示例，包括模块一至模块五的 ，1 个存放 DTD 相关 内容文件，2 个骨架文件（XML 文件） 文件的 util 文件夹及 1 个存放 MD5 值的文本文件。 1 / 40"
+      },
+      {
+        "pdf_page": 21,
+        "matched_terms": [
+          "MD5",
+          "md5"
+        ],
+        "context": "示例 文件夹 文件 命名规则 x202112345 由申请编号命名的申请文件夹 0000 4 位数字组成的序列文件夹 index.xml 符合 ICH 要求的骨架文件 index-md5.txt 符合 ICH 要求的 MD5 校验和文 件 m1 符合 ICH 要求的模块一内容文件 夹 cn 模块一区域文件夹 cn-regional.xml 模块一的骨架文件 1 《ICH eCTD 技术规范 V3.2.2》中规定的文件命名要求不允许使用下划线，但在临床数据集提 交时，SAS XPORT 文件的命名可能会使用下划线。考虑到在其他国家监管机构按照 eCTD 格式 递交的临床数据集文件命名也允许使用下划线，并且在《ICH"
+      },
+      {
+        "pdf_page": 38,
+        "matched_terms": [
+          "MD5",
+          "md5"
+        ],
+        "context": " ， 如 “operation” 、 “xlink:href” 、 “checksum-type”、“checksum”等。其中“checksum-type”属性的 值必须设置为“MD5”或“md5”。 叶元素的叶标题内容应当简短、明确并能提供有用信息。 目录元素在骨架文件中的内容如下图 14 所示： 34 / 40"
+      },
+      {
+        "pdf_page": 43,
+        "matched_terms": [
+          "MD5",
+          "md5"
+        ],
+        "context": "Study Tagging 文件中没有包含的关于研究主题和 Files, STF） 研究报告的信息，例如研究全称，研 究 ID，研究使用的种属，给药途径， 研究时长，对照类型等。 MD5 MD5 消息摘要算法（MD5 Message- Digest Algorithm），一种被广泛使用 的密码散列函数，用于产生一个文件 对应的数字指纹，即校验和。 校验和（checksum） 使用 MD5 消息摘要算法产生的文件 校验和，用以确保信息传输的完整性 和一致性。 DTD 文 档 类 型 定 义 （ Document Type 39 / 40"
+      }
+    ]
+  },
+  "rule_map": {
+    "6.1": [
+      "technical-specification §5 PDF/document integrity context"
+    ],
+    "6.2": [
+      "technical-specification §3.4 document navigation and cross-document link portability"
+    ],
+    "6.3": [
+      "technical-specification §3.4 navigation boundaries; no cross-application links"
+    ],
+    "6.4": [
+      "technical-specification §3.4 navigation behavior; PDF action semantics remain implementation detail"
+    ],
+    "6.5": [
+      "technical-specification §3.4 usable document navigation"
+    ],
+    "6.6": [
+      "technical-specification §3.4 valid internal/cross-document destinations"
+    ],
+    "6.7": [
+      "technical-specification §3.4 deterministic navigation"
+    ],
+    "6.8": [
+      "technical-specification §5 incorporates ICH eCTD File Format Specification V1.3 navigation recommendations"
+    ],
+    "6.9": [
+      "technical-specification §3.4 cross-document link portability"
+    ],
+    "6.10": [
+      "technical-specification §3.4 navigation boundaries; no cross-application links"
+    ],
+    "6.11": [
+      "technical-specification §3.4 navigation behavior; PDF action semantics remain implementation detail"
+    ],
+    "6.12": [
+      "technical-specification §3.4 usable document navigation"
+    ],
+    "6.13": [
+      "technical-specification §3.4 valid internal/cross-document destinations"
+    ],
+    "6.14": [
+      "technical-specification §3.4 deterministic navigation"
+    ],
+    "6.15": [
+      "technical-specification §5 incorporates ICH eCTD File Format Specification V1.3 navigation recommendations"
+    ],
+    "6.16": [
+      "technical-specification §5 incorporates ICH eCTD File Format Specification V1.3 version guidance"
+    ],
+    "6.17": [
+      "technical-specification §5 PDF restrictions"
+    ],
+    "6.18": [
+      "technical-specification §5 PDF restrictions and navigation annotations"
+    ],
+    "6.19": [
+      "technical-specification §5 PDF security restrictions"
+    ],
+    "6.20": [
+      "technical-specification §5 initial-view recommendations"
+    ],
+    "6.21": [
+      "technical-specification §5 PDF security restrictions"
+    ],
+    "6.22": [
+      "technical-specification §5 optimization/Fast Web View recommendations"
+    ],
+    "6.23": [
+      "technical-specification §5 China-specific requirement: files over five pages need TOC/bookmarks, subject to exceptions"
+    ],
+    "6.24": [
+      "technical-specification §5 PDF restrictions on dynamic content"
+    ],
+    "6.25": [
+      "technical-specification §5 searchable text and OCR recommendations"
+    ],
+    "6.26": [
+      "technical-specification §5 font embedding recommendations"
+    ]
+  },
+  "status": "SECONDARY_NORMATIVE_CONTEXT"
+}

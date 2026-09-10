@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ezctd.local/schema/cde-validator-observation-0.1.0.json",
+  "title": "CDE eCTD Validator Observation",
+  "type": "object",
+  "required": ["schema_version", "run_id", "case_id", "state", "official_findings", "review_status"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "pattern": "^CN-PDF-6_[0-9]+-"},
+    "state": {"enum": ["PREPARED", "RAW_EVIDENCE_CAPTURED", "PARSED", "REVIEWED", "REJECTED"]},
+    "operator_notes": {"type": ["string", "null"]},
+    "official_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "message_raw", "file_path"],
+        "properties": {
+          "rule_id": {"type": ["string", "null"]},
+          "severity": {"enum": ["错误", "警告", "提示信息", "未知"]},
+          "message_raw": {"type": "string", "minLength": 1},
+          "file_path": {"type": "string"},
+          "page": {"type": ["integer", "null"], "minimum": 1},
+          "object_hint": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "target_rule_observed_state": {"enum": ["PASS", "FINDING", "NOT_APPLICABLE", "UNDETERMINED", null]},
+    "unexpected_rule_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "repeat_run_equal": {"type": ["boolean", "null"]},
+    "review_status": {"enum": ["NOT_REVIEWED", "CONFIRMED", "PARTIAL", "CONTRADICTED", "UNUSABLE"]}
+  },
+  "additionalProperties": false
+}

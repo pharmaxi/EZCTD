@@ -1,0 +1,191 @@
+{
+  "cv-application-type.xml": {
+    "name": "application-type",
+    "descriptions": {
+      "zh": "申请类型",
+      "en": "Application Type"
+    },
+    "version": "1.1",
+    "valid_from": "2026-3-1",
+    "codes": [
+      {
+        "code": "cnapt1",
+        "descriptions": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        }
+      },
+      {
+        "code": "cnapt2",
+        "descriptions": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        }
+      },
+      {
+        "code": "cnapt3",
+        "descriptions": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        }
+      },
+      {
+        "code": "cnapt4",
+        "descriptions": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        }
+      }
+    ],
+    "count": 4,
+    "source_sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641",
+    "source_path": "cv-application-type.xml"
+  },
+  "cv-product-type.xml": {
+    "name": "product-type",
+    "descriptions": {
+      "zh": "产品类型",
+      "en": "Product Type"
+    },
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "codes": [
+      {
+        "code": "cnprt1",
+        "descriptions": {
+          "zh": "化学药品",
+          "en": "Chemical Product"
+        }
+      },
+      {
+        "code": "cnprt2",
+        "descriptions": {
+          "zh": "生物制品",
+          "en": "Biological Product"
+        }
+      }
+    ],
+    "count": 2,
+    "source_sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216",
+    "source_path": "cv-product-type.xml"
+  },
+  "cv-regulatory-activity-type.xml": {
+    "name": "regulatory-activity-type",
+    "descriptions": {
+      "zh": "注册行为类型",
+      "en": "Regulatory Activity Type"
+    },
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "codes": [
+      {
+        "code": "cnrat1",
+        "descriptions": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        }
+      },
+      {
+        "code": "cnrat2",
+        "descriptions": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        }
+      },
+      {
+        "code": "cnrat3",
+        "descriptions": {
+          "zh": "备案",
+          "en": "Record"
+        }
+      },
+      {
+        "code": "cnrat4",
+        "descriptions": {
+          "zh": "报告",
+          "en": "Report"
+        }
+      },
+      {
+        "code": "cnrat5",
+        "descriptions": {
+          "zh": "新适应症和联合用药",
+          "en": "New Indication and Drug Combination"
+        }
+      },
+      {
+        "code": "cnrat6",
+        "descriptions": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        }
+      },
+      {
+        "code": "cnrat7",
+        "descriptions": {
+          "zh": "研发期间安全性报告",
+          "en": "Development Safety Report"
+        }
+      },
+      {
+        "code": "cnrat8",
+        "descriptions": {
+          "zh": "再注册",
+          "en": "Renewal"
+        }
+      },
+      {
+        "code": "cnrat9",
+        "descriptions": {
+          "zh": "基线",
+          "en": "Baseline"
+        }
+      }
+    ],
+    "count": 9,
+    "source_sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd",
+    "source_path": "cv-regulatory-activity-type.xml"
+  },
+  "cv-sequence-type.xml": {
+    "name": "sequence-type",
+    "descriptions": {
+      "zh": "序列类型",
+      "en": "Sequence Type"
+    },
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "codes": [
+      {
+        "code": "cnsqt1",
+        "descriptions": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "code": "cnsqt2",
+        "descriptions": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "code": "cnsqt3",
+        "descriptions": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "code": "cnsqt4",
+        "descriptions": {
+          "zh": "格式转换",
+          "en": "Reformat"
+        }
+      }
+    ],
+    "count": 4,
+    "source_sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17",
+    "source_path": "cv-sequence-type.xml"
+  }
+}

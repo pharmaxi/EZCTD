@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.3.0",
+  "profile_id": "cn-cde-ectd-v4.0-draft-2026-05-27",
+  "profile_status": "draft_research_only",
+  "published_date": "2026-05-27",
+  "notice_url": "https://www.cde.org.cn/main/news/viewInfoCommon/7898f68946d8e8e44d074657c7112002",
+  "runtime_enabled": false,
+  "must_not_influence": [
+    "cn-cde-ectd-v3.2.2-v1.1-pdf",
+    "cn-cde-ectd-v3.2.2-v1.1-package"
+  ],
+  "expected_roles": {
+    "guidance": "cn_ectd_v4_draft_guidance",
+    "controlled_vocabulary": "cn_ectd_v4_draft_controlled_vocabulary",
+    "validation_standard": "cn_ectd_v4_draft_validation_standard",
+    "rationale": "cn_ectd_v4_draft_rationale",
+    "feedback_form": "cn_ectd_v4_draft_feedback_form"
+  },
+  "retrieved_roles": [
+    "controlled_vocabulary",
+    "feedback_form",
+    "guidance",
+    "rationale",
+    "validation_standard"
+  ],
+  "content_acceptance": {
+    "pdf": "%PDF- within first 1024 bytes and successful pdfinfo/pdftotext inspection",
+    "docx": "OOXML ZIP containing [Content_Types].xml and word/document.xml",
+    "http_200_alone_is_success": false
+  },
+  "sources": [
+    {
+      "source_id": "CDE-CN-V4-DRAFT-CONTROLLED-VOCABULARY",
+      "role_key": "controlled_vocabulary",
+      "role": "cn_ectd_v4_draft_controlled_vocabulary",
+      "url": "https://www.cde.org.cn/main/att/download/00a5b8edf156d399f72e1543737fec40",
+      "displayed_name": "eCTD v4.0指导原则附件1-受控词汇文件（公开征求意见稿）.pdf",
+      "sha256": "bc8d57e1a988608d2afd1e4739f0a7446c97211bd8bf42b34189cae19a9e6461",
+      "sm3": "99ef2bd7202c1d1558e7024dd97f6f191fda8c7afb9f8f6e78ddf060173d622f",
+      "kind": "pdf",
+      "size": 221237,
+      "pages": 10,
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-GUIDANCE",
+      "role_key": "guidance",
+      "role": "cn_ectd_v4_draft_guidance",
+      "url": "https://www.cde.org.cn/main/att/download/22d2128d8193f20cec98639662a78557",
+      "displayed_name": "eCTD v4.0指导原则（公开征求意见稿）.pdf",
+      "sha256": "f24401043663bab609773defb3daaacad07febe62581108180a592dd23535d63",
+      "sm3": "7705637b1a7e3d3f95a0146e9462179a9b6dc72ba97855f2bf013efc4368fe32",
+      "kind": "pdf",
+      "size": 1613653,
+      "pages": 82,
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-FEEDBACK",
+      "role_key": "feedback_form",
+      "role": "cn_ectd_v4_draft_feedback_form",
+      "url": "https://www.cde.org.cn/main/att/download/2aa41d3f263c030f340bf55594befc73",
+      "displayed_name": "征求意见反馈表.docx",
+      "sha256": "e98e1478130cd2f7d90e16ba7ae043f5384aff5e3668cd51892afe2bd568e7dd",
+      "sm3": "a3f177d04f3325012ec72d1ca978df90453d6c98992a57d5c55a465134f72076",
+      "kind": "docx",
+      "size": 17058,
+      "pages": null,
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-RATIONALE",
+      "role_key": "rationale",
+      "role": "cn_ectd_v4_draft_rationale",
+      "url": "https://www.cde.org.cn/main/att/download/7e3c4cee73f2f7457d21bde0d4f302c9",
+      "displayed_name": "《eCTD v4.0指导原则》起草说明.pdf",
+      "sha256": "f589fd7f2d68512658ea9a69b31394b1ab1538c5f01edd14461013630a5e5a82",
+      "sm3": "9000ea1c9149cd3dab138a28da31aa24865d811dd98d574bda78773372e06438",
+      "kind": "pdf",
+      "size": 318423,
+      "pages": 5,
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies"
+    },
+    {
+      "source_id": "CDE-CN-V4-DRAFT-VALIDATION-STANDARD",
+      "role_key": "validation_standard",
+      "role": "cn_ectd_v4_draft_validation_standard",
+      "url": "https://www.cde.org.cn/main/att/download/cc387d6210363bf551d60e4b4725bb82",
+      "displayed_name": "eCTD v4.0指导原则附件2-eCTD v4.0 验证标准（公开征求意见稿）.pdf",
+      "sha256": "36f871b89a3292f97d2a865506aeed0e1418dde1767eea61d03c9a9cc86a0774",
+      "sm3": "fe3145865508a49249baab1d6338923bbfe27a32adb8ed01eb81c0458b0ad9ed",
+      "kind": "pdf",
+      "size": 309311,
+      "pages": 10,
+      "download_status": "SUCCESS_BYTE_VALIDATED",
+      "acquisition_method": "requests-with-browser-cookies"
+    }
+  ],
+  "implementation_policy": "Evidence and delta research only; no production rule activation."
+}

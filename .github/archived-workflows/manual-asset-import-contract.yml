@@ -1,0 +1,95 @@
+name: Manual official-asset intake contract
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/regulatory/import_official_assets.py"
+      - "tools/regulatory/repair_manual_asset_import.py"
+      - "tests/regulatory/test_manual_asset_import.py"
+      - "evidence/regulatory/manual-asset-intake.template.json"
+      - ".github/workflows/manual-asset-import-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manual-asset-import-contract
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply intake hardening and compile
+        run: |
+          python tools/regulatory/repair_manual_asset_import.py
+          python -m compileall -q tools/regulatory tests/regulatory
+
+      - name: Run positive and negative intake tests
+        run: python tests/regulatory/test_manual_asset_import.py
+
+      - name: Write success-only contract marker
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('build/manual-asset-import-contract.json').read_text(encoding='utf-8'))
+          assert report['status']=='PASS'
+          assert len(report['tests'])==5
+          assert report['raw_binaries_committed'] is False
+          Path('docs/validation/p0-b0').mkdir(parents=True,exist_ok=True)
+          Path('docs/validation/p0-b0/MANUAL_ASSET_INTAKE_GATE.md').write_text('''# Manual official-asset intake contract: PASS
+
+Executable positive and negative tests confirm:
+
+- a small PDF with an approved official source URL is hashed and imported;
+- a missing required asset is rejected;
+- unresolved/non-official provenance is rejected in strict mode;
+- an oversized asset is rejected before hashing, magic-byte reading, archive inspection or copying;
+- the same exact binary cannot silently satisfy multiple evidence roles;
+- raw regulatory binaries remain outside Git.
+
+This gate validates the intake mechanism only. No CDE V1.1.0 installer or manual has yet been proven imported by this mechanism.
+''',encoding='utf-8')
+          PY
+
+      - name: Commit hardened source and success marker
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/regulatory/import_official_assets.py docs/validation/p0-b0/MANUAL_ASSET_INTAKE_GATE.md
+          if git diff --cached --quiet; then
+            echo "Manual intake contract state already committed."
+            exit 0
+          fi
+          git commit -m "fix(evidence): pass manual regulatory asset intake gate"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload intake self-test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-official-asset-intake-contract
+          path: build/manual-asset-import-contract.json
+          if-no-files-found: error
+          retention-days: 30

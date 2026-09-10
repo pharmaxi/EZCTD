@@ -1,0 +1,130 @@
+name: Inspect official CDE validator payload
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/Inspect-CDEValidatorPayload.ps1
+      - .github/workflows/official-validator-payload-inspection.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: official-validator-payload-inspection
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "33823274985"
+  OUTER_ZIP_SHA256: "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36"
+  INSTALLER_SHA256: "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+
+jobs:
+  inspect:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - name: Download byte-pinned official acquisition artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Verify outer ZIP and recover installer
+        id: recover
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Get-ChildItem -LiteralPath 'build/acquisition-v3/raw' -Filter '*.zip' -File | Select-Object -First 1
+          if (-not $zip) { throw 'Official validator ZIP missing from source artifact' }
+          $zipHash = (Get-FileHash -LiteralPath $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($zipHash -ne $env:OUTER_ZIP_SHA256) { throw "Outer ZIP hash mismatch: $zipHash" }
+          $recover = 'build/recovered-installer'
+          New-Item -ItemType Directory -Force -Path $recover | Out-Null
+          Expand-Archive -LiteralPath $zip.FullName -DestinationPath $recover -Force
+          $installer = Get-ChildItem -LiteralPath $recover -Filter '*.exe' -File -Recurse | Select-Object -First 1
+          if (-not $installer) { throw 'Installer missing from official ZIP' }
+          $installerHash = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($installerHash -ne $env:INSTALLER_SHA256) { throw "Installer hash mismatch: $installerHash" }
+          "installer=$($installer.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: Recursively extract and inventory installer payload without execution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          ./tools/regulatory/Inspect-CDEValidatorPayload.ps1 `
+            -InstallerPath '${{ steps.recover.outputs.installer }}' `
+            -OutputDirectory 'build/payload-static-inspection'
+
+      - name: Validate static conclusions
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'build/payload-static-inspection/payload-static-inspection.json'
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if ($data.installer.sha256 -ne $env:INSTALLER_SHA256) { throw 'Pinned installer hash not conserved' }
+          if ($data.installer.format -ne 'NSIS') { throw "Unexpected installer format: $($data.installer.format)" }
+          if (-not $data.installer.requires_administrator) { throw 'Administrator requirement was not detected' }
+          if ($data.installer.pe_machine -ne 'x86') { throw "Unexpected installer architecture: $($data.installer.pe_machine)" }
+          if ($data.extraction.status -ne 'SUCCESS_STATIC_EXTRACTION') { throw 'Static extraction failed' }
+          if ($data.extraction.file_count -lt 1) { throw 'No inner payload files extracted' }
+          if ($data.counts.entry_point_candidates -lt 1) { throw 'No candidate application entry point identified' }
+          if ($data.interpretation.observation_count -ne 0) { throw 'Static inspection must not count as a black-box observation' }
+          Get-Content -Raw -LiteralPath 'build/payload-static-inspection/payload-static-inspection.md' | Write-Host
+
+      - name: Upload full static payload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-payload-static-inspection
+          path: |
+            build/payload-static-inspection/payload-static-inspection.json
+            build/payload-static-inspection/payload-static-inspection.md
+            build/payload-static-inspection/installer-7z-list.txt
+            build/payload-static-inspection/installer-7z-extract.txt
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Stage bounded evidence for repository
+        shell: pwsh
+        run: |
+          $target = 'evidence/regulatory/snapshots/cde-validator-v1.1.0/payload-static-inspection'
+          New-Item -ItemType Directory -Force -Path $target | Out-Null
+          Copy-Item 'build/payload-static-inspection/payload-static-inspection.json' $target -Force
+          Copy-Item 'build/payload-static-inspection/payload-static-inspection.md' $target -Force
+
+      - name: Commit static payload evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add evidence/regulatory/snapshots/cde-validator-v1.1.0/payload-static-inspection
+          if (git diff --cached --quiet) {
+            Write-Host 'No payload evidence changes.'
+            exit 0
+          }
+          git commit -m 'research(regulatory): identify official validator inner payload'
+          $pushed = $false
+          for ($attempt = 1; $attempt -le 5; $attempt++) {
+            git fetch origin agent/official-source-deep-dive
+            git rebase origin/agent/official-source-deep-dive
+            if ($LASTEXITCODE -eq 0) {
+              git push origin HEAD:agent/official-source-deep-dive
+              if ($LASTEXITCODE -eq 0) { $pushed = $true; break }
+            }
+            git rebase --abort 2>$null
+            Start-Sleep -Seconds ($attempt * 5)
+          }
+          if (-not $pushed) { throw 'Unable to push payload inspection evidence' }

@@ -1,0 +1,77 @@
+name: Repair regulatory evidence ledger
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/regulatory/repair_evidence_completeness.py"
+      - ".github/workflows/repair-regulatory-evidence-ledger.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repair-regulatory-evidence-ledger
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install archive tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full
+
+      - name: Apply classification repair
+        run: python tools/regulatory/repair_evidence_completeness.py
+
+      - name: Refresh source snapshot and package analysis
+        run: |
+          python tools/regulatory/fetch_cde_sources.py
+          python tools/regulatory/analyze_ectd_packages.py
+
+      - name: Rebuild evidence ledger
+        run: python tools/regulatory/build_evidence_completeness.py
+
+      - name: Commit corrected source and evidence ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/regulatory/build_evidence_completeness.py evidence/regulatory/snapshots/cde-2026-v1.1 evidence/regulatory/snapshots/ectd-package-analysis evidence/regulatory/P0_REGULATORY_EVIDENCE_COMPLETENESS.json evidence/regulatory/P0_REGULATORY_EVIDENCE_COMPLETENESS.md
+          if git diff --cached --quiet; then
+            echo "No corrected ledger changes."
+            exit 0
+          fi
+          git commit -m "fix(evidence): distinguish official and mirror asset hashes"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload refreshed raw evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: corrected-regulatory-evidence-ledger
+          path: |
+            build/regulatory-source-snapshot/
+            build/ectd-package-analysis/
+          if-no-files-found: warn
+          retention-days: 30

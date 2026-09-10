@@ -1,0 +1,254 @@
+name: Acquire and identify official CDE eCTD validator v3
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/acquire_validator_from_portal_v3.py
+      - .github/workflows/official-validator-acquisition-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-validator-acquisition-v3
+  cancel-in-progress: true
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install acquisition dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Resolve current official JavaScript and acquire byte-valid assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM --kill-after=30s 600s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/acquire_validator_from_portal_v3.py
+
+      - name: Validate acquisition evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('evidence/regulatory/snapshots/cde-validator-v1.1.0/official-portal-acquisition.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          assert data['status'] == 'COMPLETE_OFFICIAL_PORTAL_ACQUISITION', data
+          assert data['software_executed'] is False
+          assert data['official_black_box_observations'] == 0
+          assert len(data['records']) == 2
+          by_role = {item['role']: item for item in data['records']}
+          software = by_role['validator_software_v1_1_0']
+          manual = by_role['validator_manual_v1_1_0']
+          assert software['kind'] in {'zip', 'rar', '7z', 'pe', 'msi'}
+          assert software['size'] > 100000 and software['sha256']
+          assert manual['kind'] == 'pdf'
+          assert manual['size'] > 25000 and manual['sha256']
+          assert int(manual['pdf']['pages'] or 0) > 0
+          assert data['common_js']['sha256']
+          assert all(item['discovered_in_current_official_javascript'] for item in data['records'])
+          print(json.dumps(data, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Stage acquisition evidence
+        run: |
+          mkdir -p build/commit/acquisition
+          cp -a evidence/regulatory/snapshots/cde-validator-v1.1.0/. build/commit/acquisition/
+
+      - name: Upload official assets and portal provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/official-validator-acquisition-v3/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload acquisition evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-evidence
+          path: build/commit/acquisition/
+          if-no-files-found: error
+          retention-days: 90
+
+  inspect-windows:
+    needs: acquire
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out static inspection code
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - name: Download official assets
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+
+      - name: Inspect archive, Authenticode and version resources without execution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          ./tools/regulatory/Inspect-CDEValidatorAssets.ps1 `
+            -SourceDirectory 'build/acquisition-v3/raw' `
+            -OutputDirectory 'build/windows-static/work' `
+            -EvidenceDirectory 'build/windows-static/evidence'
+
+      - name: Validate Windows static evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'build/windows-static/evidence/inspection.json'
+          if (-not (Test-Path -LiteralPath $path)) { throw 'inspection.json missing' }
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if (-not $data.source_exists) { throw 'source directory missing' }
+          if ($data.files_inspected -lt 2) { throw 'expected at least two official assets' }
+          if ($data.likely_candidates -lt 1) { throw 'validator candidate not identified' }
+          if ($data.safety_scope -notmatch 'No installer or executable was launched') {
+            throw 'static-only safety boundary missing'
+          }
+          Get-Content -Raw -LiteralPath 'build/windows-static/evidence/README.md' | Write-Host
+
+      - name: Upload Windows static evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-windows-static
+          path: build/windows-static/evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  commit-evidence:
+    needs: [acquire, inspect-windows]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out latest research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Download acquisition evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-evidence
+          path: build/evidence/acquisition
+
+      - name: Download Windows static evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-windows-static
+          path: build/evidence/windows-static
+
+      - name: Assemble bounded evidence and stage status
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='evidence/regulatory/snapshots/cde-validator-v1.1.0'
+          mkdir -p "$target/windows-static-inspection" docs/status
+          cp -a build/evidence/acquisition/. "$target/"
+          cp -a build/evidence/windows-static/. "$target/windows-static-inspection/"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('evidence/regulatory/snapshots/cde-validator-v1.1.0')
+          acquisition = json.loads((root / 'official-portal-acquisition.json').read_text(encoding='utf-8'))
+          windows = json.loads((root / 'windows-static-inspection/inspection.json').read_text(encoding='utf-8-sig'))
+          by_role = {item['role']: item for item in acquisition['records']}
+          status = {
+              'schema_version': '0.2.0',
+              'status': 'OFFICIAL_ASSETS_ACQUIRED_AND_STATICALLY_IDENTIFIED',
+              'official_black_box_observations': 0,
+              'software_executed': False,
+              'acquisition_method': acquisition['method'],
+              'common_js': acquisition['common_js'],
+              'software': {
+                  key: by_role['validator_software_v1_1_0'][key]
+                  for key in ('file_name', 'kind', 'size', 'sha256', 'sm3')
+              },
+              'manual': {
+                  key: by_role['validator_manual_v1_1_0'][key]
+                  for key in ('file_name', 'kind', 'size', 'sha256', 'sm3')
+              },
+              'windows_static': {
+                  'status': windows['status'],
+                  'files_inspected': windows['files_inspected'],
+                  'likely_candidates': windows['likely_candidates'],
+              },
+              'next_gate': 'Controlled execution reconnaissance on an isolated Windows runner; no dossier calibration until launch mode, input contract and output locations are observed.',
+              'boundary': 'Official provenance and static identity only. No official validator result and no CDE compatibility claim.',
+          }
+          (root / 'STATUS.json').write_text(json.dumps(status, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          Path('docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.json').write_text(
+              json.dumps(status, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          md = [
+              '# CDE eCTD validation software black-box status',
+              '',
+              f"- Current state: **{status['status']}**",
+              '- Official black-box observations: **0**',
+              '- Software executed: **false**',
+              '',
+              'The prior blocker was asset acquisition, not validator execution. `downloadFiles(4/5)` opens a second-stage attachment dialog; the v2 collector waited for a transfer that never began. V3 verifies the direct URLs in the current official `common.js`, downloads the bytes with the same browser session, and performs Windows static identity inspection.',
+              '',
+              'The next admissible step is execution reconnaissance with an empty/synthetic workspace to determine installer/portable form, process tree, GUI or CLI entry point, required runtime, accepted input unit, output files, logs and exit behavior. It must not yet be counted as a PDF-rule calibration observation unless a complete input and raw validator result are preserved.',
+              '',
+              '## Evidence boundary',
+              '',
+              status['boundary'],
+              '',
+          ]
+          Path('docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.md').write_text('\n'.join(md), encoding='utf-8')
+          print(json.dumps(status, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit evidence atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add evidence/regulatory/snapshots/cde-validator-v1.1.0 \
+                  docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.json \
+                  docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No evidence changes.'
+            exit 0
+          fi
+          git commit -m 'research(regulatory): freeze official validator provenance and static identity'
+          for attempt in 1 2 3 4 5; do
+            git fetch origin agent/official-source-deep-dive
+            if git rebase origin/agent/official-source-deep-dive && \
+               git push origin HEAD:agent/official-source-deep-dive; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          exit 1

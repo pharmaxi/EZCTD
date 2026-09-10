@@ -1,0 +1,146 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "cn-cde-ectd-v3.2.2-v1.1-authoring",
+  "profile_status": "official_effective_source_verified",
+  "runtime_role": "authoring_guidance_not_validator_message_catalog",
+  "effective_runtime_profile": "cn-cde-ectd-v3.2.2-v1.1",
+  "source": {
+    "publisher": "国家药品监督管理局药品审评中心",
+    "title": "eCTD技术规范V1.1",
+    "section": "3.4 PDF文件要求；3.5 外文参考资料的要求",
+    "url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDJSGFV1.1.pdf?name=eCTD%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83V1.1.0.pdf",
+    "sha256": "fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b"
+  },
+  "classification_policy": {
+    "official_validation_rules": "《eCTD验证标准V1.1》第6章6.1—6.26；可形成官方错误、警告或提示信息。",
+    "official_authoring_requirements": "《eCTD技术规范V1.1》的制作要求；可检查和提示，但除非明确映射到验证标准，不得冒充官方验证消息。",
+    "official_recommendations": "使用‘建议’等表述的制作建议；默认不阻断资料包。",
+    "product_guardrails": "EZCTD自身的安全限制；必须与官方要求分栏显示。"
+  },
+  "items": [
+    {
+      "id": "CN-V11-AUTH-3.4-001",
+      "topic": "navigation_required_over_five_pages",
+      "strength": "must",
+      "classification": "official_authoring_requirement",
+      "text": "除外文参考资料、参考文献和申请表之外，单个申报资料文件内容超过五页时，需要提供相应目录和书签辅助导航。",
+      "exceptions": ["外文参考资料", "参考文献", "申请表"],
+      "validation_rule_links": ["6.23"],
+      "implementation": {
+        "detector": "page_count > 5 and no bookmarks, with explicit eCTD node/document-role context",
+        "default_disposition": "official_validator_rule_controls",
+        "notes": "目录质量和表格/图表目录要求不应仅用书签存在性替代。"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-002",
+      "topic": "hyperlinks_when_bookmarks_or_toc_are_insufficient",
+      "strength": "may",
+      "classification": "official_authoring_guidance",
+      "text": "不能使用目录和书签进行文档导航时，可使用超文本链接帮助定位位于不同页的相关章节、文献、附件、表格和图表。",
+      "validation_rule_links": ["6.9", "6.10", "6.11", "6.12", "6.13", "6.14", "6.15"],
+      "implementation": {
+        "detector": "navigation quality advisory",
+        "default_disposition": "non_blocking_authoring_advice"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-003",
+      "topic": "minimum_cross_document_links",
+      "strength": "must",
+      "classification": "official_authoring_requirement",
+      "text": "跨文档超文本链接至少包括：模块一上市后变更/研究等项目至模块二至模块五具体内容；模块二概述和总结至模块三至模块五详细信息；临床研究报告至对应附件；PDF格式临床数据集数据说明文件至相应XPT文件。",
+      "validation_rule_links": ["6.9", "6.12", "6.13"],
+      "implementation": {
+        "detector": "package-level expected-link graph",
+        "default_disposition": "context_dependent_review",
+        "notes": "是否应当存在某条业务链接不能由单个PDF独立判断，需要CTD节点、资料类型和目标资料存在性。"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-004",
+      "topic": "no_cross_application_links",
+      "strength": "must_not",
+      "classification": "official_authoring_requirement",
+      "text": "为避免链接失效或定位错误，不应在申报资料中创建跨申请超文本链接。",
+      "validation_rule_links": ["6.9", "6.10", "6.13"],
+      "implementation": {
+        "detector": "target escapes current application root or references another application identity",
+        "default_disposition": "review_required"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-005",
+      "topic": "chinese_font_family",
+      "strength": "must",
+      "classification": "official_authoring_requirement",
+      "text": "中文申报资料字体使用宋体。",
+      "validation_rule_links": [],
+      "implementation": {
+        "detector": "font inventory plus text-language classification",
+        "default_disposition": "authoring_warning_not_official_validator_message",
+        "limitations": "PDF字体子集名称、替代字体和图像文字可能使自动判断不确定；不能据此生成第6章官方错误。"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-006",
+      "topic": "chinese_font_size",
+      "strength": "must",
+      "classification": "official_authoring_requirement",
+      "requirements": {
+        "body": "不小于小四号字",
+        "table": "不小于五号字",
+        "table_of_contents": "小四号字",
+        "footnote": "五号字"
+      },
+      "validation_rule_links": [],
+      "implementation": {
+        "detector": "source-document preflight preferred; PDF glyph-size estimate is advisory",
+        "default_disposition": "authoring_warning_not_official_validator_message",
+        "limitations": "PDF坐标和文本矩阵只能估计视觉字号，不能稳定还原Word中文字号名称。"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.4-007",
+      "topic": "text_color",
+      "strength": "mixed",
+      "classification": "official_authoring_requirement_and_recommendation",
+      "requirements": {
+        "narrative_text": {
+          "strength": "must",
+          "value": "黑色"
+        },
+        "hyperlink_text": {
+          "strength": "recommended",
+          "value": "蓝色文字，或黑色文字带蓝色框"
+        }
+      },
+      "validation_rule_links": [],
+      "implementation": {
+        "detector": "page content and link annotation visual analysis",
+        "default_disposition": "authoring_advice",
+        "notes": "‘建议’项不得作为阻断性官方验证规则。"
+      }
+    },
+    {
+      "id": "CN-V11-AUTH-3.5-001",
+      "topic": "foreign_reference_pairing",
+      "strength": "must",
+      "classification": "official_authoring_requirement",
+      "text": "申报资料应使用中文并附原文；其他文种资料可附后作为参考，中文译文应与原文一致。外文参考资料在eCTD骨架中放于对应中文资料同一目录元素下的不同叶元素中，中文资料在前。",
+      "validation_rule_links": [],
+      "implementation": {
+        "detector": "package-level sibling-leaf and ordering check with explicit language metadata",
+        "default_disposition": "context_dependent_review",
+        "limitations": "内容翻译一致性不由PDF结构检查器自动判定。"
+      }
+    }
+  ],
+  "runtime_rules": {
+    "may_emit_official_validator_message": false,
+    "may_emit_authoring_finding": true,
+    "must_display_source_section": true,
+    "must_display_strength": true,
+    "must_not_override": "rulepacks/cn-cde-ectd/v1.1/cde_ectd_pdf_rules_v1.1_verified.json"
+  }
+}

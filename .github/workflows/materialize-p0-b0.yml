@@ -1,0 +1,55 @@
+name: Materialize P0-B0 baseline
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/p0-b0/materialize_p0_b0.py"
+      - ".github/workflows/materialize-p0-b0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-p0-b0
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Materialize tracked P0-B0 sources
+        run: python tools/p0-b0/materialize_p0_b0.py
+
+      - name: Validate generated JSON syntax and invariants
+        run: |
+          python -m json.tool tests/p0_b0/case_matrix.json >/dev/null
+          python -m json.tool tests/p0_b0/smoke_manifest.json >/dev/null
+          python -m json.tool tests/p0_b0/boundary_experiment_queue.json >/dev/null
+          python tests/p0_b0/validators/validate_case_matrix.py
+
+      - name: Commit generated baseline
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/p0-b0-validation.yml docs/validation/p0-b0 tests/p0_b0 tools/cde-validator PROJECT_STATUS.md CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "test(p0-b0): materialize CDE PDF validation baseline"
+            git push origin HEAD:agent/p0-b0-validation-matrix
+          fi

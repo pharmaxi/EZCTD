@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-03T10:43:07.0915573Z",
+  "generator": "tools/regulatory/Inspect-CDEValidatorAssets.ps1",
+  "status": "UNRESOLVED_NO_CONFIRMED_VALIDATOR_ASSET",
+  "safety_scope": "Static metadata, hashes, Authenticode, version resources and archive listings only. No installer or executable was launched. No decompilation was performed.",
+  "expected_product": {
+    "name": "CDE eCTD validation software",
+    "target_version": "1.1.0",
+    "effective_date": "2026-03-01"
+  },
+  "source_directory": "build/regulatory-source-snapshot/assets",
+  "source_exists": true,
+  "files_inspected": 3,
+  "likely_candidates": 0,
+  "records": [
+    {
+      "source_path": "001-xhtml1-transitional.dtd",
+      "file_name": "001-xhtml1-transitional.dtd",
+      "size": 32111,
+      "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+      "extension": ".dtd",
+      "authenticode": null,
+      "version_info": null,
+      "archive": {
+        "status": "NOT_ARCHIVE",
+        "members": [],
+        "extraction_status": "NOT_ATTEMPTED",
+        "extracted_inventory": []
+      },
+      "likely_validator_asset": false,
+      "notes": []
+    },
+    {
+      "source_path": "002-183312.pdf",
+      "file_name": "002-183312.pdf",
+      "size": 525655,
+      "sha256": "3dba8a9bb32e6af6cea585aa742217afdeb95ace3a5e2de60ec557f255e7fe3d",
+      "extension": ".pdf",
+      "authenticode": null,
+      "version_info": null,
+      "archive": {
+        "status": "NOT_ARCHIVE",
+        "members": [],
+        "extraction_status": "NOT_ATTEMPTED",
+        "extracted_inventory": []
+      },
+      "likely_validator_asset": false,
+      "notes": []
+    },
+    {
+      "source_path": "003-183313.pdf",
+      "file_name": "003-183313.pdf",
+      "size": 428841,
+      "sha256": "9d8b9e8baae0f891d833946a0cde78332c39f8072974387ecdda6ca16c884f7a",
+      "extension": ".pdf",
+      "authenticode": null,
+      "version_info": null,
+      "archive": {
+        "status": "NOT_ARCHIVE",
+        "members": [],
+        "extraction_status": "NOT_ATTEMPTED",
+        "extracted_inventory": []
+      },
+      "likely_validator_asset": false,
+      "notes": []
+    }
+  ],
+  "unresolved": "No asset was automatically confirmed as CDE eCTD validation software V1.1.0. Manual retrieval from the CDE common-download page may still be required."
+}

@@ -1,0 +1,230 @@
+name: Probe official CDE validator through byte-identical ASCII alias
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/probe_cde_validator_install_and_launch.py
+      - tools/regulatory/probe_cde_validator_ascii_alias.py
+      - tools/regulatory/stage_cde_validator_launch_forensics.py
+      - tools/regulatory/stage_cde_validator_ascii_alias_probe.py
+      - .github/workflows/official-validator-launch-forensics-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: official-validator-launch-forensics-v2
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "33823274985"
+  OUTER_ZIP_SHA256: "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36"
+  INSTALLER_SHA256: "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+  APP_SHA256: "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163"
+
+jobs:
+  probe:
+    permissions:
+      contents: read
+      actions: read
+    runs-on: windows-latest
+    timeout-minutes: 35
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      artifact_url: ${{ steps.upload.outputs.artifact-url }}
+      artifact_digest: ${{ steps.upload.outputs.artifact-digest }}
+    steps:
+      - name: Check out probe code without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Windows probe dependencies and compile scripts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -m pip install --disable-pip-version-check psutil pywinauto pillow
+          python -X utf8 -m py_compile `
+            tools/regulatory/probe_cde_validator_install_and_launch.py `
+            tools/regulatory/probe_cde_validator_ascii_alias.py `
+            tools/regulatory/stage_cde_validator_launch_forensics.py `
+            tools/regulatory/stage_cde_validator_ascii_alias_probe.py
+
+      - name: Download byte-pinned official validator artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Recover installer and static payload with full hash verification
+        id: recover
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $outer = Get-ChildItem -LiteralPath 'build/acquisition-v3/raw' -Filter '*.zip' -File | Select-Object -First 1
+          if (-not $outer) { throw 'Official validator ZIP missing' }
+          $outerHash = (Get-FileHash -LiteralPath $outer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($outerHash -ne $env:OUTER_ZIP_SHA256) { throw "Outer ZIP hash mismatch: $outerHash" }
+
+          New-Item -ItemType Directory -Force -Path 'build/recovered-installer' | Out-Null
+          Expand-Archive -LiteralPath $outer.FullName -DestinationPath 'build/recovered-installer' -Force
+          $installer = Get-ChildItem -LiteralPath 'build/recovered-installer' -Filter '*.exe' -File -Recurse | Select-Object -First 1
+          if (-not $installer) { throw 'Installer missing after outer ZIP extraction' }
+          $installerHash = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($installerHash -ne $env:INSTALLER_SHA256) { throw "Installer hash mismatch: $installerHash" }
+
+          New-Item -ItemType Directory -Force -Path 'build/static-payload' | Out-Null
+          $sevenZip = (Get-Command 7z).Source
+          & $sevenZip x -y -aoa '-obuild/static-payload' -- $installer.FullName | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Static NSIS extraction failed' }
+          $app = Get-ChildItem -LiteralPath 'build/static-payload' -Filter 'eCTD*.exe' -File |
+            Where-Object { $_.Name -notmatch '^(?i:uninst|uninstall)' } |
+            Select-Object -First 1
+          if (-not $app) { throw 'Static application entry point missing' }
+          $appHash = (Get-FileHash -LiteralPath $app.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($appHash -ne $env:APP_SHA256) { throw "Static application hash mismatch: $appHash" }
+
+          "installer=$($installer.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "static_payload=$((Resolve-Path -LiteralPath 'build/static-payload').Path)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: Reproduce installed-layout baseline with UTF-8 output
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/probe_cde_validator_install_and_launch.py `
+            --installer '${{ steps.recover.outputs.installer }}' `
+            --static-payload '${{ steps.recover.outputs.static_payload }}' `
+            --output 'build/validator-launch-forensics-v2' `
+            --install-dir 'C:\CDEValidatorForensics' `
+            --expected-installer-sha256 $env:INSTALLER_SHA256 `
+            --expected-app-sha256 $env:APP_SHA256 `
+            --observation-seconds 20
+
+      - name: Launch same official bytes through an ASCII NTFS alias
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          python -X utf8 tools/regulatory/probe_cde_validator_ascii_alias.py `
+            --report 'build/validator-launch-forensics-v2/install-and-launch-forensics.json' `
+            --output 'build/validator-launch-forensics-v2/ascii-alias-adaptation' `
+            --expected-app-sha256 $env:APP_SHA256 `
+            --observation-seconds 45
+
+      - name: Enforce identity and non-overclaiming contract
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'build/validator-launch-forensics-v2/install-and-launch-forensics.json'
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if ($data.assertions.validation_invoked) { throw 'Probe must not invoke validation' }
+          if ($data.assertions.native_validation_report_present) { throw 'Probe must not claim native validation output' }
+          if ($data.observation_counters.official_black_box_observations -ne 0) { throw 'Probe cannot count as official observation' }
+          if ($data.identity.installer_sha256 -ne $env:INSTALLER_SHA256) { throw 'Installer identity not conserved' }
+          if ($data.identity.installed_application_sha256 -ne $env:APP_SHA256) { throw 'Installed application identity not conserved' }
+          $alias = $data.ascii_alias_probe.alias_identity
+          if (-not $alias.byte_identical) { throw 'ASCII alias is not byte-identical' }
+          if ($alias.alias_sha256 -ne $env:APP_SHA256) { throw 'ASCII alias hash mismatch' }
+          Get-Content -Raw -LiteralPath 'build/validator-launch-forensics-v2/ascii-alias-adaptation/ASCII_ALIAS_SUMMARY.json' | Write-Host
+
+      - name: Upload complete raw alias probe
+        id: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-launch-forensics-v2
+          path: build/validator-launch-forensics-v2/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 6
+
+  commit-evidence:
+    needs: probe
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out latest evidence branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Download raw alias probe from this run
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-launch-forensics-v2
+          path: build/validator-launch-forensics-v2
+          repository: laojia-a/EZCTD
+          run-id: ${{ github.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Stage baseline launch forensics
+        env:
+          RAW_ARTIFACT_ID: ${{ needs.probe.outputs.artifact_id }}
+          RAW_ARTIFACT_URL: ${{ needs.probe.outputs.artifact_url }}
+          RAW_ARTIFACT_DIGEST: ${{ needs.probe.outputs.artifact_digest }}
+        run: |
+          python tools/regulatory/stage_cde_validator_launch_forensics.py \
+            --report build/validator-launch-forensics-v2/install-and-launch-forensics.json \
+            --workflow-run-id "${{ github.run_id }}" \
+            --workflow-run-attempt "${{ github.run_attempt }}" \
+            --artifact-id "$RAW_ARTIFACT_ID" \
+            --artifact-url "$RAW_ARTIFACT_URL" \
+            --artifact-digest "$RAW_ARTIFACT_DIGEST"
+
+      - name: Stage ASCII alias adaptation evidence
+        env:
+          RAW_ARTIFACT_ID: ${{ needs.probe.outputs.artifact_id }}
+          RAW_ARTIFACT_URL: ${{ needs.probe.outputs.artifact_url }}
+          RAW_ARTIFACT_DIGEST: ${{ needs.probe.outputs.artifact_digest }}
+        run: |
+          python tools/regulatory/stage_cde_validator_ascii_alias_probe.py \
+            --report build/validator-launch-forensics-v2/install-and-launch-forensics.json \
+            --workflow-run-id "${{ github.run_id }}" \
+            --workflow-run-attempt "${{ github.run_attempt }}" \
+            --artifact-id "$RAW_ARTIFACT_ID" \
+            --artifact-url "$RAW_ARTIFACT_URL" \
+            --artifact-digest "$RAW_ARTIFACT_DIGEST"
+
+      - name: Commit bounded alias-probe evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/launch-forensics \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No alias-probe evidence changes.'
+            exit 0
+          fi
+          git commit -m 'research(regulatory): record ASCII alias validator launch evidence'
+          for attempt in 1 2 3 4 5; do
+            git fetch origin agent/official-source-deep-dive
+            if git rebase origin/agent/official-source-deep-dive && \
+               git push origin HEAD:agent/official-source-deep-dive; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          exit 1

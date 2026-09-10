@@ -1,0 +1,166 @@
+# acquisition-run: 2026-09-04T00:00Z
+name: Acquire official CDE eCTD validator assets
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/acquire_validator_from_portal.py
+      - tools/regulatory/Inspect-CDEValidatorAssets.ps1
+      - .github/workflows/official-validator-acquisition.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-validator-acquisition
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install browser and static inspection dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Trigger official portal controls and acquire bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          EZCTD_BROWSER_HEADLESS=0 xvfb-run -a python tools/regulatory/acquire_validator_from_portal.py
+
+      - name: Validate acquisition contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("evidence/regulatory/snapshots/cde-validator-v1.1.0/official-portal-acquisition.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["status"] == "COMPLETE_OFFICIAL_PORTAL_ACQUISITION", data
+          assert len(data["records"]) == 2, data
+          by_role = {item["role"]: item for item in data["records"]}
+          software = by_role["validator_software_v1_1_0"]
+          manual = by_role["validator_manual_v1_1_0"]
+          assert software["kind"] in {"zip", "rar", "7z", "pe", "msi"}, software
+          assert software["size"] > 100000, software
+          assert software["archive"]["status"] in {"EXTRACTED_FOR_STATIC_INSPECTION", "NOT_ARCHIVE"}, software
+          assert manual["kind"] == "pdf", manual
+          assert manual["size"] > 25000, manual
+          assert int(manual["pdf"]["pages"] or 0) > 0, manual
+          assert software["sha256"] and manual["sha256"]
+          print(json.dumps({
+              "status": data["status"],
+              "software": {"kind": software["kind"], "size": software["size"], "sha256": software["sha256"]},
+              "manual": {"pages": manual["pdf"]["pages"], "size": manual["size"], "sha256": manual["sha256"]},
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit provenance and Linux static inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/regulatory/snapshots/cde-validator-v1.1.0
+          if git diff --cached --quiet; then
+            echo "No validator provenance changes."
+          else
+            git commit -m "research(regulatory): acquire official CDE validator and manual"
+            for attempt in 1 2 3 4; do
+              git pull --rebase origin agent/official-source-deep-dive
+              if git push origin HEAD:agent/official-source-deep-dive; then break; fi
+              sleep $((attempt * 5))
+            done
+          fi
+
+      - name: Upload official portal assets for Windows static inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-official-portal
+          path: build/official-source-deep-dive/validator-assets/
+          if-no-files-found: error
+          retention-days: 90
+
+  inspect-windows:
+    needs: acquire
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out updated research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Download official portal assets
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-official-portal
+          path: build/cde-validator-v1.1.0
+
+      - name: Inspect signatures, versions and binary metadata without execution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          ./tools/regulatory/Inspect-CDEValidatorAssets.ps1 `
+            -SourceDirectory "build/cde-validator-v1.1.0" `
+            -ReportDirectory "build/cde-validator-v1.1.0/windows-static-inspection"
+
+      - name: Validate Windows inspection output
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $path = "build/cde-validator-v1.1.0/windows-static-inspection/windows-validator-asset-inspection.json"
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if ($data.file_count -lt 2) { throw "Expected at least two acquired files" }
+          if ($data.scan_scope -notmatch "No executable was launched") { throw "Safety scope missing" }
+          Write-Host (Get-Content -Raw -LiteralPath "build/cde-validator-v1.1.0/windows-static-inspection/windows-validator-asset-inspection.md")
+
+      - name: Commit Windows static evidence
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $target = "evidence/regulatory/snapshots/cde-validator-v1.1.0/windows-static-inspection"
+          New-Item -ItemType Directory -Force -Path $target | Out-Null
+          Copy-Item "build/cde-validator-v1.1.0/windows-static-inspection/*" $target -Force
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $target
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "research(regulatory): statically inspect official validator on Windows"
+            for ($attempt = 1; $attempt -le 4; $attempt++) {
+              git pull --rebase origin agent/official-source-deep-dive
+              git push origin HEAD:agent/official-source-deep-dive
+              if ($LASTEXITCODE -eq 0) { break }
+              Start-Sleep -Seconds ($attempt * 5)
+            }
+            if ($LASTEXITCODE -ne 0) { throw "Unable to push Windows static-inspection evidence" }
+          }
+
+      - name: Upload Windows inspection artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-windows-static-inspection
+          path: build/cde-validator-v1.1.0/windows-static-inspection/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,206 @@
+name: Official eCTD source deep dive
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/deep_dive_official_sources.py
+      - tools/regulatory/discover_cde_dynamic_links.py
+      - tools/regulatory/acquire_v4_draft_with_browser.py
+      - tools/regulatory/analyze_v11_attachment_package.py
+      - tools/regulatory/analyze_v4_draft_semantics.py
+      - .github/workflows/official-source-deep-dive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-source-deep-dive
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install inspection tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - name: Discover dynamic CDE links in a real browser
+        id: browser
+        shell: bash
+        run: |
+          set +e
+          mkdir -p build/official-source-deep-dive
+          timeout --signal=TERM --kill-after=30s 240s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/discover_cde_dynamic_links.py \
+            2>&1 | tee build/official-source-deep-dive/browser-discovery.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > build/official-source-deep-dive/browser-discovery-exit-code.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # Discovery is supporting evidence. Exact supplied URLs and browser attachment acquisition remain controlling.
+          exit 0
+
+      - name: Download and analyze exact direct official sources
+        id: collect
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=30s 300s \
+            python tools/regulatory/deep_dive_official_sources.py \
+            2>&1 | tee build/official-source-deep-dive/collector.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > build/official-source-deep-dive/collector-exit-code.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # Static discovery may not see protected v4 attachment responses; browser acquisition is controlling.
+          exit 0
+
+      - name: Acquire byte-valid v4 consultation attachments
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout --signal=TERM --kill-after=30s 480s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/acquire_v4_draft_with_browser.py
+
+      - name: Parse V1.1 technical attachment package
+        run: python tools/regulatory/analyze_v11_attachment_package.py
+
+      - name: Build semantic v4 draft rule index and V1.1 delta
+        run: python tools/regulatory/analyze_v4_draft_semantics.py
+
+      - name: Validate generated evidence and classify completeness
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          evidence = Path("evidence/regulatory/snapshots/user-supplied-official-sources")
+          summary = json.loads((evidence / "SUMMARY.json").read_text(encoding="utf-8"))
+          assert summary["direct_success"] == summary["direct_total"] == 4, summary
+          assert summary["v1_pdf_sha256"], summary
+          assert summary["v1_attachment_sha256"], summary
+          assert summary["attachment_members"] == 23, summary
+          assert summary["v4_assets"] == 5, summary
+          assert summary["v4_retrieved_roles"] == summary["v4_expected_roles"] == 5, summary
+          assert summary["v4_failures"] == 0, summary
+          assert summary["v4_byte_identity_validated"] is True, summary
+
+          profile = json.loads(Path("rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27/manifest.json").read_text(encoding="utf-8"))
+          assert profile["schema_version"] == "0.3.0"
+          assert profile["profile_status"] == "draft_research_only"
+          assert profile["runtime_enabled"] is False
+          assert len(profile["sources"]) == 5
+          assert all(item["download_status"] == "SUCCESS_BYTE_VALIDATED" for item in profile["sources"])
+          assert sum(item["kind"] == "pdf" and int(item["pages"] or 0) > 0 for item in profile["sources"]) == 4
+          assert sum(item["kind"] == "docx" for item in profile["sources"]) == 1
+          assert all(
+              (item["kind"] == "pdf" and item["size"] and item["size"] > 25000)
+              or (item["kind"] == "docx" and item["size"] and item["size"] > 10000)
+              for item in profile["sources"]
+          )
+          assert "cn-cde-ectd-v3.2.2-v1.1-pdf" in profile["must_not_influence"]
+
+          package = json.loads((evidence / "V1_1_ATTACHMENT_PACKAGE_TECHNICAL_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert package["manifest"]["member_count"] == 23
+          assert package["schema_contract"]["target_namespace"] == "cn_ectd"
+          assert package["dependency_matrix"]["count"] == 75
+          assert package["module1_elements"]["count"] == 70
+          assert package["ich_elements"]["count"] == 159
+          assert package["node_extension_elements"]["count"] == 6
+          assert package["package_source_sha256"] == summary["v1_attachment_sha256"]
+
+          semantic = json.loads((evidence / "V4_DRAFT_SEMANTIC_ANALYSIS.json").read_text(encoding="utf-8"))
+          assert semantic["status"] == "DRAFT_RESEARCH_ONLY"
+          assert semantic["runtime_enabled"] is False
+          assert semantic["validation_standard"]["totals"] == {"rules": 165, "提示信息": 6, "错误": 145, "警告": 14}
+          assert len(semantic["validation_standard"]["pdf_rules"]) == 27
+          assert semantic["controlled_vocabulary"]["counts"] == {
+              "application_type": 4,
+              "submission_type": 9,
+              "submissionunit_type": 26,
+              "product_type": 2,
+              "context_of_use": 63,
+              "contact_type": 3,
+          }
+          assert Path("docs/validation/V1_1_TO_V4_DRAFT_DELTA.md").exists()
+          assert Path("docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md").exists()
+
+          acquisition = json.loads(Path("build/official-source-deep-dive/browser-attachment-acquisition/acquisition-summary.json").read_text(encoding="utf-8"))
+          assert acquisition["status"] == "COMPLETE_BYTE_VALIDATED", acquisition
+          assert acquisition["valid_records"] == 5, acquisition
+
+          dynamic_path = Path("build/official-source-deep-dive/browser-discovery/dynamic-link-discovery.json")
+          dynamic_summary = {}
+          if dynamic_path.exists():
+              dynamic_summary = json.loads(dynamic_path.read_text(encoding="utf-8")).get("summary", {})
+          result = {
+              "status": "COMPLETE_FOR_SUPPLIED_SOURCES_BYTE_VALIDATED_AND_SEMANTICALLY_INDEXED",
+              "browser_exit_code": int(Path("build/official-source-deep-dive/browser-discovery-exit-code.txt").read_text().strip()),
+              "collector_exit_code": int(Path("build/official-source-deep-dive/collector-exit-code.txt").read_text().strip()),
+              "summary": summary,
+              "dynamic_discovery": dynamic_summary,
+              "v4_acquisition": acquisition,
+              "v4_profile": profile["profile_id"],
+              "v11_package_profile": package["manifest"]["release_profile"],
+              "v4_validation_rules": semantic["validation_standard"]["totals"],
+              "v4_pdf_rules": len(semantic["validation_standard"]["pdf_rules"]),
+              "v4_controlled_vocabulary": semantic["controlled_vocabulary"]["counts"],
+          }
+          Path("build/official-source-deep-dive/completeness.json").write_text(
+              json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(result, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit structured evidence and generated rule data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            evidence/regulatory/snapshots/user-supplied-official-sources \
+            rulepacks/cn-cde-ectd/v1.1/technical-package \
+            rulepacks/cn-cde-ectd-v4.0-draft/2026-05-27 \
+            docs/validation/V1_1_TO_V4_DRAFT_DELTA.md \
+            docs/decisions/0002-isolate-cn-ectd-v4-draft-profile.md
+          if git diff --cached --quiet; then
+            echo "No structured evidence changes."
+            exit 0
+          fi
+          git commit -m "research(regulatory): index v4 draft validation and isolate runtime profile"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/official-source-deep-dive
+            if git push origin HEAD:agent/official-source-deep-dive; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload raw official assets, rejected responses, and extracted text
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-ectd-source-deep-dive
+          path: build/official-source-deep-dive/
+          if-no-files-found: error
+          retention-days: 90

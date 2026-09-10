@@ -1,0 +1,74 @@
+name: Regulatory evidence completeness ledger
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/regulatory/build_evidence_completeness.py"
+      - "tools/regulatory/fetch_cde_sources.py"
+      - "tools/regulatory/analyze_ectd_packages.py"
+      - ".github/workflows/regulatory-evidence-completeness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regulatory-evidence-completeness
+  cancel-in-progress: false
+
+jobs:
+  build-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install archive inspection tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full
+
+      - name: Refresh source snapshot
+        run: python tools/regulatory/fetch_cde_sources.py
+
+      - name: Refresh technical-package analysis
+        run: python tools/regulatory/analyze_ectd_packages.py
+
+      - name: Build completeness ledger
+        run: python tools/regulatory/build_evidence_completeness.py
+
+      - name: Commit source metadata, package analysis and ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/regulatory/snapshots/cde-2026-v1.1 evidence/regulatory/snapshots/ectd-package-analysis evidence/regulatory/P0_REGULATORY_EVIDENCE_COMPLETENESS.json evidence/regulatory/P0_REGULATORY_EVIDENCE_COMPLETENESS.md
+          if git diff --cached --quiet; then
+            echo "No evidence-ledger changes."
+            exit 0
+          fi
+          git commit -m "evidence(p0): record regulatory asset completeness"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload raw source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-regulatory-evidence-refresh
+          path: |
+            build/regulatory-source-snapshot/
+            build/ectd-package-analysis/
+          if-no-files-found: warn
+          retention-days: 30

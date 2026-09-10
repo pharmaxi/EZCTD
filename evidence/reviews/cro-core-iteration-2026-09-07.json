@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-09-07",
+  "basis_commit": "ad62a3ebdd7d74b5101bd82ae7b26fc765042028",
+  "local_test_command": "PYTHONPATH=src python -m pytest -q tests/cro_pdf",
+  "local_result": {
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "python": "3.13.5",
+    "platform": "Linux",
+    "pikepdf": "10.5.0",
+    "pypdfium2": "5.8.0",
+    "qpdf_cli": "UNAVAILABLE"
+  },
+  "test_scope": "Synthetic PDFs, actual native engines, source/output boundaries, batch isolation and per-rule accounting; not official calibration or full historical suite",
+  "additional_checks": {
+    "planning_validation": "PASS",
+    "matrix_schema": "PASS",
+    "smoke_generated": 28,
+    "smoke_structure_passed": 28
+  },
+  "demonstration": {
+    "synthetic_pdf_count": 20,
+    "input_hashes_unchanged": 20,
+    "includes_password_and_corrupt_pdf": true,
+    "text_search": "12.50",
+    "character_rectangles": 5,
+    "png_rendered": true,
+    "preview_visually_reviewed": true,
+    "original_clinical_pdfs_used": false
+  },
+  "native_engine_loaded_in_parent": false,
+  "official_validator_executed": false,
+  "whole_submission_required": false,
+  "cross_platform_ci": {
+    "workflow_run": 34090491339,
+    "code_commit": "95f197c097119fbc2c3620cb24cec442aed26b7f",
+    "jobs": [
+      {
+        "platform": "Linux",
+        "artifact_id": 10006650757,
+        "sha256": "31a086c08c7fb544c2e954c545ab022569605dc69d07ff654668ab90ca5d1541",
+        "tests": 54,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "source_hashes_match_local": true,
+        "versions": [
+          "pikepdf==10.13.0.post1",
+          "pillow==12.3.0",
+          "pypdfium2==5.13.0",
+          "pytest==9.1.1"
+        ]
+      },
+      {
+        "platform": "Windows",
+        "artifact_id": 10006658070,
+        "sha256": "ac291c5088beff985faa9003f497ddede2b8289e9abba419678e5aacbe161a5f",
+        "tests": 54,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "source_hashes_match_local": false,
+        "versions": [
+          "pikepdf==10.13.0.post1",
+          "pillow==12.3.0",
+          "pypdfium2==5.13.0",
+          "pytest==9.1.1"
+        ],
+        "source_hashes_match_after_crlf_normalization": true,
+        "source_difference_explanation": "Windows archive converts text line endings to CRLF; all 19 application/test files match the local LF bytes after CRLF-to-LF normalization. Raw archive hashes are preserved, not conflated.",
+        "raw_source_sha256": {
+          "src/ezctd/__init__.py": "71d056de986fe9b1799e4f1686d8b3159e2b672459eb571104ed506ee3accd44",
+          "src/ezctd/__main__.py": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+          "src/ezctd/applicability.py": "37862446b8e52768e6e4e9ac8b814ce238c37fae15c3085c7be14c5819455062",
+          "src/ezctd/assurance.py": "0facd2eb6a4111ae4329b8fa8446f0eb8777d6ad549d51ea450bb304606aa525",
+          "src/ezctd/batch.py": "6b851231c61e0d2b7580dc35db391f4bb3660114b53581754b16f83ac28f40bc",
+          "src/ezctd/catalog.py": "7b539d534c5bceb812f9c8a25b3ba0e2696de9b668865ad66d6f2bb8a5520cc1",
+          "src/ezctd/cde_report.py": "e78bf67cd4a55d21c17a8911d3698b9671229fa4ad37c8420cb75fb1fa234d9b",
+          "src/ezctd/cli.py": "2ced90e4c60233bae061b8d7313d490c842f8945e0b2ea685f2f39c3d7c3ee04",
+          "src/ezctd/models.py": "e8ec226f7a93baaeb24b1a1f0992b6926b0213d5714e48e6e6171ee84daa944f",
+          "src/ezctd/page_tools.py": "d34c6c010091c3db1e7cd930a8a9ccd3f12e6c7e9cde45f1943540c8709e5669",
+          "src/ezctd/pdf_observer.py": "694073c0067ea65dc9ad00ff584463d33ca20c98d2cf466d825c4d7db2f1010a",
+          "src/ezctd/pdf_resources.py": "e1e45c1aa9c1a2616e6e594281d17ce2dec02e4f5200ca7874ff464ea621997e",
+          "src/ezctd/process_runner.py": "a6cae94c465cc4c8dab59559a506aaab59402b0b2d78dedadd2d31324557242e",
+          "src/ezctd/read_scope.py": "87fe15467bf749dea11f77f19117e0d96e25c2679e2bd8baeddad4c592a51046",
+          "src/ezctd/safe_io.py": "7a8744e11416b1f1560f3ae6a556d38b4382da2a185248aa5be856ff7e579586",
+          "src/ezctd/worker.py": "2e26dc73b1ea1fbc69295f04ac83cce493bd2005aa56415bc78fe06ae7c9ec01",
+          "tests/cro_pdf/conftest.py": "c5c1238dc883ad619900cd2ae64b83b444158243432bf1e80f856e418c85db6e",
+          "tests/cro_pdf/test_pdf_core.py": "6a12a8cd0a58b6259a37c81608caa6e1c3dc572ca4b0b776b7443d7c0114ebd1",
+          "tests/cro_pdf/test_safe_entry_and_report.py": "6d6d91a7ce95247b90088b1113ffa777678185dcfed2846390e264fc03536e46"
+        }
+      }
+    ],
+    "legacy_validate_job": "success"
+  },
+  "windows_nas_product_certified": false,
+  "source_sha256": {
+    "src/ezctd/__init__.py": "3c154cb8b6884a65a49b248a5a1e676475fbd894b5c42821348d4b763fcfe9bd",
+    "src/ezctd/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ezctd/applicability.py": "feb2d98fe62fdcbcd498d432d0a2d86c5b563ca08e0478f1e92eebf76dec0ed5",
+    "src/ezctd/assurance.py": "611330b5b123746682c61d4de0789d8bd7e81641363c0c8820f8292186cc3c4e",
+    "src/ezctd/batch.py": "1dd591b6784026c2609eba619ff7bf9bd397c17e26937a975c7c5ca9d89f9af4",
+    "src/ezctd/catalog.py": "5729f0965e23785bbc30bae563d69bea9cb83b01c43ee43b300804586e763b29",
+    "src/ezctd/cde_report.py": "508fd56c9a9f395913e0f8c393c10f836754a485e549b091b151f62bfeee8882",
+    "src/ezctd/cli.py": "6d6c2cb227d0b915d5191ad640e2e126e42e01b3678020cf2f30ef992cd76af6",
+    "src/ezctd/models.py": "f323387f0a544630c81a25f886bb3376054b4294cf25960189859f5c8bb658df",
+    "src/ezctd/page_tools.py": "3d8de442b26a077aa778830cd63dd6afb72145a060ec9b1271f60e1df56c8858",
+    "src/ezctd/pdf_observer.py": "7b4190e393391cfb3d7fc5d737ba5c7b7eee7598ee1a9a667fcca3e124f54d91",
+    "src/ezctd/pdf_resources.py": "a8b09177f2564e5e0b1acac0d47a2e860b2144f97c9fe2d45067d2e009cec780",
+    "src/ezctd/process_runner.py": "8e1411b1c5f7ed77d2946061ff2cec0fc81f44f6e63f20b0f9be861dd9f6a43f",
+    "src/ezctd/read_scope.py": "23d469ea1432cb5b9c28d0bc59c488d6a71ea4d6706fb29e75b92d4e20cca50f",
+    "src/ezctd/safe_io.py": "ade70fed288c6d383dd0489b8de46515799b20f386e5e3bf6e6bff04ef38945b",
+    "src/ezctd/worker.py": "5c22e73a5d74b0636ea08fdb585f1fe0b20a96bd5ab34b41437a55dce78d8b90",
+    "tests/cro_pdf/conftest.py": "ed47c9d26f0003d1350a93439957ced83454a93b886f399c7ed16844b9815931",
+    "tests/cro_pdf/test_pdf_core.py": "85736d5f735376cc69095aa08b26e0524756a000fbe068b9e8ecc0fe73dd0fe9",
+    "tests/cro_pdf/test_safe_entry_and_report.py": "a9bcc2c42fd5ae062229eb78a75b865134427c5790908877dc043ff2fe6b1fcf"
+  },
+  "limitations": [
+    "No complete GUI",
+    "No released PDF rewriting command",
+    "Not all 26 predicates exhaustively implemented",
+    "Font aliases and complex object graphs remain indeterminate",
+    "No full OS-level native parser sandbox",
+    "Application path checks assume trusted workspace; adversarial directory races and NAS are not certified"
+  ],
+  "verified_code_commit": "95f197c097119fbc2c3620cb24cec442aed26b7f"
+}

@@ -1,0 +1,96 @@
+{
+  "schema_version": "0.1.0",
+  "batch_id": "CDE-V1.1.0-CALIBRATION-01",
+  "validator_target": "CDE eCTD validation software V1.1.0",
+  "purpose": "Calibrate report format, message coexistence, parser thresholds, zoom semantics, security/password distinction, linearization and font inspection before executing the full 130-case matrix.",
+  "prerequisites": {
+    "official_validator_installer_hashed": true,
+    "official_validator_manual_hashed": true,
+    "known_good_baseline_sequence": true,
+    "baseline_validator_report_preserved": true,
+    "single_replacement_leaf": true
+  },
+  "cases": [
+    {
+      "case_id": "CDE-PDF-BASELINE",
+      "rule_id": null,
+      "file_name": "CDE-PDF-BASELINE.pdf",
+      "role": "negative-control",
+      "questions": [
+        "Does the untouched differential package remain free of PDF rule 6 findings?",
+        "What report formats and stable identifiers can the validator export?",
+        "Does repeated validation produce byte-stable or semantically stable reports?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-1-POS",
+      "rule_id": "6.1",
+      "file_name": "CDE-PDF-6-1-POS.pdf",
+      "role": "unambiguously-unreadable-positive",
+      "questions": [
+        "Does the official validator emit 6.1 before or together with package/checksum findings?",
+        "Does one unreadable leaf prevent remaining PDF rules from being evaluated?",
+        "What object/path is reported?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-8-POS",
+      "rule_id": "6.8",
+      "file_name": "CDE-PDF-6-8-POS.pdf",
+      "role": "bookmark-explicit-zoom-positive",
+      "questions": [
+        "Does numeric /XYZ zoom trigger rule 6.8 as a warning?",
+        "Is the bookmark title or object location included in the report?",
+        "Does the validator distinguish /XYZ null from /Fit and other fit destinations?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-19-POS",
+      "rule_id": "6.19",
+      "file_name": "CDE-PDF-6-19-POS.pdf",
+      "role": "empty-user-password-restricted-permissions-positive",
+      "questions": [
+        "Can the official validator open the PDF without prompting?",
+        "Does it emit 6.19 but not 6.21?",
+        "Which permission restriction is named, if any?",
+        "Does encryption itself trigger the rule even when all content can be opened?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-21-POS",
+      "rule_id": "6.21",
+      "file_name": "CDE-PDF-6-21-POS.pdf",
+      "role": "non-empty-user-password-positive",
+      "questions": [
+        "Does the validator emit both 6.21 and 6.19, only 6.21, or a package-level open failure?",
+        "Does password protection suppress all subsequent PDF analysis?",
+        "How is the failure represented in exported reports?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-22-POS",
+      "rule_id": "6.22",
+      "file_name": "CDE-PDF-6-22-POS.pdf",
+      "role": "valid-nonlinearized-positive",
+      "questions": [
+        "Does a final non-linearized PDF trigger 6.22 as information?",
+        "Does the validator detect stale or invalid linearization, not merely the dictionary marker?",
+        "Is the rule skipped at officially exempt nodes?"
+      ]
+    },
+    {
+      "case_id": "CDE-PDF-6-26-POS",
+      "rule_id": "6.26",
+      "file_name": "CDE-PDF-6-26-POS.pdf",
+      "role": "used-nonstandard-unembedded-font-positive",
+      "questions": [
+        "Does a used non-Base-14 Type1 font without FontDescriptor/font program trigger 6.26?",
+        "Does the report name the font and page?",
+        "Are unused font resources ignored?"
+      ]
+    }
+  ],
+  "expected_case_count": 7,
+  "official_observations": 0,
+  "status": "NOT_RUN"
+}

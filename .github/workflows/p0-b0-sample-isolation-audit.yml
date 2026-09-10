@@ -1,0 +1,56 @@
+name: P0-B0 sample isolation audit
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/p0-b0/generate_sample_isolation_audit.py"
+      - ".github/workflows/p0-b0-sample-isolation-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-b0-sample-isolation-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Synchronize generated baseline if needed
+        run: |
+          git pull --rebase origin agent/p0-b0-validation-matrix
+          test -f tests/p0_b0/smoke_manifest.json
+
+      - name: Generate and validate isolation audit
+        run: python tools/p0-b0/generate_sample_isolation_audit.py
+
+      - name: Commit audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/p0_b0/smoke_expectations.json docs/validation/p0-b0/SAMPLE_ISOLATION_AUDIT.md
+          if git diff --cached --quiet; then
+            echo "Isolation audit unchanged."
+            exit 0
+          fi
+          git commit -m "test(p0-b0): classify smoke fixture isolation and correlations"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1

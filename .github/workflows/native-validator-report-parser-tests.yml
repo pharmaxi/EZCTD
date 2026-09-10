@@ -1,0 +1,46 @@
+name: Test native validator evidence analyzers
+
+on:
+  push:
+    branches:
+      - agent/official-validator-black-box-loop
+    paths:
+      - tools/regulatory/parse_cde_validator_native_report.py
+      - tools/regulatory/analyze_cde_validator_sequence_folder_probe.py
+      - tests/regulatory/test_parse_cde_validator_native_report.py
+      - tests/regulatory/test_analyze_cde_validator_sequence_folder_probe.py
+      - .github/workflows/native-validator-report-parser-tests.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-validator-evidence-analyzer-tests
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-validator-black-box-loop
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Compile analyzers and run focused tests
+        run: |
+          python -m py_compile \
+            tools/regulatory/parse_cde_validator_native_report.py \
+            tools/regulatory/analyze_cde_validator_sequence_folder_probe.py
+          python -m pytest -q \
+            tests/regulatory/test_parse_cde_validator_native_report.py \
+            tests/regulatory/test_analyze_cde_validator_sequence_folder_probe.py

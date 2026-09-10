@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.2.0",
+  "profile_id": "cn-cde-ectd-v3.2.2-v1.1-pdf",
+  "profile_status": "official-source-verified",
+  "effective_date": "2026-03-01",
+  "verification_date": "2026-09-03",
+  "authority": {
+    "publisher": "国家药品监督管理局药品审评中心",
+    "announcement": "国家药监局药审中心关于发布eCTD V3.2.2相关技术文件的通告（2026年第4号）",
+    "published_date": "2026-01-15",
+    "effective_date": "2026-03-01"
+  },
+  "primary_source": {
+    "title": "eCTD验证标准V1.1",
+    "section": "6 - PDF分析",
+    "pages": "9-11",
+    "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf"
+  },
+  "counts": {
+    "rules": 26,
+    "错误": 16,
+    "警告": 8,
+    "提示信息": 2
+  },
+  "rules": [
+    {"id":"6.1","official_title":"PDF文件必须可读","official_severity":"错误","official_explanation":"针对被破坏或不可读的PDF文件（因内容无效，或页码数为0）进行检查，并提示错误信息。","scope_exemptions":[],"printed_page":9,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.2","official_title":"书签必须指向相对路径","official_severity":"错误","official_explanation":"PDF文件中必须使用指向相对路径的书签，不允许使用指向绝对路径的书签。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":9,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.3","official_title":"有网页、邮箱地址或其他外部链接的书签","official_severity":"错误","official_explanation":"PDF文件中不允许使用包含网页链接、电子邮箱地址或其他外部链接的书签。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":9,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.4","official_title":"不允许有未知动作的书签","official_severity":"错误","official_explanation":"不允许使用GoTo，GoToR和Launch以外的操作类型的书签。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.5","official_title":"书签不能失效","official_severity":"错误","official_explanation":"不允许在PDF文件中使用失效的书签（例如：未分配任何操作的书签）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.6","official_title":"书签不能被损坏","official_severity":"错误","official_explanation":"PDF文件中不允许包含损坏的书签（例如：书签指向地址不存在）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.7","official_title":"书签不能有多个动作","official_severity":"错误","official_explanation":"不允许有指定多个动作的书签（例如，打开两个不同的页面）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.8","official_title":"书签必须承前缩放（Inherit Zoom）","official_severity":"警告","official_explanation":"所有的书签的放大率设置应为承前缩放（Inherit Zoom）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.9","official_title":"超文本链接必须使用相对路径","official_severity":"警告","official_explanation":"PDF文件中的超文本链接必须使用相对路径，不允许使用绝对路径。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.10","official_title":"有网页、邮箱地址或其他外部链接的超文本链接","official_severity":"错误","official_explanation":"PDF文件中不允许使用包含网页链接、电子邮箱地址或其他外部链接的超文本链接。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.11","official_title":"不允许有未知动作的超文本链接","official_severity":"错误","official_explanation":"不允许在PDF文件使用除GoTo, GoToR和Launch以外动作类型的超文本链接。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.12","official_title":"超文本链接不能处于失效状态","official_severity":"错误","official_explanation":"不允许在PDF文件中使用失效的超文本链接（例如：未指定任何操作的超文本链接）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.13","official_title":"超文本链接不能被损坏","official_severity":"错误","official_explanation":"PDF文件中不允许包含损坏的超文本链接（例如：超文本链接指向地址不存在）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.14","official_title":"超文本链接不能有多个动作","official_severity":"错误","official_explanation":"不允许设置有多个指定动作（例如，打开两个不同的页面）的超文本链接。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.15","official_title":"超文本链接必须承前缩放（Inherit Zoom）","official_severity":"警告","official_explanation":"所有超文本链接的放大率设置应为承前缩放（Inherit Zoom）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.16","official_title":"PDF版本必须正确","official_severity":"警告","official_explanation":"允许的PDF文件版本为1.4，1.5，1.6，1.7，PDF/A-1，PDF/A-2。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.17","official_title":"不允许带附件的PDF文件","official_severity":"错误","official_explanation":"PDF文件中不能嵌入任何附件。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.18","official_title":"有注释的PDF文件","official_severity":"提示信息","official_explanation":"除了超文本链接以外，PDF文件中不能包含其他注释。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.19","official_title":"PDF文件不能有任何安全设置","official_severity":"错误","official_explanation":"不能提交有安全设置的PDF文件，例如限制选择文本或图形等。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":10,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.20","official_title":"PDF初始视图正确","official_severity":"警告","official_explanation":"有书签的文件在初始视图中应显示书签。放大率和页面布局应设置为默认。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.21","official_title":"PDF文件不能有密码保护","official_severity":"错误","official_explanation":"不能提交使用密码保护且无法打开的文件。","scope_exemptions":[],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.22","official_title":"PDF应该设置启用“快速Web查看（Fast Web View）”","official_severity":"提示信息","official_explanation":"不能提交未启用“快速Web查看（Fast Web View）”情况下创建的PDF文件。","scope_exemptions":["1.0说明函","1.2申请表（含自查表）","1.3.8产品相关证明性文件（如适用）","1.10上市后变更（如适用）","1.11申请人/生产企业证明性文件","1.12小微企业证明文件（如适用）","2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.23","official_title":"大于5页的文件必须有书签","official_severity":"错误","official_explanation":"除外文参考资料、参考文献（2.7.5章节、3.3章节、4.3章节、5.4章节）和申请表之外，大于5页的文件必须有书签。","scope_exemptions":["外文参考资料","2.7.5、3.3、4.3、5.4参考文献","申请表"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.24","official_title":"PDF内容限制","official_severity":"警告","official_explanation":"PDF文件不能包含JavaScript，3D内容或动态内容（音频/视频）。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.25","official_title":"PDF内容可搜索","official_severity":"警告","official_explanation":"PDF文件中的文本必须可搜索。如果是扫描页面，则应使用OCR提供可搜索的文本。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"},
+    {"id":"6.26","official_title":"如使用非标准字体，需嵌入在PDF文件中","official_severity":"警告","official_explanation":"PDF文件应尽量使用标准字体。如果包含非标准字体，则需在文件中嵌入该非标准字体。","scope_exemptions":["2.7.5、3.3、4.3、5.4参考文献","外文参考资料"],"printed_page":11,"verification_status":"VERIFIED_PRIMARY"}
+  ]
+}

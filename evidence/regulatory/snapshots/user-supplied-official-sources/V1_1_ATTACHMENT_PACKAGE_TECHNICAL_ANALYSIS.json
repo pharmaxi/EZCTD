@@ -1,0 +1,5301 @@
+{
+  "schema_version": "0.1.0",
+  "status": "OFFICIAL_EFFECTIVE_PACKAGE_PARSED",
+  "package_source_sha256": "0dbfd2ffb8969731deef3a1dd446da6b48511b2d537c5946eb9498a0b5992eea",
+  "manifest": {
+    "schema_version": "0.1.0",
+    "release_profile": "cn-cde-ectd-v3.2.2-v1.1-technical-package",
+    "package_root": "eCTD技术规范V1.1附件包",
+    "member_count": 23,
+    "total_member_bytes": 659173,
+    "counts_by_suffix": {
+      ".dtd": 2,
+      ".pdf": 2,
+      ".xml": 9,
+      ".xsd": 6,
+      ".xsl": 4
+    },
+    "members": [
+      {
+        "relative_path": "附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+        "filename": "cn-regional-1-0.xsd",
+        "suffix": ".xsd",
+        "size": 12034,
+        "kind": "xml-like",
+        "sha256": "e1a7f6a88189f72d156ae403e1c3de89ddfaed32b5f477348e99c7d7aabc9dd4",
+        "sm3": "445547b2295cb924319bf940ad60b2839a14462f3a0f5eac8c99402d7d3c3a18",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cn-cv.xsd",
+        "filename": "cn-cv.xsd",
+        "suffix": ".xsd",
+        "size": 1652,
+        "kind": "xml-like",
+        "sha256": "f0c7f0647f718f3f6805bea0a47de79d3fcc056875bf503c7ffefc04c7b7447d",
+        "sm3": "da609e9297604e9efdfa56c1434befd9ab7c2e14548c74ede5ebe4c8eaa8b9e7",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cn-dependency.xsd",
+        "filename": "cn-dependency.xsd",
+        "suffix": ".xsd",
+        "size": 1304,
+        "kind": "text-or-binary",
+        "sha256": "74e002522da8bb073f60b2e26dd3093f61bf23ddff4785736fbea5b0a35d75b5",
+        "sm3": "04ce3c0b0a6e79e17bfcabf49097e80a196c59308489f74e7407b30367cee362",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cn-elements.xsd",
+        "filename": "cn-elements.xsd",
+        "suffix": ".xsd",
+        "size": 1524,
+        "kind": "xml-like",
+        "sha256": "303c303ef7b3a4c6d7721c903e08cae3d2a593fe7dbee5fce346f86e573a96ef",
+        "sm3": "d2077ae476da3028172a3d1f49b850d05709e90636b202d324c33e5d0704e18e",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cv-application-type.xml",
+        "filename": "cv-application-type.xml",
+        "suffix": ".xml",
+        "size": 1499,
+        "kind": "xml-like",
+        "sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641",
+        "sm3": "cc94dde92e8470c2b7931ec3d440825d2f766e7e8be5cbe717656115b6f9c221",
+        "declared_versions": [
+          {
+            "version": "1.1",
+            "date_text": "2026年3月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": true,
+          "baseline": false,
+          "version_1_1": true
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cv-product-type.xml",
+        "filename": "cv-product-type.xml",
+        "suffix": ".xml",
+        "size": 691,
+        "kind": "xml-like",
+        "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216",
+        "sm3": "5b7b8ab3091923c52404fc9cd636c5d24333ef01a4b48469c75a19ff12aa5505",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+        "filename": "cv-regulatory-activity-type.xml",
+        "suffix": ".xml",
+        "size": 2849,
+        "kind": "xml-like",
+        "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd",
+        "sm3": "5c672f56085c61ba5f3f656db78b561ffdda29690447062ad6ffdc97137df574",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": true,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/cv-sequence-type.xml",
+        "filename": "cv-sequence-type.xml",
+        "suffix": ".xml",
+        "size": 951,
+        "kind": "xml-like",
+        "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17",
+        "sm3": "e989481e8d42f18a8590738516a9233addc5e70d6b237a1e2150750ec8178a00",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+        "filename": "depend-apt-rat-sqt.xml",
+        "suffix": ".xml",
+        "size": 7363,
+        "kind": "text-or-binary",
+        "sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867",
+        "sm3": "b30b3115d06454c4f7a77f6d64c4f9434c78323866b4330c78288e69f88e705e",
+        "declared_versions": [
+          {
+            "version": "1.1",
+            "date_text": "2026年3月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": true,
+          "baseline": true,
+          "version_1_1": true
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/eCTD受控词汇文件列表说明.pdf",
+        "filename": "eCTD受控词汇文件列表说明.pdf",
+        "suffix": ".pdf",
+        "size": 70318,
+        "kind": "pdf",
+        "sha256": "966503796da0e0ceaae814e26b51cf79b37ad23233e652b542c02f1575871151",
+        "sm3": "0d7e90c934f419307e56b969db7c5a4714f14fe9c14182ba53be577bbc38721d",
+        "declared_versions": [],
+        "comment_mentions": {}
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/element-property_CN.xml",
+        "filename": "element-property_CN.xml",
+        "suffix": ".xml",
+        "size": 18752,
+        "kind": "text-or-binary",
+        "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59",
+        "sm3": "36aca8fcbcad459cd64807f6b1123781393d4275153acb9ef3f658cfed7c271e",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": true,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/element-property_ICH.xml",
+        "filename": "element-property_ICH.xml",
+        "suffix": ".xml",
+        "size": 39820,
+        "kind": "xml-like",
+        "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d",
+        "sm3": "68cb309a2453c9b68cec4d64558221e1a304485b97f9552d73ff3b0249c10217",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": true,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+        "filename": "node-extension-property_CN.xml",
+        "suffix": ".xml",
+        "size": 1293,
+        "kind": "text-or-binary",
+        "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9",
+        "sm3": "f805c5a965dbc99cb82b6b1fce8bf8873816da3a90a3defbf12135e0fd6da0c7",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "2021年9月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件1-3：区域性样式文件/cn-regional-1-1.xsl",
+        "filename": "cn-regional-1-1.xsl",
+        "suffix": ".xsl",
+        "size": 23469,
+        "kind": "text-or-binary",
+        "sha256": "bb3c710f51444b9fe36b6cc18cb269beaa10c36ed117c80b60da5e274b5e745f",
+        "sm3": "6392a7019d11b499260dfd3ed6da12ccd34d4931becb510a4337cd328cda597a",
+        "declared_versions": [
+          {
+            "version": "1.1",
+            "date_text": "2026年3月1日"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": true,
+          "baseline": true,
+          "version_1_1": true
+        }
+      },
+      {
+        "relative_path": "附件1-4：CTD模块一文件组织结构/附件1-4：CTD模块一文件组织结构.pdf",
+        "filename": "附件1-4：CTD模块一文件组织结构.pdf",
+        "suffix": ".pdf",
+        "size": 404306,
+        "kind": "pdf",
+        "sha256": "386296ead625587bab9bcccaa9bada54a02119fec1c0e5604a1bf0cf27a80626",
+        "sm3": "18ddd02c832f75a960352b79559497e24fc7421379bcebc848bad4e7640cb580",
+        "declared_versions": [],
+        "comment_mentions": {}
+      },
+      {
+        "relative_path": "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+        "filename": "ich-ectd-3-2.dtd",
+        "suffix": ".dtd",
+        "size": 31400,
+        "kind": "xml-like",
+        "sha256": "c094aa2bded99564ade8ac78ae1540f95e518461b8eebe9a3063f67a165c2731",
+        "sm3": "26b3e59410f676e9a1275ac4eafffa454f4993e5e171d1f6d35ac8a4d4bec3cc",
+        "declared_versions": [
+          {
+            "version": "1.0",
+            "date_text": "March 6, 2002"
+          },
+          {
+            "version": "3.0",
+            "date_text": "Sept 11, 2002"
+          },
+          {
+            "version": "3.0",
+            "date_text": "Oct 1, 2002"
+          },
+          {
+            "version": "3.0",
+            "date_text": "Oct 8, 2002"
+          },
+          {
+            "version": "3.1",
+            "date_text": "Nov 11, 2003"
+          },
+          {
+            "version": "3.2",
+            "date_text": "Nov 21, 2003"
+          },
+          {
+            "version": "3.1",
+            "date_text": "ID was changed to REQUIRED in the following four locations:"
+          },
+          {
+            "version": "3.2",
+            "date_text": "Indication attribute was changed to REQUIRED in the following two locations:"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+        "filename": "ich-stf-v2-2.dtd",
+        "suffix": ".dtd",
+        "size": 5024,
+        "kind": "xml-like",
+        "sha256": "e6d47695501e263534a89a2b7bf7018c92e12a11c3dd82fc1d0c462bfa52c81f",
+        "sm3": "13a15d5fcd373cb8b0ee085775f2c4a55f51eda3646cd699720338f06aee54c4",
+        "declared_versions": [
+          {
+            "version": "2",
+            "date_text": "2  -->"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件2-3：ICH样式文件/ectd-2-0.xsl",
+        "filename": "ectd-2-0.xsl",
+        "suffix": ".xsl",
+        "size": 2049,
+        "kind": "xml-like",
+        "sha256": "41bf6aaf78fa1ba736951174c5e3dc6724410f4d5d9332034dac9b2c8d34dcd1",
+        "sm3": "480bb3251939781c7064ebeaaf7ba1576c9a5a074df20ead2f87df27ea31c70c",
+        "declared_versions": [],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+        "filename": "ich-stf-stylesheet-2-2a.xsl",
+        "suffix": ".xsl",
+        "size": 5008,
+        "kind": "xml-like",
+        "sha256": "377e4aa00788e79c64afad0182cb67964b7a4ae8c5b86819b19ec2221e3a1d8f",
+        "sm3": "693248afcbf98de0ff9fde585ce094633b28afc16b9b5435d6a69ed55a4d9aeb",
+        "declared_versions": [
+          {
+            "version": "2",
+            "date_text": "2a"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl",
+        "filename": "ich-stf-stylesheet-2-3.xsl",
+        "suffix": ".xsl",
+        "size": 5287,
+        "kind": "xml-like",
+        "sha256": "9131de4db31b5c74d6559e8e92f0aecb82bbd45f7783b8adfead826dbb943023",
+        "sm3": "d46bacf6539553f75a4495f99e45f87bc80612527c862a50969c0ac333ba397f",
+        "declared_versions": [
+          {
+            "version": "2",
+            "date_text": "3"
+          }
+        ],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件2-6：STF标签值文件/valid-values.xml",
+        "filename": "valid-values.xml",
+        "suffix": ".xml",
+        "size": 7803,
+        "kind": "xml-like",
+        "sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3",
+        "sm3": "eb7d656ef7419c7661c6645440b16af945fdb706f612f2baed7f0f75bce9e7e9",
+        "declared_versions": [],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件3-1：w3c标准xlink结构定义文件/xlink.xsd",
+        "filename": "xlink.xsd",
+        "suffix": ".xsd",
+        "size": 9261,
+        "kind": "xml-like",
+        "sha256": "04ba27c1e2dd651ebb9d9a888141f933aebe0f69318ba45bf97b0780aaee7b54",
+        "sm3": "9c90d9a2844e2344bb87b0980700c3a6b7cc5e51bf25b86d49cec1b680aeaf80",
+        "declared_versions": [],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      },
+      {
+        "relative_path": "附件3-2：w3c标准xml命名规范定义文件/xml.xsd",
+        "filename": "xml.xsd",
+        "suffix": ".xsd",
+        "size": 5516,
+        "kind": "xml-like",
+        "sha256": "a694fad40f399c42a4b1df99497e8dba4dd6f212e530733329a490d6ef7b1bb4",
+        "sm3": "5245cf0ed5a118ea432c9a368493c63660fe7436a4445a53cd37c3d2c279cbf3",
+        "declared_versions": [],
+        "comment_mentions": {
+          "drug_substance": false,
+          "baseline": false,
+          "version_1_1": false
+        }
+      }
+    ]
+  },
+  "schema_contract": {
+    "target_namespace": "cn_ectd",
+    "element_form_default": "qualified",
+    "attribute_form_default": "unqualified",
+    "imports": [
+      {
+        "namespace": "http://www.w3.org/1999/xlink",
+        "schema_location": "xlink.xsd"
+      },
+      {
+        "namespace": "http://www.w3.org/XML/1998/namespace",
+        "schema_location": "xml.xsd"
+      }
+    ],
+    "global_elements": [
+      {
+        "name": "cn_ectd",
+        "type": null,
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "global_complex_types": [
+      "cn-contact",
+      "cn-content",
+      "cn-envelope",
+      "cn-leaf",
+      "cn-leaf-ext",
+      "cn-node-extension",
+      "cn-type"
+    ],
+    "global_simple_types": [
+      "ich-checksum-type",
+      "ich-leaf-operations"
+    ],
+    "root_contract": {
+      "children": [
+        {
+          "name": "cn-envelope",
+          "type": "cn-envelope",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "cn-content",
+          "type": "cn-content",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        }
+      ],
+      "attributes": [
+        {
+          "name": "schema-version",
+          "type": null,
+          "use": "required",
+          "ref": null,
+          "enumerations": [
+            "1.0"
+          ]
+        }
+      ]
+    },
+    "envelope_contract": {
+      "children": [
+        {
+          "name": "application-id",
+          "type": "xs:string",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "application-type",
+          "type": "cn-type",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "product-type",
+          "type": "cn-type",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "product-number",
+          "type": "xs:string",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "related-sequence",
+          "type": "xs:string",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "regulatory-activity-type",
+          "type": "cn-type",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "sequence-number",
+          "type": "xs:string",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "sequence-type",
+          "type": "cn-type",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "sequence-description",
+          "type": "xs:string",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "sequence-contact",
+          "type": "cn-contact",
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        }
+      ],
+      "attributes": []
+    },
+    "content_top_level": [
+      {
+        "name": "cn-1-0",
+        "type": "cn-leaf-ext",
+        "min_occurs": "1",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-1",
+        "type": "cn-leaf-ext",
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-2",
+        "type": "cn-leaf-ext",
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-3",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-4",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-5",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-6",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-7",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-8",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-9",
+        "type": "cn-leaf-ext",
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-10",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-11",
+        "type": null,
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      },
+      {
+        "name": "cn-1-12",
+        "type": "cn-leaf-ext",
+        "min_occurs": "0",
+        "max_occurs": "1",
+        "ref": null
+      }
+    ],
+    "leaf_container_contract": {
+      "sequence_min_occurs": "0",
+      "sequence_max_occurs": "unbounded",
+      "empty_container_schema_valid_possible": true
+    },
+    "leaf_contract": {
+      "children": [
+        {
+          "name": "title",
+          "type": null,
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "link-text",
+          "type": null,
+          "min_occurs": "0",
+          "max_occurs": "1",
+          "ref": null
+        },
+        {
+          "name": "xref",
+          "type": null,
+          "min_occurs": "0",
+          "max_occurs": "1",
+          "ref": null
+        }
+      ],
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "xs:ID",
+          "use": "required",
+          "ref": null
+        },
+        {
+          "name": "operation",
+          "type": "ich-leaf-operations",
+          "use": "required",
+          "ref": null
+        },
+        {
+          "name": "xlink:href",
+          "type": null,
+          "use": "optional",
+          "ref": "xlink:href"
+        },
+        {
+          "name": "modified-file",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "checksum-type",
+          "type": "ich-checksum-type",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "checksum",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "application-version",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "version",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "keywords",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "font-library",
+          "type": "xs:string",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "xlink:type",
+          "type": null,
+          "use": "optional",
+          "ref": "xlink:type"
+        },
+        {
+          "name": "xlink:role",
+          "type": null,
+          "use": "optional",
+          "ref": "xlink:role"
+        },
+        {
+          "name": "xlink:show",
+          "type": null,
+          "use": "optional",
+          "ref": "xlink:show"
+        },
+        {
+          "name": "xlink:actuate",
+          "type": null,
+          "use": "optional",
+          "ref": "xlink:actuate"
+        },
+        {
+          "name": "xml:lang",
+          "type": null,
+          "use": "optional",
+          "ref": "xml:lang"
+        }
+      ]
+    },
+    "node_extension_contract": {
+      "children": [
+        {
+          "name": "title",
+          "type": null,
+          "min_occurs": "1",
+          "max_occurs": "1",
+          "ref": null
+        }
+      ],
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "xs:ID",
+          "use": "optional",
+          "ref": null
+        },
+        {
+          "name": "xml:lang",
+          "type": null,
+          "use": "optional",
+          "ref": "xml:lang"
+        }
+      ]
+    },
+    "simple_type_enumerations": {
+      "ich-checksum-type": [
+        "MD5",
+        "md5"
+      ],
+      "ich-leaf-operations": [
+        "new",
+        "append",
+        "replace",
+        "delete"
+      ]
+    },
+    "source_sha256": "e1a7f6a88189f72d156ae403e1c3de89ddfaed32b5f477348e99c7d7aabc9dd4",
+    "source_path": "cn-regional-1-0.xsd"
+  },
+  "controlled_vocabularies": {
+    "cv-application-type.xml": {
+      "name": "application-type",
+      "descriptions": {
+        "zh": "申请类型",
+        "en": "Application Type"
+      },
+      "version": "1.1",
+      "valid_from": "2026-3-1",
+      "codes": [
+        {
+          "code": "cnapt1",
+          "descriptions": {
+            "zh": "临床试验申请",
+            "en": "Investigational New Drug"
+          }
+        },
+        {
+          "code": "cnapt2",
+          "descriptions": {
+            "zh": "新药申请",
+            "en": "New Drug Application"
+          }
+        },
+        {
+          "code": "cnapt3",
+          "descriptions": {
+            "zh": "仿制药申请",
+            "en": "Abbreviated New Drug Application"
+          }
+        },
+        {
+          "code": "cnapt4",
+          "descriptions": {
+            "zh": "原料药申请",
+            "en": "Drug Substance Application"
+          }
+        }
+      ],
+      "count": 4,
+      "source_sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641",
+      "source_path": "cv-application-type.xml"
+    },
+    "cv-product-type.xml": {
+      "name": "product-type",
+      "descriptions": {
+        "zh": "产品类型",
+        "en": "Product Type"
+      },
+      "version": "1.0",
+      "valid_from": "2021-9-1",
+      "codes": [
+        {
+          "code": "cnprt1",
+          "descriptions": {
+            "zh": "化学药品",
+            "en": "Chemical Product"
+          }
+        },
+        {
+          "code": "cnprt2",
+          "descriptions": {
+            "zh": "生物制品",
+            "en": "Biological Product"
+          }
+        }
+      ],
+      "count": 2,
+      "source_sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216",
+      "source_path": "cv-product-type.xml"
+    },
+    "cv-regulatory-activity-type.xml": {
+      "name": "regulatory-activity-type",
+      "descriptions": {
+        "zh": "注册行为类型",
+        "en": "Regulatory Activity Type"
+      },
+      "version": "1.0",
+      "valid_from": "2021-9-1",
+      "codes": [
+        {
+          "code": "cnrat1",
+          "descriptions": {
+            "zh": "首次申请",
+            "en": "Original Application"
+          }
+        },
+        {
+          "code": "cnrat2",
+          "descriptions": {
+            "zh": "补充申请",
+            "en": "Supplement"
+          }
+        },
+        {
+          "code": "cnrat3",
+          "descriptions": {
+            "zh": "备案",
+            "en": "Record"
+          }
+        },
+        {
+          "code": "cnrat4",
+          "descriptions": {
+            "zh": "报告",
+            "en": "Report"
+          }
+        },
+        {
+          "code": "cnrat5",
+          "descriptions": {
+            "zh": "新适应症和联合用药",
+            "en": "New Indication and Drug Combination"
+          }
+        },
+        {
+          "code": "cnrat6",
+          "descriptions": {
+            "zh": "新适应症",
+            "en": "New Indication"
+          }
+        },
+        {
+          "code": "cnrat7",
+          "descriptions": {
+            "zh": "研发期间安全性报告",
+            "en": "Development Safety Report"
+          }
+        },
+        {
+          "code": "cnrat8",
+          "descriptions": {
+            "zh": "再注册",
+            "en": "Renewal"
+          }
+        },
+        {
+          "code": "cnrat9",
+          "descriptions": {
+            "zh": "基线",
+            "en": "Baseline"
+          }
+        }
+      ],
+      "count": 9,
+      "source_sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd",
+      "source_path": "cv-regulatory-activity-type.xml"
+    },
+    "cv-sequence-type.xml": {
+      "name": "sequence-type",
+      "descriptions": {
+        "zh": "序列类型",
+        "en": "Sequence Type"
+      },
+      "version": "1.0",
+      "valid_from": "2021-9-1",
+      "codes": [
+        {
+          "code": "cnsqt1",
+          "descriptions": {
+            "zh": "首次提交",
+            "en": "Original"
+          }
+        },
+        {
+          "code": "cnsqt2",
+          "descriptions": {
+            "zh": "回复",
+            "en": "Response"
+          }
+        },
+        {
+          "code": "cnsqt3",
+          "descriptions": {
+            "zh": "撤回",
+            "en": "Withdrawal"
+          }
+        },
+        {
+          "code": "cnsqt4",
+          "descriptions": {
+            "zh": "格式转换",
+            "en": "Reformat"
+          }
+        }
+      ],
+      "count": 4,
+      "source_sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17",
+      "source_path": "cv-sequence-type.xml"
+    }
+  },
+  "dependency_matrix": {
+    "keys": [
+      "cv-application-type",
+      "cv-regulatory-activity-type",
+      "cv-sequence-type"
+    ],
+    "version": "1.1",
+    "valid_from": "2026-3-1",
+    "triples": [
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat5",
+        "regulatory_activity_label": {
+          "zh": "新适应症和联合用药",
+          "en": "New Indication and Drug Combination"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat5",
+        "regulatory_activity_label": {
+          "zh": "新适应症和联合用药",
+          "en": "New Indication and Drug Combination"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat5",
+        "regulatory_activity_label": {
+          "zh": "新适应症和联合用药",
+          "en": "New Indication and Drug Combination"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat7",
+        "regulatory_activity_label": {
+          "zh": "研发期间安全性报告",
+          "en": "Development Safety Report"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat7",
+        "regulatory_activity_label": {
+          "zh": "研发期间安全性报告",
+          "en": "Development Safety Report"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat7",
+        "regulatory_activity_label": {
+          "zh": "研发期间安全性报告",
+          "en": "Development Safety Report"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt4",
+        "sequence_label": {
+          "zh": "格式转换",
+          "en": "Reformat"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt1",
+        "application_label": {
+          "zh": "临床试验申请",
+          "en": "Investigational New Drug"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt4",
+        "sequence_label": {
+          "zh": "格式转换",
+          "en": "Reformat"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt2",
+        "application_label": {
+          "zh": "新药申请",
+          "en": "New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat6",
+        "regulatory_activity_label": {
+          "zh": "新适应症",
+          "en": "New Indication"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt4",
+        "sequence_label": {
+          "zh": "格式转换",
+          "en": "Reformat"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt3",
+        "application_label": {
+          "zh": "仿制药申请",
+          "en": "Abbreviated New Drug Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat1",
+        "regulatory_activity_label": {
+          "zh": "首次申请",
+          "en": "Original Application"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat2",
+        "regulatory_activity_label": {
+          "zh": "补充申请",
+          "en": "Supplement"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat3",
+        "regulatory_activity_label": {
+          "zh": "备案",
+          "en": "Record"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat4",
+        "regulatory_activity_label": {
+          "zh": "报告",
+          "en": "Report"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt1",
+        "sequence_label": {
+          "zh": "首次提交",
+          "en": "Original"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat8",
+        "regulatory_activity_label": {
+          "zh": "再注册",
+          "en": "Renewal"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt4",
+        "sequence_label": {
+          "zh": "格式转换",
+          "en": "Reformat"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt2",
+        "sequence_label": {
+          "zh": "回复",
+          "en": "Response"
+        }
+      },
+      {
+        "application_type": "cnapt4",
+        "application_label": {
+          "zh": "原料药申请",
+          "en": "Drug Substance Application"
+        },
+        "regulatory_activity_type": "cnrat9",
+        "regulatory_activity_label": {
+          "zh": "基线",
+          "en": "Baseline"
+        },
+        "sequence_type": "cnsqt3",
+        "sequence_label": {
+          "zh": "撤回",
+          "en": "Withdrawal"
+        }
+      }
+    ],
+    "count": 75,
+    "activity_sets_by_application": {
+      "cnapt1": [
+        "cnrat1",
+        "cnrat2",
+        "cnrat5",
+        "cnrat7",
+        "cnrat9"
+      ],
+      "cnapt2": [
+        "cnrat1",
+        "cnrat2",
+        "cnrat3",
+        "cnrat4",
+        "cnrat6",
+        "cnrat8",
+        "cnrat9"
+      ],
+      "cnapt3": [
+        "cnrat1",
+        "cnrat2",
+        "cnrat3",
+        "cnrat4",
+        "cnrat6",
+        "cnrat8",
+        "cnrat9"
+      ],
+      "cnapt4": [
+        "cnrat1",
+        "cnrat2",
+        "cnrat3",
+        "cnrat4",
+        "cnrat8",
+        "cnrat9"
+      ]
+    },
+    "sequence_sets_by_activity": {
+      "cnrat1": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat2": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat5": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat7": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat9": [
+        "cnsqt2",
+        "cnsqt3",
+        "cnsqt4"
+      ],
+      "cnrat3": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat4": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat6": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ],
+      "cnrat8": [
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3"
+      ]
+    },
+    "source_sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867",
+    "source_path": "depend-apt-rat-sqt.xml"
+  },
+  "module1_elements": {
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "elements": [
+      {
+        "name": "cn-1-0",
+        "structure_number": "1.0",
+        "descriptions": {
+          "zh": "说明函",
+          "en": "Cover letter"
+        }
+      },
+      {
+        "name": "cn-1-1",
+        "structure_number": "1.1",
+        "descriptions": {
+          "zh": "目录",
+          "en": "ToC"
+        }
+      },
+      {
+        "name": "cn-1-2",
+        "structure_number": "1.2",
+        "descriptions": {
+          "zh": "申请表",
+          "en": "Application Form"
+        }
+      },
+      {
+        "name": "cn-1-3",
+        "structure_number": "1.3",
+        "descriptions": {
+          "zh": "产品信息相关材料",
+          "en": "Product Information"
+        }
+      },
+      {
+        "name": "cn-1-3-1",
+        "structure_number": "1.3.1",
+        "descriptions": {
+          "zh": "说明书",
+          "en": "Package Insert"
+        }
+      },
+      {
+        "name": "cn-1-3-1-1",
+        "structure_number": "1.3.1.1",
+        "descriptions": {
+          "zh": "研究药物说明书及修订说明（适用于临床试验申请）",
+          "en": "Investigational Drug Package Insert and Descriptions of Revisions (applicable to IND)"
+        }
+      },
+      {
+        "name": "cn-1-3-1-2",
+        "structure_number": "1.3.1.2",
+        "descriptions": {
+          "zh": "上市药品说明书及修订说明（适用于上市及上市后变更申请）",
+          "en": "Marketed Product Package Insert and Descriptions of Revisions (applicable to NDA and post-NDA variation applications)"
+        }
+      },
+      {
+        "name": "cn-1-3-2",
+        "structure_number": "1.3.2",
+        "descriptions": {
+          "zh": "包装标签",
+          "en": "Labeling"
+        }
+      },
+      {
+        "name": "cn-1-3-2-1",
+        "structure_number": "1.3.2.1",
+        "descriptions": {
+          "zh": "研究药物包装标签（适用于临床试验申请）",
+          "en": "Investigational drug package label (applicable to IND)"
+        }
+      },
+      {
+        "name": "cn-1-3-2-2",
+        "structure_number": "1.3.2.2",
+        "descriptions": {
+          "zh": "上市药品包装标签（适用于上市及上市后变更申请）",
+          "en": "Marketed product package label (applicable to NDA/ANDA and post-NDA variation applications)"
+        }
+      },
+      {
+        "name": "cn-1-3-3",
+        "structure_number": "1.3.3",
+        "descriptions": {
+          "zh": "产品质量标准和生产工艺/制造及检定规程",
+          "en": "Product Specification, Manufacturing Process, and Testing Procedures"
+        }
+      },
+      {
+        "name": "cn-1-3-4",
+        "structure_number": "1.3.4",
+        "descriptions": {
+          "zh": "临床试验相关资料（适用于临床试验申请）",
+          "en": "IND Information(applicable to IND)"
+        }
+      },
+      {
+        "name": "cn-1-3-4-1",
+        "structure_number": "1.3.4.1",
+        "descriptions": {
+          "zh": "临床试验计划和方案",
+          "en": "Clinical study development plan and protocol"
+        }
+      },
+      {
+        "name": "cn-1-3-4-2",
+        "structure_number": "1.3.4.2",
+        "descriptions": {
+          "zh": "知情同意书样稿",
+          "en": "Sample Informed Consent Form"
+        }
+      },
+      {
+        "name": "cn-1-3-4-3",
+        "structure_number": "1.3.4.3",
+        "descriptions": {
+          "zh": "研究者手册",
+          "en": "Investigator Brochure"
+        }
+      },
+      {
+        "name": "cn-1-3-5",
+        "structure_number": "1.3.5",
+        "descriptions": {
+          "zh": "药品通用名称核准申请材料",
+          "en": "Generic name application dossiers"
+        }
+      },
+      {
+        "name": "cn-1-3-6",
+        "structure_number": "1.3.6",
+        "descriptions": {
+          "zh": "检查相关信息（适用于上市申请和涉及检查检验的补充申请）",
+          "en": "Inspection related dossiers (Only for NDA and variation application where inspection is needed)"
+        }
+      },
+      {
+        "name": "cn-1-3-7",
+        "structure_number": "1.3.7",
+        "descriptions": {
+          "zh": "疫苗生物安全及环境影响评价",
+          "en": "Vaccine biosafety and environmental impact assessment"
+        }
+      },
+      {
+        "name": "cn-1-3-8",
+        "structure_number": "1.3.8",
+        "descriptions": {
+          "zh": "产品相关证明性文件（如适用）",
+          "en": "Product-related certifications"
+        }
+      },
+      {
+        "name": "cn-1-3-8-1",
+        "structure_number": "1.3.8.1",
+        "descriptions": {
+          "zh": "原料药、药用辅料及药包材证明文件",
+          "en": "Certifications of drug substance, Excipients, and Packaging Materials"
+        }
+      },
+      {
+        "name": "cn-1-3-8-2",
+        "structure_number": "1.3.8.2",
+        "descriptions": {
+          "zh": "专利信息及证明文件",
+          "en": "Patent information and certificates"
+        }
+      },
+      {
+        "name": "cn-1-3-8-3",
+        "structure_number": "1.3.8.3",
+        "descriptions": {
+          "zh": "特殊药品研制立项批准文件",
+          "en": "Approval documents for controlled drug development and approval program (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-3-8-4",
+        "structure_number": "1.3.8.4",
+        "descriptions": {
+          "zh": "商标信息及证明文件",
+          "en": "Trademark information and certificates (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-3-8-5",
+        "structure_number": "1.3.8.5",
+        "descriptions": {
+          "zh": "对照药来源证明文件",
+          "en": "Documents certifying the source of the reference drug"
+        }
+      },
+      {
+        "name": "cn-1-3-8-6",
+        "structure_number": "1.3.8.6",
+        "descriptions": {
+          "zh": "药物临床试验相关证明文件（适用于上市申请）",
+          "en": "Clinical study related certificates (Only for NDA)"
+        }
+      },
+      {
+        "name": "cn-1-3-8-7",
+        "structure_number": "1.3.8.7",
+        "descriptions": {
+          "zh": "研究机构资质证明文件",
+          "en": "Qualification documents of research institutions"
+        }
+      },
+      {
+        "name": "cn-1-3-8-8",
+        "structure_number": "1.3.8.8",
+        "descriptions": {
+          "zh": "药械组合产品相关证明性文件",
+          "en": "Drug-Device combination product related certificates"
+        }
+      },
+      {
+        "name": "cn-1-3-8-9",
+        "structure_number": "1.3.8.9",
+        "descriptions": {
+          "zh": "允许药品上市销售证明文件（适用于境外已上市的药品）",
+          "en": "Documents permitting the marketing of drugs (applicable to drugs already marketed overseas)"
+        }
+      },
+      {
+        "name": "cn-1-3-8-10",
+        "structure_number": "1.3.8.10",
+        "descriptions": {
+          "zh": "允许药品变更的证明文件",
+          "en": "Certificated documents of variation approval (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-3-9",
+        "structure_number": "1.3.9",
+        "descriptions": {
+          "zh": "其他产品信息相关材料",
+          "en": "Other product information related materials"
+        }
+      },
+      {
+        "name": "cn-1-4",
+        "structure_number": "1.4",
+        "descriptions": {
+          "zh": "申请状态（如适用）",
+          "en": "Status of application (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-4-1",
+        "structure_number": "1.4.1",
+        "descriptions": {
+          "zh": "既往批准情况",
+          "en": "Previous approved information"
+        }
+      },
+      {
+        "name": "cn-1-4-2",
+        "structure_number": "1.4.2",
+        "descriptions": {
+          "zh": "申请调整临床试验方案、暂停或者终止临床试验",
+          "en": "Application to adjust clinical trial protocol, hold or terminate a CTA"
+        }
+      },
+      {
+        "name": "cn-1-4-3",
+        "structure_number": "1.4.3",
+        "descriptions": {
+          "zh": "暂停后申请恢复临床试验",
+          "en": "Request to resume a clinical trial"
+        }
+      },
+      {
+        "name": "cn-1-4-4",
+        "structure_number": "1.4.4",
+        "descriptions": {
+          "zh": "终止后重新申请临床试验",
+          "en": "New application after terminating a CTA"
+        }
+      },
+      {
+        "name": "cn-1-4-5",
+        "structure_number": "1.4.5",
+        "descriptions": {
+          "zh": "申请撤回尚未批准的药物临床试验申请、上市注册许可申请、补充申请或再注册申请",
+          "en": "Withdrawal of not yet approved Applications for CTA, NDA, ANDA, variation application or renewal application"
+        }
+      },
+      {
+        "name": "cn-1-4-6",
+        "structure_number": "1.4.6",
+        "descriptions": {
+          "zh": "申请上市注册审评期间变更仅包括申请人更名、变更注册地址名称等不涉及技术审评内容的变更",
+          "en": "Variation Application during the review stage, which will not involve the technical review contents, including the changes of applicant name, registered address, etc."
+        }
+      },
+      {
+        "name": "cn-1-4-7",
+        "structure_number": "1.4.7",
+        "descriptions": {
+          "zh": "申请注销药品注册证书",
+          "en": "Request to withdraw a drug registration certificate"
+        }
+      },
+      {
+        "name": "cn-1-5",
+        "structure_number": "1.5",
+        "descriptions": {
+          "zh": "加快上市注册程序申请（如适用）",
+          "en": "Application for Accelerated review (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-5-1",
+        "structure_number": "1.5.1",
+        "descriptions": {
+          "zh": "加快上市注册程序申请",
+          "en": "Application for Accelerated review designation"
+        }
+      },
+      {
+        "name": "cn-1-5-2",
+        "structure_number": "1.5.2",
+        "descriptions": {
+          "zh": "加快上市注册程序终止申请",
+          "en": "Application for withdrawal of accelerated review designation"
+        }
+      },
+      {
+        "name": "cn-1-5-3",
+        "structure_number": "1.5.3",
+        "descriptions": {
+          "zh": "其他加快注册程序申请",
+          "en": "Other application for accelerated review designation"
+        }
+      },
+      {
+        "name": "cn-1-6",
+        "structure_number": "1.6",
+        "descriptions": {
+          "zh": "沟通交流会议（如适用）",
+          "en": "Communication Meeting (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-6-1",
+        "structure_number": "1.6.1",
+        "descriptions": {
+          "zh": "会议申请",
+          "en": "Meeting request"
+        }
+      },
+      {
+        "name": "cn-1-6-2",
+        "structure_number": "1.6.2",
+        "descriptions": {
+          "zh": "会议背景资料",
+          "en": "Meeting background documents"
+        }
+      },
+      {
+        "name": "cn-1-6-3",
+        "structure_number": "1.6.3",
+        "descriptions": {
+          "zh": "会议相关信函、会议纪要以及答复",
+          "en": "Meeting correspondence/meeting minutes and responses"
+        }
+      },
+      {
+        "name": "cn-1-7",
+        "structure_number": "1.7",
+        "descriptions": {
+          "zh": "临床试验过程管理信息（如适用）",
+          "en": "Clinical trial management information (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-7-1",
+        "structure_number": "1.7.1",
+        "descriptions": {
+          "zh": "临床试验期间增加适应症",
+          "en": "Additional indication during clinical trial"
+        }
+      },
+      {
+        "name": "cn-1-7-2",
+        "structure_number": "1.7.2",
+        "descriptions": {
+          "zh": "临床试验方案变更、非临床或者药学的变化或者新发现等可能增加受试者安全性风险的",
+          "en": "Protocol amendment, major CMC change, significant nonclinical safety findings which may pose additional safety risk to subjects"
+        }
+      },
+      {
+        "name": "cn-1-7-3",
+        "structure_number": "1.7.3",
+        "descriptions": {
+          "zh": "要求申办者调整临床试验方案、暂停或终止药物临床试验",
+          "en": "Request for sponsor to adjust clinical trial protocol, hold or terminate the clinical trial"
+        }
+      },
+      {
+        "name": "cn-1-8",
+        "structure_number": "1.8",
+        "descriptions": {
+          "zh": "药物警戒与风险管理（如适用）",
+          "en": "Pharmacovigilance and risk management plan (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-8-1",
+        "structure_number": "1.8.1",
+        "descriptions": {
+          "zh": "研发期间安全性更新报告及附件",
+          "en": "Risk management plan during clincial trial"
+        }
+      },
+      {
+        "name": "cn-1-8-1-1",
+        "structure_number": "1.8.1.1",
+        "descriptions": {
+          "zh": "研发期间安全性更新报告",
+          "en": "Development safety update report"
+        }
+      },
+      {
+        "name": "cn-1-8-1-2",
+        "structure_number": "1.8.1.2",
+        "descriptions": {
+          "zh": "严重不良反应（SAR）累计汇总表",
+          "en": "Severe adverse reaction (SAR) cumulative summary table"
+        }
+      },
+      {
+        "name": "cn-1-8-1-3",
+        "structure_number": "1.8.1.3",
+        "descriptions": {
+          "zh": "报告周期内境内死亡受试者列表",
+          "en": "List of subjects who died within the reporting period"
+        }
+      },
+      {
+        "name": "cn-1-8-1-4",
+        "structure_number": "1.8.1.4",
+        "descriptions": {
+          "zh": "报告周期内境内因任何不良事件而退出临床试验的受试者列表",
+          "en": "List of subjects who withdrew from clinical trials due to any adverse events within the reporting period"
+        }
+      },
+      {
+        "name": "cn-1-8-1-5",
+        "structure_number": "1.8.1.5",
+        "descriptions": {
+          "zh": "报告周期内发生的药物临床试验方案变更或者临床方面的新发现、非临床或者药学的变化或者新发现总结表",
+          "en": "Summary table of changes in drug clinical trial protocol or new discoveries in clinical areas, non-clinical or pharmaceutical changes or new discoveries that occurred during the reporting period"
+        }
+      },
+      {
+        "name": "cn-1-8-1-6",
+        "structure_number": "1.8.1.6",
+        "descriptions": {
+          "zh": "下一报告周期内总体研究计划概要",
+          "en": "Summary of the overall research plan in the next reporting cycle"
+        }
+      },
+      {
+        "name": "cn-1-8-2",
+        "structure_number": "1.8.2",
+        "descriptions": {
+          "zh": "其他潜在的严重安全性风险信息",
+          "en": "Other potentially serious security risk information"
+        }
+      },
+      {
+        "name": "cn-1-8-3",
+        "structure_number": "1.8.3",
+        "descriptions": {
+          "zh": "风险管理计划（RMP）",
+          "en": "Risk management plan (RMP)"
+        }
+      },
+      {
+        "name": "cn-1-9",
+        "structure_number": "1.9",
+        "descriptions": {
+          "zh": "上市后研究（如适用）",
+          "en": "Post-approval studies (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-10",
+        "structure_number": "1.10",
+        "descriptions": {
+          "zh": "上市后变更（如适用）",
+          "en": "Post-approval changes (if applicable)"
+        }
+      },
+      {
+        "name": "cn-1-10-1",
+        "structure_number": "1.10.1",
+        "descriptions": {
+          "zh": "审批类变更",
+          "en": "Changes requiring approval"
+        }
+      },
+      {
+        "name": "cn-1-10-2",
+        "structure_number": "1.10.2",
+        "descriptions": {
+          "zh": "备案类变更",
+          "en": "Changes requiring filing"
+        }
+      },
+      {
+        "name": "cn-1-10-3",
+        "structure_number": "1.10.3",
+        "descriptions": {
+          "zh": "报告类变更",
+          "en": "Changes requiring reporting"
+        }
+      },
+      {
+        "name": "cn-1-11",
+        "structure_number": "1.11",
+        "descriptions": {
+          "zh": "申请人/生产企业证明性文件",
+          "en": "Applicant/Manufacturer certificates"
+        }
+      },
+      {
+        "name": "cn-1-11-1",
+        "structure_number": "1.11.1",
+        "descriptions": {
+          "zh": "境内生产药品申请人/生产企业资质证明文件",
+          "en": "Domestic Applicant/Manufacturer qualification certificate"
+        }
+      },
+      {
+        "name": "cn-1-11-2",
+        "structure_number": "1.11.2",
+        "descriptions": {
+          "zh": "境外生产药品申请人/生产企业资质证明文件",
+          "en": "Oversea Applicant/Manufacturer qualification certificate"
+        }
+      },
+      {
+        "name": "cn-1-11-3",
+        "structure_number": "1.11.3",
+        "descriptions": {
+          "zh": "注册代理机构证明文件",
+          "en": "Certificated documents of registration agency"
+        }
+      },
+      {
+        "name": "cn-1-12",
+        "structure_number": "1.12",
+        "descriptions": {
+          "zh": "小微企业证明文件（如适用）",
+          "en": "Certificated documents of small or micro enterprises (if applicable)"
+        }
+      }
+    ],
+    "count": 70,
+    "source_sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59",
+    "source_path": "element-property_CN.xml"
+  },
+  "ich_elements": {
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "elements": [
+      {
+        "name": "m1-administrative-information-and-prescribing-information",
+        "structure_number": "1",
+        "descriptions": {
+          "zh": "模块1：行政文件和药品信息",
+          "en": "Module 1:Administrative Information and Prescribing Information"
+        }
+      },
+      {
+        "name": "m2-common-technical-document-summaries",
+        "structure_number": "2",
+        "descriptions": {
+          "zh": "模块2：通用技术文档总结",
+          "en": "Module 2:Common Technical Document Summaries"
+        }
+      },
+      {
+        "name": "m2-2-introduction",
+        "structure_number": "2.2",
+        "descriptions": {
+          "zh": "CTD引言",
+          "en": "CTD Introduction"
+        }
+      },
+      {
+        "name": "m2-3-quality-overall-summary",
+        "structure_number": "2.3",
+        "descriptions": {
+          "zh": "质量综述",
+          "en": "Quality Overall Summary"
+        }
+      },
+      {
+        "name": "m2-3-introduction",
+        "structure_number": "2.3.1",
+        "descriptions": {
+          "zh": "引言",
+          "en": "Introduction"
+        }
+      },
+      {
+        "name": "m2-3-s-drug-substance",
+        "structure_number": "2.3.S",
+        "descriptions": {
+          "zh": "原料药",
+          "en": "Drug Substance"
+        }
+      },
+      {
+        "name": "m2-3-p-drug-product",
+        "structure_number": "2.3.P",
+        "descriptions": {
+          "zh": "制剂",
+          "en": "Drug Product"
+        }
+      },
+      {
+        "name": "m2-3-a-appendices",
+        "structure_number": "2.3.A",
+        "descriptions": {
+          "zh": "附录",
+          "en": "Appendices"
+        }
+      },
+      {
+        "name": "m2-3-r-regional-information",
+        "structure_number": "2.3.R",
+        "descriptions": {
+          "zh": "区域性信息",
+          "en": "Regional Information"
+        }
+      },
+      {
+        "name": "m2-4-nonclinical-overview",
+        "structure_number": "2.4",
+        "descriptions": {
+          "zh": "非临床综述",
+          "en": "Nonclinical Overview"
+        }
+      },
+      {
+        "name": "m2-5-clinical-overview",
+        "structure_number": "2.5",
+        "descriptions": {
+          "zh": "临床综述",
+          "en": "Clinical Overview"
+        }
+      },
+      {
+        "name": "m2-6-nonclinical-written-and-tabulated-summaries",
+        "structure_number": "2.6",
+        "descriptions": {
+          "zh": "非临床文字总结和列表总结",
+          "en": "Nonclinical Written and Tabulated Summaries"
+        }
+      },
+      {
+        "name": "m2-6-1-introduction",
+        "structure_number": "2.6.1",
+        "descriptions": {
+          "zh": "前言",
+          "en": "Introduction"
+        }
+      },
+      {
+        "name": "m2-6-2-pharmacology-written-summary",
+        "structure_number": "2.6.2",
+        "descriptions": {
+          "zh": "药理学文字总结",
+          "en": "Pharmacology Written Summary"
+        }
+      },
+      {
+        "name": "m2-6-3-pharmacology-tabulated-summary",
+        "structure_number": "2.6.3",
+        "descriptions": {
+          "zh": "药理学列表总结",
+          "en": "Pharmacology Tabulated Summary"
+        }
+      },
+      {
+        "name": "m2-6-4-pharmacokinetics-written-summary",
+        "structure_number": "2.6.4",
+        "descriptions": {
+          "zh": "药代动力学文字总结",
+          "en": "Pharmacokinetics Written Summary"
+        }
+      },
+      {
+        "name": "m2-6-5-pharmacokinetics-tabulated-summary",
+        "structure_number": "2.6.5",
+        "descriptions": {
+          "zh": "药代动力学列表总结",
+          "en": "Pharmacokinetics Tabulated Summary"
+        }
+      },
+      {
+        "name": "m2-6-6-toxicology-written-summary",
+        "structure_number": "2.6.6",
+        "descriptions": {
+          "zh": "毒理学文字总结",
+          "en": "Toxicology Written Summary"
+        }
+      },
+      {
+        "name": "m2-6-7-toxicology-tabulated-summary",
+        "structure_number": "2.6.7",
+        "descriptions": {
+          "zh": "毒理学列表总结",
+          "en": "Toxicology Tabulated Summary"
+        }
+      },
+      {
+        "name": "m2-7-clinical-summary",
+        "structure_number": "2.7",
+        "descriptions": {
+          "zh": "临床总结",
+          "en": "Clinical Summary"
+        }
+      },
+      {
+        "name": "m2-7-1-summary-of-biopharmaceutic-studies-and-associated-analytical-methods",
+        "structure_number": "2.7.1",
+        "descriptions": {
+          "zh": "生物药剂学研究及相关分析方法总结",
+          "en": "Summary of Biopharmaceutic Studies and Associated Analytical Methods"
+        }
+      },
+      {
+        "name": "m2-7-2-summary-of-clinical-pharmacology-studies",
+        "structure_number": "2.7.2",
+        "descriptions": {
+          "zh": "临床药理学研究总结",
+          "en": "Summary of Clinical Pharmacology Studies"
+        }
+      },
+      {
+        "name": "m2-7-3-summary-of-clinical-efficacy",
+        "structure_number": "2.7.3",
+        "descriptions": {
+          "zh": "临床有效性总结",
+          "en": "Summary of Clinical Efficacy"
+        }
+      },
+      {
+        "name": "m2-7-4-summary-of-clinical-safety",
+        "structure_number": "2.7.4",
+        "descriptions": {
+          "zh": "临床安全性总结",
+          "en": "Summary of Clinical Safety"
+        }
+      },
+      {
+        "name": "m2-7-5-literature-references",
+        "structure_number": "2.7.5",
+        "descriptions": {
+          "zh": "参考文献",
+          "en": "Literature References"
+        }
+      },
+      {
+        "name": "m2-7-6-synopses-of-individual-studies",
+        "structure_number": "2.7.6",
+        "descriptions": {
+          "zh": "单项研究摘要",
+          "en": "Synopses of Individual Studies"
+        }
+      },
+      {
+        "name": "m3-quality",
+        "structure_number": "3",
+        "descriptions": {
+          "zh": "模块3：质量",
+          "en": "Module 3:Quality"
+        }
+      },
+      {
+        "name": "m3-2-body-of-data",
+        "structure_number": "3.2",
+        "descriptions": {
+          "zh": "主体数据",
+          "en": "Body of Data"
+        }
+      },
+      {
+        "name": "m3-2-s-drug-substance",
+        "structure_number": "3.2.S",
+        "descriptions": {
+          "zh": "原料药",
+          "en": "Drug Substance"
+        }
+      },
+      {
+        "name": "m3-2-s-1-general-information",
+        "structure_number": "3.2.S.1",
+        "descriptions": {
+          "zh": "基本信息",
+          "en": "General Information"
+        }
+      },
+      {
+        "name": "m3-2-s-1-1-nomenclature",
+        "structure_number": "3.2.S.1.1",
+        "descriptions": {
+          "zh": "药品名称",
+          "en": "Nomenclature"
+        }
+      },
+      {
+        "name": "m3-2-s-1-2-structure",
+        "structure_number": "3.2.S.1.2",
+        "descriptions": {
+          "zh": "结构",
+          "en": "Structure"
+        }
+      },
+      {
+        "name": "m3-2-s-1-3-general-properties",
+        "structure_number": "3.2.S.1.3",
+        "descriptions": {
+          "zh": "基本性质",
+          "en": "General Properties"
+        }
+      },
+      {
+        "name": "m3-2-s-2-manufacture",
+        "structure_number": "3.2.S.2",
+        "descriptions": {
+          "zh": "生产",
+          "en": "Manufacture"
+        }
+      },
+      {
+        "name": "m3-2-s-2-1-manufacturer",
+        "structure_number": "3.2.S.2.1",
+        "descriptions": {
+          "zh": "生产商",
+          "en": "Manufacturer(s)"
+        }
+      },
+      {
+        "name": "m3-2-s-2-2-description-of-manufacturing-process-and-process-controls",
+        "structure_number": "3.2.S.2.2",
+        "descriptions": {
+          "zh": "生产工艺和工艺控制",
+          "en": "Description of Manufacturing Process and Process Controls"
+        }
+      },
+      {
+        "name": "m3-2-s-2-3-control-of-materials",
+        "structure_number": "3.2.S.2.3",
+        "descriptions": {
+          "zh": "物料控制",
+          "en": "Control of Materials"
+        }
+      },
+      {
+        "name": "m3-2-s-2-4-controls-of-critical-steps-and-intermediates",
+        "structure_number": "3.2.S.2.4",
+        "descriptions": {
+          "zh": "关键步骤和中间体的控制",
+          "en": "Controls of Critical Steps and Intermediates"
+        }
+      },
+      {
+        "name": "m3-2-s-2-5-process-validation-and-or-evaluation",
+        "structure_number": "3.2.S.2.5",
+        "descriptions": {
+          "zh": "工艺验证和/或评价",
+          "en": "Process Validation and/or Evaluation"
+        }
+      },
+      {
+        "name": "m3-2-s-2-6-manufacturing-process-development",
+        "structure_number": "3.2.S.2.6",
+        "descriptions": {
+          "zh": "生产工艺的开发",
+          "en": "Manufacturing Process Development"
+        }
+      },
+      {
+        "name": "m3-2-s-3-characterisation",
+        "structure_number": "3.2.S.3",
+        "descriptions": {
+          "zh": "特性鉴定",
+          "en": "Characterization"
+        }
+      },
+      {
+        "name": "m3-2-s-3-1-elucidation-of-structure-and-other-characteristics",
+        "structure_number": "3.2.S.3.1",
+        "descriptions": {
+          "zh": "结构和理化性质",
+          "en": "Elucidation of Structure and Other Characteristics"
+        }
+      },
+      {
+        "name": "m3-2-s-3-2-impurities",
+        "structure_number": "3.2.S.3.2",
+        "descriptions": {
+          "zh": "杂质",
+          "en": "Impurities"
+        }
+      },
+      {
+        "name": "m3-2-s-4-control-of-drug-substance",
+        "structure_number": "3.2.S.4",
+        "descriptions": {
+          "zh": "原料药的质量控制",
+          "en": "Control of Drug Substance"
+        }
+      },
+      {
+        "name": "m3-2-s-4-1-specification",
+        "structure_number": "3.2.S.4.1",
+        "descriptions": {
+          "zh": "质量标准",
+          "en": "Specification"
+        }
+      },
+      {
+        "name": "m3-2-s-4-2-analytical-procedures",
+        "structure_number": "3.2.S.4.2",
+        "descriptions": {
+          "zh": "分析方法",
+          "en": "Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-s-4-3-validation-of-analytical-procedures",
+        "structure_number": "3.2.S.4.3",
+        "descriptions": {
+          "zh": "分析方法的验证",
+          "en": "Validation of Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-s-4-4-batch-analyses",
+        "structure_number": "3.2.S.4.4",
+        "descriptions": {
+          "zh": "批分析",
+          "en": "Batch Analyses"
+        }
+      },
+      {
+        "name": "m3-2-s-4-5-justification-of-specification",
+        "structure_number": "3.2.S.4.5",
+        "descriptions": {
+          "zh": "质量标准制定依据",
+          "en": "Justification of Specification"
+        }
+      },
+      {
+        "name": "m3-2-s-5-reference-standards-or-materials",
+        "structure_number": "3.2.S.5",
+        "descriptions": {
+          "zh": "对照品/标准品",
+          "en": "Reference Standards or Materials"
+        }
+      },
+      {
+        "name": "m3-2-s-6-container-closure-system",
+        "structure_number": "3.2.S.6",
+        "descriptions": {
+          "zh": "包装系统",
+          "en": "Container Closure System"
+        }
+      },
+      {
+        "name": "m3-2-s-7-stability",
+        "structure_number": "3.2.S.7",
+        "descriptions": {
+          "zh": "稳定性",
+          "en": "Stability"
+        }
+      },
+      {
+        "name": "m3-2-s-7-1-stability-summary-and-conclusions",
+        "structure_number": "3.2.S.7.1",
+        "descriptions": {
+          "zh": "稳定性总结和结论",
+          "en": "Stability Summary and Conclusions"
+        }
+      },
+      {
+        "name": "m3-2-s-7-2-post-approval-stability-protocol-and-stability-commitment",
+        "structure_number": "3.2.S.7.2",
+        "descriptions": {
+          "zh": "批准后稳定性研究方案和承诺",
+          "en": "Post-approval Stability Protocol and Stability Commitment"
+        }
+      },
+      {
+        "name": "m3-2-s-7-3-stability-data",
+        "structure_number": "3.2.S.7.3",
+        "descriptions": {
+          "zh": "稳定性数据",
+          "en": "Stability Data"
+        }
+      },
+      {
+        "name": "m3-2-p-drug-product",
+        "structure_number": "3.2.P",
+        "descriptions": {
+          "zh": "制剂",
+          "en": "Drug Product"
+        }
+      },
+      {
+        "name": "m3-2-p-1-description-and-composition-of-the-drug-product",
+        "structure_number": "3.2.P.1",
+        "descriptions": {
+          "zh": "剂型及产品组成",
+          "en": "Description and Composition of the Drug Product"
+        }
+      },
+      {
+        "name": "m3-2-p-2-pharmaceutical-development",
+        "structure_number": "3.2.P.2",
+        "descriptions": {
+          "zh": "产品开发",
+          "en": "Pharmaceutical Development"
+        }
+      },
+      {
+        "name": "m3-2-p-3-manufacture",
+        "structure_number": "3.2.P.3",
+        "descriptions": {
+          "zh": "生产",
+          "en": "Manufacture"
+        }
+      },
+      {
+        "name": "m3-2-p-3-1-manufacturers",
+        "structure_number": "3.2.P.3.1",
+        "descriptions": {
+          "zh": "生产商",
+          "en": "Manufacturer(s)"
+        }
+      },
+      {
+        "name": "m3-2-p-3-2-batch-formula",
+        "structure_number": "3.2.P.3.2",
+        "descriptions": {
+          "zh": "批处方",
+          "en": "Batch Formula"
+        }
+      },
+      {
+        "name": "m3-2-p-3-3-description-of-manufacturing-process-and-process-controls",
+        "structure_number": "3.2.P.3.3",
+        "descriptions": {
+          "zh": "生产工艺和工艺控制",
+          "en": "Description of Manufacturing Process and Process Controls"
+        }
+      },
+      {
+        "name": "m3-2-p-3-4-controls-of-critical-steps-and-intermediates",
+        "structure_number": "3.2.P.3.4",
+        "descriptions": {
+          "zh": "关键步骤和中间体的控制",
+          "en": "Controls of Critical Steps and Intermediates"
+        }
+      },
+      {
+        "name": "m3-2-p-3-5-process-validation-and-or-evaluation",
+        "structure_number": "3.2.P.3.5",
+        "descriptions": {
+          "zh": "工艺验证和/或评价",
+          "en": "Process Validation and/or Evaluation"
+        }
+      },
+      {
+        "name": "m3-2-p-4-control-of-excipients",
+        "structure_number": "3.2.P.4",
+        "descriptions": {
+          "zh": "辅料的控制",
+          "en": "Control of Excipients"
+        }
+      },
+      {
+        "name": "m3-2-p-4-1-specifications",
+        "structure_number": "3.2.P.4.1",
+        "descriptions": {
+          "zh": "质量标准",
+          "en": "Specifications"
+        }
+      },
+      {
+        "name": "m3-2-p-4-2-analytical-procedures",
+        "structure_number": "3.2.P.4.2",
+        "descriptions": {
+          "zh": "分析方法",
+          "en": "Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-p-4-3-validation-of-analytical-procedures",
+        "structure_number": "3.2.P.4.3",
+        "descriptions": {
+          "zh": "分析方法的验证",
+          "en": "Validation of Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-p-4-4-justification-of-specifications",
+        "structure_number": "3.2.P.4.4",
+        "descriptions": {
+          "zh": "质量标准制定依据",
+          "en": "Justification of Specifications"
+        }
+      },
+      {
+        "name": "m3-2-p-4-5-excipients-of-human-or-animal-origin",
+        "structure_number": "3.2.P.4.5",
+        "descriptions": {
+          "zh": "人源或动物源辅料",
+          "en": "Excipients of Human or Animal Origin"
+        }
+      },
+      {
+        "name": "m3-2-p-4-6-novel-excipients",
+        "structure_number": "3.2.P.4.6",
+        "descriptions": {
+          "zh": "新型辅料",
+          "en": "Novel Excipients"
+        }
+      },
+      {
+        "name": "m3-2-p-5-control-of-drug-product",
+        "structure_number": "3.2.P.5",
+        "descriptions": {
+          "zh": "制剂的质量控制",
+          "en": "Control of Drug Product"
+        }
+      },
+      {
+        "name": "m3-2-p-5-1-specifications",
+        "structure_number": "3.2.P.5.1",
+        "descriptions": {
+          "zh": "质量标准",
+          "en": "Specification(s)"
+        }
+      },
+      {
+        "name": "m3-2-p-5-2-analytical-procedures",
+        "structure_number": "3.2.P.5.2",
+        "descriptions": {
+          "zh": "分析方法",
+          "en": "Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-p-5-3-validation-of-analytical-procedures",
+        "structure_number": "3.2.P.5.3",
+        "descriptions": {
+          "zh": "分析方法的验证",
+          "en": "Validation of Analytical Procedures"
+        }
+      },
+      {
+        "name": "m3-2-p-5-4-batch-analyses",
+        "structure_number": "3.2.P.5.4",
+        "descriptions": {
+          "zh": "批分析",
+          "en": "Batch Analyses"
+        }
+      },
+      {
+        "name": "m3-2-p-5-5-characterisation-of-impurities",
+        "structure_number": "3.2.P.5.5",
+        "descriptions": {
+          "zh": "杂质分析",
+          "en": "Characterisation of Impurities"
+        }
+      },
+      {
+        "name": "m3-2-p-5-6-justification-of-specifications",
+        "structure_number": "3.2.P.5.6",
+        "descriptions": {
+          "zh": "质量标准制定依据",
+          "en": "Justification of Specification(s)"
+        }
+      },
+      {
+        "name": "m3-2-p-6-reference-standards-or-materials",
+        "structure_number": "3.2.P.6",
+        "descriptions": {
+          "zh": "对照品/标准品",
+          "en": "Reference Standards or Materials"
+        }
+      },
+      {
+        "name": "m3-2-p-7-container-closure-system",
+        "structure_number": "3.2.P.7",
+        "descriptions": {
+          "zh": "包装系统",
+          "en": "Container Closure System"
+        }
+      },
+      {
+        "name": "m3-2-p-8-stability",
+        "structure_number": "3.2.P.8",
+        "descriptions": {
+          "zh": "稳定性",
+          "en": "Stability"
+        }
+      },
+      {
+        "name": "m3-2-p-8-1-stability-summary-and-conclusion",
+        "structure_number": "3.2.P.8.1",
+        "descriptions": {
+          "zh": "稳定性总结和结论",
+          "en": "Stability Summary and Conclusion"
+        }
+      },
+      {
+        "name": "m3-2-p-8-2-post-approval-stability-protocol-and-stability-commitment",
+        "structure_number": "3.2.P.8.2",
+        "descriptions": {
+          "zh": "批准后稳定性研究方案和承诺",
+          "en": "Post-approval Stability Protocol and Stability Commitment"
+        }
+      },
+      {
+        "name": "m3-2-p-8-3-stability-data",
+        "structure_number": "3.2.P.8.3",
+        "descriptions": {
+          "zh": "稳定性数据",
+          "en": "Stability Data"
+        }
+      },
+      {
+        "name": "m3-2-a-appendices",
+        "structure_number": "3.2.A",
+        "descriptions": {
+          "zh": "附录",
+          "en": "Appendices"
+        }
+      },
+      {
+        "name": "m3-2-a-1-facilities-and-equipment",
+        "structure_number": "3.2.A.1",
+        "descriptions": {
+          "zh": "设施和设备",
+          "en": "Facilities and Equipment"
+        }
+      },
+      {
+        "name": "m3-2-a-2-adventitious-agents-safety-evaluation",
+        "structure_number": "3.2.A.2",
+        "descriptions": {
+          "zh": "外源因子的安全性评价",
+          "en": "Adventitious Agents Safety Evaluation"
+        }
+      },
+      {
+        "name": "m3-2-a-3-excipients",
+        "structure_number": "3.2.A.3",
+        "descriptions": {
+          "zh": "辅料",
+          "en": "Excipients"
+        }
+      },
+      {
+        "name": "m3-2-r-regional-information",
+        "structure_number": "3.2.R",
+        "descriptions": {
+          "zh": "区域性信息",
+          "en": "Regional Information"
+        }
+      },
+      {
+        "name": "m3-3-literature-references",
+        "structure_number": "3.3",
+        "descriptions": {
+          "zh": "参考文献",
+          "en": "Literature References"
+        }
+      },
+      {
+        "name": "m4-nonclinical-study-reports",
+        "structure_number": "4",
+        "descriptions": {
+          "zh": "模块4：非临床试验报告",
+          "en": "Module 4: Nonclinical Study Reports"
+        }
+      },
+      {
+        "name": "m4-2-study-reports",
+        "structure_number": "4.2",
+        "descriptions": {
+          "zh": "试验报告",
+          "en": "Study Reports"
+        }
+      },
+      {
+        "name": "m4-2-1-pharmacology",
+        "structure_number": "4.2.1",
+        "descriptions": {
+          "zh": "药理学",
+          "en": "Pharmacology"
+        }
+      },
+      {
+        "name": "m4-2-1-1-primary-pharmacodynamics",
+        "structure_number": "4.2.1.1",
+        "descriptions": {
+          "zh": "主要药效学",
+          "en": "Primary Pharmacodynamics"
+        }
+      },
+      {
+        "name": "m4-2-1-2-secondary-pharmacodynamics",
+        "structure_number": "4.2.1.2",
+        "descriptions": {
+          "zh": "次要药效学",
+          "en": "Secondary Pharmacodynamics"
+        }
+      },
+      {
+        "name": "m4-2-1-3-safety-pharmacology",
+        "structure_number": "4.2.1.3",
+        "descriptions": {
+          "zh": "安全药理学",
+          "en": "Safety Pharmacology"
+        }
+      },
+      {
+        "name": "m4-2-1-4-pharmacodynamic-drug-interactions",
+        "structure_number": "4.2.1.4",
+        "descriptions": {
+          "zh": "药效学药物相互作用",
+          "en": "Pharmacodynamic Drug Interactions"
+        }
+      },
+      {
+        "name": "m4-2-2-pharmacokinetics",
+        "structure_number": "4.2.2",
+        "descriptions": {
+          "zh": "药代动力学",
+          "en": "Pharmacokinetics"
+        }
+      },
+      {
+        "name": "m4-2-2-1-analytical-methods-and-validation-reports",
+        "structure_number": "4.2.2.1",
+        "descriptions": {
+          "zh": "分析方法和验证报告（如果有单独的报告）",
+          "en": "Analytical Methods and Validation Reports (if separate reports are available)"
+        }
+      },
+      {
+        "name": "m4-2-2-2-absorption",
+        "structure_number": "4.2.2.2",
+        "descriptions": {
+          "zh": "吸收",
+          "en": "Absorption"
+        }
+      },
+      {
+        "name": "m4-2-2-3-distribution",
+        "structure_number": "4.2.2.3",
+        "descriptions": {
+          "zh": "分布",
+          "en": "Distribution"
+        }
+      },
+      {
+        "name": "m4-2-2-4-metabolism",
+        "structure_number": "4.2.2.4",
+        "descriptions": {
+          "zh": "代谢",
+          "en": "Metabolism"
+        }
+      },
+      {
+        "name": "m4-2-2-5-excretion",
+        "structure_number": "4.2.2.5",
+        "descriptions": {
+          "zh": "排泄",
+          "en": "Excretion"
+        }
+      },
+      {
+        "name": "m4-2-2-6-pharmacokinetic-drug-interactions",
+        "structure_number": "4.2.2.6",
+        "descriptions": {
+          "zh": "药代动力学药物相互作用（非临床）",
+          "en": "Pharmacokinetic Drug Interactions (nonclinical)"
+        }
+      },
+      {
+        "name": "m4-2-2-7-other-pharmacokinetic-studies",
+        "structure_number": "4.2.2.7",
+        "descriptions": {
+          "zh": "其他药代动力学试验",
+          "en": "Other Pharmacokinetic Studies"
+        }
+      },
+      {
+        "name": "m4-2-3-toxicology",
+        "structure_number": "4.2.3",
+        "descriptions": {
+          "zh": "毒理学",
+          "en": "Toxicology"
+        }
+      },
+      {
+        "name": "m4-2-3-1-single-dose-toxicity",
+        "structure_number": "4.2.3.1",
+        "descriptions": {
+          "zh": "单次给药毒性（按照动物种属、给药途径的顺序）",
+          "en": "Single-Dose Toxicity (in order by species, by route)"
+        }
+      },
+      {
+        "name": "m4-2-3-2-repeat-dose-toxicity",
+        "structure_number": "4.2.3.2",
+        "descriptions": {
+          "zh": "重复给药毒性（按照动物种属、给药途径、给药持续时间的顺序；包括伴随毒代动力学试验）",
+          "en": "Repeat-Dose Toxicity (in order by species, by route, by duration; including supportive toxicokinetics evaluations)"
+        }
+      },
+      {
+        "name": "m4-2-3-3-genotoxicity",
+        "structure_number": "4.2.3.3",
+        "descriptions": {
+          "zh": "遗传毒性",
+          "en": "Genotoxicity"
+        }
+      },
+      {
+        "name": "m4-2-3-3-1-in-vitro",
+        "structure_number": "4.2.3.3.1",
+        "descriptions": {
+          "zh": "体外",
+          "en": "In Vitro"
+        }
+      },
+      {
+        "name": "m4-2-3-3-2-in-vivo",
+        "structure_number": "4.2.3.3.2",
+        "descriptions": {
+          "zh": "体内（包括伴随毒代动力学试验）",
+          "en": "In Vivo (including supportive toxicokinetics evaluations)"
+        }
+      },
+      {
+        "name": "m4-2-3-4-carcinogenicity",
+        "structure_number": "4.2.3.4",
+        "descriptions": {
+          "zh": "致癌性（包括伴随毒代动力学试验）",
+          "en": "Carcinogenicity (including supportive toxicokinetics evaluations)"
+        }
+      },
+      {
+        "name": "m4-2-3-4-1-long-term-studies",
+        "structure_number": "4.2.3.4.1",
+        "descriptions": {
+          "zh": "长期试验（按照动物种属的顺序，包括不适合放在重复给药毒性试验或药代动力学试验中的剂量探索试验）",
+          "en": "Long-term Studies (in order by species; including range-finding studies that cannot appropriately be included under repeat-dose toxicity or pharmacokinetics)"
+        }
+      },
+      {
+        "name": "m4-2-3-4-2-short-or-medium-term-studies",
+        "structure_number": "4.2.3.4.2",
+        "descriptions": {
+          "zh": "短期或中期试验（包括不适合放在重复给药毒性试验或药代动力学试验中的剂量探索试验）",
+          "en": "Short- or Medium-term Studies (including range-finding studies that cannot appropriately be included under repeat-dose toxicity or pharmacokinetics)"
+        }
+      },
+      {
+        "name": "m4-2-3-4-3-other-studies",
+        "structure_number": "4.2.3.4.3",
+        "descriptions": {
+          "zh": "其他试验",
+          "en": "Other Studies"
+        }
+      },
+      {
+        "name": "m4-2-3-5-reproductive-and-developmental-toxicity",
+        "structure_number": "4.2.3.5",
+        "descriptions": {
+          "zh": "生殖毒性（包括剂量探索研究和伴随毒代动力学试验）（如果采用了改良的试验设计，则下列副标题应作相应修改。）",
+          "en": "Reproductive and Developmental Toxicity (including range-finding studies and supportive toxicokinetics evaluations) (If modified study designs are used, the following sub-headings should be modified accordingly.)"
+        }
+      },
+      {
+        "name": "m4-2-3-5-1-fertility-and-early-embryonic-development",
+        "structure_number": "4.2.3.5.1",
+        "descriptions": {
+          "zh": "生育力与早期胚胎发育毒性",
+          "en": "Fertility and Early Embryonic Development"
+        }
+      },
+      {
+        "name": "m4-2-3-5-2-embryo-fetal-development",
+        "structure_number": "4.2.3.5.2",
+        "descriptions": {
+          "zh": "胚胎-胎仔发育毒性",
+          "en": "Embryo-fetal Development"
+        }
+      },
+      {
+        "name": "m4-2-3-5-3-prenatal-and-postnatal-development-including-maternal-function",
+        "structure_number": "4.2.3.5.3",
+        "descriptions": {
+          "zh": "围产期毒性，包括母体功能",
+          "en": "Prenatal and Postnatal Development, including Maternal Function"
+        }
+      },
+      {
+        "name": "m4-2-3-5-4-studies-in-which-the-offspring-juvenile-animals-are-dosed-and-or-further-evaluated",
+        "structure_number": "4.2.3.5.4",
+        "descriptions": {
+          "zh": "对子代（幼龄动物）给药和/或进一步评价的试验",
+          "en": "Studies in Which the Offspring (Juvenile Animals) are Dosed and/or Further Evaluated."
+        }
+      },
+      {
+        "name": "m4-2-3-6-local-tolerance",
+        "structure_number": "4.2.3.6",
+        "descriptions": {
+          "zh": "局部耐受性",
+          "en": "Local Tolerance"
+        }
+      },
+      {
+        "name": "m4-2-3-7-other-toxicity-studies",
+        "structure_number": "4.2.3.7",
+        "descriptions": {
+          "zh": "其他毒性研究（如有）",
+          "en": "Other Toxicity Studies (if available)"
+        }
+      },
+      {
+        "name": "m4-2-3-7-1-antigenicity",
+        "structure_number": "4.2.3.7.1",
+        "descriptions": {
+          "zh": "抗原性",
+          "en": "Antigenicity"
+        }
+      },
+      {
+        "name": "m4-2-3-7-2-immunotoxicity",
+        "structure_number": "4.2.3.7.2",
+        "descriptions": {
+          "zh": "免疫毒性",
+          "en": "Immunotoxicity"
+        }
+      },
+      {
+        "name": "m4-2-3-7-3-mechanistic-studies",
+        "structure_number": "4.2.3.7.3",
+        "descriptions": {
+          "zh": "作用机理研究（如其他章节未报告）",
+          "en": "Mechanistic Studies (if not included elsewhere)"
+        }
+      },
+      {
+        "name": "m4-2-3-7-4-dependence",
+        "structure_number": "4.2.3.7.4",
+        "descriptions": {
+          "zh": "依赖性",
+          "en": "Dependence"
+        }
+      },
+      {
+        "name": "m4-2-3-7-5-metabolites",
+        "structure_number": "4.2.3.7.5",
+        "descriptions": {
+          "zh": "代谢产物研究",
+          "en": "Metabolites"
+        }
+      },
+      {
+        "name": "m4-2-3-7-6-impurities",
+        "structure_number": "4.2.3.7.6",
+        "descriptions": {
+          "zh": "杂质研究",
+          "en": "Impurities"
+        }
+      },
+      {
+        "name": "m4-2-3-7-7-other",
+        "structure_number": "4.2.3.7.7",
+        "descriptions": {
+          "zh": "其他试验",
+          "en": "Other"
+        }
+      },
+      {
+        "name": "m4-3-literature-references",
+        "structure_number": "4.3",
+        "descriptions": {
+          "zh": "参考文献",
+          "en": "Literature References"
+        }
+      },
+      {
+        "name": "m5-clinical-study-reports",
+        "structure_number": "5",
+        "descriptions": {
+          "zh": "模块5：临床研究报告",
+          "en": "Module 5:Clinical Study Reports"
+        }
+      },
+      {
+        "name": "m5-2-tabular-listing-of-all-clinical-studies",
+        "structure_number": "5.2",
+        "descriptions": {
+          "zh": "所有临床研究列表",
+          "en": "Tabular Listing of All Clinical Studies"
+        }
+      },
+      {
+        "name": "m5-3-clinical-study-reports",
+        "structure_number": "5.3",
+        "descriptions": {
+          "zh": "临床研究报告",
+          "en": "Clinical Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-1-reports-of-biopharmaceutic-studies",
+        "structure_number": "5.3.1",
+        "descriptions": {
+          "zh": "生物药剂学研究报告",
+          "en": "Reports of Biopharmaceutic Studies"
+        }
+      },
+      {
+        "name": "m5-3-1-1-bioavailability-study-reports",
+        "structure_number": "5.3.1.1",
+        "descriptions": {
+          "zh": "生物利用度（BA）研究报告",
+          "en": "Bioavailability (BA) Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-1-2-comparative-ba-and-bioequivalence-study-reports",
+        "structure_number": "5.3.1.2",
+        "descriptions": {
+          "zh": "相对BA和生物等效性（BE）研究报告",
+          "en": "Comparative BA and Bioequivalence (BE) Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-1-3-in-vitro-in-vivo-correlation-study-reports",
+        "structure_number": "5.3.1.3",
+        "descriptions": {
+          "zh": "体外-体内相关性研究报告",
+          "en": "In vitro-In vivo Correlation Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-1-4-reports-of-bioanalytical-and-analytical-methods-for-human-studies",
+        "structure_number": "5.3.1.4",
+        "descriptions": {
+          "zh": "人体研究的生物分析和分析方法的报告",
+          "en": "Reports of Bioanalytical and Analytical Methods for Human Studies"
+        }
+      },
+      {
+        "name": "m5-3-2-reports-of-studies-pertinent-to-pharmacokinetics-using-human-biomaterials",
+        "structure_number": "5.3.2",
+        "descriptions": {
+          "zh": "使用人体生物材料进行的药代动力学研究报告",
+          "en": "Reports of Studies Pertinent to Pharmacokinetics Using Human Biomaterials"
+        }
+      },
+      {
+        "name": "m5-3-2-1-plasma-protein-binding-study-reports",
+        "structure_number": "5.3.2.1",
+        "descriptions": {
+          "zh": "血浆蛋白结合研究报告",
+          "en": "Plasma Protein Binding Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-2-2-reports-of-hepatic-metabolism-and-drug-interaction-studies",
+        "structure_number": "5.3.2.2",
+        "descriptions": {
+          "zh": "肝脏代谢和药物相互作用研究报告",
+          "en": "Reports of Hepatic Metabolism and Drug Interaction Studies"
+        }
+      },
+      {
+        "name": "m5-3-2-3-reports-of-studies-using-other-human-biomaterials",
+        "structure_number": "5.3.2.3",
+        "descriptions": {
+          "zh": "使用其他人体生物材料的研究报告",
+          "en": "Reports of Studies Using Other Human Biomaterials"
+        }
+      },
+      {
+        "name": "m5-3-3-reports-of-human-pharmacokinetics-pk-studies",
+        "structure_number": "5.3.3",
+        "descriptions": {
+          "zh": "人体药代动力学（PK）研究报告",
+          "en": "Reports of Human Pharmacokinetic (PK) Studies"
+        }
+      },
+      {
+        "name": "m5-3-3-1-healthy-subject-pk-and-initial-tolerability-study-reports",
+        "structure_number": "5.3.3.1",
+        "descriptions": {
+          "zh": "健康受试者PK和初始耐受性研究报告",
+          "en": "Healthy Subject PK and Initial Tolerability Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-3-2-patient-pk-and-initial-tolerability-study-reports",
+        "structure_number": "5.3.3.2",
+        "descriptions": {
+          "zh": "患者PK和初始耐受性研究报告",
+          "en": "Patient PK and Initial Tolerability Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-3-3-intrinsic-factor-pk-study-reports",
+        "structure_number": "5.3.3.3",
+        "descriptions": {
+          "zh": "内在因素PK研究报告",
+          "en": "Intrinsic Factor PK Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-3-4-extrinsic-factor-pk-study-reports",
+        "structure_number": "5.3.3.4",
+        "descriptions": {
+          "zh": "外在因素PK研究报告",
+          "en": "Extrinsic Factor PK Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-3-5-population-pk-study-reports",
+        "structure_number": "5.3.3.5",
+        "descriptions": {
+          "zh": "群体PK研究报告",
+          "en": "Population PK Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-4-reports-of-human-pharmacodynamics-pd-studies",
+        "structure_number": "5.3.4",
+        "descriptions": {
+          "zh": "人体药效动力学研究报告",
+          "en": "Reports of Human Pharmacodynamic (PD) Studies"
+        }
+      },
+      {
+        "name": "m5-3-4-1-healthy-subject-pd-and-pk-pd-study-reports",
+        "structure_number": "5.3.4.1",
+        "descriptions": {
+          "zh": "健康受试者PD和PK/PD研究报告",
+          "en": "Healthy Subject PD and PK/PD Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-4-2-patient-pd-and-pk-pd-study-reports",
+        "structure_number": "5.3.4.2",
+        "descriptions": {
+          "zh": "患者PD和PK/PD研究报告",
+          "en": "Patient PD and PK/PD Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-5-reports-of-efficacy-and-safety-studies",
+        "structure_number": "5.3.5",
+        "descriptions": {
+          "zh": "有效性和安全性研究报告",
+          "en": "Reports of Efficacy and Safety Studies"
+        }
+      },
+      {
+        "name": "m5-3-5-1-study-reports-of-controlled-clinical-studies-pertinent-to-the-claimed-indication",
+        "structure_number": "5.3.5.1",
+        "descriptions": {
+          "zh": "与申报适应症相关的对照临床研究报告",
+          "en": "Study Reports of Controlled Clinical Studies Pertinent to the Claimed Indication"
+        }
+      },
+      {
+        "name": "m5-3-5-2-study-reports-of-uncontrolled-clinical-studies",
+        "structure_number": "5.3.5.2",
+        "descriptions": {
+          "zh": "非对照临床研究报告",
+          "en": "Study Reports of Uncontrolled Clinical Studies"
+        }
+      },
+      {
+        "name": "m5-3-5-3-reports-of-analyses-of-data-from-more-than-one-study",
+        "structure_number": "5.3.5.3",
+        "descriptions": {
+          "zh": "多项研究数据的分析报告",
+          "en": "Reports of Analyses of Data from More Than One Study"
+        }
+      },
+      {
+        "name": "m5-3-5-4-other-study-reports",
+        "structure_number": "5.3.5.4",
+        "descriptions": {
+          "zh": "其他研究报告",
+          "en": "Other Study Reports"
+        }
+      },
+      {
+        "name": "m5-3-6-reports-of-postmarketing-experience",
+        "structure_number": "5.3.6",
+        "descriptions": {
+          "zh": "上市后报告",
+          "en": "Reports of Post-Marketing Experience"
+        }
+      },
+      {
+        "name": "m5-3-7-case-report-forms-and-individual-patient-listings",
+        "structure_number": "5.3.7",
+        "descriptions": {
+          "zh": "病例报告表和个体患者列表",
+          "en": "Case Report Forms and Individual Patient Listings"
+        }
+      },
+      {
+        "name": "m5-4-literature-references",
+        "structure_number": "5.4",
+        "descriptions": {
+          "zh": "参考文献",
+          "en": "Literature References"
+        }
+      }
+    ],
+    "count": 159,
+    "source_sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d",
+    "source_path": "element-property_ICH.xml"
+  },
+  "node_extension_elements": {
+    "version": "1.0",
+    "valid_from": "2021-9-1",
+    "elements": [
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.1",
+        "descriptions": {
+          "zh": "3.2.R.1工艺验证"
+        }
+      },
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.2",
+        "descriptions": {
+          "zh": "3.2.R.2批记录"
+        }
+      },
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.3",
+        "descriptions": {
+          "zh": "3.2.R.3分析方法验证报告"
+        }
+      },
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.4",
+        "descriptions": {
+          "zh": "3.2.R.4稳定性图谱"
+        }
+      },
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.5",
+        "descriptions": {
+          "zh": "3.2.R.5可比性方案"
+        }
+      },
+      {
+        "name": "node-extension",
+        "structure_number": "3.2.R.6",
+        "descriptions": {
+          "zh": "3.2.R.6其他"
+        }
+      }
+    ],
+    "count": 6,
+    "source_sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9",
+    "source_path": "node-extension-property_CN.xml"
+  },
+  "stf_valid_values_summary": {
+    "namespace": "http://www.ich.org/ectd",
+    "root_tag": "study-values",
+    "tag_counts": {
+      "study-values": 1,
+      "category": 4,
+      "valid-value": 123,
+      "property": 1,
+      "file-tag": 1
+    },
+    "attribute_counts": {
+      "dtd-version": 1,
+      "name": 4,
+      "realm": 123,
+      "value": 123
+    },
+    "sample_nodes": [
+      {
+        "tag": "study-values",
+        "attributes": {
+          "dtd-version": "3.2"
+        },
+        "text": ""
+      },
+      {
+        "tag": "category",
+        "attributes": {
+          "name": "species"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "mouse"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "rat"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "hamster"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "other-rodent"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "rabbit"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "dog"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "non-human-primate"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "other-non-rodent-mammal"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "non-mammals"
+        },
+        "text": ""
+      },
+      {
+        "tag": "category",
+        "attributes": {
+          "name": "route-of-admin"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "oral"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "intravenous"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "intramuscular"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "intraperitoneal"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "subcutaneous"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "inhalation"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "topical"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "other"
+        },
+        "text": ""
+      },
+      {
+        "tag": "category",
+        "attributes": {
+          "name": "duration"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "us",
+          "value": "short"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "us",
+          "value": "medium"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "us",
+          "value": "long"
+        },
+        "text": ""
+      },
+      {
+        "tag": "category",
+        "attributes": {
+          "name": "type-of-control"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "placebo"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "no-treatment"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "dose-response-without-placebo"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "active-control-without-placebo"
+        },
+        "text": ""
+      },
+      {
+        "tag": "valid-value",
+        "attributes": {
+          "realm": "ich",
+          "value": "external"
+        },
+        "text": ""
+      }
+    ],
+    "source_sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3",
+    "source_path": "valid-values.xml"
+  },
+  "dtd_summaries": {
+    "ich-ectd-3-2.dtd": {
+      "element_declarations": [
+        "leaf",
+        "xref",
+        "node-extension",
+        "node-extension",
+        "ectd:ectd",
+        "leaf",
+        "title",
+        "link-text",
+        "xref",
+        "node-extension",
+        "m1-administrative-information-and-prescribing-information",
+        "m2-common-technical-document-summaries",
+        "m2-2-introduction",
+        "m2-3-quality-overall-summary",
+        "m2-3-introduction",
+        "m2-3-s-drug-substance",
+        "m2-3-p-drug-product",
+        "m2-3-a-appendices",
+        "m2-3-r-regional-information",
+        "m2-4-nonclinical-overview",
+        "m2-5-clinical-overview",
+        "m2-6-nonclinical-written-and-tabulated-summaries",
+        "m2-6-1-introduction",
+        "m2-6-2-pharmacology-written-summary",
+        "m2-6-3-pharmacology-tabulated-summary",
+        "m2-6-4-pharmacokinetics-written-summary",
+        "m2-6-5-pharmacokinetics-tabulated-summary",
+        "m2-6-6-toxicology-written-summary",
+        "m2-6-7-toxicology-tabulated-summary",
+        "m2-7-clinical-summary",
+        "m2-7-1-summary-of-biopharmaceutic-studies-and-associated-analytical-methods",
+        "m2-7-2-summary-of-clinical-pharmacology-studies",
+        "m2-7-3-summary-of-clinical-efficacy",
+        "m2-7-4-summary-of-clinical-safety",
+        "m2-7-5-literature-references",
+        "m2-7-6-synopses-of-individual-studies",
+        "m3-quality",
+        "m3-2-body-of-data",
+        "m3-2-s-drug-substance",
+        "m3-2-s-1-general-information",
+        "m3-2-s-1-1-nomenclature",
+        "m3-2-s-1-2-structure",
+        "m3-2-s-1-3-general-properties",
+        "m3-2-s-2-manufacture",
+        "m3-2-s-2-1-manufacturer",
+        "m3-2-s-2-2-description-of-manufacturing-process-and-process-controls",
+        "m3-2-s-2-3-control-of-materials",
+        "m3-2-s-2-4-controls-of-critical-steps-and-intermediates",
+        "m3-2-s-2-5-process-validation-and-or-evaluation",
+        "m3-2-s-2-6-manufacturing-process-development",
+        "m3-2-s-3-characterisation",
+        "m3-2-s-3-1-elucidation-of-structure-and-other-characteristics",
+        "m3-2-s-3-2-impurities",
+        "m3-2-s-4-control-of-drug-substance",
+        "m3-2-s-4-1-specification",
+        "m3-2-s-4-2-analytical-procedures",
+        "m3-2-s-4-3-validation-of-analytical-procedures",
+        "m3-2-s-4-4-batch-analyses",
+        "m3-2-s-4-5-justification-of-specification",
+        "m3-2-s-5-reference-standards-or-materials",
+        "m3-2-s-6-container-closure-system",
+        "m3-2-s-7-stability",
+        "m3-2-s-7-1-stability-summary-and-conclusions",
+        "m3-2-s-7-2-post-approval-stability-protocol-and-stability-commitment",
+        "m3-2-s-7-3-stability-data",
+        "m3-2-p-drug-product",
+        "m3-2-p-1-description-and-composition-of-the-drug-product",
+        "m3-2-p-2-pharmaceutical-development",
+        "m3-2-p-3-manufacture",
+        "m3-2-p-3-1-manufacturers",
+        "m3-2-p-3-2-batch-formula",
+        "m3-2-p-3-3-description-of-manufacturing-process-and-process-controls",
+        "m3-2-p-3-4-controls-of-critical-steps-and-intermediates",
+        "m3-2-p-3-5-process-validation-and-or-evaluation",
+        "m3-2-p-4-control-of-excipients",
+        "m3-2-p-4-1-specifications",
+        "m3-2-p-4-2-analytical-procedures",
+        "m3-2-p-4-3-validation-of-analytical-procedures",
+        "m3-2-p-4-4-justification-of-specifications",
+        "m3-2-p-4-5-excipients-of-human-or-animal-origin",
+        "m3-2-p-4-6-novel-excipients",
+        "m3-2-p-5-control-of-drug-product",
+        "m3-2-p-5-1-specifications",
+        "m3-2-p-5-2-analytical-procedures",
+        "m3-2-p-5-3-validation-of-analytical-procedures",
+        "m3-2-p-5-4-batch-analyses",
+        "m3-2-p-5-5-characterisation-of-impurities",
+        "m3-2-p-5-6-justification-of-specifications",
+        "m3-2-p-6-reference-standards-or-materials",
+        "m3-2-p-7-container-closure-system",
+        "m3-2-p-8-stability",
+        "m3-2-p-8-1-stability-summary-and-conclusion",
+        "m3-2-p-8-2-post-approval-stability-protocol-and-stability-commitment",
+        "m3-2-p-8-3-stability-data",
+        "m3-2-a-appendices",
+        "m3-2-a-1-facilities-and-equipment",
+        "m3-2-a-2-adventitious-agents-safety-evaluation",
+        "m3-2-a-3-excipients",
+        "m3-2-r-regional-information",
+        "m3-3-literature-references",
+        "m4-nonclinical-study-reports",
+        "m4-2-study-reports",
+        "m4-2-1-pharmacology",
+        "m4-2-1-1-primary-pharmacodynamics",
+        "m4-2-1-2-secondary-pharmacodynamics",
+        "m4-2-1-3-safety-pharmacology",
+        "m4-2-1-4-pharmacodynamic-drug-interactions",
+        "m4-2-2-pharmacokinetics",
+        "m4-2-2-1-analytical-methods-and-validation-reports",
+        "m4-2-2-2-absorption",
+        "m4-2-2-3-distribution",
+        "m4-2-2-4-metabolism",
+        "m4-2-2-5-excretion",
+        "m4-2-2-6-pharmacokinetic-drug-interactions",
+        "m4-2-2-7-other-pharmacokinetic-studies",
+        "m4-2-3-toxicology",
+        "m4-2-3-1-single-dose-toxicity",
+        "m4-2-3-2-repeat-dose-toxicity",
+        "m4-2-3-3-genotoxicity",
+        "m4-2-3-3-1-in-vitro",
+        "m4-2-3-3-2-in-vivo",
+        "m4-2-3-4-carcinogenicity",
+        "m4-2-3-4-1-long-term-studies",
+        "m4-2-3-4-2-short-or-medium-term-studies",
+        "m4-2-3-4-3-other-studies",
+        "m4-2-3-5-reproductive-and-developmental-toxicity",
+        "m4-2-3-5-1-fertility-and-early-embryonic-development",
+        "m4-2-3-5-2-embryo-fetal-development",
+        "m4-2-3-5-3-prenatal-and-postnatal-development-including-maternal-function",
+        "m4-2-3-5-4-studies-in-which-the-offspring-juvenile-animals-are-dosed-and-or-further-evaluated",
+        "m4-2-3-6-local-tolerance",
+        "m4-2-3-7-other-toxicity-studies",
+        "m4-2-3-7-1-antigenicity",
+        "m4-2-3-7-2-immunotoxicity",
+        "m4-2-3-7-3-mechanistic-studies",
+        "m4-2-3-7-4-dependence",
+        "m4-2-3-7-5-metabolites",
+        "m4-2-3-7-6-impurities",
+        "m4-2-3-7-7-other",
+        "m4-3-literature-references",
+        "m5-clinical-study-reports",
+        "m5-2-tabular-listing-of-all-clinical-studies",
+        "m5-3-clinical-study-reports",
+        "m5-3-1-reports-of-biopharmaceutic-studies",
+        "m5-3-1-1-bioavailability-study-reports",
+        "m5-3-1-2-comparative-ba-and-bioequivalence-study-reports",
+        "m5-3-1-3-in-vitro-in-vivo-correlation-study-reports",
+        "m5-3-1-4-reports-of-bioanalytical-and-analytical-methods-for-human-studies",
+        "m5-3-2-reports-of-studies-pertinent-to-pharmacokinetics-using-human-biomaterials",
+        "m5-3-2-1-plasma-protein-binding-study-reports",
+        "m5-3-2-2-reports-of-hepatic-metabolism-and-drug-interaction-studies",
+        "m5-3-2-3-reports-of-studies-using-other-human-biomaterials",
+        "m5-3-3-reports-of-human-pharmacokinetics-pk-studies",
+        "m5-3-3-1-healthy-subject-pk-and-initial-tolerability-study-reports",
+        "m5-3-3-2-patient-pk-and-initial-tolerability-study-reports",
+        "m5-3-3-3-intrinsic-factor-pk-study-reports",
+        "m5-3-3-4-extrinsic-factor-pk-study-reports",
+        "m5-3-3-5-population-pk-study-reports",
+        "m5-3-4-reports-of-human-pharmacodynamics-pd-studies",
+        "m5-3-4-1-healthy-subject-pd-and-pk-pd-study-reports",
+        "m5-3-4-2-patient-pd-and-pk-pd-study-reports",
+        "m5-3-5-reports-of-efficacy-and-safety-studies",
+        "m5-3-5-1-study-reports-of-controlled-clinical-studies-pertinent-to-the-claimed-indication",
+        "m5-3-5-2-study-reports-of-uncontrolled-clinical-studies",
+        "m5-3-5-3-reports-of-analyses-of-data-from-more-than-one-study",
+        "m5-3-5-4-other-study-reports",
+        "m5-3-6-reports-of-postmarketing-experience",
+        "m5-3-7-case-report-forms-and-individual-patient-listings",
+        "m5-4-literature-references"
+      ],
+      "attribute_list_declarations": [
+        "leaf",
+        "xref",
+        "node-extension",
+        "m2-7-3-summary-of-clinical-efficacy",
+        "m5-3-5-reports-of-efficacy-and-safety-studies",
+        "node-extension",
+        "ectd:ectd",
+        "leaf",
+        "title",
+        "link-text",
+        "xref",
+        "node-extension",
+        "m1-administrative-information-and-prescribing-information",
+        "m2-common-technical-document-summaries",
+        "m2-2-introduction",
+        "m2-3-quality-overall-summary",
+        "m2-3-introduction",
+        "m2-3-s-drug-substance",
+        "m2-3-p-drug-product",
+        "m2-3-a-appendices",
+        "m2-3-r-regional-information",
+        "m2-4-nonclinical-overview",
+        "m2-5-clinical-overview",
+        "m2-6-nonclinical-written-and-tabulated-summaries",
+        "m2-6-1-introduction",
+        "m2-6-2-pharmacology-written-summary",
+        "m2-6-3-pharmacology-tabulated-summary",
+        "m2-6-4-pharmacokinetics-written-summary",
+        "m2-6-5-pharmacokinetics-tabulated-summary",
+        "m2-6-6-toxicology-written-summary",
+        "m2-6-7-toxicology-tabulated-summary",
+        "m2-7-clinical-summary",
+        "m2-7-1-summary-of-biopharmaceutic-studies-and-associated-analytical-methods",
+        "m2-7-2-summary-of-clinical-pharmacology-studies",
+        "m2-7-3-summary-of-clinical-efficacy",
+        "m2-7-4-summary-of-clinical-safety",
+        "m2-7-5-literature-references",
+        "m2-7-6-synopses-of-individual-studies",
+        "m3-quality",
+        "m3-2-body-of-data",
+        "m3-2-s-drug-substance",
+        "m3-2-s-1-general-information",
+        "m3-2-s-1-1-nomenclature",
+        "m3-2-s-1-2-structure",
+        "m3-2-s-1-3-general-properties",
+        "m3-2-s-2-manufacture",
+        "m3-2-s-2-1-manufacturer",
+        "m3-2-s-2-2-description-of-manufacturing-process-and-process-controls",
+        "m3-2-s-2-3-control-of-materials",
+        "m3-2-s-2-4-controls-of-critical-steps-and-intermediates",
+        "m3-2-s-2-5-process-validation-and-or-evaluation",
+        "m3-2-s-2-6-manufacturing-process-development",
+        "m3-2-s-3-characterisation",
+        "m3-2-s-3-1-elucidation-of-structure-and-other-characteristics",
+        "m3-2-s-3-2-impurities",
+        "m3-2-s-4-control-of-drug-substance",
+        "m3-2-s-4-1-specification",
+        "m3-2-s-4-2-analytical-procedures",
+        "m3-2-s-4-3-validation-of-analytical-procedures",
+        "m3-2-s-4-4-batch-analyses",
+        "m3-2-s-4-5-justification-of-specification",
+        "m3-2-s-5-reference-standards-or-materials",
+        "m3-2-s-6-container-closure-system",
+        "m3-2-s-7-stability",
+        "m3-2-s-7-1-stability-summary-and-conclusions",
+        "m3-2-s-7-2-post-approval-stability-protocol-and-stability-commitment",
+        "m3-2-s-7-3-stability-data",
+        "m3-2-p-drug-product",
+        "m3-2-p-1-description-and-composition-of-the-drug-product",
+        "m3-2-p-2-pharmaceutical-development",
+        "m3-2-p-3-manufacture",
+        "m3-2-p-3-1-manufacturers",
+        "m3-2-p-3-2-batch-formula",
+        "m3-2-p-3-3-description-of-manufacturing-process-and-process-controls",
+        "m3-2-p-3-4-controls-of-critical-steps-and-intermediates",
+        "m3-2-p-3-5-process-validation-and-or-evaluation",
+        "m3-2-p-4-control-of-excipients",
+        "m3-2-p-4-1-specifications",
+        "m3-2-p-4-2-analytical-procedures",
+        "m3-2-p-4-3-validation-of-analytical-procedures",
+        "m3-2-p-4-4-justification-of-specifications",
+        "m3-2-p-4-5-excipients-of-human-or-animal-origin",
+        "m3-2-p-4-6-novel-excipients",
+        "m3-2-p-5-control-of-drug-product",
+        "m3-2-p-5-1-specifications",
+        "m3-2-p-5-2-analytical-procedures",
+        "m3-2-p-5-3-validation-of-analytical-procedures",
+        "m3-2-p-5-4-batch-analyses",
+        "m3-2-p-5-5-characterisation-of-impurities",
+        "m3-2-p-5-6-justification-of-specifications",
+        "m3-2-p-6-reference-standards-or-materials",
+        "m3-2-p-7-container-closure-system",
+        "m3-2-p-8-stability",
+        "m3-2-p-8-1-stability-summary-and-conclusion",
+        "m3-2-p-8-2-post-approval-stability-protocol-and-stability-commitment",
+        "m3-2-p-8-3-stability-data",
+        "m3-2-a-appendices",
+        "m3-2-a-1-facilities-and-equipment",
+        "m3-2-a-2-adventitious-agents-safety-evaluation",
+        "m3-2-a-3-excipients",
+        "m3-2-r-regional-information",
+        "m3-3-literature-references",
+        "m4-nonclinical-study-reports",
+        "m4-2-study-reports",
+        "m4-2-1-pharmacology",
+        "m4-2-1-1-primary-pharmacodynamics",
+        "m4-2-1-2-secondary-pharmacodynamics",
+        "m4-2-1-3-safety-pharmacology",
+        "m4-2-1-4-pharmacodynamic-drug-interactions",
+        "m4-2-2-pharmacokinetics",
+        "m4-2-2-1-analytical-methods-and-validation-reports",
+        "m4-2-2-2-absorption",
+        "m4-2-2-3-distribution",
+        "m4-2-2-4-metabolism",
+        "m4-2-2-5-excretion",
+        "m4-2-2-6-pharmacokinetic-drug-interactions",
+        "m4-2-2-7-other-pharmacokinetic-studies",
+        "m4-2-3-toxicology",
+        "m4-2-3-1-single-dose-toxicity",
+        "m4-2-3-2-repeat-dose-toxicity",
+        "m4-2-3-3-genotoxicity",
+        "m4-2-3-3-1-in-vitro",
+        "m4-2-3-3-2-in-vivo",
+        "m4-2-3-4-carcinogenicity",
+        "m4-2-3-4-1-long-term-studies",
+        "m4-2-3-4-2-short-or-medium-term-studies",
+        "m4-2-3-4-3-other-studies",
+        "m4-2-3-5-reproductive-and-developmental-toxicity",
+        "m4-2-3-5-1-fertility-and-early-embryonic-development",
+        "m4-2-3-5-2-embryo-fetal-development",
+        "m4-2-3-5-3-prenatal-and-postnatal-development-including-maternal-function",
+        "m4-2-3-5-4-studies-in-which-the-offspring-juvenile-animals-are-dosed-and-or-further-evaluated",
+        "m4-2-3-6-local-tolerance",
+        "m4-2-3-7-other-toxicity-studies",
+        "m4-2-3-7-1-antigenicity",
+        "m4-2-3-7-2-immunotoxicity",
+        "m4-2-3-7-3-mechanistic-studies",
+        "m4-2-3-7-4-dependence",
+        "m4-2-3-7-5-metabolites",
+        "m4-2-3-7-6-impurities",
+        "m4-2-3-7-7-other",
+        "m4-3-literature-references",
+        "m5-clinical-study-reports",
+        "m5-2-tabular-listing-of-all-clinical-studies",
+        "m5-3-clinical-study-reports",
+        "m5-3-1-reports-of-biopharmaceutic-studies",
+        "m5-3-1-1-bioavailability-study-reports",
+        "m5-3-1-2-comparative-ba-and-bioequivalence-study-reports",
+        "m5-3-1-3-in-vitro-in-vivo-correlation-study-reports",
+        "m5-3-1-4-reports-of-bioanalytical-and-analytical-methods-for-human-studies",
+        "m5-3-2-reports-of-studies-pertinent-to-pharmacokinetics-using-human-biomaterials",
+        "m5-3-2-1-plasma-protein-binding-study-reports",
+        "m5-3-2-2-reports-of-hepatic-metabolism-and-drug-interaction-studies",
+        "m5-3-2-3-reports-of-studies-using-other-human-biomaterials",
+        "m5-3-3-reports-of-human-pharmacokinetics-pk-studies",
+        "m5-3-3-1-healthy-subject-pk-and-initial-tolerability-study-reports",
+        "m5-3-3-2-patient-pk-and-initial-tolerability-study-reports",
+        "m5-3-3-3-intrinsic-factor-pk-study-reports",
+        "m5-3-3-4-extrinsic-factor-pk-study-reports",
+        "m5-3-3-5-population-pk-study-reports",
+        "m5-3-4-reports-of-human-pharmacodynamics-pd-studies",
+        "m5-3-4-1-healthy-subject-pd-and-pk-pd-study-reports",
+        "m5-3-4-2-patient-pd-and-pk-pd-study-reports",
+        "m5-3-5-reports-of-efficacy-and-safety-studies",
+        "m5-3-5-1-study-reports-of-controlled-clinical-studies-pertinent-to-the-claimed-indication",
+        "m5-3-5-2-study-reports-of-uncontrolled-clinical-studies",
+        "m5-3-5-3-reports-of-analyses-of-data-from-more-than-one-study",
+        "m5-3-5-4-other-study-reports",
+        "m5-3-6-reports-of-postmarketing-experience",
+        "m5-3-7-case-report-forms-and-individual-patient-listings",
+        "m5-4-literature-references"
+      ],
+      "entity_declarations": [
+        "att",
+        "att",
+        "att"
+      ],
+      "public_identifiers": [],
+      "system_identifiers": [],
+      "source_sha256": "c094aa2bded99564ade8ac78ae1540f95e518461b8eebe9a3063f67a165c2731",
+      "source_path": "ich-ectd-3-2.dtd"
+    },
+    "ich-stf-v2-2.dtd": {
+      "element_declarations": [
+        "ectd:study",
+        "study-identifier",
+        "title",
+        "study-id",
+        "category",
+        "study-document",
+        "doc-content",
+        "content-block",
+        "block-title",
+        "file-tag",
+        "property"
+      ],
+      "attribute_list_declarations": [
+        "ectd:study",
+        "category",
+        "doc-content",
+        "file-tag",
+        "property"
+      ],
+      "entity_declarations": [],
+      "public_identifiers": [],
+      "system_identifiers": [],
+      "source_sha256": "e6d47695501e263534a89a2b7bf7018c92e12a11c3dd82fc1d0c462bfa52c81f",
+      "source_path": "ich-stf-v2-2.dtd"
+    }
+  },
+  "stylesheet_summaries": {
+    "cn-regional-1-1.xsl": {
+      "declared_versions": [
+        {
+          "version": "1.1",
+          "date_text": "2026年3月1日"
+        }
+      ],
+      "included_or_imported_stylesheets": [],
+      "hard_coded_cn_codes": [
+        "cnapt1",
+        "cnapt2",
+        "cnapt3",
+        "cnapt4",
+        "cnrat1",
+        "cnrat2",
+        "cnrat3",
+        "cnrat4",
+        "cnrat5",
+        "cnrat6",
+        "cnrat7",
+        "cnrat8",
+        "cnrat9",
+        "cnsqt1",
+        "cnsqt2",
+        "cnsqt3",
+        "cnsqt4"
+      ],
+      "literal_label_sample": [
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "模块一 - Schema 版本 ",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "模块一",
+        "\t\t",
+        "Schema 版本 ",
+        "\t\t",
+        "样式文件版本 1.1",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "临床试验申请",
+        "\t\t",
+        "新药申请",
+        "\t\t",
+        "仿制药申请",
+        "\t\t",
+        "原料药申请",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "化学药品",
+        "\t\t",
+        "生物制品",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "首次申请",
+        "\t\t",
+        "补充申请",
+        "\t\t",
+        "备案",
+        "\t\t",
+        "报告",
+        "\t\t"
+      ],
+      "source_sha256": "bb3c710f51444b9fe36b6cc18cb269beaa10c36ed117c80b60da5e274b5e745f",
+      "source_path": "cn-regional-1-1.xsl"
+    },
+    "ectd-2-0.xsl": {
+      "declared_versions": [],
+      "included_or_imported_stylesheets": [],
+      "hard_coded_cn_codes": [],
+      "literal_label_sample": [
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "eCTD ",
+        "DTD version ",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "[manufacturer: ",
+        "] ",
+        "\t\t",
+        "[substance: ",
+        "] ",
+        "\t\t",
+        "[product name: ",
+        "] ",
+        "\t\t",
+        "[dosage form: ",
+        "] ",
+        "\t\t",
+        "[indication: ",
+        "] ",
+        "\t\t",
+        "[excipient: ",
+        "] ",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t[",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t"
+      ],
+      "source_sha256": "41bf6aaf78fa1ba736951174c5e3dc6724410f4d5d9332034dac9b2c8d34dcd1",
+      "source_path": "ectd-2-0.xsl"
+    },
+    "ich-stf-stylesheet-2-2a.xsl": {
+      "declared_versions": [
+        {
+          "version": "2",
+          "date_text": "2a"
+        }
+      ],
+      "included_or_imported_stylesheets": [],
+      "hard_coded_cn_codes": [],
+      "literal_label_sample": [
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Tagging File (STF)",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Tagging File (STF)",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Title:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study ID:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Category:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "#FF6666",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Content:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t"
+      ],
+      "source_sha256": "377e4aa00788e79c64afad0182cb67964b7a4ae8c5b86819b19ec2221e3a1d8f",
+      "source_path": "ich-stf-stylesheet-2-2a.xsl"
+    },
+    "ich-stf-stylesheet-2-3.xsl": {
+      "declared_versions": [
+        {
+          "version": "2",
+          "date_text": "3"
+        }
+      ],
+      "included_or_imported_stylesheets": [],
+      "hard_coded_cn_codes": [],
+      "literal_label_sample": [
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Tagging File (STF)",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Tagging File (STF)",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Title:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study ID:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Category:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "#FF6666",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "Study Content:",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t",
+        "\t\t"
+      ],
+      "source_sha256": "9131de4db31b5c74d6559e8e92f0aecb82bbd45f7783b8adfead826dbb943023",
+      "source_path": "ich-stf-stylesheet-2-3.xsl"
+    }
+  },
+  "version_coordination": {
+    "declared_versions_observed": [
+      "1.0",
+      "1.1",
+      "2",
+      "3.0",
+      "3.1",
+      "3.2"
+    ],
+    "members_by_declared_version": {
+      "1.0": [
+        "附件1-1：区域Schema文件/cn-regional-1-0.xsd",
+        "附件1-2：受控词汇文件包/cn-cv.xsd",
+        "附件1-2：受控词汇文件包/cn-dependency.xsd",
+        "附件1-2：受控词汇文件包/cn-elements.xsd",
+        "附件1-2：受控词汇文件包/cv-product-type.xml",
+        "附件1-2：受控词汇文件包/cv-regulatory-activity-type.xml",
+        "附件1-2：受控词汇文件包/cv-sequence-type.xml",
+        "附件1-2：受控词汇文件包/element-property_CN.xml",
+        "附件1-2：受控词汇文件包/element-property_ICH.xml",
+        "附件1-2：受控词汇文件包/node-extension-property_CN.xml",
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd"
+      ],
+      "1.1": [
+        "附件1-2：受控词汇文件包/cv-application-type.xml",
+        "附件1-2：受控词汇文件包/depend-apt-rat-sqt.xml",
+        "附件1-3：区域性样式文件/cn-regional-1-1.xsl"
+      ],
+      "3.0": [
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd"
+      ],
+      "3.1": [
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd"
+      ],
+      "3.2": [
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd",
+        "附件2-1：ICH DTD文件/ich-ectd-3-2.dtd"
+      ],
+      "2": [
+        "附件2-2：ICH STF DTD文件/ich-stf-v2-2.dtd",
+        "附件2-4：ICH STF样式文件2-2a/ich-stf-stylesheet-2-2a.xsl",
+        "附件2-5：ICH STF样式文件2-3/ich-stf-stylesheet-2-3.xsl"
+      ]
+    },
+    "mixed_member_versions": true,
+    "policy": "Pin the whole official package and all member hashes; do not compose releases by filename/version heuristics."
+  },
+  "validation_layers": [
+    "archive integrity and member identity",
+    "XML well-formedness",
+    "XSD/DTD validation",
+    "controlled vocabulary membership",
+    "application/activity/sequence dependency validation",
+    "element/node-extension metadata and applicability",
+    "file path/reference/checksum/lifecycle validation",
+    "official validator black-box comparison"
+  ],
+  "non_equivalence_warning": "Schema-valid is not equivalent to CDE-valid or acceptable for submission."
+}

@@ -1,0 +1,183 @@
+{
+  "schema_version": "0.2.0",
+  "generated_at_epoch": 1788433682,
+  "generator": "tools/regulatory/fetch_cde_sources.py",
+  "policy": {
+    "authority_order": [
+      "CDE/NMPA effective official files",
+      "ICH base specification",
+      "secondary mirror"
+    ],
+    "binary_storage": "Actions artifact; only metadata and hashes are committed",
+    "limitations": "Dynamic CDE downloads and desktop software may require manual browser retrieval. A failed automated download is not evidence that the asset does not exist."
+  },
+  "seeds": [
+    {
+      "url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
+      "authority": "CDE/NMPA",
+      "role": "effective_technical_files_notice",
+      "status": "official_effective"
+    },
+    {
+      "url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "authority": "CDE/NMPA",
+      "role": "validator_1_1_0_notice",
+      "status": "official_effective"
+    },
+    {
+      "url": "https://www.cde.org.cn/",
+      "authority": "CDE/NMPA",
+      "role": "common_download_discovery",
+      "status": "official"
+    },
+    {
+      "url": "https://www.ich.org/page/ich-electronic-common-technical-document-ectd-v322",
+      "authority": "ICH",
+      "role": "international_ectd_3_2_2_package_discovery",
+      "status": "official"
+    }
+  ],
+  "secondary_mirrors": [
+    {
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183312.pdf",
+      "authority": "China Pharmaceutical News mirror",
+      "role": "eCTD_implementation_guide_v1_1_secondary_mirror",
+      "status": "secondary_mirror"
+    },
+    {
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "authority": "China Pharmaceutical News mirror",
+      "role": "eCTD_validation_standard_v1_1_secondary_mirror",
+      "status": "secondary_mirror"
+    }
+  ],
+  "summary": {
+    "html_pages_fetched": 4,
+    "relevant_links_discovered": 3,
+    "binary_downloads_successful": 3,
+    "binary_candidates_not_downloaded": 0,
+    "failures": 0
+  },
+  "pages": [
+    {
+      "requested_url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
+      "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/454f7eb43d4eb4c42503d697784903db",
+      "status": 202,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "615784d2d88afc74b1d30769f9c97787ca19e54544965fbfde2d41940e44f142",
+      "saved_as": "pages/page-001-1833f880f38d.html",
+      "seed_role": "effective_technical_files_notice",
+      "links_found": 1
+    },
+    {
+      "requested_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "final_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "status": 202,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "55d7f8b2c61c1d33948b5fe6d85a4735ec37bd3d6a6d0334ee6e8ac3ce7ca048",
+      "saved_as": "pages/page-002-f61c52eae9ff.html",
+      "seed_role": "validator_1_1_0_notice",
+      "links_found": 1
+    },
+    {
+      "requested_url": "https://www.cde.org.cn/",
+      "final_url": "https://www.cde.org.cn/",
+      "status": 200,
+      "content_type": "text/html",
+      "sha256": "36ce5f650e0179cd212e83b5e0b7267c48695184eeaebe8f4b770bcf5996c3ae",
+      "saved_as": "pages/page-003-076bfedd5465.html",
+      "seed_role": "common_download_discovery",
+      "links_found": 138
+    },
+    {
+      "requested_url": "https://www.ich.org/page/ich-electronic-common-technical-document-ectd-v322",
+      "final_url": "https://www.ich.org/page/ich-electronic-common-technical-document-ectd-v322",
+      "status": 200,
+      "content_type": "text/html",
+      "sha256": "c19774b8c67c6c22182e1aca7db08afb04861080c763ed9d7399c50fa5b7df7c",
+      "saved_as": "pages/page-004-48dc1041275e.html",
+      "seed_role": "international_ectd_3_2_2_package_discovery",
+      "links_found": 0
+    }
+  ],
+  "links": [
+    {
+      "source_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+      "text": "embedded-url",
+      "depth": 1
+    },
+    {
+      "source_url": "secondary-mirror-list",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183312.pdf",
+      "text": "eCTD_implementation_guide_v1_1_secondary_mirror",
+      "depth": 0
+    },
+    {
+      "source_url": "secondary-mirror-list",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "text": "eCTD_validation_standard_v1_1_secondary_mirror",
+      "depth": 0
+    }
+  ],
+  "assets": [
+    {
+      "source_url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+      "requested_url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+      "final_url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+      "anchor_text": "embedded-url",
+      "download_status": "SUCCESS",
+      "http_status": 200,
+      "content_type": "application/xml-dtd",
+      "content_disposition": null,
+      "size": 32111,
+      "saved_as": "assets/001-xhtml1-transitional.dtd",
+      "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+      "sm3": "f26e391e192d0ee18df4d5e24644b8a81babc83e5234d0894ca204592c05c2d6",
+      "archive": {
+        "kind": null,
+        "members": [],
+        "status": "NOT_ARCHIVE"
+      }
+    },
+    {
+      "source_url": "secondary-mirror-list",
+      "requested_url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183312.pdf",
+      "final_url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183312.pdf",
+      "anchor_text": "eCTD_implementation_guide_v1_1_secondary_mirror",
+      "download_status": "SUCCESS",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_disposition": null,
+      "size": 525655,
+      "saved_as": "assets/002-183312.pdf",
+      "sha256": "3dba8a9bb32e6af6cea585aa742217afdeb95ace3a5e2de60ec557f255e7fe3d",
+      "sm3": "b1dfd74830a8c77001dce55064d6cb8e4b3bc182f73f3dbc5d0623806aa07c77",
+      "archive": {
+        "kind": null,
+        "members": [],
+        "status": "NOT_ARCHIVE"
+      }
+    },
+    {
+      "source_url": "secondary-mirror-list",
+      "requested_url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "final_url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "anchor_text": "eCTD_validation_standard_v1_1_secondary_mirror",
+      "download_status": "SUCCESS",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_disposition": null,
+      "size": 428841,
+      "saved_as": "assets/003-183313.pdf",
+      "sha256": "9d8b9e8baae0f891d833946a0cde78332c39f8072974387ecdda6ca16c884f7a",
+      "sm3": "dc1a77ff57e20eb9186de944d02d867bb2d006b810da9510491baaabff2a3397",
+      "archive": {
+        "kind": null,
+        "members": [],
+        "status": "NOT_ARCHIVE"
+      }
+    }
+  ],
+  "failures": []
+}

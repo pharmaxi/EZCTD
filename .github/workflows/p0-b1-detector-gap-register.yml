@@ -1,0 +1,63 @@
+name: P0-B1 detector gap register
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "docs/validation/p0-b1/DETECTOR_GAP_REGISTER.json"
+      - "tools/p0-b1/validate_detector_gap_register.py"
+      - ".github/workflows/p0-b1-detector-gap-register.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-b1-detector-gap-register
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate and render gap register
+        run: python tools/p0-b1/validate_detector_gap_register.py
+
+      - name: Commit rendered register
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/p0-b1/DETECTOR_GAP_REGISTER.md
+          if git diff --cached --quiet; then
+            echo "Detector gap register unchanged."
+            exit 0
+          fi
+          git commit -m "docs(p0-b1): render detector limitation register"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-b1-detector-gap-register
+          path: build/p0-b1-detector-gap-register.json
+          if-no-files-found: error
+          retention-days: 30

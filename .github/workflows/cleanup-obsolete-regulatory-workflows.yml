@@ -1,0 +1,106 @@
+name: Cleanup superseded regulatory workflows
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - .github/workflows/cleanup-obsolete-regulatory-workflows.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cleanup-superseded-regulatory-workflows
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Require completed converged evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("docs/status/OFFICIAL_SOURCE_DEEP_DIVE_STATUS.json")
+          if not path.exists():
+              raise SystemExit("converged status file is not present")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          expected = "OFFICIAL_SOURCES_AND_VALIDATOR_STATIC_EVIDENCE_COMPLETE"
+          if data.get("status") != expected:
+              raise SystemExit(f"status is {data.get('status')!r}, expected {expected!r}")
+          if data.get("official_black_box_observations") != 0:
+              raise SystemExit("unexpected official black-box observation state")
+          if data.get("software_executed") is not False:
+              raise SystemExit("software execution boundary is not preserved")
+          print(json.dumps(data, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Remove superseded workflows and record decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f \
+            .github/workflows/official-source-deep-dive.yml \
+            .github/workflows/official-validator-acquisition.yml \
+            .github/workflows/official-validator-acquisition-v2.yml
+          cat > docs/decisions/0003-consolidate-official-source-automation.md <<'EOF'
+          # ADR-0003：官方来源自动化收敛为单一总工作流
+
+          - Status: Accepted
+          - Date: 2026-09-04
+
+          ## Context
+
+          官方来源研究阶段曾分别建立技术包抓取、验证软件抓取和 Windows 静态检查工作流。并行工作流会重复访问 CDE、争抢同一分支写入，并让“某一步成功”被误读为整体完成。
+
+          ## Decision
+
+          1. 仅保留 `.github/workflows/converge-official-regulatory-sources.yml` 作为官方来源取证的规范入口。
+          2. 该工作流同时完成 V1.1 技术包、v4.0 征求意见稿、验证软件与手册获取、Windows 静态检查、结构化报告和 Draft PR。
+          3. 删除三套已被替代的临时工作流；诊断脚本继续保留，可由主工作流或本地命令复用。
+          4. 原始二进制仍仅保存为 Actions artifact；Git 只保存来源、哈希、结构化静态结果和结论边界。
+          5. 官方验证器黑盒运行属于下一阶段，不能加入本工作流自动执行。
+
+          ## Consequences
+
+          - 降低重复抓取、并发冲突和状态漂移。
+          - 后续来源更新只维护一条执行路径。
+          - 历史失败仍保留在 GitHub Actions 记录中，不删除、不伪装。
+          EOF
+          rm -f .github/workflows/cleanup-obsolete-regulatory-workflows.yml
+
+      - name: Commit cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to clean."
+            exit 0
+          fi
+          git commit -m "chore(regulatory): remove superseded source workflows"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            git fetch origin agent/official-source-deep-dive
+            if git rebase origin/agent/official-source-deep-dive && git push origin HEAD:agent/official-source-deep-dive; then
+              pushed=1
+              break
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 6))
+          done
+          test "$pushed" -eq 1

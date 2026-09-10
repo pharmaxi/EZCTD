@@ -1,0 +1,1281 @@
+{
+  "version": "1.0",
+  "valid_from": "2021-9-1",
+  "elements": [
+    {
+      "name": "m1-administrative-information-and-prescribing-information",
+      "structure_number": "1",
+      "descriptions": {
+        "zh": "模块1：行政文件和药品信息",
+        "en": "Module 1:Administrative Information and Prescribing Information"
+      }
+    },
+    {
+      "name": "m2-common-technical-document-summaries",
+      "structure_number": "2",
+      "descriptions": {
+        "zh": "模块2：通用技术文档总结",
+        "en": "Module 2:Common Technical Document Summaries"
+      }
+    },
+    {
+      "name": "m2-2-introduction",
+      "structure_number": "2.2",
+      "descriptions": {
+        "zh": "CTD引言",
+        "en": "CTD Introduction"
+      }
+    },
+    {
+      "name": "m2-3-quality-overall-summary",
+      "structure_number": "2.3",
+      "descriptions": {
+        "zh": "质量综述",
+        "en": "Quality Overall Summary"
+      }
+    },
+    {
+      "name": "m2-3-introduction",
+      "structure_number": "2.3.1",
+      "descriptions": {
+        "zh": "引言",
+        "en": "Introduction"
+      }
+    },
+    {
+      "name": "m2-3-s-drug-substance",
+      "structure_number": "2.3.S",
+      "descriptions": {
+        "zh": "原料药",
+        "en": "Drug Substance"
+      }
+    },
+    {
+      "name": "m2-3-p-drug-product",
+      "structure_number": "2.3.P",
+      "descriptions": {
+        "zh": "制剂",
+        "en": "Drug Product"
+      }
+    },
+    {
+      "name": "m2-3-a-appendices",
+      "structure_number": "2.3.A",
+      "descriptions": {
+        "zh": "附录",
+        "en": "Appendices"
+      }
+    },
+    {
+      "name": "m2-3-r-regional-information",
+      "structure_number": "2.3.R",
+      "descriptions": {
+        "zh": "区域性信息",
+        "en": "Regional Information"
+      }
+    },
+    {
+      "name": "m2-4-nonclinical-overview",
+      "structure_number": "2.4",
+      "descriptions": {
+        "zh": "非临床综述",
+        "en": "Nonclinical Overview"
+      }
+    },
+    {
+      "name": "m2-5-clinical-overview",
+      "structure_number": "2.5",
+      "descriptions": {
+        "zh": "临床综述",
+        "en": "Clinical Overview"
+      }
+    },
+    {
+      "name": "m2-6-nonclinical-written-and-tabulated-summaries",
+      "structure_number": "2.6",
+      "descriptions": {
+        "zh": "非临床文字总结和列表总结",
+        "en": "Nonclinical Written and Tabulated Summaries"
+      }
+    },
+    {
+      "name": "m2-6-1-introduction",
+      "structure_number": "2.6.1",
+      "descriptions": {
+        "zh": "前言",
+        "en": "Introduction"
+      }
+    },
+    {
+      "name": "m2-6-2-pharmacology-written-summary",
+      "structure_number": "2.6.2",
+      "descriptions": {
+        "zh": "药理学文字总结",
+        "en": "Pharmacology Written Summary"
+      }
+    },
+    {
+      "name": "m2-6-3-pharmacology-tabulated-summary",
+      "structure_number": "2.6.3",
+      "descriptions": {
+        "zh": "药理学列表总结",
+        "en": "Pharmacology Tabulated Summary"
+      }
+    },
+    {
+      "name": "m2-6-4-pharmacokinetics-written-summary",
+      "structure_number": "2.6.4",
+      "descriptions": {
+        "zh": "药代动力学文字总结",
+        "en": "Pharmacokinetics Written Summary"
+      }
+    },
+    {
+      "name": "m2-6-5-pharmacokinetics-tabulated-summary",
+      "structure_number": "2.6.5",
+      "descriptions": {
+        "zh": "药代动力学列表总结",
+        "en": "Pharmacokinetics Tabulated Summary"
+      }
+    },
+    {
+      "name": "m2-6-6-toxicology-written-summary",
+      "structure_number": "2.6.6",
+      "descriptions": {
+        "zh": "毒理学文字总结",
+        "en": "Toxicology Written Summary"
+      }
+    },
+    {
+      "name": "m2-6-7-toxicology-tabulated-summary",
+      "structure_number": "2.6.7",
+      "descriptions": {
+        "zh": "毒理学列表总结",
+        "en": "Toxicology Tabulated Summary"
+      }
+    },
+    {
+      "name": "m2-7-clinical-summary",
+      "structure_number": "2.7",
+      "descriptions": {
+        "zh": "临床总结",
+        "en": "Clinical Summary"
+      }
+    },
+    {
+      "name": "m2-7-1-summary-of-biopharmaceutic-studies-and-associated-analytical-methods",
+      "structure_number": "2.7.1",
+      "descriptions": {
+        "zh": "生物药剂学研究及相关分析方法总结",
+        "en": "Summary of Biopharmaceutic Studies and Associated Analytical Methods"
+      }
+    },
+    {
+      "name": "m2-7-2-summary-of-clinical-pharmacology-studies",
+      "structure_number": "2.7.2",
+      "descriptions": {
+        "zh": "临床药理学研究总结",
+        "en": "Summary of Clinical Pharmacology Studies"
+      }
+    },
+    {
+      "name": "m2-7-3-summary-of-clinical-efficacy",
+      "structure_number": "2.7.3",
+      "descriptions": {
+        "zh": "临床有效性总结",
+        "en": "Summary of Clinical Efficacy"
+      }
+    },
+    {
+      "name": "m2-7-4-summary-of-clinical-safety",
+      "structure_number": "2.7.4",
+      "descriptions": {
+        "zh": "临床安全性总结",
+        "en": "Summary of Clinical Safety"
+      }
+    },
+    {
+      "name": "m2-7-5-literature-references",
+      "structure_number": "2.7.5",
+      "descriptions": {
+        "zh": "参考文献",
+        "en": "Literature References"
+      }
+    },
+    {
+      "name": "m2-7-6-synopses-of-individual-studies",
+      "structure_number": "2.7.6",
+      "descriptions": {
+        "zh": "单项研究摘要",
+        "en": "Synopses of Individual Studies"
+      }
+    },
+    {
+      "name": "m3-quality",
+      "structure_number": "3",
+      "descriptions": {
+        "zh": "模块3：质量",
+        "en": "Module 3:Quality"
+      }
+    },
+    {
+      "name": "m3-2-body-of-data",
+      "structure_number": "3.2",
+      "descriptions": {
+        "zh": "主体数据",
+        "en": "Body of Data"
+      }
+    },
+    {
+      "name": "m3-2-s-drug-substance",
+      "structure_number": "3.2.S",
+      "descriptions": {
+        "zh": "原料药",
+        "en": "Drug Substance"
+      }
+    },
+    {
+      "name": "m3-2-s-1-general-information",
+      "structure_number": "3.2.S.1",
+      "descriptions": {
+        "zh": "基本信息",
+        "en": "General Information"
+      }
+    },
+    {
+      "name": "m3-2-s-1-1-nomenclature",
+      "structure_number": "3.2.S.1.1",
+      "descriptions": {
+        "zh": "药品名称",
+        "en": "Nomenclature"
+      }
+    },
+    {
+      "name": "m3-2-s-1-2-structure",
+      "structure_number": "3.2.S.1.2",
+      "descriptions": {
+        "zh": "结构",
+        "en": "Structure"
+      }
+    },
+    {
+      "name": "m3-2-s-1-3-general-properties",
+      "structure_number": "3.2.S.1.3",
+      "descriptions": {
+        "zh": "基本性质",
+        "en": "General Properties"
+      }
+    },
+    {
+      "name": "m3-2-s-2-manufacture",
+      "structure_number": "3.2.S.2",
+      "descriptions": {
+        "zh": "生产",
+        "en": "Manufacture"
+      }
+    },
+    {
+      "name": "m3-2-s-2-1-manufacturer",
+      "structure_number": "3.2.S.2.1",
+      "descriptions": {
+        "zh": "生产商",
+        "en": "Manufacturer(s)"
+      }
+    },
+    {
+      "name": "m3-2-s-2-2-description-of-manufacturing-process-and-process-controls",
+      "structure_number": "3.2.S.2.2",
+      "descriptions": {
+        "zh": "生产工艺和工艺控制",
+        "en": "Description of Manufacturing Process and Process Controls"
+      }
+    },
+    {
+      "name": "m3-2-s-2-3-control-of-materials",
+      "structure_number": "3.2.S.2.3",
+      "descriptions": {
+        "zh": "物料控制",
+        "en": "Control of Materials"
+      }
+    },
+    {
+      "name": "m3-2-s-2-4-controls-of-critical-steps-and-intermediates",
+      "structure_number": "3.2.S.2.4",
+      "descriptions": {
+        "zh": "关键步骤和中间体的控制",
+        "en": "Controls of Critical Steps and Intermediates"
+      }
+    },
+    {
+      "name": "m3-2-s-2-5-process-validation-and-or-evaluation",
+      "structure_number": "3.2.S.2.5",
+      "descriptions": {
+        "zh": "工艺验证和/或评价",
+        "en": "Process Validation and/or Evaluation"
+      }
+    },
+    {
+      "name": "m3-2-s-2-6-manufacturing-process-development",
+      "structure_number": "3.2.S.2.6",
+      "descriptions": {
+        "zh": "生产工艺的开发",
+        "en": "Manufacturing Process Development"
+      }
+    },
+    {
+      "name": "m3-2-s-3-characterisation",
+      "structure_number": "3.2.S.3",
+      "descriptions": {
+        "zh": "特性鉴定",
+        "en": "Characterization"
+      }
+    },
+    {
+      "name": "m3-2-s-3-1-elucidation-of-structure-and-other-characteristics",
+      "structure_number": "3.2.S.3.1",
+      "descriptions": {
+        "zh": "结构和理化性质",
+        "en": "Elucidation of Structure and Other Characteristics"
+      }
+    },
+    {
+      "name": "m3-2-s-3-2-impurities",
+      "structure_number": "3.2.S.3.2",
+      "descriptions": {
+        "zh": "杂质",
+        "en": "Impurities"
+      }
+    },
+    {
+      "name": "m3-2-s-4-control-of-drug-substance",
+      "structure_number": "3.2.S.4",
+      "descriptions": {
+        "zh": "原料药的质量控制",
+        "en": "Control of Drug Substance"
+      }
+    },
+    {
+      "name": "m3-2-s-4-1-specification",
+      "structure_number": "3.2.S.4.1",
+      "descriptions": {
+        "zh": "质量标准",
+        "en": "Specification"
+      }
+    },
+    {
+      "name": "m3-2-s-4-2-analytical-procedures",
+      "structure_number": "3.2.S.4.2",
+      "descriptions": {
+        "zh": "分析方法",
+        "en": "Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-s-4-3-validation-of-analytical-procedures",
+      "structure_number": "3.2.S.4.3",
+      "descriptions": {
+        "zh": "分析方法的验证",
+        "en": "Validation of Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-s-4-4-batch-analyses",
+      "structure_number": "3.2.S.4.4",
+      "descriptions": {
+        "zh": "批分析",
+        "en": "Batch Analyses"
+      }
+    },
+    {
+      "name": "m3-2-s-4-5-justification-of-specification",
+      "structure_number": "3.2.S.4.5",
+      "descriptions": {
+        "zh": "质量标准制定依据",
+        "en": "Justification of Specification"
+      }
+    },
+    {
+      "name": "m3-2-s-5-reference-standards-or-materials",
+      "structure_number": "3.2.S.5",
+      "descriptions": {
+        "zh": "对照品/标准品",
+        "en": "Reference Standards or Materials"
+      }
+    },
+    {
+      "name": "m3-2-s-6-container-closure-system",
+      "structure_number": "3.2.S.6",
+      "descriptions": {
+        "zh": "包装系统",
+        "en": "Container Closure System"
+      }
+    },
+    {
+      "name": "m3-2-s-7-stability",
+      "structure_number": "3.2.S.7",
+      "descriptions": {
+        "zh": "稳定性",
+        "en": "Stability"
+      }
+    },
+    {
+      "name": "m3-2-s-7-1-stability-summary-and-conclusions",
+      "structure_number": "3.2.S.7.1",
+      "descriptions": {
+        "zh": "稳定性总结和结论",
+        "en": "Stability Summary and Conclusions"
+      }
+    },
+    {
+      "name": "m3-2-s-7-2-post-approval-stability-protocol-and-stability-commitment",
+      "structure_number": "3.2.S.7.2",
+      "descriptions": {
+        "zh": "批准后稳定性研究方案和承诺",
+        "en": "Post-approval Stability Protocol and Stability Commitment"
+      }
+    },
+    {
+      "name": "m3-2-s-7-3-stability-data",
+      "structure_number": "3.2.S.7.3",
+      "descriptions": {
+        "zh": "稳定性数据",
+        "en": "Stability Data"
+      }
+    },
+    {
+      "name": "m3-2-p-drug-product",
+      "structure_number": "3.2.P",
+      "descriptions": {
+        "zh": "制剂",
+        "en": "Drug Product"
+      }
+    },
+    {
+      "name": "m3-2-p-1-description-and-composition-of-the-drug-product",
+      "structure_number": "3.2.P.1",
+      "descriptions": {
+        "zh": "剂型及产品组成",
+        "en": "Description and Composition of the Drug Product"
+      }
+    },
+    {
+      "name": "m3-2-p-2-pharmaceutical-development",
+      "structure_number": "3.2.P.2",
+      "descriptions": {
+        "zh": "产品开发",
+        "en": "Pharmaceutical Development"
+      }
+    },
+    {
+      "name": "m3-2-p-3-manufacture",
+      "structure_number": "3.2.P.3",
+      "descriptions": {
+        "zh": "生产",
+        "en": "Manufacture"
+      }
+    },
+    {
+      "name": "m3-2-p-3-1-manufacturers",
+      "structure_number": "3.2.P.3.1",
+      "descriptions": {
+        "zh": "生产商",
+        "en": "Manufacturer(s)"
+      }
+    },
+    {
+      "name": "m3-2-p-3-2-batch-formula",
+      "structure_number": "3.2.P.3.2",
+      "descriptions": {
+        "zh": "批处方",
+        "en": "Batch Formula"
+      }
+    },
+    {
+      "name": "m3-2-p-3-3-description-of-manufacturing-process-and-process-controls",
+      "structure_number": "3.2.P.3.3",
+      "descriptions": {
+        "zh": "生产工艺和工艺控制",
+        "en": "Description of Manufacturing Process and Process Controls"
+      }
+    },
+    {
+      "name": "m3-2-p-3-4-controls-of-critical-steps-and-intermediates",
+      "structure_number": "3.2.P.3.4",
+      "descriptions": {
+        "zh": "关键步骤和中间体的控制",
+        "en": "Controls of Critical Steps and Intermediates"
+      }
+    },
+    {
+      "name": "m3-2-p-3-5-process-validation-and-or-evaluation",
+      "structure_number": "3.2.P.3.5",
+      "descriptions": {
+        "zh": "工艺验证和/或评价",
+        "en": "Process Validation and/or Evaluation"
+      }
+    },
+    {
+      "name": "m3-2-p-4-control-of-excipients",
+      "structure_number": "3.2.P.4",
+      "descriptions": {
+        "zh": "辅料的控制",
+        "en": "Control of Excipients"
+      }
+    },
+    {
+      "name": "m3-2-p-4-1-specifications",
+      "structure_number": "3.2.P.4.1",
+      "descriptions": {
+        "zh": "质量标准",
+        "en": "Specifications"
+      }
+    },
+    {
+      "name": "m3-2-p-4-2-analytical-procedures",
+      "structure_number": "3.2.P.4.2",
+      "descriptions": {
+        "zh": "分析方法",
+        "en": "Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-p-4-3-validation-of-analytical-procedures",
+      "structure_number": "3.2.P.4.3",
+      "descriptions": {
+        "zh": "分析方法的验证",
+        "en": "Validation of Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-p-4-4-justification-of-specifications",
+      "structure_number": "3.2.P.4.4",
+      "descriptions": {
+        "zh": "质量标准制定依据",
+        "en": "Justification of Specifications"
+      }
+    },
+    {
+      "name": "m3-2-p-4-5-excipients-of-human-or-animal-origin",
+      "structure_number": "3.2.P.4.5",
+      "descriptions": {
+        "zh": "人源或动物源辅料",
+        "en": "Excipients of Human or Animal Origin"
+      }
+    },
+    {
+      "name": "m3-2-p-4-6-novel-excipients",
+      "structure_number": "3.2.P.4.6",
+      "descriptions": {
+        "zh": "新型辅料",
+        "en": "Novel Excipients"
+      }
+    },
+    {
+      "name": "m3-2-p-5-control-of-drug-product",
+      "structure_number": "3.2.P.5",
+      "descriptions": {
+        "zh": "制剂的质量控制",
+        "en": "Control of Drug Product"
+      }
+    },
+    {
+      "name": "m3-2-p-5-1-specifications",
+      "structure_number": "3.2.P.5.1",
+      "descriptions": {
+        "zh": "质量标准",
+        "en": "Specification(s)"
+      }
+    },
+    {
+      "name": "m3-2-p-5-2-analytical-procedures",
+      "structure_number": "3.2.P.5.2",
+      "descriptions": {
+        "zh": "分析方法",
+        "en": "Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-p-5-3-validation-of-analytical-procedures",
+      "structure_number": "3.2.P.5.3",
+      "descriptions": {
+        "zh": "分析方法的验证",
+        "en": "Validation of Analytical Procedures"
+      }
+    },
+    {
+      "name": "m3-2-p-5-4-batch-analyses",
+      "structure_number": "3.2.P.5.4",
+      "descriptions": {
+        "zh": "批分析",
+        "en": "Batch Analyses"
+      }
+    },
+    {
+      "name": "m3-2-p-5-5-characterisation-of-impurities",
+      "structure_number": "3.2.P.5.5",
+      "descriptions": {
+        "zh": "杂质分析",
+        "en": "Characterisation of Impurities"
+      }
+    },
+    {
+      "name": "m3-2-p-5-6-justification-of-specifications",
+      "structure_number": "3.2.P.5.6",
+      "descriptions": {
+        "zh": "质量标准制定依据",
+        "en": "Justification of Specification(s)"
+      }
+    },
+    {
+      "name": "m3-2-p-6-reference-standards-or-materials",
+      "structure_number": "3.2.P.6",
+      "descriptions": {
+        "zh": "对照品/标准品",
+        "en": "Reference Standards or Materials"
+      }
+    },
+    {
+      "name": "m3-2-p-7-container-closure-system",
+      "structure_number": "3.2.P.7",
+      "descriptions": {
+        "zh": "包装系统",
+        "en": "Container Closure System"
+      }
+    },
+    {
+      "name": "m3-2-p-8-stability",
+      "structure_number": "3.2.P.8",
+      "descriptions": {
+        "zh": "稳定性",
+        "en": "Stability"
+      }
+    },
+    {
+      "name": "m3-2-p-8-1-stability-summary-and-conclusion",
+      "structure_number": "3.2.P.8.1",
+      "descriptions": {
+        "zh": "稳定性总结和结论",
+        "en": "Stability Summary and Conclusion"
+      }
+    },
+    {
+      "name": "m3-2-p-8-2-post-approval-stability-protocol-and-stability-commitment",
+      "structure_number": "3.2.P.8.2",
+      "descriptions": {
+        "zh": "批准后稳定性研究方案和承诺",
+        "en": "Post-approval Stability Protocol and Stability Commitment"
+      }
+    },
+    {
+      "name": "m3-2-p-8-3-stability-data",
+      "structure_number": "3.2.P.8.3",
+      "descriptions": {
+        "zh": "稳定性数据",
+        "en": "Stability Data"
+      }
+    },
+    {
+      "name": "m3-2-a-appendices",
+      "structure_number": "3.2.A",
+      "descriptions": {
+        "zh": "附录",
+        "en": "Appendices"
+      }
+    },
+    {
+      "name": "m3-2-a-1-facilities-and-equipment",
+      "structure_number": "3.2.A.1",
+      "descriptions": {
+        "zh": "设施和设备",
+        "en": "Facilities and Equipment"
+      }
+    },
+    {
+      "name": "m3-2-a-2-adventitious-agents-safety-evaluation",
+      "structure_number": "3.2.A.2",
+      "descriptions": {
+        "zh": "外源因子的安全性评价",
+        "en": "Adventitious Agents Safety Evaluation"
+      }
+    },
+    {
+      "name": "m3-2-a-3-excipients",
+      "structure_number": "3.2.A.3",
+      "descriptions": {
+        "zh": "辅料",
+        "en": "Excipients"
+      }
+    },
+    {
+      "name": "m3-2-r-regional-information",
+      "structure_number": "3.2.R",
+      "descriptions": {
+        "zh": "区域性信息",
+        "en": "Regional Information"
+      }
+    },
+    {
+      "name": "m3-3-literature-references",
+      "structure_number": "3.3",
+      "descriptions": {
+        "zh": "参考文献",
+        "en": "Literature References"
+      }
+    },
+    {
+      "name": "m4-nonclinical-study-reports",
+      "structure_number": "4",
+      "descriptions": {
+        "zh": "模块4：非临床试验报告",
+        "en": "Module 4: Nonclinical Study Reports"
+      }
+    },
+    {
+      "name": "m4-2-study-reports",
+      "structure_number": "4.2",
+      "descriptions": {
+        "zh": "试验报告",
+        "en": "Study Reports"
+      }
+    },
+    {
+      "name": "m4-2-1-pharmacology",
+      "structure_number": "4.2.1",
+      "descriptions": {
+        "zh": "药理学",
+        "en": "Pharmacology"
+      }
+    },
+    {
+      "name": "m4-2-1-1-primary-pharmacodynamics",
+      "structure_number": "4.2.1.1",
+      "descriptions": {
+        "zh": "主要药效学",
+        "en": "Primary Pharmacodynamics"
+      }
+    },
+    {
+      "name": "m4-2-1-2-secondary-pharmacodynamics",
+      "structure_number": "4.2.1.2",
+      "descriptions": {
+        "zh": "次要药效学",
+        "en": "Secondary Pharmacodynamics"
+      }
+    },
+    {
+      "name": "m4-2-1-3-safety-pharmacology",
+      "structure_number": "4.2.1.3",
+      "descriptions": {
+        "zh": "安全药理学",
+        "en": "Safety Pharmacology"
+      }
+    },
+    {
+      "name": "m4-2-1-4-pharmacodynamic-drug-interactions",
+      "structure_number": "4.2.1.4",
+      "descriptions": {
+        "zh": "药效学药物相互作用",
+        "en": "Pharmacodynamic Drug Interactions"
+      }
+    },
+    {
+      "name": "m4-2-2-pharmacokinetics",
+      "structure_number": "4.2.2",
+      "descriptions": {
+        "zh": "药代动力学",
+        "en": "Pharmacokinetics"
+      }
+    },
+    {
+      "name": "m4-2-2-1-analytical-methods-and-validation-reports",
+      "structure_number": "4.2.2.1",
+      "descriptions": {
+        "zh": "分析方法和验证报告（如果有单独的报告）",
+        "en": "Analytical Methods and Validation Reports (if separate reports are available)"
+      }
+    },
+    {
+      "name": "m4-2-2-2-absorption",
+      "structure_number": "4.2.2.2",
+      "descriptions": {
+        "zh": "吸收",
+        "en": "Absorption"
+      }
+    },
+    {
+      "name": "m4-2-2-3-distribution",
+      "structure_number": "4.2.2.3",
+      "descriptions": {
+        "zh": "分布",
+        "en": "Distribution"
+      }
+    },
+    {
+      "name": "m4-2-2-4-metabolism",
+      "structure_number": "4.2.2.4",
+      "descriptions": {
+        "zh": "代谢",
+        "en": "Metabolism"
+      }
+    },
+    {
+      "name": "m4-2-2-5-excretion",
+      "structure_number": "4.2.2.5",
+      "descriptions": {
+        "zh": "排泄",
+        "en": "Excretion"
+      }
+    },
+    {
+      "name": "m4-2-2-6-pharmacokinetic-drug-interactions",
+      "structure_number": "4.2.2.6",
+      "descriptions": {
+        "zh": "药代动力学药物相互作用（非临床）",
+        "en": "Pharmacokinetic Drug Interactions (nonclinical)"
+      }
+    },
+    {
+      "name": "m4-2-2-7-other-pharmacokinetic-studies",
+      "structure_number": "4.2.2.7",
+      "descriptions": {
+        "zh": "其他药代动力学试验",
+        "en": "Other Pharmacokinetic Studies"
+      }
+    },
+    {
+      "name": "m4-2-3-toxicology",
+      "structure_number": "4.2.3",
+      "descriptions": {
+        "zh": "毒理学",
+        "en": "Toxicology"
+      }
+    },
+    {
+      "name": "m4-2-3-1-single-dose-toxicity",
+      "structure_number": "4.2.3.1",
+      "descriptions": {
+        "zh": "单次给药毒性（按照动物种属、给药途径的顺序）",
+        "en": "Single-Dose Toxicity (in order by species, by route)"
+      }
+    },
+    {
+      "name": "m4-2-3-2-repeat-dose-toxicity",
+      "structure_number": "4.2.3.2",
+      "descriptions": {
+        "zh": "重复给药毒性（按照动物种属、给药途径、给药持续时间的顺序；包括伴随毒代动力学试验）",
+        "en": "Repeat-Dose Toxicity (in order by species, by route, by duration; including supportive toxicokinetics evaluations)"
+      }
+    },
+    {
+      "name": "m4-2-3-3-genotoxicity",
+      "structure_number": "4.2.3.3",
+      "descriptions": {
+        "zh": "遗传毒性",
+        "en": "Genotoxicity"
+      }
+    },
+    {
+      "name": "m4-2-3-3-1-in-vitro",
+      "structure_number": "4.2.3.3.1",
+      "descriptions": {
+        "zh": "体外",
+        "en": "In Vitro"
+      }
+    },
+    {
+      "name": "m4-2-3-3-2-in-vivo",
+      "structure_number": "4.2.3.3.2",
+      "descriptions": {
+        "zh": "体内（包括伴随毒代动力学试验）",
+        "en": "In Vivo (including supportive toxicokinetics evaluations)"
+      }
+    },
+    {
+      "name": "m4-2-3-4-carcinogenicity",
+      "structure_number": "4.2.3.4",
+      "descriptions": {
+        "zh": "致癌性（包括伴随毒代动力学试验）",
+        "en": "Carcinogenicity (including supportive toxicokinetics evaluations)"
+      }
+    },
+    {
+      "name": "m4-2-3-4-1-long-term-studies",
+      "structure_number": "4.2.3.4.1",
+      "descriptions": {
+        "zh": "长期试验（按照动物种属的顺序，包括不适合放在重复给药毒性试验或药代动力学试验中的剂量探索试验）",
+        "en": "Long-term Studies (in order by species; including range-finding studies that cannot appropriately be included under repeat-dose toxicity or pharmacokinetics)"
+      }
+    },
+    {
+      "name": "m4-2-3-4-2-short-or-medium-term-studies",
+      "structure_number": "4.2.3.4.2",
+      "descriptions": {
+        "zh": "短期或中期试验（包括不适合放在重复给药毒性试验或药代动力学试验中的剂量探索试验）",
+        "en": "Short- or Medium-term Studies (including range-finding studies that cannot appropriately be included under repeat-dose toxicity or pharmacokinetics)"
+      }
+    },
+    {
+      "name": "m4-2-3-4-3-other-studies",
+      "structure_number": "4.2.3.4.3",
+      "descriptions": {
+        "zh": "其他试验",
+        "en": "Other Studies"
+      }
+    },
+    {
+      "name": "m4-2-3-5-reproductive-and-developmental-toxicity",
+      "structure_number": "4.2.3.5",
+      "descriptions": {
+        "zh": "生殖毒性（包括剂量探索研究和伴随毒代动力学试验）（如果采用了改良的试验设计，则下列副标题应作相应修改。）",
+        "en": "Reproductive and Developmental Toxicity (including range-finding studies and supportive toxicokinetics evaluations) (If modified study designs are used, the following sub-headings should be modified accordingly.)"
+      }
+    },
+    {
+      "name": "m4-2-3-5-1-fertility-and-early-embryonic-development",
+      "structure_number": "4.2.3.5.1",
+      "descriptions": {
+        "zh": "生育力与早期胚胎发育毒性",
+        "en": "Fertility and Early Embryonic Development"
+      }
+    },
+    {
+      "name": "m4-2-3-5-2-embryo-fetal-development",
+      "structure_number": "4.2.3.5.2",
+      "descriptions": {
+        "zh": "胚胎-胎仔发育毒性",
+        "en": "Embryo-fetal Development"
+      }
+    },
+    {
+      "name": "m4-2-3-5-3-prenatal-and-postnatal-development-including-maternal-function",
+      "structure_number": "4.2.3.5.3",
+      "descriptions": {
+        "zh": "围产期毒性，包括母体功能",
+        "en": "Prenatal and Postnatal Development, including Maternal Function"
+      }
+    },
+    {
+      "name": "m4-2-3-5-4-studies-in-which-the-offspring-juvenile-animals-are-dosed-and-or-further-evaluated",
+      "structure_number": "4.2.3.5.4",
+      "descriptions": {
+        "zh": "对子代（幼龄动物）给药和/或进一步评价的试验",
+        "en": "Studies in Which the Offspring (Juvenile Animals) are Dosed and/or Further Evaluated."
+      }
+    },
+    {
+      "name": "m4-2-3-6-local-tolerance",
+      "structure_number": "4.2.3.6",
+      "descriptions": {
+        "zh": "局部耐受性",
+        "en": "Local Tolerance"
+      }
+    },
+    {
+      "name": "m4-2-3-7-other-toxicity-studies",
+      "structure_number": "4.2.3.7",
+      "descriptions": {
+        "zh": "其他毒性研究（如有）",
+        "en": "Other Toxicity Studies (if available)"
+      }
+    },
+    {
+      "name": "m4-2-3-7-1-antigenicity",
+      "structure_number": "4.2.3.7.1",
+      "descriptions": {
+        "zh": "抗原性",
+        "en": "Antigenicity"
+      }
+    },
+    {
+      "name": "m4-2-3-7-2-immunotoxicity",
+      "structure_number": "4.2.3.7.2",
+      "descriptions": {
+        "zh": "免疫毒性",
+        "en": "Immunotoxicity"
+      }
+    },
+    {
+      "name": "m4-2-3-7-3-mechanistic-studies",
+      "structure_number": "4.2.3.7.3",
+      "descriptions": {
+        "zh": "作用机理研究（如其他章节未报告）",
+        "en": "Mechanistic Studies (if not included elsewhere)"
+      }
+    },
+    {
+      "name": "m4-2-3-7-4-dependence",
+      "structure_number": "4.2.3.7.4",
+      "descriptions": {
+        "zh": "依赖性",
+        "en": "Dependence"
+      }
+    },
+    {
+      "name": "m4-2-3-7-5-metabolites",
+      "structure_number": "4.2.3.7.5",
+      "descriptions": {
+        "zh": "代谢产物研究",
+        "en": "Metabolites"
+      }
+    },
+    {
+      "name": "m4-2-3-7-6-impurities",
+      "structure_number": "4.2.3.7.6",
+      "descriptions": {
+        "zh": "杂质研究",
+        "en": "Impurities"
+      }
+    },
+    {
+      "name": "m4-2-3-7-7-other",
+      "structure_number": "4.2.3.7.7",
+      "descriptions": {
+        "zh": "其他试验",
+        "en": "Other"
+      }
+    },
+    {
+      "name": "m4-3-literature-references",
+      "structure_number": "4.3",
+      "descriptions": {
+        "zh": "参考文献",
+        "en": "Literature References"
+      }
+    },
+    {
+      "name": "m5-clinical-study-reports",
+      "structure_number": "5",
+      "descriptions": {
+        "zh": "模块5：临床研究报告",
+        "en": "Module 5:Clinical Study Reports"
+      }
+    },
+    {
+      "name": "m5-2-tabular-listing-of-all-clinical-studies",
+      "structure_number": "5.2",
+      "descriptions": {
+        "zh": "所有临床研究列表",
+        "en": "Tabular Listing of All Clinical Studies"
+      }
+    },
+    {
+      "name": "m5-3-clinical-study-reports",
+      "structure_number": "5.3",
+      "descriptions": {
+        "zh": "临床研究报告",
+        "en": "Clinical Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-1-reports-of-biopharmaceutic-studies",
+      "structure_number": "5.3.1",
+      "descriptions": {
+        "zh": "生物药剂学研究报告",
+        "en": "Reports of Biopharmaceutic Studies"
+      }
+    },
+    {
+      "name": "m5-3-1-1-bioavailability-study-reports",
+      "structure_number": "5.3.1.1",
+      "descriptions": {
+        "zh": "生物利用度（BA）研究报告",
+        "en": "Bioavailability (BA) Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-1-2-comparative-ba-and-bioequivalence-study-reports",
+      "structure_number": "5.3.1.2",
+      "descriptions": {
+        "zh": "相对BA和生物等效性（BE）研究报告",
+        "en": "Comparative BA and Bioequivalence (BE) Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-1-3-in-vitro-in-vivo-correlation-study-reports",
+      "structure_number": "5.3.1.3",
+      "descriptions": {
+        "zh": "体外-体内相关性研究报告",
+        "en": "In vitro-In vivo Correlation Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-1-4-reports-of-bioanalytical-and-analytical-methods-for-human-studies",
+      "structure_number": "5.3.1.4",
+      "descriptions": {
+        "zh": "人体研究的生物分析和分析方法的报告",
+        "en": "Reports of Bioanalytical and Analytical Methods for Human Studies"
+      }
+    },
+    {
+      "name": "m5-3-2-reports-of-studies-pertinent-to-pharmacokinetics-using-human-biomaterials",
+      "structure_number": "5.3.2",
+      "descriptions": {
+        "zh": "使用人体生物材料进行的药代动力学研究报告",
+        "en": "Reports of Studies Pertinent to Pharmacokinetics Using Human Biomaterials"
+      }
+    },
+    {
+      "name": "m5-3-2-1-plasma-protein-binding-study-reports",
+      "structure_number": "5.3.2.1",
+      "descriptions": {
+        "zh": "血浆蛋白结合研究报告",
+        "en": "Plasma Protein Binding Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-2-2-reports-of-hepatic-metabolism-and-drug-interaction-studies",
+      "structure_number": "5.3.2.2",
+      "descriptions": {
+        "zh": "肝脏代谢和药物相互作用研究报告",
+        "en": "Reports of Hepatic Metabolism and Drug Interaction Studies"
+      }
+    },
+    {
+      "name": "m5-3-2-3-reports-of-studies-using-other-human-biomaterials",
+      "structure_number": "5.3.2.3",
+      "descriptions": {
+        "zh": "使用其他人体生物材料的研究报告",
+        "en": "Reports of Studies Using Other Human Biomaterials"
+      }
+    },
+    {
+      "name": "m5-3-3-reports-of-human-pharmacokinetics-pk-studies",
+      "structure_number": "5.3.3",
+      "descriptions": {
+        "zh": "人体药代动力学（PK）研究报告",
+        "en": "Reports of Human Pharmacokinetic (PK) Studies"
+      }
+    },
+    {
+      "name": "m5-3-3-1-healthy-subject-pk-and-initial-tolerability-study-reports",
+      "structure_number": "5.3.3.1",
+      "descriptions": {
+        "zh": "健康受试者PK和初始耐受性研究报告",
+        "en": "Healthy Subject PK and Initial Tolerability Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-3-2-patient-pk-and-initial-tolerability-study-reports",
+      "structure_number": "5.3.3.2",
+      "descriptions": {
+        "zh": "患者PK和初始耐受性研究报告",
+        "en": "Patient PK and Initial Tolerability Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-3-3-intrinsic-factor-pk-study-reports",
+      "structure_number": "5.3.3.3",
+      "descriptions": {
+        "zh": "内在因素PK研究报告",
+        "en": "Intrinsic Factor PK Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-3-4-extrinsic-factor-pk-study-reports",
+      "structure_number": "5.3.3.4",
+      "descriptions": {
+        "zh": "外在因素PK研究报告",
+        "en": "Extrinsic Factor PK Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-3-5-population-pk-study-reports",
+      "structure_number": "5.3.3.5",
+      "descriptions": {
+        "zh": "群体PK研究报告",
+        "en": "Population PK Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-4-reports-of-human-pharmacodynamics-pd-studies",
+      "structure_number": "5.3.4",
+      "descriptions": {
+        "zh": "人体药效动力学研究报告",
+        "en": "Reports of Human Pharmacodynamic (PD) Studies"
+      }
+    },
+    {
+      "name": "m5-3-4-1-healthy-subject-pd-and-pk-pd-study-reports",
+      "structure_number": "5.3.4.1",
+      "descriptions": {
+        "zh": "健康受试者PD和PK/PD研究报告",
+        "en": "Healthy Subject PD and PK/PD Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-4-2-patient-pd-and-pk-pd-study-reports",
+      "structure_number": "5.3.4.2",
+      "descriptions": {
+        "zh": "患者PD和PK/PD研究报告",
+        "en": "Patient PD and PK/PD Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-5-reports-of-efficacy-and-safety-studies",
+      "structure_number": "5.3.5",
+      "descriptions": {
+        "zh": "有效性和安全性研究报告",
+        "en": "Reports of Efficacy and Safety Studies"
+      }
+    },
+    {
+      "name": "m5-3-5-1-study-reports-of-controlled-clinical-studies-pertinent-to-the-claimed-indication",
+      "structure_number": "5.3.5.1",
+      "descriptions": {
+        "zh": "与申报适应症相关的对照临床研究报告",
+        "en": "Study Reports of Controlled Clinical Studies Pertinent to the Claimed Indication"
+      }
+    },
+    {
+      "name": "m5-3-5-2-study-reports-of-uncontrolled-clinical-studies",
+      "structure_number": "5.3.5.2",
+      "descriptions": {
+        "zh": "非对照临床研究报告",
+        "en": "Study Reports of Uncontrolled Clinical Studies"
+      }
+    },
+    {
+      "name": "m5-3-5-3-reports-of-analyses-of-data-from-more-than-one-study",
+      "structure_number": "5.3.5.3",
+      "descriptions": {
+        "zh": "多项研究数据的分析报告",
+        "en": "Reports of Analyses of Data from More Than One Study"
+      }
+    },
+    {
+      "name": "m5-3-5-4-other-study-reports",
+      "structure_number": "5.3.5.4",
+      "descriptions": {
+        "zh": "其他研究报告",
+        "en": "Other Study Reports"
+      }
+    },
+    {
+      "name": "m5-3-6-reports-of-postmarketing-experience",
+      "structure_number": "5.3.6",
+      "descriptions": {
+        "zh": "上市后报告",
+        "en": "Reports of Post-Marketing Experience"
+      }
+    },
+    {
+      "name": "m5-3-7-case-report-forms-and-individual-patient-listings",
+      "structure_number": "5.3.7",
+      "descriptions": {
+        "zh": "病例报告表和个体患者列表",
+        "en": "Case Report Forms and Individual Patient Listings"
+      }
+    },
+    {
+      "name": "m5-4-literature-references",
+      "structure_number": "5.4",
+      "descriptions": {
+        "zh": "参考文献",
+        "en": "Literature References"
+      }
+    }
+  ],
+  "count": 159,
+  "source_sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d",
+  "source_path": "element-property_ICH.xml"
+}

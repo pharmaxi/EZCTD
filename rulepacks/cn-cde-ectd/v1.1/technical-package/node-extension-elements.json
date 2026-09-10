@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "valid_from": "2021-9-1",
+  "elements": [
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.1",
+      "descriptions": {
+        "zh": "3.2.R.1工艺验证"
+      }
+    },
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.2",
+      "descriptions": {
+        "zh": "3.2.R.2批记录"
+      }
+    },
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.3",
+      "descriptions": {
+        "zh": "3.2.R.3分析方法验证报告"
+      }
+    },
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.4",
+      "descriptions": {
+        "zh": "3.2.R.4稳定性图谱"
+      }
+    },
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.5",
+      "descriptions": {
+        "zh": "3.2.R.5可比性方案"
+      }
+    },
+    {
+      "name": "node-extension",
+      "structure_number": "3.2.R.6",
+      "descriptions": {
+        "zh": "3.2.R.6其他"
+      }
+    }
+  ],
+  "count": 6,
+  "source_sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9",
+  "source_path": "node-extension-property_CN.xml"
+}

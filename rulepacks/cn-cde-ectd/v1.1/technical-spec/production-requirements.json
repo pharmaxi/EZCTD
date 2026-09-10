@@ -1,0 +1,314 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "cn-cde-ectd-v3.2.2-v1.1-technical-spec",
+  "profile_status": "official_source_verified",
+  "runtime_enabled": false,
+  "source": {
+    "title": "eCTD技术规范V1.1",
+    "publisher": "国家药品监督管理局药品审评中心",
+    "official_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDJSGFV1.1.pdf",
+    "sha256": "fbb193736108da6ca4d686d58f55469a0c00161f5db91c8e4fd30d8bf2b0ed7b",
+    "physical_pages_total": 45,
+    "numbered_content_pages": 40
+  },
+  "scope_note": "这些要求来自技术规范3.3—3.11，不等同于eCTD验证标准V1.1第6章PDF分析规则。是否由官方验证软件自动检查、对应何种严重程度，必须另行建立黑盒证据。",
+  "requirements": [
+    {
+      "id": "TS-3.3.1-01",
+      "section": "3.3.1",
+      "physical_pages": [20],
+      "topic": "allowed-file-formats",
+      "normative_strength": "must",
+      "requirement": "eCTD申报资料适用的内容格式为PDF、XML、SAS XPORT、TXT和XSL五类。",
+      "implementation": "建立节点/目录上下文相关的扩展名白名单；不能把ZIP、DOCX等工作文件留在正式序列中。"
+    },
+    {
+      "id": "TS-3.3.2-01",
+      "section": "3.3.2",
+      "physical_pages": [21],
+      "topic": "file-and-folder-naming",
+      "normative_strength": "must",
+      "requirement": "文件及文件夹名称仅允许小写字母a-z、数字0-9、中划线和下划线。",
+      "implementation": "按Unicode代码点检查，不应仅依赖Windows文件系统是否接受该名称。"
+    },
+    {
+      "id": "TS-3.3.2-02",
+      "section": "3.3.2",
+      "physical_pages": [21],
+      "topic": "relative-path-length",
+      "normative_strength": "should-not-exceed",
+      "requirement": "由序列文件夹开始计算的文件夹和文件名含扩展名的路径长度不应超过180个字符。",
+      "implementation": "必须按序列根相对路径计数，并固定字符计数算法；需用官方验证软件校准边界值和Unicode处理。"
+    },
+    {
+      "id": "TS-3.3.2-03",
+      "section": "3.3.2",
+      "physical_pages": [21],
+      "topic": "single-name-length",
+      "normative_strength": "should-not-exceed",
+      "requirement": "单一文件夹或文件名称含扩展名长度不应超过64个字符。",
+      "implementation": "分别检查每个路径段；边界值和字符计数方式需黑盒校准。"
+    },
+    {
+      "id": "TS-3.3.2-04",
+      "section": "3.3.2",
+      "physical_pages": [21],
+      "topic": "backbone-reference-completeness",
+      "normative_strength": "must",
+      "requirement": "所有目录结构均须在XML骨架文件中被引用，以便有效导航。",
+      "implementation": "建立文件系统树与index.xml/cn-regional.xml引用图的双向差异检查。"
+    },
+    {
+      "id": "TS-3.3.3-01",
+      "section": "3.3.3",
+      "physical_pages": [23],
+      "topic": "empty-folders",
+      "normative_strength": "prohibited",
+      "requirement": "序列文件夹中不允许存在没有文件或子文件夹的空文件夹。",
+      "implementation": "扫描时忽略操作系统显示差异，显式报告隐藏文件或系统文件造成的伪非空目录。"
+    },
+    {
+      "id": "TS-3.3.3-02",
+      "section": "3.3.3",
+      "physical_pages": [23],
+      "topic": "placeholder-documents",
+      "normative_strength": "prohibited",
+      "requirement": "序列中不允许存在没有实际内容的占位文档。",
+      "implementation": "不能仅以文件大小判定；应区分真正空白、仅写“不适用”和有效简短说明。最终语义判定需人工复核。"
+    },
+    {
+      "id": "TS-3.3.3-03",
+      "section": "3.3.3",
+      "physical_pages": [23],
+      "topic": "not-applicable-sections",
+      "normative_strength": "must",
+      "requirement": "不适用章节应在模块一说明函中说明，无需单独递交“不适用”占位文档。",
+      "implementation": "资料模板不得自动创建N/A PDF；可在说明函检查清单中提示。"
+    },
+    {
+      "id": "TS-3.3.4-01",
+      "section": "3.3.4",
+      "physical_pages": [23, 24],
+      "topic": "file-reuse",
+      "normative_strength": "permitted",
+      "requirement": "文件可复用同一序列中的实体文件，或同一申请前序序列中的实体文件；通过新增叶元素引用而非重复实体文件。",
+      "implementation": "Publisher需要全生命周期文件图、稳定leaf/file标识和前序序列只读索引。"
+    },
+    {
+      "id": "TS-3.3.4-02",
+      "section": "3.3.4",
+      "physical_pages": [23],
+      "topic": "cross-application-reuse",
+      "normative_strength": "prohibited",
+      "requirement": "不支持跨申请引用另一个申请中提交的文件。",
+      "implementation": "引用解析必须以application根为安全边界，路径逃逸和跨申请对象引用均阻断。"
+    },
+    {
+      "id": "TS-3.4-01",
+      "section": "3.4",
+      "physical_pages": [24],
+      "topic": "toc-and-bookmarks",
+      "normative_strength": "must",
+      "requirement": "除外文参考资料、参考文献和申请表外，单个文件超过五页时应提供正文/表格/图表目录和书签辅助导航。",
+      "implementation": "对应验证标准6.23，但技术规范还提出目录要求；页数、节点角色和例外必须共同判断。"
+    },
+    {
+      "id": "TS-3.4-02",
+      "section": "3.4",
+      "physical_pages": [24],
+      "topic": "hyperlink-use",
+      "normative_strength": "conditional",
+      "requirement": "不能使用目录和书签进行导航时，可用超文本链接定位相关章节、文献、附件、表格和图表。",
+      "implementation": "自动建链属于语义操作，不进入默认安全修复。"
+    },
+    {
+      "id": "TS-3.4-03",
+      "section": "3.4",
+      "physical_pages": [24, 25],
+      "topic": "minimum-cross-document-links",
+      "normative_strength": "at-least",
+      "requirement": "跨文档链接至少包括模块一上市后变更/研究项目到模块二至五具体内容、模块二概述总结到模块三至五详细信息、CSR到对应附件、PDF数据说明到相应XPT文件等。",
+      "implementation": "需用节点语义和资料关系图检查，不能仅扫描PDF对象；先做缺失关系报告，不自动生成。"
+    },
+    {
+      "id": "TS-3.4-04",
+      "section": "3.4",
+      "physical_pages": [25],
+      "topic": "cross-application-hyperlinks",
+      "normative_strength": "should-not",
+      "requirement": "为避免链接失效或定位错误，不应创建跨申请超文本链接。",
+      "implementation": "包级链接图必须知道申请根边界；外部URI与跨申请文件引用应分别分类。"
+    },
+    {
+      "id": "TS-3.4-05",
+      "section": "3.4",
+      "physical_pages": [25],
+      "topic": "chinese-font-family",
+      "normative_strength": "must",
+      "requirement": "中文申报资料字体使用宋体。",
+      "implementation": "该项属于制作质量要求，不等于验证标准6.26的非标准字体嵌入检查；字体识别必须处理子集名前缀和字体替代。"
+    },
+    {
+      "id": "TS-3.4-06",
+      "section": "3.4",
+      "physical_pages": [25],
+      "topic": "chinese-font-size",
+      "normative_strength": "must",
+      "requirement": "正文不小于小四号、表格不小于五号、目录小四号、脚注五号。",
+      "implementation": "PDF字级检测存在内容流、变换矩阵和扫描页限制，首版只生成抽样证据和可疑页，不声称整份准确判定。"
+    },
+    {
+      "id": "TS-3.4-07",
+      "section": "3.4",
+      "physical_pages": [25],
+      "topic": "text-and-link-color",
+      "normative_strength": "mixed",
+      "requirement": "叙述性文字为黑色；超文本链接建议使用蓝色文字或黑色文字带蓝色框。",
+      "implementation": "叙述文字颜色和链接外观分开建模；“建议”不得提升为阻断错误。修改可见文字颜色属于高风险内容重写。"
+    },
+    {
+      "id": "TS-3.5-01",
+      "section": "3.5",
+      "physical_pages": [25, 26],
+      "topic": "submission-language",
+      "normative_strength": "must",
+      "requirement": "申报资料应使用中文并附原文，其他文种资料可附后参考；中文译文应与原文一致。",
+      "implementation": "语言存在性可检查，译文一致性属于内容审查，不能由包级验证器自动下合规结论。"
+    },
+    {
+      "id": "TS-3.5-02",
+      "section": "3.5",
+      "physical_pages": [26],
+      "topic": "foreign-reference-leaf-placement",
+      "normative_strength": "must",
+      "requirement": "外文参考资料与对应中文资料置于同一目录元素的不同叶元素，中文在前且用中文叶标题，外文在后且用外文叶标题。",
+      "implementation": "需要有序XML节点模型，不能把文件系统顺序当成骨架顺序。"
+    },
+    {
+      "id": "TS-3.5.1-01",
+      "section": "3.5.1",
+      "physical_pages": [26],
+      "topic": "language-attribute-standard",
+      "normative_strength": "should",
+      "requirement": "叶元素可使用xml:lang区分中文申报资料和外文参考资料，属性值应遵循ISO 639-1。",
+      "implementation": "保留原始属性值并按规范分类，另行报告无效代码。"
+    },
+    {
+      "id": "TS-3.5.1-02",
+      "section": "3.5.1",
+      "physical_pages": [27],
+      "topic": "chinese-language-classification",
+      "normative_strength": "defined-behavior",
+      "requirement": "xml:lang为zh、为空或未设置时，文件被识别为中文申报资料。",
+      "implementation": "分类器必须复现该区域行为，不能把缺失xml:lang一律判为未知语言。"
+    },
+    {
+      "id": "TS-3.5.1-03",
+      "section": "3.5.1",
+      "physical_pages": [27, 28],
+      "topic": "foreign-language-classification",
+      "normative_strength": "defined-behavior",
+      "requirement": "xml:lang设置为外文或无效值时，文件被识别为外文参考资料。",
+      "implementation": "“无效值被归入外文”与“值符合ISO 639-1”必须作为两个独立发现，避免互相覆盖。"
+    },
+    {
+      "id": "TS-3.5.2-01",
+      "section": "3.5.2",
+      "physical_pages": [28],
+      "topic": "language-lifecycle",
+      "normative_strength": "must",
+      "requirement": "使用replace替换前序文件时，被替换文件与新文件应具有相同语言属性分类。",
+      "implementation": "跨序列生命周期校验必须比较旧leaf与新leaf的语言分类。"
+    },
+    {
+      "id": "TS-3.6-01",
+      "section": "3.6",
+      "physical_pages": [29],
+      "topic": "metadata-content-coupling",
+      "normative_strength": "must",
+      "requirement": "更新ICH元数据时必须同时提交对应全部申报资料的内容变更；不得仅改元数据，也不得只更新部分相关内容。",
+      "implementation": "需要跨序列粒度的完整子树差异，不是单XML字段检查。"
+    },
+    {
+      "id": "TS-3.7-01",
+      "section": "3.7",
+      "physical_pages": [29, 30],
+      "topic": "node-extension-applicability",
+      "normative_strength": "only-permitted",
+      "requirement": "扩展节点仅允许用于产品类型为生物制品的提交序列3.2.R章节。",
+      "implementation": "必须联合product-type、模块路径和node-extension对象检查。"
+    },
+    {
+      "id": "TS-3.8-01",
+      "section": "3.8",
+      "physical_pages": [30],
+      "topic": "stf-required-scope",
+      "normative_strength": "must",
+      "requirement": "模块四4.2.X及模块五5.3.1.X—5.3.5.X章节的所有文件应使用STF。",
+      "implementation": "资料包检查器需验证STF骨架、leaf关系和标签值，而非只看文件路径。"
+    },
+    {
+      "id": "TS-3.8-02",
+      "section": "3.8",
+      "physical_pages": [30, 31],
+      "topic": "stf-exceptions",
+      "normative_strength": "permitted",
+      "requirement": "模块五5.2临床研究列表、5.3.6上市后报告和5.4参考文献可不使用STF，作为独立文件提交。",
+      "implementation": "STF缺失检查必须按具体节点例外，不能对整个模块五一刀切。"
+    },
+    {
+      "id": "TS-3.9-01",
+      "section": "3.9",
+      "physical_pages": [31],
+      "topic": "lifecycle-operation-set",
+      "normative_strength": "defined-behavior",
+      "requirement": "文件生命周期操作类型为new、replace、delete和append。",
+      "implementation": "数据模型保留四种原始操作；显示中文不能替换XML代码。"
+    },
+    {
+      "id": "TS-3.9-02",
+      "section": "3.9",
+      "physical_pages": [31],
+      "topic": "recommended-lifecycle-operations",
+      "normative_strength": "recommended",
+      "requirement": "推荐使用new、replace和delete。除STF操作外，其他情况不建议使用append。",
+      "implementation": "append不能作为通用默认操作；Publisher应优先提供推荐操作并显示例外。"
+    },
+    {
+      "id": "TS-3.9-03",
+      "section": "3.9",
+      "physical_pages": [31],
+      "topic": "append-warning",
+      "normative_strength": "defined-validator-behavior",
+      "requirement": "STF以外文件使用append会在验证时产生警告并需在说明函解释；STF使用append不产生该警告。",
+      "implementation": "建立STF上下文感知规则，并通过官方验证软件黑盒确认消息ID和严重程度。"
+    },
+    {
+      "id": "TS-3.10-01",
+      "section": "3.10",
+      "physical_pages": [31],
+      "topic": "electronic-seal",
+      "normative_strength": "accepted",
+      "requirement": "符合中国电子签名法要求的电子签章可在eCTD申请中使用。",
+      "implementation": "EZCTD首版只检查签名存在、覆盖和修改风险，不自建证书信任体系或替代官方签章工具。"
+    },
+    {
+      "id": "TS-3.11-01",
+      "section": "3.11",
+      "physical_pages": [31],
+      "topic": "submission-channel",
+      "normative_strength": "must",
+      "requirement": "eCTD资料通过网络传输或物理电子媒介提交；物理媒介当前仅接受一次写入型CD-R、DVD+R、DVD-R。",
+      "implementation": "输出包按传输介质生成清单，但不要把介质规则混入PDF修复器。"
+    },
+    {
+      "id": "TS-3.11-02",
+      "section": "3.11",
+      "physical_pages": [31, 32],
+      "topic": "physical-media-and-password",
+      "normative_strength": "mixed",
+      "requirement": "物理介质使用标准120型档案级光盘，建议不超过8X刻录，不得重复擦写，不得使用双面DVD，不得给申报资料设置密码保护。",
+      "implementation": "将建议与禁止项分开；密码检查同时关联验证标准6.19和6.21。"
+    }
+  ]
+}

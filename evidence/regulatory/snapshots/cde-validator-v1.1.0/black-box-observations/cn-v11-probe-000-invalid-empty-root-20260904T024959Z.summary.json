@@ -1,0 +1,2906 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T024959Z",
+  "case_id": "cn-v11-probe-000-invalid-empty-root",
+  "profile": "cn-cde-ectd-v3.2.2-v1.1",
+  "status": "ADMISSIBLE_ENVIRONMENT_ADAPTED_OFFICIAL_OBSERVATION",
+  "started_at": "2026-09-04T02:49:59.421117+00:00",
+  "finished_at": "2026-09-04T02:51:19.841005+00:00",
+  "admissible": true,
+  "classification": "environment_adapted_official_binary_black_box_observation",
+  "environment_adaptation": {
+    "type": "byte_identical_ascii_ntfs_alias",
+    "reason": "Launch4j corrupts the Chinese executable name in the JVM classpath on the non-Chinese hosted Windows runner.",
+    "stock_environment_equivalent": false
+  },
+  "identity": {
+    "application": "C:\\CDEValidatorTransactionRuntime\\CDEValidator.exe",
+    "original_application": "C:\\CDEValidatorTransactionRuntime\\eCTD验证软件.exe",
+    "alias_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "original_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "expected_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "byte_identical": true,
+    "samefile": true
+  },
+  "input": {
+    "directory": "C:\\EZCTDProbeInput\\0000",
+    "inventory_digest_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "inventory_digest_after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "expected_inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "file_count_before": 0,
+    "file_count_after": 0,
+    "unchanged": true
+  },
+  "ui_transaction": {
+    "validation_invoked": true,
+    "validation_click_at": "2026-09-04T02:50:38.501541+00:00",
+    "input_selection": {
+      "button_title": "选择申报资料",
+      "directory": "C:\\EZCTDProbeInput\\0000",
+      "started_at": "2026-09-04T02:50:11.383637+00:00",
+      "success": true,
+      "attempts": [
+        "ctrl_l_address_navigation",
+        "positive_button"
+      ],
+      "error": null,
+      "dialog_initial": {
+        "handle": 458992,
+        "pid": 4476,
+        "name": "打开文件夹",
+        "automation_id": "",
+        "control_type": "Window",
+        "class_name": "#32770",
+        "visible": true,
+        "enabled": true,
+        "descendant_count": 88,
+        "descendants": [
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "DUIViewWndClassName",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 86,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Command Module",
+            "automation_id": "FolderBandModuleInner",
+            "control_type": "ToolBar",
+            "class_name": "FolderBandModuleInner",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 86,
+              "right": 617,
+              "bottom": 117
+            }
+          },
+          {
+            "name": "&Help",
+            "automation_id": "HelpButton",
+            "control_type": "Button",
+            "class_name": "Button3d",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 580,
+              "top": 88,
+              "right": 608,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Details",
+            "automation_id": "ViewControl",
+            "control_type": "SplitButton",
+            "class_name": "ViewControl",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 517,
+              "top": 88,
+              "right": 572,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "View Slider",
+            "automation_id": "SplitMenuButton",
+            "control_type": "Button",
+            "class_name": "Button3d",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 544,
+              "top": 88,
+              "right": 562,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Organize",
+            "automation_id": "{7DDC1264-7E4D-4F74-BBC0-D191987C8D0F}",
+            "control_type": "Button",
+            "class_name": "AJOSplitButton",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 11,
+              "top": 88,
+              "right": 102,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "New folder",
+            "automation_id": "{E44616AD-6DF1-4B94-85A4-E465AE8A19DB}",
+            "control_type": "Button",
+            "class_name": "AJOSplitButton",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 102,
+              "top": 88,
+              "right": 190,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Control Host",
+            "automation_id": "ProperTreeHost",
+            "control_type": "Pane",
+            "class_name": "ProperTreeHost",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 10,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Navigation Pane",
+            "automation_id": "100",
+            "control_type": "Tree",
+            "class_name": "SysTreeView32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 10,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Vertical",
+            "automation_id": "NonClientVerticalScrollBar",
+            "control_type": "ScrollBar",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Line up",
+            "automation_id": "UpButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 117,
+              "right": 164,
+              "bottom": 134
+            }
+          },
+          {
+            "name": "Page up",
+            "automation_id": "UpPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 134,
+              "right": 164,
+              "bottom": 200
+            }
+          },
+          {
+            "name": "Position",
+            "automation_id": "ScrollbarThumb",
+            "control_type": "Thumb",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 200,
+              "right": 164,
+              "bottom": 353
+            }
+          },
+          {
+            "name": "Page down",
+            "automation_id": "DownPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 353,
+              "right": 164,
+              "bottom": 375
+            }
+          },
+          {
+            "name": "Line down",
+            "automation_id": "DownButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 375,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Desktop",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Home",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Start of Quick Access - Desktop (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Downloads (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 117,
+              "right": 124,
+              "bottom": 149
+            }
+          },
+          {
+            "name": "Documents (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 149,
+              "right": 126,
+              "bottom": 181
+            }
+          },
+          {
+            "name": "Pictures (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 181,
+              "right": 107,
+              "bottom": 213
+            }
+          },
+          {
+            "name": "Music (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 213,
+              "right": 97,
+              "bottom": 245
+            }
+          },
+          {
+            "name": "End of Quick Access - Videos (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 245,
+              "right": 100,
+              "bottom": 277
+            }
+          },
+          {
+            "name": "This PC",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 309,
+              "right": 105,
+              "bottom": 341
+            }
+          },
+          {
+            "name": "Network",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 341,
+              "right": 110,
+              "bottom": 373
+            }
+          },
+          {
+            "name": "Shell Folder View",
+            "automation_id": "listview",
+            "control_type": "Pane",
+            "class_name": "DUIListView",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Items View",
+            "automation_id": "",
+            "control_type": "List",
+            "class_name": "UIItemsView",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Horizontal",
+            "automation_id": "HorizontalScrollBar",
+            "control_type": "ScrollBar",
+            "class_name": "LineHScrollBar",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 375,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Column left",
+            "automation_id": "UpButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 375,
+              "right": 185,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Position",
+            "automation_id": "ScrollbarThumb",
+            "control_type": "Thumb",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 185,
+              "top": 375,
+              "right": 483,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Page right",
+            "automation_id": "DownPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 483,
+              "top": 375,
+              "right": 600,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Column right",
+            "automation_id": "DownButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 600,
+              "top": 375,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Header",
+            "automation_id": "",
+            "control_type": "Header",
+            "class_name": "UIViewHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 794,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 440,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 424,
+              "top": 117,
+              "right": 439,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 117,
+              "right": 584,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 568,
+              "top": 117,
+              "right": 583,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 117,
+              "right": 704,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 688,
+              "top": 117,
+              "right": 703,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 117,
+              "right": 784,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 768,
+              "top": 117,
+              "right": 783,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "config",
+            "automation_id": "0",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 148,
+              "right": 780,
+              "bottom": 172
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 151,
+              "right": 440,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 151,
+              "right": 584,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 151,
+              "right": 704,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 151,
+              "right": 784,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "jre",
+            "automation_id": "1",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 176,
+              "right": 780,
+              "bottom": 200
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 179,
+              "right": 440,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 179,
+              "right": 584,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 179,
+              "right": 704,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 179,
+              "right": 784,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "logs",
+            "automation_id": "2",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 204,
+              "right": 780,
+              "bottom": 228
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 207,
+              "right": 440,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 207,
+              "right": 584,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 207,
+              "right": 704,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 207,
+              "right": 784,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Application Controls",
+            "automation_id": "AppControlsModuleInner",
+            "control_type": "Tree",
+            "class_name": "AppControlsModuleInner",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Folder:",
+            "automation_id": "1090",
+            "control_type": "Text",
+            "class_name": "Static",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 138,
+              "top": 405,
+              "right": 174,
+              "bottom": 420
+            }
+          },
+          {
+            "name": "Folder:",
+            "automation_id": "1152",
+            "control_type": "Edit",
+            "class_name": "Edit",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 179,
+              "top": 401,
+              "right": 600,
+              "bottom": 424
+            }
+          },
+          {
+            "name": "Select Folder",
+            "automation_id": "1",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 393,
+              "top": 429,
+              "right": 500,
+              "bottom": 455
+            }
+          },
+          {
+            "name": "Cancel",
+            "automation_id": "2",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 512,
+              "top": 429,
+              "right": 600,
+              "bottom": 455
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Thumb",
+            "class_name": "ScrollBar",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 600,
+              "top": 455,
+              "right": 617,
+              "bottom": 472
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "40965",
+            "control_type": "Pane",
+            "class_name": "ReBarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 31,
+              "right": 617,
+              "bottom": 86
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "TravelBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 40,
+              "right": 108,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Navigation buttons",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 12,
+              "top": 42,
+              "right": 108,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Back (Alt + Left Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 12,
+              "top": 42,
+              "right": 47,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Forward (Alt + Right Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 47,
+              "top": 42,
+              "right": 82,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Recent locations",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 82,
+              "top": 42,
+              "right": 102,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "UpBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 39,
+              "right": 144,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Up band",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 42,
+              "right": 144,
+              "bottom": 78
+            }
+          },
+          {
+            "name": "Up to \"Windows (C:)\" (Alt + Up Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 42,
+              "right": 141,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "41477",
+            "control_type": "Pane",
+            "class_name": "Address Band Root",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 144,
+              "top": 31,
+              "right": 392,
+              "bottom": 83
+            }
+          },
+          {
+            "name": "Loading",
+            "automation_id": "",
+            "control_type": "ProgressBar",
+            "class_name": "msctls_progress32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 146,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "Breadcrumb Parent",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 146,
+              "top": 41,
+              "right": 322,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Address: C:\\CDEValidatorTransactionRuntime",
+            "automation_id": "1001",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 152,
+              "top": 41,
+              "right": 322,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "All locations",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 152,
+              "top": 41,
+              "right": 187,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Windows (C:)",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 187,
+              "top": 41,
+              "right": 237,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "‎CDEValidatorTransactionRuntime",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 237,
+              "top": 41,
+              "right": 286,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Address band",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 322,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Previous Locations",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 322,
+              "top": 41,
+              "right": 356,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Refresh \"CDEValidatorTransactionRuntime\" (F5)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 356,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "UniversalSearchBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 402,
+              "top": 37,
+              "right": 606,
+              "bottom": 77
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "Search Box",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 402,
+              "top": 40,
+              "right": 606,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "SearchEditBoxWrapperClass",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 407,
+              "top": 40,
+              "right": 601,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "Search Box",
+            "automation_id": "SearchEditBox",
+            "control_type": "Edit",
+            "class_name": "SearchEditBox",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 409,
+              "top": 50,
+              "right": 567,
+              "bottom": 65
+            }
+          },
+          {
+            "name": "Search",
+            "automation_id": "SearchBoxSearchButton",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 571,
+              "top": 40,
+              "right": 599,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "TitleBar",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 3,
+              "right": 617,
+              "bottom": 31
+            }
+          },
+          {
+            "name": "Close",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 1,
+              "right": 618,
+              "bottom": 31
+            }
+          }
+        ]
+      },
+      "positive_button": "Select Folder",
+      "positive_method": "native_coordinate_click",
+      "dialog_final_visible": false,
+      "dialog_final": {
+        "handle": 458992,
+        "pid": 0,
+        "name": "",
+        "automation_id": "",
+        "control_type": "Pane",
+        "class_name": "",
+        "visible": true,
+        "enabled": false,
+        "descendant_count": 0,
+        "descendants": []
+      },
+      "finished_at": "2026-09-04T02:50:24.312195+00:00"
+    },
+    "report_selection": {
+      "button_title": "报告输出路径",
+      "directory": "C:\\EZCTDProbeReports",
+      "started_at": "2026-09-04T02:50:24.314728+00:00",
+      "success": true,
+      "attempts": [
+        "ctrl_l_address_navigation",
+        "positive_button"
+      ],
+      "error": null,
+      "dialog_initial": {
+        "handle": 131684,
+        "pid": 4476,
+        "name": "打开文件夹",
+        "automation_id": "",
+        "control_type": "Window",
+        "class_name": "#32770",
+        "visible": true,
+        "enabled": true,
+        "descendant_count": 88,
+        "descendants": [
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "DUIViewWndClassName",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 86,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Command Module",
+            "automation_id": "FolderBandModuleInner",
+            "control_type": "ToolBar",
+            "class_name": "FolderBandModuleInner",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 86,
+              "right": 617,
+              "bottom": 117
+            }
+          },
+          {
+            "name": "&Help",
+            "automation_id": "HelpButton",
+            "control_type": "Button",
+            "class_name": "Button3d",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 580,
+              "top": 88,
+              "right": 608,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Details",
+            "automation_id": "ViewControl",
+            "control_type": "SplitButton",
+            "class_name": "ViewControl",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 517,
+              "top": 88,
+              "right": 572,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "View Slider",
+            "automation_id": "SplitMenuButton",
+            "control_type": "Button",
+            "class_name": "Button3d",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 544,
+              "top": 88,
+              "right": 562,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Organize",
+            "automation_id": "{7DDC1264-7E4D-4F74-BBC0-D191987C8D0F}",
+            "control_type": "Button",
+            "class_name": "AJOSplitButton",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 11,
+              "top": 88,
+              "right": 102,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "New folder",
+            "automation_id": "{E44616AD-6DF1-4B94-85A4-E465AE8A19DB}",
+            "control_type": "Button",
+            "class_name": "AJOSplitButton",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 102,
+              "top": 88,
+              "right": 190,
+              "bottom": 114
+            }
+          },
+          {
+            "name": "Control Host",
+            "automation_id": "ProperTreeHost",
+            "control_type": "Pane",
+            "class_name": "ProperTreeHost",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 10,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Navigation Pane",
+            "automation_id": "100",
+            "control_type": "Tree",
+            "class_name": "SysTreeView32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 10,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Vertical",
+            "automation_id": "NonClientVerticalScrollBar",
+            "control_type": "ScrollBar",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 117,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Line up",
+            "automation_id": "UpButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 117,
+              "right": 164,
+              "bottom": 134
+            }
+          },
+          {
+            "name": "Page up",
+            "automation_id": "UpPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 134,
+              "right": 164,
+              "bottom": 200
+            }
+          },
+          {
+            "name": "Position",
+            "automation_id": "ScrollbarThumb",
+            "control_type": "Thumb",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 200,
+              "right": 164,
+              "bottom": 353
+            }
+          },
+          {
+            "name": "Page down",
+            "automation_id": "DownPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 353,
+              "right": 164,
+              "bottom": 375
+            }
+          },
+          {
+            "name": "Line down",
+            "automation_id": "DownButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 147,
+              "top": 375,
+              "right": 164,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Desktop",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Home",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Start of Quick Access - Desktop (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Downloads (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 117,
+              "right": 124,
+              "bottom": 149
+            }
+          },
+          {
+            "name": "Documents (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 149,
+              "right": 126,
+              "bottom": 181
+            }
+          },
+          {
+            "name": "Pictures (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 181,
+              "right": 107,
+              "bottom": 213
+            }
+          },
+          {
+            "name": "Music (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 213,
+              "right": 97,
+              "bottom": 245
+            }
+          },
+          {
+            "name": "End of Quick Access - Videos (pinned)",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 245,
+              "right": 100,
+              "bottom": 277
+            }
+          },
+          {
+            "name": "This PC",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 309,
+              "right": 105,
+              "bottom": 341
+            }
+          },
+          {
+            "name": "Network",
+            "automation_id": "",
+            "control_type": "TreeItem",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 61,
+              "top": 341,
+              "right": 110,
+              "bottom": 373
+            }
+          },
+          {
+            "name": "Shell Folder View",
+            "automation_id": "listview",
+            "control_type": "Pane",
+            "class_name": "DUIListView",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Items View",
+            "automation_id": "",
+            "control_type": "List",
+            "class_name": "UIItemsView",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Horizontal",
+            "automation_id": "HorizontalScrollBar",
+            "control_type": "ScrollBar",
+            "class_name": "LineHScrollBar",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 375,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Column left",
+            "automation_id": "UpButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 375,
+              "right": 185,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Position",
+            "automation_id": "ScrollbarThumb",
+            "control_type": "Thumb",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 185,
+              "top": 375,
+              "right": 483,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Page right",
+            "automation_id": "DownPageButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 483,
+              "top": 375,
+              "right": 600,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Column right",
+            "automation_id": "DownButton",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 600,
+              "top": 375,
+              "right": 617,
+              "bottom": 392
+            }
+          },
+          {
+            "name": "Header",
+            "automation_id": "",
+            "control_type": "Header",
+            "class_name": "UIViewHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 794,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 168,
+              "top": 117,
+              "right": 440,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 424,
+              "top": 117,
+              "right": 439,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 117,
+              "right": 584,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 568,
+              "top": 117,
+              "right": 583,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 117,
+              "right": 704,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 688,
+              "top": 117,
+              "right": 703,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "SplitButton",
+            "class_name": "UIColumnHeader",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 117,
+              "right": 784,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "Filter dropdown",
+            "automation_id": "DropDown",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 768,
+              "top": 117,
+              "right": 783,
+              "bottom": 142
+            }
+          },
+          {
+            "name": "config",
+            "automation_id": "0",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 148,
+              "right": 780,
+              "bottom": 172
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 151,
+              "right": 440,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 151,
+              "right": 584,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 151,
+              "right": 704,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 151,
+              "right": 784,
+              "bottom": 170
+            }
+          },
+          {
+            "name": "jre",
+            "automation_id": "1",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 176,
+              "right": 780,
+              "bottom": 200
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 179,
+              "right": 440,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 179,
+              "right": 584,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 179,
+              "right": 704,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 179,
+              "right": 784,
+              "bottom": 198
+            }
+          },
+          {
+            "name": "logs",
+            "automation_id": "2",
+            "control_type": "ListItem",
+            "class_name": "UIItem",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 182,
+              "top": 204,
+              "right": 780,
+              "bottom": 228
+            }
+          },
+          {
+            "name": "Name",
+            "automation_id": "System.ItemNameDisplay",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 204,
+              "top": 207,
+              "right": 440,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Date modified",
+            "automation_id": "System.DateModified",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 440,
+              "top": 207,
+              "right": 584,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Type",
+            "automation_id": "System.ItemTypeText",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 207,
+              "right": 704,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Size",
+            "automation_id": "System.Size",
+            "control_type": "Edit",
+            "class_name": "UIProperty",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 704,
+              "top": 207,
+              "right": 784,
+              "bottom": 226
+            }
+          },
+          {
+            "name": "Application Controls",
+            "automation_id": "AppControlsModuleInner",
+            "control_type": "Tree",
+            "class_name": "AppControlsModuleInner",
+            "enabled": true,
+            "visible": false,
+            "rectangle": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            }
+          },
+          {
+            "name": "Folder:",
+            "automation_id": "1090",
+            "control_type": "Text",
+            "class_name": "Static",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 138,
+              "top": 405,
+              "right": 174,
+              "bottom": 420
+            }
+          },
+          {
+            "name": "Folder:",
+            "automation_id": "1152",
+            "control_type": "Edit",
+            "class_name": "Edit",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 179,
+              "top": 401,
+              "right": 600,
+              "bottom": 424
+            }
+          },
+          {
+            "name": "Select Folder",
+            "automation_id": "1",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 393,
+              "top": 429,
+              "right": 500,
+              "bottom": 455
+            }
+          },
+          {
+            "name": "Cancel",
+            "automation_id": "2",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 512,
+              "top": 429,
+              "right": 600,
+              "bottom": 455
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Thumb",
+            "class_name": "ScrollBar",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 600,
+              "top": 455,
+              "right": 617,
+              "bottom": 472
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "40965",
+            "control_type": "Pane",
+            "class_name": "ReBarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 31,
+              "right": 617,
+              "bottom": 86
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "TravelBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 40,
+              "right": 108,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Navigation buttons",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 12,
+              "top": 42,
+              "right": 108,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Back (Alt + Left Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 12,
+              "top": 42,
+              "right": 47,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Forward (Alt + Right Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 47,
+              "top": 42,
+              "right": 82,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Recent locations",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": false,
+            "visible": true,
+            "rectangle": {
+              "left": 82,
+              "top": 42,
+              "right": 102,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "UpBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 39,
+              "right": 144,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Up band",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 42,
+              "right": 144,
+              "bottom": 78
+            }
+          },
+          {
+            "name": "Up to \"Windows (C:)\" (Alt + Up Arrow)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 108,
+              "top": 42,
+              "right": 141,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "41477",
+            "control_type": "Pane",
+            "class_name": "Address Band Root",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 144,
+              "top": 31,
+              "right": 392,
+              "bottom": 83
+            }
+          },
+          {
+            "name": "Loading",
+            "automation_id": "",
+            "control_type": "ProgressBar",
+            "class_name": "msctls_progress32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 146,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "Breadcrumb Parent",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 146,
+              "top": 41,
+              "right": 322,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Address: C:\\CDEValidatorTransactionRuntime",
+            "automation_id": "1001",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 152,
+              "top": 41,
+              "right": 322,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "All locations",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 152,
+              "top": 41,
+              "right": 187,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Windows (C:)",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 187,
+              "top": 41,
+              "right": 237,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "‎CDEValidatorTransactionRuntime",
+            "automation_id": "",
+            "control_type": "SplitButton",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 237,
+              "top": 41,
+              "right": 286,
+              "bottom": 74
+            }
+          },
+          {
+            "name": "Address band",
+            "automation_id": "",
+            "control_type": "ToolBar",
+            "class_name": "ToolbarWindow32",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 322,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Previous Locations",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 322,
+              "top": 41,
+              "right": 356,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "Refresh \"CDEValidatorTransactionRuntime\" (F5)",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 356,
+              "top": 41,
+              "right": 390,
+              "bottom": 75
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "UniversalSearchBand",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 402,
+              "top": 37,
+              "right": 606,
+              "bottom": 77
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "Search Box",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 402,
+              "top": 40,
+              "right": 606,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "Pane",
+            "class_name": "SearchEditBoxWrapperClass",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 407,
+              "top": 40,
+              "right": 601,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "Search Box",
+            "automation_id": "SearchEditBox",
+            "control_type": "Edit",
+            "class_name": "SearchEditBox",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 409,
+              "top": 50,
+              "right": 567,
+              "bottom": 65
+            }
+          },
+          {
+            "name": "Search",
+            "automation_id": "SearchBoxSearchButton",
+            "control_type": "Button",
+            "class_name": "Button",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 571,
+              "top": 40,
+              "right": 599,
+              "bottom": 76
+            }
+          },
+          {
+            "name": "",
+            "automation_id": "",
+            "control_type": "TitleBar",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 8,
+              "top": 3,
+              "right": 617,
+              "bottom": 31
+            }
+          },
+          {
+            "name": "Close",
+            "automation_id": "",
+            "control_type": "Button",
+            "class_name": "",
+            "enabled": true,
+            "visible": true,
+            "rectangle": {
+              "left": 584,
+              "top": 1,
+              "right": 618,
+              "bottom": 31
+            }
+          }
+        ]
+      },
+      "positive_button": "Select Folder",
+      "positive_method": "native_coordinate_click",
+      "dialog_final_visible": false,
+      "dialog_final": {
+        "handle": 131684,
+        "pid": 0,
+        "name": "",
+        "automation_id": "",
+        "control_type": "Pane",
+        "class_name": "",
+        "visible": true,
+        "enabled": false,
+        "descendant_count": 0,
+        "descendants": []
+      },
+      "finished_at": "2026-09-04T02:50:35.191839+00:00"
+    },
+    "action_trace": [
+      {
+        "at": "2026-09-04T02:50:03.450936+00:00",
+        "action": "launch_official_byte_identical_alias",
+        "pid": 6712
+      },
+      {
+        "at": "2026-09-04T02:50:12.358562+00:00",
+        "action": "open_directory_chooser",
+        "button": "选择申报资料",
+        "method": "fresh_uia_coordinate_click"
+      },
+      {
+        "at": "2026-09-04T02:50:24.312195+00:00",
+        "action": "directory_chooser_result",
+        "button": "选择申报资料",
+        "directory": "C:\\EZCTDProbeInput\\0000",
+        "success": true,
+        "attempts": [
+          "ctrl_l_address_navigation",
+          "positive_button"
+        ]
+      },
+      {
+        "at": "2026-09-04T02:50:25.279445+00:00",
+        "action": "open_directory_chooser",
+        "button": "报告输出路径",
+        "method": "fresh_uia_coordinate_click"
+      },
+      {
+        "at": "2026-09-04T02:50:35.191839+00:00",
+        "action": "directory_chooser_result",
+        "button": "报告输出路径",
+        "directory": "C:\\EZCTDProbeReports",
+        "success": true,
+        "attempts": [
+          "ctrl_l_address_navigation",
+          "positive_button"
+        ]
+      },
+      {
+        "at": "2026-09-04T02:50:38.501541+00:00",
+        "action": "invoke_validation",
+        "control": "启动验证",
+        "method": "fresh_uia_coordinate_click"
+      },
+      {
+        "at": "2026-09-04T02:50:43.630185+00:00",
+        "action": "confirm_native_dialog",
+        "button": "OK",
+        "texts": [
+          "Warning",
+          "System",
+          "Close",
+          "不规范的资料路径",
+          "序列文件夹不是数字。仍要使用？",
+          "OK"
+        ]
+      }
+    ]
+  },
+  "native_result": {
+    "terminal_reason": "native_terminal_dialog",
+    "terminal_alert": {
+      "at": "2026-09-04T02:51:00.379651+00:00",
+      "sample": 2,
+      "texts": [
+        "提示",
+        "System",
+        "Close",
+        "执行成功",
+        "OK"
+      ],
+      "handling": {
+        "texts": [
+          "提示",
+          "System",
+          "Close",
+          "执行成功",
+          "OK"
+        ],
+        "is_confirmation": false,
+        "clicked": false,
+        "button": null
+      },
+      "window": {
+        "handle": 524430,
+        "pid": 4476,
+        "name": "提示",
+        "automation_id": "JavaFX176",
+        "control_type": "Window",
+        "class_name": "GlassWndClass-GlassWindowClass-4",
+        "visible": true,
+        "enabled": true,
+        "descendant_count": 11
+      }
+    },
+    "table_native_texts": [],
+    "native_report_present": true,
+    "output_inventory": [
+      {
+        "path": "evReport--0000-20260904.html",
+        "size": 276382,
+        "last_write_utc": "2026-09-04T02:50:43.230587+00:00",
+        "sha256": "e8c5926f3557ed460f4a417d898849c0601cbcfc04623c0f8c781db6027af620"
+      }
+    ],
+    "output_digest": "52331b3c091e4f7005e7f92efeb419c8c4fc4a81754e85c88ac8393185b9118e"
+  },
+  "native_evidence": {
+    "schema_version": "0.1.0",
+    "source_report_directory": "C:\\EZCTDProbeReports",
+    "copied_report_directory": "native-output",
+    "source_inventory": [
+      {
+        "path": "evReport--0000-20260904.html",
+        "size": 276382,
+        "sha256": "e8c5926f3557ed460f4a417d898849c0601cbcfc04623c0f8c781db6027af620"
+      }
+    ],
+    "source_inventory_digest": "52331b3c091e4f7005e7f92efeb419c8c4fc4a81754e85c88ac8393185b9118e",
+    "copied_inventory": [
+      {
+        "path": "evReport--0000-20260904.html",
+        "size": 276382,
+        "sha256": "e8c5926f3557ed460f4a417d898849c0601cbcfc04623c0f8c781db6027af620"
+      }
+    ],
+    "copied_inventory_digest": "52331b3c091e4f7005e7f92efeb419c8c4fc4a81754e85c88ac8393185b9118e",
+    "copied_matches_source": true,
+    "copied_matches_runtime_inventory": true,
+    "copied_native_output_present": true,
+    "terminal_ui_evidence_present": true,
+    "application_logs": [
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\util\\style\\valid-values.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/util/style/valid-values.xml",
+        "size": 6401,
+        "sha256": "0b9820c156340bdcc0ab709e78657e0d9d5e3a757fee1e42490ca5aec04e9084"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-application-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-application-type.xml",
+        "size": 1222,
+        "sha256": "bdba7ee350917c8278696caea5c7dc9e22432cc24557194dc09877e07e44c931"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-product-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-product-type.xml",
+        "size": 691,
+        "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-regulatory-activity-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-regulatory-activity-type.xml",
+        "size": 2849,
+        "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-sequence-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-sequence-type.xml",
+        "size": 951,
+        "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\depend-apt-rat-sqt.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/depend-apt-rat-sqt.xml",
+        "size": 5423,
+        "sha256": "d1c1cf9fd1965251c1c8a5f99eb648098fce7debce7dc4d43751479aef7fe96f"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\element-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/element-property_CN.xml",
+        "size": 18752,
+        "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\element-property_ICH.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/element-property_ICH.xml",
+        "size": 39820,
+        "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\node-extension-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/node-extension-property_CN.xml",
+        "size": 1293,
+        "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\util\\style\\valid-values.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/util/style/valid-values.xml",
+        "size": 7803,
+        "sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-application-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-application-type.xml",
+        "size": 1499,
+        "sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-product-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-product-type.xml",
+        "size": 691,
+        "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-regulatory-activity-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-regulatory-activity-type.xml",
+        "size": 2849,
+        "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-sequence-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-sequence-type.xml",
+        "size": 951,
+        "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\depend-apt-rat-sqt.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/depend-apt-rat-sqt.xml",
+        "size": 7363,
+        "sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\element-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/element-property_CN.xml",
+        "size": 18752,
+        "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\element-property_ICH.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/element-property_ICH.xml",
+        "size": 39820,
+        "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\node-extension-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/node-extension-property_CN.xml",
+        "size": 1293,
+        "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\bin\\server\\Xusage.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/bin/server/Xusage.txt",
+        "size": 1423,
+        "sha256": "37cf4e6cdc4357cebb0ec8108d5cb0ad42611f675b926c819ae03b74ce990a08"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\lib\\jvm.hprof.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/lib/jvm.hprof.txt",
+        "size": 4226,
+        "sha256": "b055bf25b07e5ac70e99b897fb8152f288769065b5b84387362bb9cc2e6c9d38"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\README.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/README.txt",
+        "size": 46,
+        "sha256": "963095cf8db76fb8071fd19a3110718a42f2ab42b27a3adfd9ec58981c3e88d2"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\THIRDPARTYLICENSEREADME-JAVAFX.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/THIRDPARTYLICENSEREADME-JAVAFX.txt",
+        "size": 112724,
+        "sha256": "18193fe6b7a04b12fbc04c6c383ed67982a3bff62773087175fff6dc05731b13"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\THIRDPARTYLICENSEREADME.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/THIRDPARTYLICENSEREADME.txt",
+        "size": 153824,
+        "sha256": "3114fc257cff7e538c07e5cae90fe53766725efe7746614e4437695a0a89138a"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\Welcome.html",
+        "captured_as": "application-logs/jre/jre1.8.0_202/Welcome.html",
+        "size": 955,
+        "sha256": "db34008b34b4bc3177436e71bd01557d45d52e710699758ab227e5fec7ffadb8"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\launch4j.log",
+        "captured_as": "application-logs/launch4j.log",
+        "size": 3866,
+        "sha256": "25b915acdddc1720f14873db09437d809d987cbdaa0fa20e29c1b6528aedf7e1"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\logs\\client.log",
+        "captured_as": "application-logs/logs/client.log",
+        "size": 49700,
+        "sha256": "ef14fe7058b40796cabd2e117e8e13d0b700af3ef338467602afefa4b204e4a4"
+      }
+    ]
+  },
+  "admissibility": {
+    "official_binary_identity_fixed": true,
+    "input_identity_fixed": true,
+    "validation_control_invoked": true,
+    "native_terminal_result_captured": true,
+    "precondition_only_result": false,
+    "input_unchanged": true,
+    "outbound_firewall_ready": true,
+    "raw_evidence_written": true,
+    "native_output_conserved_in_artifact": true,
+    "terminal_ui_evidence_conserved_in_artifact": true,
+    "native_evidence_conserved": true
+  },
+  "failed_admissibility_gates": [],
+  "observation_counters": {
+    "completed_validation_runs": 1,
+    "admissible_black_box_observations": 1,
+    "environment_adapted_official_observations": 1,
+    "stock_environment_official_observations": 0,
+    "calibration_informative_observations": 0,
+    "official_black_box_observations": 1
+  },
+  "errors": [],
+  "next_gate": "Repeat the same frozen case to test stability, then build a minimal sequence baseline before rule-specific mutations.",
+  "raw_evidence": {
+    "workflow_run_id": 33830318274,
+    "workflow_run_attempt": 3,
+    "artifact_id": "9921682707",
+    "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33830318274/artifacts/9921682707",
+    "artifact_digest": "e192f292daa49b3047f06dd0ffb8e021ab552dd4e747e0b4ea7158ca872f0ca5",
+    "retention_days": 90
+  },
+  "boundary": "This result uses byte-identical official application bytes through an ASCII NTFS alias to work around Launch4j filename encoding on the hosted non-Chinese Windows runner. It is an official-binary black-box observation when admissible, but it is not evidence of stock-environment parity and is not yet a rule-calibration observation."
+}

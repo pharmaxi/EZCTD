@@ -1,0 +1,331 @@
+{
+  "schema_version": "0.1.0",
+  "generated_by": "tools/regulatory/build_evidence_completeness.py",
+  "policy": "No item is complete merely because a page title or secondary mirror was found. Official binary hashes and, where applicable, official-validator observations are separate gates.",
+  "inputs": {
+    "source_manifest_present": true,
+    "validator_inspection_present": true,
+    "package_analysis_present": true
+  },
+  "counts": {
+    "NOT_DISCOVERED": 10,
+    "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED": 3
+  },
+  "items": [
+    {
+      "id": "NMPA-2026-08",
+      "title": "国家药监局关于化学药品和生物制品全面实施药品电子通用技术文档申报的公告（2026年第8号）",
+      "patterns": [
+        "2026年第8号",
+        "全面实施.*电子通用技术文档"
+      ],
+      "required_for": [
+        "effective_scope",
+        "transition_date"
+      ],
+      "binary_expected": false,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-2026-04",
+      "title": "CDE eCTD V3.2.2相关技术文件通告（2026年第4号）",
+      "patterns": [
+        "2026年第4号",
+        "发布eCTD V3\\.2\\.2相关技术文件"
+      ],
+      "required_for": [
+        "effective_technical_baseline"
+      ],
+      "binary_expected": false,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-MAPPING-TABLE-V1.1",
+      "title": "现行申报资料要求与eCTD目录元素、CTD目录层级对应表",
+      "patterns": [
+        "现行申报资料要求.*eCTD目录元素",
+        "目录层级对应表"
+      ],
+      "required_for": [
+        "context_resolver",
+        "node_mapping"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-TECH-SPEC-V1.1",
+      "title": "eCTD技术规范V1.1",
+      "patterns": [
+        "eCTD技术规范\\s*V?1\\.1"
+      ],
+      "required_for": [
+        "china_regional_structure",
+        "pdf_semantics_cross_reference"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-TECH-ANNEX-V1.1",
+      "title": "eCTD技术规范V1.1附件/实用文件包",
+      "patterns": [
+        "技术规范.*附件",
+        "util",
+        "dtd",
+        "xsl",
+        "schema"
+      ],
+      "required_for": [
+        "xml_validation",
+        "utility_files",
+        "publisher_prototype"
+      ],
+      "binary_expected": true,
+      "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
+      "page_or_link_candidates": 1,
+      "binary_candidates": 1,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": [
+        {
+          "url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+          "anchor_or_role": null,
+          "saved_as": null,
+          "sha256": null,
+          "download_status": null,
+          "provenance": "other"
+        },
+        {
+          "url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+          "anchor_or_role": "embedded-url",
+          "saved_as": "assets/001-xhtml1-transitional.dtd",
+          "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+          "download_status": "SUCCESS",
+          "provenance": "other"
+        }
+      ]
+    },
+    {
+      "id": "CDE-IMPLEMENTATION-GUIDE-V1.1",
+      "title": "eCTD实施指南V1.1",
+      "patterns": [
+        "eCTD实施指南\\s*V?1\\.1"
+      ],
+      "required_for": [
+        "submission_practice",
+        "pdf_generation_guidance"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-VALIDATION-STANDARD-V1.1",
+      "title": "eCTD验证标准V1.1",
+      "patterns": [
+        "eCTD验证标准\\s*V?1\\.1"
+      ],
+      "required_for": [
+        "official_rule_catalog",
+        "severity",
+        "exceptions"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-VALIDATOR-V1.1.0",
+      "title": "CDE eCTD验证软件V1.1.0安装包",
+      "patterns": [
+        "eCTD验证软件",
+        "V?1\\.1\\.0",
+        "validator"
+      ],
+      "required_for": [
+        "official_black_box"
+      ],
+      "binary_expected": true,
+      "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
+      "page_or_link_candidates": 2,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 2,
+      "matched_records": [
+        {
+          "url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+          "anchor_or_role": "validator_1_1_0_notice",
+          "saved_as": "pages/page-002-f61c52eae9ff.html",
+          "sha256": "55d7f8b2c61c1d33948b5fe6d85a4735ec37bd3d6a6d0334ee6e8ac3ce7ca048",
+          "download_status": null,
+          "provenance": "official"
+        },
+        {
+          "url": "https://www.cde.org.cn/main/news/viewInfoCommon/43ee306c48b514cb05fdbf6e6f873d67",
+          "anchor_or_role": "validator_1_1_0_notice",
+          "saved_as": null,
+          "sha256": null,
+          "download_status": null,
+          "provenance": "official"
+        }
+      ]
+    },
+    {
+      "id": "CDE-VALIDATOR-MANUAL-V1.1.0",
+      "title": "CDE eCTD验证软件V1.1.0操作手册",
+      "patterns": [
+        "eCTD验证软件.*操作手册",
+        "验证软件.*用户手册",
+        "validator.*manual"
+      ],
+      "required_for": [
+        "official_black_box_protocol",
+        "report_export"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "ICH-ECTD-3.2.2-SPEC",
+      "title": "ICH eCTD v3.2.2 specification",
+      "patterns": [
+        "eCTD.*3\\.2\\.2",
+        "electronic common technical document"
+      ],
+      "required_for": [
+        "international_backbone"
+      ],
+      "binary_expected": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "ICH-ECTD-3.2.2-UTIL",
+      "title": "ICH eCTD v3.2.2 DTD/XSL utility package",
+      "patterns": [
+        "ich-ectd.*dtd",
+        "ectd-.*xsl",
+        "DTD",
+        "stylesheet"
+      ],
+      "required_for": [
+        "international_xml_validation"
+      ],
+      "binary_expected": true,
+      "status": "PAGE_OR_LINK_CONFIRMED_BINARY_UNRESOLVED",
+      "page_or_link_candidates": 1,
+      "binary_candidates": 1,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": [
+        {
+          "url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+          "anchor_or_role": null,
+          "saved_as": null,
+          "sha256": null,
+          "download_status": null,
+          "provenance": "other"
+        },
+        {
+          "url": "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+          "anchor_or_role": "embedded-url",
+          "saved_as": "assets/001-xhtml1-transitional.dtd",
+          "sha256": "28905cd059167bfa1a5866053799d55fd335c0717920a7048de400c8a32b9d93",
+          "download_status": "SUCCESS",
+          "provenance": "other"
+        }
+      ]
+    },
+    {
+      "id": "CN-CLEAN-BASELINE-SEQUENCE",
+      "title": "经CDE V1.1.0验证无阻断问题的最小中国eCTD序列",
+      "patterns": [
+        "sample.*sequence",
+        "示例.*序列",
+        "index\\.xml",
+        "cn-regional\\.xml"
+      ],
+      "required_for": [
+        "differential_black_box_cases"
+      ],
+      "binary_expected": true,
+      "requires_manual_proof": true,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    },
+    {
+      "id": "CDE-OFFICIAL-TRAINING",
+      "title": "CDE官方eCTD V1.1培训材料、演示或操作视频",
+      "patterns": [
+        "eCTD.*培训",
+        "eCTD.*操作视频",
+        "药审云课堂.*eCTD"
+      ],
+      "required_for": [
+        "operational_interpretation"
+      ],
+      "binary_expected": false,
+      "status": "NOT_DISCOVERED",
+      "page_or_link_candidates": 0,
+      "binary_candidates": 0,
+      "official_binary_candidates": 0,
+      "secondary_binary_candidates": 0,
+      "official_candidates": 0,
+      "matched_records": []
+    }
+  ]
+}

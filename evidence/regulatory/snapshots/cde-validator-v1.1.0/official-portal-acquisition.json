@@ -1,0 +1,111 @@
+{
+  "schema_version": "0.3.0",
+  "status": "COMPLETE_OFFICIAL_PORTAL_ACQUISITION",
+  "portal": "https://www.cde.org.cn/ectd/index",
+  "method": "official_control_plus_current_same_origin_javascript",
+  "software_executed": false,
+  "official_black_box_observations": 0,
+  "records": [
+    {
+      "role": "validator_software_v1_1_0",
+      "portal_label": "eCTD验证软件",
+      "portal_control": "downloadFiles(4)",
+      "discovered_in_current_official_javascript": true,
+      "url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZV1.1.0.zip?name=eCTD验证软件V1.1.0.zip",
+      "final_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZV1.1.0.zip?name=eCTD%E9%AA%8C%E8%AF%81%E8%BD%AF%E4%BB%B6V1.1.0.zip",
+      "http_status": 200,
+      "content_type": "application/zip",
+      "content_disposition": null,
+      "file_name": "eCTD验证软件V1.1.0.zip",
+      "kind": "zip",
+      "size": 162000248,
+      "sha256": "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36",
+      "sm3": "b5f687f3edd9042d03bbb5f2d3597ed7971dedb0cb61928d0831ce4b8dc1e910",
+      "archive": {
+        "status": "EXTRACTED_FOR_STATIC_INSPECTION",
+        "members": [
+          {
+            "name": "eCTD验证软件安装包.exe",
+            "size": 162554346,
+            "compressed_size": 161999994
+          }
+        ],
+        "extracted_files": [
+          {
+            "relative_path": "eCTD验证软件安装包.exe",
+            "size": 162554346,
+            "kind": "pe",
+            "sha256": "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+          }
+        ]
+      }
+    },
+    {
+      "role": "validator_manual_v1_1_0",
+      "portal_label": "eCTD验证软件操作手册",
+      "portal_control": "downloadFiles(5)",
+      "discovered_in_current_official_javascript": true,
+      "url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZSCV1.1.0.pdf?name=eCTD验证软件操作手册V1.1.0.pdf",
+      "final_url": "https://www.cde.org.cn/ectd/guideDownLoads/eCTDYZSCV1.1.0.pdf?name=eCTD%E9%AA%8C%E8%AF%81%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8CV1.1.0.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_disposition": null,
+      "file_name": "eCTD验证软件操作手册V1.1.0.pdf",
+      "kind": "pdf",
+      "size": 1124051,
+      "sha256": "30eef1b42d6fc980b243bcc667291eb7abc9ddc2c4dc33a5c8a67cb1368f583b",
+      "sm3": "039ee11c2e19e5d8a4eea0f4b204ffc82154a4f39c4f5dcba7ef9dac774417b2",
+      "pdf": {
+        "status": "SUCCESS",
+        "pages": 11,
+        "text_file": "validator-manual.txt",
+        "metadata": {
+          "Creator": "Microsoft® Word 2016",
+          "Producer": "Microsoft® Word 2016",
+          "CreationDate": "Mon Jan 12 04:11:48 2026 UTC",
+          "ModDate": "Mon Jan 12 04:11:48 2026 UTC",
+          "Custom Metadata": "no",
+          "Metadata Stream": "no",
+          "Tagged": "yes",
+          "UserProperties": "no",
+          "Suspects": "no",
+          "Form": "none",
+          "JavaScript": "no",
+          "Pages": "11",
+          "Encrypted": "no",
+          "Page size": "595.32 x 841.92 pts (A4)",
+          "Page rot": "0",
+          "File size": "1124051 bytes",
+          "Optimized": "no",
+          "PDF version": "1.5"
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "portal_controls": [
+    {
+      "role": "validator_software_v1_1_0",
+      "selector": "[onclick=\"downloadFiles(4)\"]",
+      "outer_html": "<a href=\"javascript:void(0);\" title=\"点击下载\" class=\"fileLink\" style=\"width:40%\" onclick=\"downloadFiles(4)\">eCTD验证软件<img src=\"images/icon_new.jpg\"></a>",
+      "text": "eCTD验证软件"
+    },
+    {
+      "role": "validator_manual_v1_1_0",
+      "selector": "[onclick=\"downloadFiles(5)\"]",
+      "outer_html": "<a href=\"javascript:void(0);\" title=\"点击下载\" class=\"fileLink\" style=\"width:40%\" onclick=\"downloadFiles(5)\">eCTD验证软件操作手册<img src=\"images/icon_new.jpg\"></a>",
+      "text": "eCTD验证软件操作手册"
+    }
+  ],
+  "download_files_function_sha256": "4124f3a19e69cbc55633720fb394026b104266c992fe95be05bfe056ef6ae0aa",
+  "common_js": {
+    "url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+    "final_url": "https://www.cde.org.cn/ectd/js/common.js?v=20260817",
+    "status": 200,
+    "content_type": "application/javascript",
+    "etag": null,
+    "last_modified": "Mon, 17 Aug 2026 09:04:23 GMT",
+    "size": 16914,
+    "sha256": "ebd564a8c9c188eae38f09cf22336f968421d1997cf2ed823ff5c48221b25de5"
+  }
+}

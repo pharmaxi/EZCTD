@@ -1,0 +1,108 @@
+name: P0-B1 candidate package inspector v2
+
+on:
+  push:
+    branches:
+      - agent/p0-b0-validation-matrix
+    paths:
+      - "tools/p0-b1/repair_package_inspector.py"
+      - ".github/workflows/p0-b1-package-inspector-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-b1-package-inspector-v2
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/p0-b0-validation-matrix
+          fetch-depth: 0
+
+      - name: Synchronize branch
+        run: git pull --rebase origin agent/p0-b0-validation-matrix
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply current fixture, observer and package-inspector repairs
+        run: |
+          python tools/p0-b0/repair_materializer.py
+          python tools/p0-b0/repair_materializer_v2.py
+          python tools/p0-b0/repair_materializer_v3.py
+          python tools/p0-b0/materialize_p0_b0.py
+          python tools/p0-b1/repair_observer.py
+          python tools/p0-b1/repair_package_inspector.py
+          python -m compileall -q src tools tests
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qpdf
+          python -m pip install --upgrade pip
+          python -m pip install -r tests/p0_b0/requirements.txt
+          python -m pip install -e .
+
+      - name: Generate baseline fixture and run expanded package tests
+        run: |
+          python tests/p0_b0/generators/generate_smoke_cases.py --manifest tests/p0_b0/smoke_manifest.json --output build/p0-b0-smoke
+          python tests/p0_b1/test_baseline_candidate_inspector.py build/p0-b0-smoke/CDE-PDF-BASELINE.pdf
+
+      - name: Write success-only v2 marker
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('build/p0-b1-package-inspector-tests.json').read_text(encoding='utf-8'))
+          assert report['status']=='PASS'
+          names={item['case']:item['status'] for item in report['tests']}
+          for required in ['valid-candidate','leaf-checksum-mismatch','strict-context-missing','output-inside-package-rejected','symbolic-link-rejection']:
+              assert required in names
+          Path('docs/validation/p0-b1').mkdir(parents=True,exist_ok=True)
+          Path('docs/validation/p0-b1/P0_B1_PACKAGE_INSPECTOR_GATE.md').write_text(f'''# P0-B1 candidate package inspector gate: PASS
+
+- Test scenarios: {len(report['tests'])}
+- Internally consistent package: candidate accepted for official validation
+- Leaf MD5 mismatch: rejected
+- Missing context in strict mode: rejected
+- Output path inside input package: rejected before writing
+- Symbolic link out of package: rejected or explicitly skipped only if the runner cannot create symlinks
+- Input package SHA-256 inventory unchanged: required
+- CDE eCTD validator V1.1.0: NOT_RUN
+
+This gate proves only the implemented package-level read-only checks. DTD/XSD, lifecycle and official-validator equivalence remain pending.
+''',encoding='utf-8')
+          PY
+
+      - name: Commit repaired source and success marker
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/p0-b0/materialize_p0_b0.py tools/ectd/inspect_baseline_candidate.py tests/p0_b1/test_baseline_candidate_inspector.py docs/validation/p0-b1/P0_B1_PACKAGE_INSPECTOR_GATE.md PROJECT_STATUS.md CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "Package-inspector v2 success state already committed."
+            exit 0
+          fi
+          git commit -m "fix(p0-b1): pass package inspector read-only boundary gate"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin agent/p0-b0-validation-matrix
+            if git push origin HEAD:agent/p0-b0-validation-matrix; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+
+      - name: Upload package-inspector evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-b1-package-inspector-v2
+          path: build/p0-b1-package-inspector-tests.json
+          if-no-files-found: error
+          retention-days: 30

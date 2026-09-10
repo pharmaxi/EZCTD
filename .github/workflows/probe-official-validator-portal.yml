@@ -1,0 +1,114 @@
+name: Probe official CDE validator portal
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - .github/workflows/probe-official-validator-portal.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: probe-official-validator-portal
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install browser and inspection dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils p7zip-full file xvfb
+          python -m pip install --disable-pip-version-check selenium requests
+
+      - id: portal_probe
+        name: Run current acquisition code without discarding failure evidence
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build/validator-portal-probe
+          timeout --signal=TERM --kill-after=30s 600s \
+            xvfb-run -a env EZCTD_BROWSER_HEADLESS=0 \
+            python tools/regulatory/acquire_validator_from_portal.py \
+            2>&1 | tee build/validator-portal-probe/acquisition.log
+
+      - name: Write diagnostic index
+        if: always()
+        env:
+          PROBE_OUTCOME: ${{ steps.portal_probe.outcome }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          TRIGGER_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          roots = [
+              Path('build/validator-portal-probe'),
+              Path('build/official-source-deep-dive/validator-assets'),
+              Path('evidence/regulatory/snapshots/cde-validator-v1.1.0'),
+          ]
+          records = []
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in sorted(p for p in root.rglob('*') if p.is_file()):
+                  digest = hashlib.sha256(path.read_bytes()).hexdigest()
+                  records.append({
+                      'path': path.as_posix(),
+                      'size': path.stat().st_size,
+                      'sha256': digest,
+                  })
+
+          status = {
+              'schema_version': '0.1.0',
+              'purpose': 'Preserve portal diagnostics even when validator acquisition fails.',
+              'probe_outcome': os.environ.get('PROBE_OUTCOME', 'unknown'),
+              'run_id': os.environ['RUN_ID'],
+              'run_attempt': os.environ['RUN_ATTEMPT'],
+              'trigger_sha': os.environ['TRIGGER_SHA'],
+              'files': records,
+              'interpretation': (
+                  'A successful workflow means diagnostic evidence was preserved. '
+                  'It does not mean the validator software was acquired or executed.'
+              ),
+          }
+          out = Path('build/validator-portal-probe/diagnostic-index.json')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(status, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(status, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload complete portal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-validator-portal-probe
+          path: |
+            build/validator-portal-probe/
+            build/official-source-deep-dive/validator-assets/
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/
+          if-no-files-found: error
+          retention-days: 30

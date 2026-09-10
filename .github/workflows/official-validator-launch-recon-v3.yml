@@ -1,0 +1,201 @@
+# launch-recon-v3-trigger: 2026-09-04-r2
+name: Reconnoitre official CDE validator launch v3
+
+on:
+  push:
+    branches:
+      - agent/official-source-deep-dive
+    paths:
+      - tools/regulatory/Invoke-CDEValidatorLaunchReconV2.ps1
+      - tools/regulatory/stage_validator_launch_recon.py
+      - .github/workflows/official-validator-launch-recon-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: official-validator-launch-recon-v3
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "33823274985"
+  OUTER_ZIP_SHA256: "d3f143873fb37b78dbc952c8d8d6db5a13a82c5ba5a77798b8319852b9ed2b36"
+  INSTALLER_SHA256: "66c5f189e0a3308568ad99e22da6062b7bbf9d61adec757f3f233521c4c7b8f8"
+  APP_SHA256: "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163"
+
+jobs:
+  reconnaissance:
+    permissions:
+      contents: read
+      actions: read
+    runs-on: windows-latest
+    timeout-minutes: 25
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      artifact_url: ${{ steps.upload.outputs.artifact-url }}
+      artifact_digest: ${{ steps.upload.outputs.artifact-digest }}
+    steps:
+      - name: Check out probe code without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Download byte-pinned official validator artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-acquisition-v3-raw
+          path: build/acquisition-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Recover static payload and verify complete hash chain
+        id: recover
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Get-ChildItem -LiteralPath 'build/acquisition-v3/raw' -Filter '*.zip' -File | Select-Object -First 1
+          if (-not $zip) { throw 'Official validator ZIP missing' }
+          $zipHash = (Get-FileHash -LiteralPath $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($zipHash -ne $env:OUTER_ZIP_SHA256) { throw "Outer ZIP hash mismatch: $zipHash" }
+
+          New-Item -ItemType Directory -Force -Path 'build/recovered-installer' | Out-Null
+          Expand-Archive -LiteralPath $zip.FullName -DestinationPath 'build/recovered-installer' -Force
+          $installer = Get-ChildItem -LiteralPath 'build/recovered-installer' -Filter '*.exe' -File -Recurse | Select-Object -First 1
+          if (-not $installer) { throw 'Installer missing' }
+          $installerHash = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($installerHash -ne $env:INSTALLER_SHA256) { throw "Installer hash mismatch: $installerHash" }
+
+          New-Item -ItemType Directory -Force -Path 'build/payload' | Out-Null
+          $sevenZip = (Get-Command 7z).Source
+          & $sevenZip x -y -aoa '-obuild/payload' -- $installer.FullName | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Static NSIS payload extraction failed' }
+          $app = Get-ChildItem -LiteralPath 'build/payload' -Filter 'eCTD*.exe' -File |
+            Where-Object { $_.Name -notmatch '^(?i:uninst|uninstall)' } |
+            Select-Object -First 1
+          if (-not $app) { throw 'Application entry point missing' }
+          $appHash = (Get-FileHash -LiteralPath $app.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($appHash -ne $env:APP_SHA256) { throw "Application hash mismatch: $appHash" }
+          "application=$($app.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: Verify credential isolation before binary execution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Remove-Item Env:GITHUB_TOKEN -ErrorAction SilentlyContinue
+          Remove-Item Env:GH_TOKEN -ErrorAction SilentlyContinue
+          Remove-Item Env:ACTIONS_ID_TOKEN_REQUEST_TOKEN -ErrorAction SilentlyContinue
+          Remove-Item Env:ACTIONS_RUNTIME_TOKEN -ErrorAction SilentlyContinue
+          if (Test-Path -LiteralPath '.git/config') {
+            $config = Get-Content -Raw -LiteralPath '.git/config'
+            if ($config -match '(?i)authorization|extraheader') {
+              throw 'Repository credential residue remains in .git/config'
+            }
+          }
+          Write-Host 'Credential isolation verified; absent credentials are not treated as an error.'
+
+      - name: Launch exact official application in reconnaissance mode
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          ./tools/regulatory/Invoke-CDEValidatorLaunchReconV2.ps1 `
+            -ApplicationPath '${{ steps.recover.outputs.application }}' `
+            -PayloadDirectory 'build/payload' `
+            -OutputDirectory 'build/launch-recon-v3' `
+            -ExpectedApplicationSha256 $env:APP_SHA256 `
+            -ObservationSeconds 45
+
+      - name: Validate non-overclaiming reconnaissance contract
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'build/launch-recon-v3/launch-recon-result.json'
+          if (-not (Test-Path -LiteralPath $path)) { throw 'Launch reconnaissance result missing' }
+          $data = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json
+          if ($data.run_type -ne 'launch_reconnaissance') { throw 'Unexpected run type' }
+          if ($data.observation_counters.launch_reconnaissance_runs -ne 1) { throw 'Reconnaissance count must be one' }
+          if ($data.observation_counters.completed_validation_runs -ne 0) { throw 'Launch probe cannot count as completed validation' }
+          if ($data.observation_counters.official_black_box_observations -ne 0) { throw 'Launch probe cannot count as official observation' }
+          if ($data.assertions.validation_invoked) { throw 'Validation must not be invoked in launch reconnaissance' }
+          if ($data.assertions.native_validation_report_present) { throw 'Unexpected native report claim' }
+          if ($data.validator.application_sha256 -ne $env:APP_SHA256) { throw 'Application identity was not conserved' }
+          if (-not $data.safety.outbound_firewall_ready) { throw 'Outbound firewall safety gate failed' }
+          Get-Content -Raw -LiteralPath 'build/launch-recon-v3/launch-recon-result.md' | Write-Host
+
+      - name: Upload raw reconnaissance evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-launch-recon-v3
+          path: build/launch-recon-v3/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 6
+
+  commit-evidence:
+    needs: reconnaissance
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out latest evidence branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-source-deep-dive
+          fetch-depth: 0
+
+      - name: Download raw reconnaissance evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: cde-validator-v1.1.0-launch-recon-v3
+          path: build/launch-recon-v3
+          repository: laojia-a/EZCTD
+          run-id: ${{ github.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Stage bounded evidence and status
+        env:
+          RAW_ARTIFACT_ID: ${{ needs.reconnaissance.outputs.artifact_id }}
+          RAW_ARTIFACT_URL: ${{ needs.reconnaissance.outputs.artifact_url }}
+          RAW_ARTIFACT_DIGEST: ${{ needs.reconnaissance.outputs.artifact_digest }}
+        run: |
+          python tools/regulatory/stage_validator_launch_recon.py \
+            --result build/launch-recon-v3/launch-recon-result.json \
+            --workflow-run-id "${{ github.run_id }}" \
+            --workflow-run-attempt "${{ github.run_attempt }}" \
+            --artifact-id "$RAW_ARTIFACT_ID" \
+            --artifact-url "$RAW_ARTIFACT_URL" \
+            --artifact-digest "$RAW_ARTIFACT_DIGEST"
+
+      - name: Commit bounded reconnaissance evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/launch-reconnaissance \
+            evidence/regulatory/snapshots/cde-validator-v1.1.0/STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.json \
+            docs/status/OFFICIAL_VALIDATOR_BLACK_BOX_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No reconnaissance evidence changes.'
+            exit 0
+          fi
+          git commit -m 'research(regulatory): record official validator launch reconnaissance'
+          for attempt in 1 2 3 4 5; do
+            git fetch origin agent/official-source-deep-dive
+            if git rebase origin/agent/official-source-deep-dive && \
+               git push origin HEAD:agent/official-source-deep-dive; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          exit 1

@@ -1,0 +1,114 @@
+{
+  "schema_version": "0.1.0",
+  "intake_id": "cn-cde-ectd-v1.1-official-assets",
+  "policy": {
+    "official_hosts": [
+      "www.cde.org.cn",
+      "cde.org.cn",
+      "www.nmpa.gov.cn",
+      "nmpa.gov.cn",
+      "www.ich.org",
+      "ich.org"
+    ],
+    "raw_binary_storage": "outside-git",
+    "no_execution": true,
+    "no_decompilation": true
+  },
+  "assets": [
+    {
+      "asset_id": "CDE-MAPPING-TABLE-V1.1",
+      "title": "现行申报资料要求与eCTD目录元素、CTD目录层级对应表",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*对应表*.xls*", "*目录层级*.xls*"],
+      "expected_extensions": [".xlsx", ".xls"],
+      "expected_version": "V1.1"
+    },
+    {
+      "asset_id": "CDE-TECH-SPEC-V1.1",
+      "title": "eCTD技术规范V1.1",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*技术规范*V1.1*.pdf", "*技术规范*1.1*.pdf"],
+      "expected_extensions": [".pdf"],
+      "expected_version": "V1.1"
+    },
+    {
+      "asset_id": "CDE-TECH-ANNEX-V1.1",
+      "title": "eCTD技术规范V1.1附件/实用文件包",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*附件*.zip", "*eCTD*附件*.rar", "*util*.zip", "*实用文件*.zip"],
+      "expected_extensions": [".zip", ".rar", ".7z"],
+      "expected_version": "V1.1"
+    },
+    {
+      "asset_id": "CDE-IMPLEMENTATION-GUIDE-V1.1",
+      "title": "eCTD实施指南V1.1",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*实施指南*V1.1*.pdf", "*实施指南*1.1*.pdf"],
+      "expected_extensions": [".pdf"],
+      "expected_version": "V1.1"
+    },
+    {
+      "asset_id": "CDE-VALIDATION-STANDARD-V1.1",
+      "title": "eCTD验证标准V1.1",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*验证标准*V1.1*.pdf", "*验证标准*1.1*.pdf"],
+      "expected_extensions": [".pdf"],
+      "expected_version": "V1.1"
+    },
+    {
+      "asset_id": "CDE-VALIDATOR-V1.1.0",
+      "title": "CDE eCTD验证软件V1.1.0安装包",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*验证软件*1.1.0*.zip", "*eCTD*验证软件*1.1.0*.rar", "*validator*1.1.0*.zip", "*1.1.0*.exe", "*1.1.0*.msi"],
+      "expected_extensions": [".zip", ".rar", ".7z", ".exe", ".msi"],
+      "expected_version": "V1.1.0"
+    },
+    {
+      "asset_id": "CDE-VALIDATOR-MANUAL-V1.1.0",
+      "title": "CDE eCTD验证软件V1.1.0操作手册",
+      "required": true,
+      "authority": "CDE/NMPA",
+      "source_url": null,
+      "file_globs": ["*eCTD*验证软件*操作手册*.pdf", "*验证软件*用户手册*.pdf", "*validator*manual*.pdf"],
+      "expected_extensions": [".pdf"],
+      "expected_version": "V1.1.0"
+    },
+    {
+      "asset_id": "ICH-ECTD-3.2.2-PACKAGE",
+      "title": "ICH eCTD v3.2.2 specification and utility package",
+      "required": true,
+      "authority": "ICH",
+      "source_url": null,
+      "file_globs": ["*eCTD*3.2.2*.zip", "*eCTD*3-2-2*.zip", "*eCTD*3.2.2*.pdf"],
+      "expected_extensions": [".zip", ".pdf"],
+      "expected_version": "3.2.2"
+    },
+    {
+      "asset_id": "CN-CLEAN-BASELINE-SEQUENCE",
+      "title": "经CDE V1.1.0验证无阻断问题的最小中国eCTD序列",
+      "required": false,
+      "authority": "locally-proven-by-official-validator",
+      "source_url": null,
+      "file_globs": ["*clean*baseline*.zip", "*最小*序列*.zip"],
+      "expected_extensions": [".zip"],
+      "expected_version": null,
+      "additional_proof_required": [
+        "CDE V1.1.0 original validation report",
+        "validator binary SHA-256",
+        "complete package SHA-256 inventory"
+      ]
+    }
+  ]
+}

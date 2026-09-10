@@ -1,0 +1,4663 @@
+{
+  "schema_version": "0.3.0",
+  "milestone": "P0-B0",
+  "title": "CDE eCTD V1.1 PDF 26条规则：来源—检测—样本—官方验证器矩阵",
+  "generated_at": "2026-09-03",
+  "status": "SPECIFICATION_READY_BLACK_BOX_PENDING",
+  "target": {
+    "rule_pack_id": "cn-cde-ectd-v3.2.2-v1.1-pdf",
+    "effective_date": "2026-03-01",
+    "official_validator_target": "CDE eCTD验证软件 V1.1.0",
+    "official_validator_observed": false
+  },
+  "source_refs": {
+    "official_rule_table": "SRC-CDE-VALIDATION-V1.1",
+    "official_implementation": "SRC-CDE-GUIDE-V1.1",
+    "regional_technical_spec": "SRC-CDE-TECHSPEC-V1.1-RAR",
+    "global_pdf_spec": "SRC-ICH-FORMAT-1.3",
+    "pdf_object_semantics": "SRC-PDF-REFERENCE"
+  },
+  "global_invariants": [
+    "任何测试生成、扫描和验证任务不得覆盖原始输入。",
+    "每个变异样本原则上只引入一个主变量；规则交互样本必须显式标注interaction_rules。",
+    "expected_cde是待验证假设，只有observed_state和证据文件齐全后才能标为CONFIRMED。",
+    "豁免必须基于eCTD节点/资料类型上下文，不得仅按文件名猜测。",
+    "错误、警告、提示信息的官方严重程度与EZCTD产品风险分开保存。",
+    "同一PDF需至少由结构解析器和独立渲染器交叉检查。"
+  ],
+  "counts": {
+    "rules": 26,
+    "cases": 163,
+    "implemented_fixture_recipes": 130,
+    "specified_fixture_recipes": 22,
+    "blocked_fixture_recipes": 11,
+    "conformant": 35,
+    "violation": 49,
+    "boundary": 37,
+    "exemption": 26,
+    "interaction": 16
+  },
+  "rules": [
+    {
+      "id": "6.1",
+      "official_title": "PDF文件必须可读",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          9
+        ]
+      },
+      "scope_exemptions": [],
+      "detector_contract": {
+        "group": "pdf_structure",
+        "predicate": "PDF可由严格解析器打开、页数大于0且页面树/对象引用可遍历。",
+        "required_context": [
+          "file_bytes"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.21"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_1-valid-one-page",
+          "class": "conformant",
+          "description": "1页、结构完整、可解析且可渲染的PDF。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.1",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_1-zero-page",
+          "class": "violation",
+          "description": "语法上可写出但页数为0的PDF。",
+          "fixture_recipe": "zero_page",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.1",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_1-truncated-xref",
+          "class": "violation",
+          "description": "截断尾部交叉引用或EOF的PDF。",
+          "fixture_recipe": "truncated_xref",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.1",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_1-recoverable-xref",
+          "class": "boundary",
+          "description": "宽松解析器可修复、严格解析器报警的交叉引用损坏。",
+          "fixture_recipe": "recoverable_xref",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.1",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_1-open-password",
+          "class": "interaction",
+          "description": "有打开密码但结构本身未损坏。",
+          "fixture_recipe": "encrypted_open_password",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.1",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.21"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "可恢复但qpdf报warning的文件，官方验证器判6.1错误还是可接受？",
+        "打开密码文件是否只报6.21，还是同时报6.1？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.2",
+      "official_title": "书签必须指向相对路径",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          9
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_path",
+        "predicate": "跨文件书签的 FileSpec 必须是位于申报根目录内的相对路径。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.3",
+          "6.6"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_2-relative-gotor",
+          "class": "conformant",
+          "description": "书签以相对路径指向包内目标PDF。",
+          "fixture_recipe": "bookmark_gotor_relative",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_2-windows-drive",
+          "class": "violation",
+          "description": "书签使用C盘绝对路径。",
+          "fixture_recipe": "bookmark_gotor_absolute_drive",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_2-unc-path",
+          "class": "violation",
+          "description": "书签使用UNC路径。",
+          "fixture_recipe": "bookmark_gotor_unc",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_2-root-escape",
+          "class": "boundary",
+          "description": "相对路径通过../逃出申报根目录。",
+          "fixture_recipe": "bookmark_gotor_escape",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_2-reference-exempt",
+          "class": "exemption",
+          "description": "同一绝对路径书签位于参考文献豁免节点。",
+          "fixture_recipe": "bookmark_gotor_absolute_drive",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_2-file-uri",
+          "class": "interaction",
+          "description": "书签使用file:// URI。",
+          "fixture_recipe": "bookmark_file_uri",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.2",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.3"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "file://与盘符路径是否同时报6.2和6.3？",
+        "相对路径含../但仍在申请根目录内是否接受？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.3",
+      "official_title": "有网页、邮箱地址或其他外部链接的书签",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          9
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_external",
+        "predicate": "书签不得指向网页、邮箱或申报包外部资源。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.2",
+          "6.4",
+          "6.6"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_3-internal-goto",
+          "class": "conformant",
+          "description": "书签指向本文件内部页。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_3-https-uri",
+          "class": "violation",
+          "description": "书签指向HTTPS网页。",
+          "fixture_recipe": "bookmark_external_https",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_3-mailto-uri",
+          "class": "violation",
+          "description": "书签指向mailto地址。",
+          "fixture_recipe": "bookmark_external_mailto",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_3-launch-outside",
+          "class": "violation",
+          "description": "Launch动作指向申报包外部可执行/文档。",
+          "fixture_recipe": "bookmark_launch_external",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_3-reference-exempt",
+          "class": "exemption",
+          "description": "网页书签位于参考文献豁免节点。",
+          "fixture_recipe": "bookmark_external_https",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_3-absolute-local",
+          "class": "interaction",
+          "description": "绝对本地文件路径是否同时命中6.2和6.3。",
+          "fixture_recipe": "bookmark_gotor_absolute_drive",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.3",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.2"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "Launch到包内相对PDF是否按允许动作接受，还是视为外部链接？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.4",
+      "official_title": "不允许有未知动作的书签",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_action_type",
+        "predicate": "书签动作仅允许 GoTo、GoToR、Launch；其他动作需报告。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.3",
+          "6.7",
+          "6.24"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_4-allowed-goto",
+          "class": "conformant",
+          "description": "书签使用GoTo动作。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_4-allowed-gotor",
+          "class": "conformant",
+          "description": "书签使用GoToR动作。",
+          "fixture_recipe": "bookmark_gotor_relative",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_4-named-action",
+          "class": "violation",
+          "description": "书签使用Named动作。",
+          "fixture_recipe": "bookmark_unknown_named",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_4-javascript",
+          "class": "interaction",
+          "description": "书签使用JavaScript动作。",
+          "fixture_recipe": "bookmark_javascript",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.24"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_4-direct-dest",
+          "class": "boundary",
+          "description": "书签直接使用/Dest而不是/A。",
+          "fixture_recipe": "bookmark_direct_dest",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_4-reference-exempt",
+          "class": "exemption",
+          "description": "未知动作位于豁免节点。",
+          "fixture_recipe": "bookmark_unknown_named",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.4",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "JavaScript书签同时触发6.4与6.24，还是仅触发其中一项？",
+        "/Dest直接目的地是否完全绕过动作类型检查？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.5",
+      "official_title": "书签不能失效",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_action_presence",
+        "predicate": "书签必须分配可解析的 Destination 或 Action。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.6",
+          "6.7"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_5-valid-action",
+          "class": "conformant",
+          "description": "书签含有效GoTo动作。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.5",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_5-no-action-dest",
+          "class": "violation",
+          "description": "书签既无/Dest也无/A。",
+          "fixture_recipe": "bookmark_no_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.5",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_5-empty-action",
+          "class": "boundary",
+          "description": "书签有空动作字典。",
+          "fixture_recipe": "bookmark_empty_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.5",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.4"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_5-dest-and-action",
+          "class": "interaction",
+          "description": "书签同时含/Dest和/A，验证器如何分类。",
+          "fixture_recipe": "bookmark_dest_and_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.5",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.7"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_5-reference-exempt",
+          "class": "exemption",
+          "description": "失效书签位于豁免节点。",
+          "fixture_recipe": "bookmark_no_action",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.5",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "同时存在/Dest和/A时，官方是否报失效、多动作或两者？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.6",
+      "official_title": "书签不能被损坏",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_target_integrity",
+        "predicate": "书签指向的页、命名目的地、文件和远程页必须存在。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id",
+          "package_file_index"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.5"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_6-valid-page",
+          "class": "conformant",
+          "description": "书签指向存在的页对象。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_6-missing-named-dest",
+          "class": "violation",
+          "description": "书签指向不存在的命名目的地。",
+          "fixture_recipe": "bookmark_missing_named_dest",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_6-missing-remote-file",
+          "class": "violation",
+          "description": "GoToR目标文件不存在。",
+          "fixture_recipe": "bookmark_missing_remote_file",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_6-invalid-page-ref",
+          "class": "violation",
+          "description": "书签目标页对象无效/越界。",
+          "fixture_recipe": "bookmark_invalid_page_target",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_6-reference-exempt",
+          "class": "exemption",
+          "description": "损坏目标位于豁免节点。",
+          "fixture_recipe": "bookmark_missing_named_dest",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_6-no-action",
+          "class": "interaction",
+          "description": "完全无动作是否只报6.5而不报6.6。",
+          "fixture_recipe": "bookmark_no_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.6",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.5"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "跨文件目标存在但命名目的地缺失时，报告是否定位到书签标题和目标文件？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.7",
+      "official_title": "书签不能有多个动作",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_action_cardinality",
+        "predicate": "单个书签只能执行一个动作，不得通过 /Next、/AA 或冲突键形成多动作。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.4",
+          "6.5"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_7-single-action",
+          "class": "conformant",
+          "description": "单一GoTo动作。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_7-next-chain",
+          "class": "violation",
+          "description": "动作通过/Next链执行第二动作。",
+          "fixture_recipe": "bookmark_multiple_next",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_7-a-plus-aa",
+          "class": "violation",
+          "description": "书签同时存在/A和/AA。",
+          "fixture_recipe": "bookmark_a_plus_aa",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_7-dest-plus-action",
+          "class": "boundary",
+          "description": "书签同时具有/Dest和/A。",
+          "fixture_recipe": "bookmark_dest_and_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.5"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_7-duplicate-identical",
+          "class": "boundary",
+          "description": "两个等价动作是否仍算多个动作。",
+          "fixture_recipe": "bookmark_duplicate_identical",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_7-reference-exempt",
+          "class": "exemption",
+          "description": "多动作书签位于豁免节点。",
+          "fixture_recipe": "bookmark_multiple_next",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.7",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "/Next链、/AA、同时/Dest与/A分别如何计数？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.8",
+      "official_title": "书签必须承前缩放（Inherit Zoom）",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_zoom",
+        "predicate": "书签目的地必须保留阅读器当前缩放；对 /XYZ 应使用空 zoom。",
+        "required_context": [
+          "ectd_node_id",
+          "named_destination_index"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.6"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_8-xyz-null",
+          "class": "conformant",
+          "description": "/XYZ left top null，zoom为空。",
+          "fixture_recipe": "bookmark_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_8-xyz-zero",
+          "class": "boundary",
+          "description": "/XYZ zoom=0；PDF规范与null等价，验证器是否接受。",
+          "fixture_recipe": "bookmark_internal_xyz_zero",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_8-fit",
+          "class": "violation",
+          "description": "目的地使用/Fit。",
+          "fixture_recipe": "bookmark_fit",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_8-zoom-one",
+          "class": "violation",
+          "description": "/XYZ zoom=1.0。",
+          "fixture_recipe": "bookmark_xyz_one",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_8-named-dest-null",
+          "class": "boundary",
+          "description": "书签经命名目的地解析到Inherit Zoom。",
+          "fixture_recipe": "bookmark_named_dest_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_8-reference-exempt",
+          "class": "exemption",
+          "description": "非承前缩放位于豁免节点。",
+          "fixture_recipe": "bookmark_fit",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.8",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "官方验证器是否接受zoom=0作为Inherit Zoom？",
+        "命名目的地是否递归解析缩放？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.9",
+      "official_title": "超文本链接必须使用相对路径",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_path",
+        "predicate": "跨文件 Link 注释的 FileSpec 必须为申报根目录内相对路径。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.10",
+          "6.13"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_9-relative-gotor",
+          "class": "conformant",
+          "description": "Link以相对路径指向包内目标。",
+          "fixture_recipe": "link_gotor_relative",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_9-windows-drive",
+          "class": "violation",
+          "description": "Link使用Windows绝对路径。",
+          "fixture_recipe": "link_gotor_absolute_drive",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_9-unc-path",
+          "class": "violation",
+          "description": "Link使用UNC路径。",
+          "fixture_recipe": "link_gotor_unc",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_9-root-escape",
+          "class": "boundary",
+          "description": "../路径逃出申报根目录。",
+          "fixture_recipe": "link_gotor_escape",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_9-reference-exempt",
+          "class": "exemption",
+          "description": "绝对路径Link位于豁免节点。",
+          "fixture_recipe": "link_gotor_absolute_drive",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_9-uri-overlap",
+          "class": "interaction",
+          "description": "file://或https是否同时命中6.9与6.10。",
+          "fixture_recipe": "link_file_uri",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.9",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.10"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "路径比较是否大小写敏感、是否规范化反斜杠和URL编码？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.10",
+      "official_title": "有网页、邮箱地址或其他外部链接的超文本链接",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_external",
+        "predicate": "Link 注释不得指向网页、邮箱或申报包外资源。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.9",
+          "6.11",
+          "6.13"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_10-internal-link",
+          "class": "conformant",
+          "description": "Link指向本文件内部页。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_10-https-uri",
+          "class": "violation",
+          "description": "Link指向HTTPS网页。",
+          "fixture_recipe": "link_external_https",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_10-mailto-uri",
+          "class": "violation",
+          "description": "Link指向电子邮箱。",
+          "fixture_recipe": "link_external_mailto",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_10-launch-outside",
+          "class": "violation",
+          "description": "Launch指向包外资源。",
+          "fixture_recipe": "link_launch_external",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_10-reference-exempt",
+          "class": "exemption",
+          "description": "外链位于参考文献豁免节点。",
+          "fixture_recipe": "link_external_https",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_10-absolute-local",
+          "class": "interaction",
+          "description": "绝对本地文件路径是否同时命中6.9。",
+          "fixture_recipe": "link_gotor_absolute_drive",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.10",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.9"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "绝对本地路径是否也被归为‘其他外部链接’？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.11",
+      "official_title": "不允许有未知动作的超文本链接",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_action_type",
+        "predicate": "Link 注释动作仅允许 GoTo、GoToR、Launch。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.10",
+          "6.14",
+          "6.24"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_11-allowed-goto",
+          "class": "conformant",
+          "description": "Link使用GoTo。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_11-allowed-gotor",
+          "class": "conformant",
+          "description": "Link使用GoToR。",
+          "fixture_recipe": "link_gotor_relative",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_11-named-action",
+          "class": "violation",
+          "description": "Link使用Named动作。",
+          "fixture_recipe": "link_unknown_named",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_11-javascript",
+          "class": "interaction",
+          "description": "Link使用JavaScript动作。",
+          "fixture_recipe": "link_javascript",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.24"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_11-direct-dest",
+          "class": "boundary",
+          "description": "Link直接使用/Dest。",
+          "fixture_recipe": "link_direct_dest",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_11-reference-exempt",
+          "class": "exemption",
+          "description": "未知动作位于豁免节点。",
+          "fixture_recipe": "link_unknown_named",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.11",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "JavaScript Link是否同时触发6.11与6.24？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.12",
+      "official_title": "超文本链接不能处于失效状态",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_action_presence",
+        "predicate": "Link 注释必须具有有效 Destination 或 Action。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.13",
+          "6.14"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_12-valid-action",
+          "class": "conformant",
+          "description": "Link有有效动作。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_12-no-action-dest",
+          "class": "violation",
+          "description": "Link既无/Dest也无/A。",
+          "fixture_recipe": "link_no_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_12-empty-action",
+          "class": "boundary",
+          "description": "Link有空动作字典。",
+          "fixture_recipe": "link_empty_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.11"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_12-zero-area",
+          "class": "boundary",
+          "description": "Link动作有效但矩形面积为0。",
+          "fixture_recipe": "link_zero_area",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_12-dest-and-action",
+          "class": "interaction",
+          "description": "Link同时含/Dest和/A。",
+          "fixture_recipe": "link_dest_and_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.14"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_12-reference-exempt",
+          "class": "exemption",
+          "description": "失效Link位于豁免节点。",
+          "fixture_recipe": "link_no_action",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.12",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "零面积Link但动作有效是否视为失效？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.13",
+      "official_title": "超文本链接不能被损坏",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_target_integrity",
+        "predicate": "Link 注释指向的页、命名目的地、文件及远程页必须存在。",
+        "required_context": [
+          "submission_root",
+          "document_relative_path",
+          "ectd_node_id",
+          "package_file_index"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.12"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_13-valid-page",
+          "class": "conformant",
+          "description": "Link指向存在页。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_13-missing-named-dest",
+          "class": "violation",
+          "description": "Link指向不存在的命名目的地。",
+          "fixture_recipe": "link_missing_named_dest",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_13-missing-remote-file",
+          "class": "violation",
+          "description": "GoToR目标文件不存在。",
+          "fixture_recipe": "link_missing_remote_file",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_13-invalid-page-ref",
+          "class": "violation",
+          "description": "Link指向无效页对象。",
+          "fixture_recipe": "link_invalid_page_target",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_13-reference-exempt",
+          "class": "exemption",
+          "description": "损坏Link位于豁免节点。",
+          "fixture_recipe": "link_missing_named_dest",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_13-no-action",
+          "class": "interaction",
+          "description": "无动作是否只报6.12。",
+          "fixture_recipe": "link_no_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.13",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.12"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "GoToR目标文件存在但目标页越界时如何报告？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.14",
+      "official_title": "超文本链接不能有多个动作",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_action_cardinality",
+        "predicate": "单个 Link 注释只能执行一个动作。",
+        "required_context": [
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.11",
+          "6.12"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_14-single-action",
+          "class": "conformant",
+          "description": "单一Link动作。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_14-next-chain",
+          "class": "violation",
+          "description": "Link动作含/Next。",
+          "fixture_recipe": "link_multiple_next",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_14-a-plus-aa",
+          "class": "violation",
+          "description": "Link同时含/A和/AA。",
+          "fixture_recipe": "link_a_plus_aa",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_14-dest-plus-action",
+          "class": "boundary",
+          "description": "Link同时具有/Dest和/A。",
+          "fixture_recipe": "link_dest_and_action",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.12"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_14-duplicate-identical",
+          "class": "boundary",
+          "description": "两个等价动作是否仍判多动作。",
+          "fixture_recipe": "link_duplicate_identical",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_14-reference-exempt",
+          "class": "exemption",
+          "description": "多动作Link位于豁免节点。",
+          "fixture_recipe": "link_multiple_next",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.14",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "动作内容相同但通过/Next重复时是否仍报多动作？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.15",
+      "official_title": "超文本链接必须承前缩放（Inherit Zoom）",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "link_zoom",
+        "predicate": "超文本链接目的地必须保留当前缩放。",
+        "required_context": [
+          "ectd_node_id",
+          "named_destination_index"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.13"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_15-xyz-null",
+          "class": "conformant",
+          "description": "Link目标/XYZ zoom为空。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_15-xyz-zero",
+          "class": "boundary",
+          "description": "Link目标zoom=0。",
+          "fixture_recipe": "link_internal_xyz_zero",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_15-fit",
+          "class": "violation",
+          "description": "Link目标/Fit。",
+          "fixture_recipe": "link_fit",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_15-zoom-one",
+          "class": "violation",
+          "description": "Link目标zoom=1.0。",
+          "fixture_recipe": "link_xyz_one",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_15-named-dest-null",
+          "class": "boundary",
+          "description": "命名目的地解析到Inherit Zoom。",
+          "fixture_recipe": "link_named_dest_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_15-reference-exempt",
+          "class": "exemption",
+          "description": "非承前缩放Link位于豁免节点。",
+          "fixture_recipe": "link_fit",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.15",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "zoom=0与命名目的地的处理是否与6.8完全一致？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.16",
+      "official_title": "PDF版本必须正确",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "pdf_version",
+        "predicate": "允许 PDF 1.4–1.7、PDF/A-1、PDF/A-2；声明 PDF/A 时还需验证真实符合性。",
+        "required_context": [
+          "pdf_header",
+          "catalog_version",
+          "xmp_pdfa_claim"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": []
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_16-pdf-14",
+          "class": "conformant",
+          "description": "PDF 1.4。",
+          "fixture_recipe": "pdf_version_14",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_16-pdf-17",
+          "class": "conformant",
+          "description": "PDF 1.7。",
+          "fixture_recipe": "pdf_version_17",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_16-pdf-13",
+          "class": "violation",
+          "description": "PDF 1.3。",
+          "fixture_recipe": "pdf_version_13",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_16-pdf-20",
+          "class": "violation",
+          "description": "PDF 2.0。",
+          "fixture_recipe": "pdf_version_20",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_16-pdfa1-real",
+          "class": "conformant",
+          "description": "真实符合PDF/A-1。",
+          "fixture_recipe": "pdfa1_verified",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_16-pdfa2-real",
+          "class": "conformant",
+          "description": "真实符合PDF/A-2。",
+          "fixture_recipe": "pdfa2_verified",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_16-header-catalog-mismatch",
+          "class": "boundary",
+          "description": "文件头与Catalog /Version冲突。",
+          "fixture_recipe": "pdf_version_header_catalog_mismatch",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_16-fake-pdfa-xmp",
+          "class": "boundary",
+          "description": "仅写PDF/A XMP声明但不符合PDF/A。",
+          "fixture_recipe": "pdfa_fake_claim",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_16-reference-exempt",
+          "class": "exemption",
+          "description": "不允许版本位于豁免节点。",
+          "fixture_recipe": "pdf_version_13",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.16",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "Header与Catalog /Version冲突时以何者为准？",
+        "仅声明PDF/A但未通过一致性验证是否接受？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.17",
+      "official_title": "不允许带附件的PDF文件",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "attachments",
+        "predicate": "不得出现 EmbeddedFiles、FileAttachment 注释、/AF 或 Portfolio 附件。",
+        "required_context": [
+          "names_tree",
+          "annotations",
+          "associated_files",
+          "collection"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.18",
+          "6.24"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_17-no-attachments",
+          "class": "conformant",
+          "description": "无任何附件机制。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_17-embedded-name-tree",
+          "class": "violation",
+          "description": "EmbeddedFiles名称树附件。",
+          "fixture_recipe": "attachment_embedded",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_17-fileattachment-annot",
+          "class": "violation",
+          "description": "FileAttachment注释。",
+          "fixture_recipe": "attachment_annotation",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.18"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_17-af-only",
+          "class": "boundary",
+          "description": "仅通过Catalog/Page /AF关联文件。",
+          "fixture_recipe": "attachment_af_only",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_17-portfolio",
+          "class": "boundary",
+          "description": "Portfolio/Collection携带附件。",
+          "fixture_recipe": "attachment_portfolio",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_17-reference-exempt",
+          "class": "exemption",
+          "description": "附件位于豁免节点。",
+          "fixture_recipe": "attachment_embedded",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.17",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "/AF关联文件、Portfolio附件是否覆盖？",
+        "FileAttachment是否同时触发6.18？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.18",
+      "official_title": "有注释的PDF文件",
+      "official_severity": "提示信息",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "annotations",
+        "predicate": "除 Link 外的注释需报告；电子签章/签名 Widget 的官方处理需黑盒确认。",
+        "required_context": [
+          "annotation_subtypes",
+          "signature_fields",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "electronic-seal"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_18-links-only",
+          "class": "conformant",
+          "description": "仅含Link注释。",
+          "fixture_recipe": "link_internal_xyz_null",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_18-text-note",
+          "class": "violation",
+          "description": "含Text便笺注释。",
+          "fixture_recipe": "annotation_text",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "FINDING",
+            "expected_severity": "提示信息",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_18-highlight",
+          "class": "violation",
+          "description": "含Highlight注释。",
+          "fixture_recipe": "annotation_highlight",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "FINDING",
+            "expected_severity": "提示信息",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_18-unsigned-widget",
+          "class": "boundary",
+          "description": "含未签名Widget表单字段。",
+          "fixture_recipe": "annotation_widget_unsigned",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_18-signed-widget",
+          "class": "boundary",
+          "description": "含数字签名/电子签章Widget；可能被官方特殊处理。",
+          "fixture_recipe": "annotation_widget_signed",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_18-popup-chain",
+          "class": "boundary",
+          "description": "Text注释及关联Popup是否重复计数。",
+          "fixture_recipe": "annotation_text_popup",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_18-reference-exempt",
+          "class": "exemption",
+          "description": "普通注释位于豁免节点。",
+          "fixture_recipe": "annotation_text",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.18",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "CDE要求的电子签章Widget是否被6.18豁免或特殊识别？",
+        "Popup是否与父注释重复计数？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.19",
+      "official_title": "PDF文件不能有任何安全设置",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          10
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "security_permissions",
+        "predicate": "不得加密或限制选择、复制、打印等；与打开密码规则分开判定。",
+        "required_context": [
+          "encryption_dictionary",
+          "permission_bits",
+          "open_password_status",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.21",
+          "electronic-seal"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_19-unencrypted",
+          "class": "conformant",
+          "description": "未加密、无权限限制。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_19-owner-restrictions",
+          "class": "violation",
+          "description": "空用户密码、owner密码并限制复制/修改。",
+          "fixture_recipe": "encrypted_restricted_empty_user",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_19-encrypted-all-permissions",
+          "class": "boundary",
+          "description": "文件加密但权限位全部允许。",
+          "fixture_recipe": "encrypted_all_permissions_empty_user",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_19-open-password",
+          "class": "interaction",
+          "description": "非空用户密码。",
+          "fixture_recipe": "encrypted_open_password",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.21"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_19-docmdp",
+          "class": "boundary",
+          "description": "签名DocMDP权限是否被视为安全设置。",
+          "fixture_recipe": "signed_docmdp",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_19-reference-exempt",
+          "class": "exemption",
+          "description": "安全设置位于豁免节点。",
+          "fixture_recipe": "encrypted_restricted_empty_user",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.19",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "加密但权限全部允许是否仍属于安全设置？",
+        "DocMDP签名权限是否被视为安全设置？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.20",
+      "official_title": "PDF初始视图正确",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "initial_view",
+        "predicate": "有书签时显示书签面板；放大率和页面布局为默认。",
+        "required_context": [
+          "page_mode",
+          "page_layout",
+          "open_action",
+          "outline_count",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.23"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_20-outlines-correct",
+          "class": "conformant",
+          "description": "有书签、PageMode=UseOutlines、默认布局、无强制缩放。",
+          "fixture_recipe": "initial_view_outlines_default",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-outlines-use-none",
+          "class": "violation",
+          "description": "有书签但PageMode=UseNone。",
+          "fixture_recipe": "initial_view_outlines_hidden",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-nondefault-layout",
+          "class": "violation",
+          "description": "页面布局为TwoColumnLeft。",
+          "fixture_recipe": "initial_view_nondefault_layout",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-openaction-zoom",
+          "class": "violation",
+          "description": "OpenAction显式缩放1.0。",
+          "fixture_recipe": "initial_view_explicit_zoom",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-no-outlines-use-none",
+          "class": "conformant",
+          "description": "无书签且UseNone。",
+          "fixture_recipe": "initial_view_no_outlines_default",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-explicit-vs-omitted-default",
+          "class": "boundary",
+          "description": "显式SinglePage/UseNone与省略键是否同等。",
+          "fixture_recipe": "initial_view_explicit_defaults",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_20-reference-exempt",
+          "class": "exemption",
+          "description": "非默认初始视图位于豁免节点。",
+          "fixture_recipe": "initial_view_outlines_hidden",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.20",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "‘默认’是要求省略键，还是显式/SinglePage、/UseNone也可？",
+        "无书签文件的PageMode要求是什么？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.21",
+      "official_title": "PDF文件不能有密码保护",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [],
+      "detector_contract": {
+        "group": "open_password",
+        "predicate": "文件不得因打开密码而无法无交互打开。",
+        "required_context": [
+          "open_without_password",
+          "encryption_dictionary"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.1",
+          "6.19"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_21-no-password",
+          "class": "conformant",
+          "description": "无打开密码。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.21",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_21-user-password",
+          "class": "violation",
+          "description": "非空用户密码，无法直接打开。",
+          "fixture_recipe": "encrypted_open_password",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.21",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_21-empty-user-owner-restrictions",
+          "class": "interaction",
+          "description": "空用户密码但有权限限制。",
+          "fixture_recipe": "encrypted_restricted_empty_user",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.21",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.19"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_21-damaged-encrypted",
+          "class": "boundary",
+          "description": "加密文件同时损坏。",
+          "fixture_recipe": "encrypted_truncated",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.21",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.1"
+            ]
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "空用户密码、仅owner限制是否只报6.19？",
+        "密码与损坏并存时错误优先级如何？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.22",
+      "official_title": "PDF应该设置启用“快速Web查看（Fast Web View）”",
+      "official_severity": "提示信息",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "1.0说明函",
+        "1.2申请表（含自查表）",
+        "1.3.8产品相关证明性文件（如适用）",
+        "1.10上市后变更（如适用）",
+        "1.11申请人/生产企业证明性文件",
+        "1.12小微企业证明文件（如适用）",
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "linearization",
+        "predicate": "非豁免 PDF 应具有有效线性化结构，而非仅含 Linearized 字样。",
+        "required_context": [
+          "linearization_dictionary",
+          "qpdf_linearization_check",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": []
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_22-linearized-valid",
+          "class": "conformant",
+          "description": "通过qpdf验证的线性化PDF。",
+          "fixture_recipe": "linearized_qpdf",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.22",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_22-not-linearized",
+          "class": "violation",
+          "description": "普通非线性化PDF。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.22",
+            "expected_state": "FINDING",
+            "expected_severity": "提示信息",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_22-fake-linearized-token",
+          "class": "boundary",
+          "description": "文件含/Linearized字样但hint/xref结构无效。",
+          "fixture_recipe": "linearized_fake_token",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.22",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_22-cover-letter-exempt",
+          "class": "exemption",
+          "description": "非线性化PDF位于1.0说明函。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.22",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_22-reference-exempt",
+          "class": "exemption",
+          "description": "非线性化PDF位于参考文献。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.22",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "官方验证器检查真正线性化结构还是仅标志？",
+        "线性化损坏时归6.1还是6.22？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.23",
+      "official_title": "大于5页的文件必须有书签",
+      "official_severity": "错误",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "申请表",
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "bookmark_presence_by_page_count",
+        "predicate": "非豁免文件页数>5时必须存在有效书签。",
+        "required_context": [
+          "page_count",
+          "valid_outline_count",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.5",
+          "6.6"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_23-five-pages-none",
+          "class": "conformant",
+          "description": "正好5页且无书签。",
+          "fixture_recipe": "no_bookmark_5p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_23-six-pages-none",
+          "class": "violation",
+          "description": "6页且无书签。",
+          "fixture_recipe": "no_bookmark_6p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "FINDING",
+            "expected_severity": "错误",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_23-six-pages-valid",
+          "class": "conformant",
+          "description": "6页且至少一个有效书签。",
+          "fixture_recipe": "valid_text_6p_bookmark",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_23-six-pages-empty-outlines",
+          "class": "boundary",
+          "description": "存在空Outlines根但没有书签项。",
+          "fixture_recipe": "empty_outlines_6p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_23-six-pages-invalid-bookmark",
+          "class": "interaction",
+          "description": "仅有失效书签时是否仍满足“有书签”。",
+          "fixture_recipe": "invalid_bookmark_6p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.5"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_23-application-form-exempt",
+          "class": "exemption",
+          "description": "6页无书签但位于申请表。",
+          "fixture_recipe": "no_bookmark_6p",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_23-reference-exempt",
+          "class": "exemption",
+          "description": "6页无书签但位于参考文献。",
+          "fixture_recipe": "no_bookmark_6p",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.23",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "无效书签是否满足‘有书签’？",
+        "页数是否以Page Tree Count还是可渲染页数为准？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.24",
+      "official_title": "PDF内容限制",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "active_content",
+        "predicate": "不得含 JavaScript、3D、音频、视频或其他动态内容。",
+        "required_context": [
+          "actions",
+          "additional_actions",
+          "names_tree",
+          "annotation_subtypes",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.4",
+          "6.11",
+          "6.17",
+          "6.18"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_24-no-active-content",
+          "class": "conformant",
+          "description": "无JS/3D/音视频。",
+          "fixture_recipe": "valid_text_1p",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_24-document-js",
+          "class": "violation",
+          "description": "Catalog名称树中的文档级JavaScript。",
+          "fixture_recipe": "javascript_document",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_24-openaction-js",
+          "class": "violation",
+          "description": "OpenAction为JavaScript。",
+          "fixture_recipe": "javascript_openaction",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_24-richmedia",
+          "class": "violation",
+          "description": "RichMedia注释。",
+          "fixture_recipe": "dynamic_richmedia",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.18"
+            ]
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_24-3d",
+          "class": "violation",
+          "description": "3D注释或对象。",
+          "fixture_recipe": "dynamic_3d",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.18"
+            ]
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_24-bookmark-js",
+          "class": "interaction",
+          "description": "JavaScript挂在书签动作。",
+          "fixture_recipe": "bookmark_javascript",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.4"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_24-link-js",
+          "class": "interaction",
+          "description": "JavaScript挂在Link动作。",
+          "fixture_recipe": "link_javascript",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.11"
+            ]
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_24-reference-exempt",
+          "class": "exemption",
+          "description": "动态内容位于豁免节点。",
+          "fixture_recipe": "javascript_document",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.24",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "动态内容位于书签/Link时是否与6.4/6.11重复报告？",
+        "XFA是否落入动态内容？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.25",
+      "official_title": "PDF内容可搜索",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "searchability",
+        "predicate": "文本应逐页可搜索；扫描页应具有与可见内容对齐的 OCR 文本层。",
+        "required_context": [
+          "page_text",
+          "page_images",
+          "rendered_bounds",
+          "unicode_mapping",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.26"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_25-born-digital",
+          "class": "conformant",
+          "description": "每页均有可提取、可定位文本。",
+          "fixture_recipe": "text_searchable",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_25-image-only",
+          "class": "violation",
+          "description": "整份文档仅图像，无文本层。",
+          "fixture_recipe": "image_only",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_25-mixed-one-image-page",
+          "class": "boundary",
+          "description": "10页中1页无文本层。",
+          "fixture_recipe": "mixed_searchability",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_25-invisible-white-text",
+          "class": "boundary",
+          "description": "图片页叠加白色/不可见文本，是否被官方视为可搜索。",
+          "fixture_recipe": "ocr_invisible_white",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_25-offpage-text",
+          "class": "boundary",
+          "description": "文本层在可见页面外。",
+          "fixture_recipe": "ocr_offpage_text",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_25-missing-tounicode",
+          "class": "boundary",
+          "description": "有字形但无可靠Unicode映射。",
+          "fixture_recipe": "font_missing_tounicode",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": [
+              "6.26"
+            ]
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_25-reference-exempt",
+          "class": "exemption",
+          "description": "图像PDF位于豁免节点。",
+          "fixture_recipe": "image_only",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.25",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        }
+      ],
+      "unresolved_questions": [
+        "可搜索性按文件、按页还是按文本覆盖率判断？",
+        "白色/离页OCR文本能否通过？",
+        "无ToUnicode但阅读器搜索可用时如何判定？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    },
+    {
+      "id": "6.26",
+      "official_title": "如使用非标准字体，需嵌入在PDF文件中",
+      "official_severity": "警告",
+      "official_source": {
+        "source_id": "SRC-CDE-VALIDATION-V1.1",
+        "section": "6 - PDF分析",
+        "printed_pages": [
+          11
+        ]
+      },
+      "scope_exemptions": [
+        "2.7.5、3.3、4.3、5.4参考文献",
+        "外文参考资料"
+      ],
+      "detector_contract": {
+        "group": "font_embedding",
+        "predicate": "非标准字体必须嵌入；需处理子集、CID、Type3及未使用资源边界。",
+        "required_context": [
+          "font_resources",
+          "font_descriptors",
+          "font_streams",
+          "used_glyphs",
+          "ectd_node_id"
+        ],
+        "output_granularity": "file+page+pdf_object",
+        "must_preserve_evidence": [
+          "relative_path",
+          "input_sha256",
+          "rule_pack_id",
+          "object_reference_or_reason",
+          "raw_observation"
+        ],
+        "interactions": [
+          "6.25"
+        ]
+      },
+      "test_cases": [
+        {
+          "case_id": "CN-PDF-6_26-standard-unembedded",
+          "class": "conformant",
+          "description": "仅使用标准14字体且未嵌入。",
+          "fixture_recipe": "font_standard_unembedded",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "implemented"
+        },
+        {
+          "case_id": "CN-PDF-6_26-nonstandard-unembedded",
+          "class": "violation",
+          "description": "使用非标准字体但未嵌入。",
+          "fixture_recipe": "font_nonstandard_unembedded",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "FINDING",
+            "expected_severity": "警告",
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "FINDING",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_26-nonstandard-embedded",
+          "class": "conformant",
+          "description": "非标准字体完整嵌入。",
+          "fixture_recipe": "font_nonstandard_embedded",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_26-subset-embedded",
+          "class": "conformant",
+          "description": "非标准字体以子集形式嵌入。",
+          "fixture_recipe": "font_subset_embedded",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "PASS",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "PASS",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_26-type3",
+          "class": "boundary",
+          "description": "Type3字体是否按嵌入规则处理。",
+          "fixture_recipe": "font_type3",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_26-cid-descendant",
+          "class": "boundary",
+          "description": "CID字体嵌入判定应检查DescendantFont。",
+          "fixture_recipe": "font_cid_descendant",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_26-unused-resource",
+          "class": "boundary",
+          "description": "页面资源引用未嵌入字体但内容流未使用。",
+          "fixture_recipe": "font_unused_resource",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        },
+        {
+          "case_id": "CN-PDF-6_26-chinese-name-variants",
+          "class": "boundary",
+          "description": "宋体/黑体等中文字体名称是否属于官方“标准字体”。",
+          "fixture_recipe": "font_chinese_standard_names",
+          "context_profile": "standard-nonexempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "OBSERVE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "OBSERVE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "blocked"
+        },
+        {
+          "case_id": "CN-PDF-6_26-reference-exempt",
+          "class": "exemption",
+          "description": "非标准未嵌入字体位于豁免节点。",
+          "fixture_recipe": "font_nonstandard_unembedded",
+          "context_profile": "reference-exempt",
+          "expected_cde": {
+            "target_rule": "6.26",
+            "expected_state": "NOT_APPLICABLE",
+            "expected_severity": null,
+            "observed_state": null,
+            "observed_validator_version": null,
+            "observation_status": "NOT_RUN"
+          },
+          "local_oracle": {
+            "expected_state": "NOT_APPLICABLE",
+            "must_not_modify_input": true,
+            "interaction_rules": []
+          },
+          "generator_status": "specified"
+        }
+      ],
+      "unresolved_questions": [
+        "中国规则采用哪一份标准字体名单？",
+        "未使用的未嵌入字体资源是否报告？",
+        "Type3和CID字体如何判定嵌入？"
+      ],
+      "implementation_status": "CONTRACT_DEFINED",
+      "official_black_box_status": "NOT_RUN"
+    }
+  ]
+}

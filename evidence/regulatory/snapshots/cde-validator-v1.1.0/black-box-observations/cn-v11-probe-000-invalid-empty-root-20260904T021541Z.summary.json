@@ -1,0 +1,273 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "cn-v11-probe-000-invalid-empty-root-20260904T021541Z",
+  "case_id": "cn-v11-probe-000-invalid-empty-root",
+  "profile": "cn-cde-ectd-v3.2.2-v1.1",
+  "status": "SYNTHETIC_TRANSACTION_NOT_ADMISSIBLE_AFTER_EVIDENCE_FINALIZATION",
+  "started_at": "2026-09-04T02:15:41.897069+00:00",
+  "finished_at": "2026-09-04T02:15:58.699142+00:00",
+  "admissible": false,
+  "classification": "non_admissible_official_validator_transaction_attempt",
+  "environment_adaptation": {
+    "type": "byte_identical_ascii_ntfs_alias",
+    "reason": "Launch4j corrupts the Chinese executable name in the JVM classpath on the non-Chinese hosted Windows runner.",
+    "stock_environment_equivalent": false
+  },
+  "identity": {
+    "application": "C:\\CDEValidatorTransactionRuntime\\CDEValidator.exe",
+    "original_application": "C:\\CDEValidatorTransactionRuntime\\eCTD验证软件.exe",
+    "alias_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "original_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "expected_sha256": "46b45f511382b5ea448df155a76e6f215713e81a5982494a4227de6825822163",
+    "byte_identical": true,
+    "samefile": true
+  },
+  "input": {
+    "directory": "C:\\EZCTDProbeInput\\0000",
+    "inventory_digest_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "inventory_digest_after": null,
+    "expected_inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "file_count_before": 0,
+    "file_count_after": 0,
+    "unchanged": null
+  },
+  "ui_transaction": {
+    "validation_invoked": false,
+    "validation_click_at": null,
+    "input_selection": {
+      "button_title": "选择申报资料",
+      "directory": "C:\\EZCTDProbeInput\\0000",
+      "started_at": "2026-09-04T02:15:53.200335+00:00",
+      "success": false,
+      "attempts": [],
+      "error": "AttributeError: 'UIAWrapper' object has no attribute 'child_window'",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\EZCTD\\EZCTD\\tools\\regulatory\\run_cde_validator_synthetic_transaction.py\", line 206, in choose_directory\n    button = main_window.child_window(\n             ^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'UIAWrapper' object has no attribute 'child_window'\n",
+      "finished_at": "2026-09-04T02:15:53.229320+00:00"
+    },
+    "report_selection": null,
+    "action_trace": [
+      {
+        "at": "2026-09-04T02:15:45.231571+00:00",
+        "action": "launch_official_byte_identical_alias",
+        "pid": 9140
+      }
+    ]
+  },
+  "native_result": {
+    "terminal_reason": null,
+    "terminal_alert": null,
+    "table_native_texts": [],
+    "native_report_present": false,
+    "output_inventory": [],
+    "output_digest": null
+  },
+  "native_evidence": {
+    "schema_version": "0.1.0",
+    "source_report_directory": "C:\\EZCTDProbeReports",
+    "copied_report_directory": "native-output",
+    "source_inventory": [],
+    "source_inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "copied_inventory": [],
+    "copied_inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "copied_matches_source": true,
+    "copied_matches_runtime_inventory": true,
+    "copied_native_output_present": false,
+    "terminal_ui_evidence_present": false,
+    "application_logs": [
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\util\\style\\valid-values.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/util/style/valid-values.xml",
+        "size": 6401,
+        "sha256": "0b9820c156340bdcc0ab709e78657e0d9d5e3a757fee1e42490ca5aec04e9084"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-application-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-application-type.xml",
+        "size": 1222,
+        "sha256": "bdba7ee350917c8278696caea5c7dc9e22432cc24557194dc09877e07e44c931"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-product-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-product-type.xml",
+        "size": 691,
+        "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-regulatory-activity-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-regulatory-activity-type.xml",
+        "size": 2849,
+        "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\cv-sequence-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/cv-sequence-type.xml",
+        "size": 951,
+        "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\depend-apt-rat-sqt.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/depend-apt-rat-sqt.xml",
+        "size": 5423,
+        "sha256": "d1c1cf9fd1965251c1c8a5f99eb648098fce7debce7dc4d43751479aef7fe96f"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\element-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/element-property_CN.xml",
+        "size": 18752,
+        "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\element-property_ICH.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/element-property_ICH.xml",
+        "size": 39820,
+        "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_0\\vocabulory\\node-extension-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_0/vocabulory/node-extension-property_CN.xml",
+        "size": 1293,
+        "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\util\\style\\valid-values.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/util/style/valid-values.xml",
+        "size": 7803,
+        "sha256": "901b6db2c4b1edf97c358c6e8413e7d18f9b1ed5143e792a98e6f5a4e71871b3"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-application-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-application-type.xml",
+        "size": 1499,
+        "sha256": "c844fa1c4bbc43ffb157e01911fd30477df4209602a1185c43a45bb267d14641"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-product-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-product-type.xml",
+        "size": 691,
+        "sha256": "e27ebdd9708fd170d0990dc5d52db97c5e5cf6be2ef64d9ff31d3153fdb5b216"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-regulatory-activity-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-regulatory-activity-type.xml",
+        "size": 2849,
+        "sha256": "418329bc4f8a1c9ebacb66897d8234a12b3e436925902fe2c6d7cb636123bcfd"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\cv-sequence-type.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/cv-sequence-type.xml",
+        "size": 951,
+        "sha256": "ae5696aa6b3035f2948e818a8c09e8b45d025ca64ca05803ad5a034333300e17"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\depend-apt-rat-sqt.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/depend-apt-rat-sqt.xml",
+        "size": 7363,
+        "sha256": "faa59d5145c83a934f7b61e9ebe1e9d8f7269c6e199dda3308183710a09f4867"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\element-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/element-property_CN.xml",
+        "size": 18752,
+        "sha256": "e51ae97c8ea13e2cdde0656601fc5933d33e5643d788902762dbc39f5945da59"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\element-property_ICH.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/element-property_ICH.xml",
+        "size": 39820,
+        "sha256": "113bc6159e0dd79021a7407c682364935088a48ddb7c979be3bf15ecc8bf773d"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\config\\CNProfile_V1_1\\vocabulory\\node-extension-property_CN.xml",
+        "captured_as": "application-logs/config/CNProfile_V1_1/vocabulory/node-extension-property_CN.xml",
+        "size": 1293,
+        "sha256": "70c97a7e9c31f414b4f79fa3e7c11a91a4eb4b4f35294176c4d1d8357dcd5be9"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\bin\\server\\Xusage.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/bin/server/Xusage.txt",
+        "size": 1423,
+        "sha256": "37cf4e6cdc4357cebb0ec8108d5cb0ad42611f675b926c819ae03b74ce990a08"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\lib\\jvm.hprof.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/lib/jvm.hprof.txt",
+        "size": 4226,
+        "sha256": "b055bf25b07e5ac70e99b897fb8152f288769065b5b84387362bb9cc2e6c9d38"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\README.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/README.txt",
+        "size": 46,
+        "sha256": "963095cf8db76fb8071fd19a3110718a42f2ab42b27a3adfd9ec58981c3e88d2"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\THIRDPARTYLICENSEREADME-JAVAFX.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/THIRDPARTYLICENSEREADME-JAVAFX.txt",
+        "size": 112724,
+        "sha256": "18193fe6b7a04b12fbc04c6c383ed67982a3bff62773087175fff6dc05731b13"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\THIRDPARTYLICENSEREADME.txt",
+        "captured_as": "application-logs/jre/jre1.8.0_202/THIRDPARTYLICENSEREADME.txt",
+        "size": 153824,
+        "sha256": "3114fc257cff7e538c07e5cae90fe53766725efe7746614e4437695a0a89138a"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\jre\\jre1.8.0_202\\Welcome.html",
+        "captured_as": "application-logs/jre/jre1.8.0_202/Welcome.html",
+        "size": 955,
+        "sha256": "db34008b34b4bc3177436e71bd01557d45d52e710699758ab227e5fec7ffadb8"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\launch4j.log",
+        "captured_as": "application-logs/launch4j.log",
+        "size": 3866,
+        "sha256": "e21632d9afd3392adad3775407651e0bc7901c01eaf2c40a3671a5e942278675"
+      },
+      {
+        "source": "C:\\CDEValidatorTransactionRuntime\\logs\\client.log",
+        "captured_as": "application-logs/logs/client.log",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "admissibility": {
+    "native_output_conserved_in_artifact": false,
+    "terminal_ui_evidence_conserved_in_artifact": false,
+    "native_evidence_conserved": false
+  },
+  "failed_admissibility_gates": [
+    "official_binary_identity_fixed",
+    "input_identity_fixed",
+    "validation_control_invoked",
+    "native_terminal_result_captured",
+    "input_unchanged",
+    "outbound_firewall_ready",
+    "native_evidence_conserved"
+  ],
+  "observation_counters": {
+    "completed_validation_runs": 0,
+    "admissible_black_box_observations": 0,
+    "environment_adapted_official_observations": 0,
+    "stock_environment_official_observations": 0,
+    "calibration_informative_observations": 0,
+    "official_black_box_observations": 0
+  },
+  "errors": [
+    {
+      "error": "RuntimeError: input directory chooser did not close successfully",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\a\\EZCTD\\EZCTD\\tools\\regulatory\\run_cde_validator_synthetic_transaction.py\", line 501, in main\n    raise RuntimeError(\"input directory chooser did not close successfully\")\nRuntimeError: input directory chooser did not close successfully\n"
+    }
+  ],
+  "next_gate": "Repair only the failed admissibility gates using the preserved raw evidence; do not increment counters.",
+  "raw_evidence": {
+    "workflow_run_id": 33828799828,
+    "workflow_run_attempt": 1,
+    "artifact_id": "9920921926",
+    "artifact_url": "https://github.com/laojia-a/EZCTD/actions/runs/33828799828/artifacts/9920921926",
+    "artifact_digest": "4aa29661aafce46a27b729c9adcfbd17345982177407198417a2102954bda043",
+    "retention_days": 90
+  },
+  "boundary": "This result uses byte-identical official application bytes through an ASCII NTFS alias to work around Launch4j filename encoding on the hosted non-Chinese Windows runner. It is an official-binary black-box observation when admissible, but it is not evidence of stock-environment parity and is not yet a rule-calibration observation."
+}

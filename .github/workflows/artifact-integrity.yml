@@ -1,25 +1,93 @@
 name: Artifact integrity
-
 on:
   push:
-    branches: [main]
+    branches: [main, "agent/**"]
   pull_request:
     branches: [main]
-
 permissions:
   contents: read
-
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
         with:
-          python-version: "3.12"
-
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Validate planning artifacts
         run: python scripts/validate_artifacts.py
+      - name: Validate P0-B0 rule matrix
+        run: python scripts/validate_p0b0_matrix.py
+      - name: Install synthetic corpus dependencies
+        run: python -m pip install -r requirements-corpus.txt
+      - name: Generate P0-B0 smoke corpus
+        run: python tools/corpus/build_pdf_fixtures.py --output tests/corpus/generated-smoke --mode smoke
+      - name: Inspect generated PDF structures
+        run: python scripts/inspect_p0b0_smoke.py
+  cro-core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install core and focused test dependencies
+        run: python -m pip install -e ".[test]"
+      - name: Prepare evidence directory
+        run: python -c "from pathlib import Path; Path('build/cro-core').mkdir(parents=True, exist_ok=True)"
+      - name: Focused safety and PDF core tests
+        run: python -m pytest -q tests/cro_pdf --junitxml=build/cro-core/junit.xml
+      - name: Preserve tested source and dependency versions
+        if: always()
+        shell: bash
+        run: |
+          git archive HEAD -o build/cro-core/source.zip
+          git rev-parse HEAD > build/cro-core/source-commit.txt
+          python -m pip freeze > build/cro-core/dependencies.txt
+      - name: Preserve core test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cro-pdf-core-${{ runner.os }}
+          path: build/cro-core/
+          retention-days: 30
+          if-no-files-found: error
+  cro-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies and Chromium
+        run: |
+          python -m pip install -e ".[test,ui-test]"
+          python -m playwright install --with-deps chromium
+      - name: Exercise actual local HTTP reader and verified copies
+        run: python tools/review/test_workbench_browser.py build/cro-browser
+      - name: Preserve browser evidence and tested source
+        if: always()
+        run: |
+          mkdir -p build/cro-browser
+          git rev-parse HEAD > build/cro-browser/source-commit.txt
+          python -m pip freeze > build/cro-browser/dependencies.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cro-workbench-browser
+          path: build/cro-browser/
+          retention-days: 30
+          if-no-files-found: error
