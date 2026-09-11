@@ -1,0 +1,3118 @@
+{
+  "spec_version": "1.0.0",
+  "date": "2026-09-11",
+  "status": "SPECIFICATION_ONLY_NOT_IMPLEMENTED",
+  "repository": "laojia-a/EZCTD",
+  "baseline_commit": "682217846a49671c9ea8cea441eb7af88b11a161",
+  "scope": [
+    "5",
+    "2.5",
+    "2.7"
+  ],
+  "profile_id": "cn-cde-ectd-v3.2.2-v1.1-pdf",
+  "sources": [
+    {
+      "id": "S01",
+      "kind": "官方发布通知，本次读取正文",
+      "title": "国家药监局药审中心关于发布eCTD V3.2.2相关技术文件的通告（2026年第4号）",
+      "url": "https://www.cde.org.cn/ectd/news/viewInfoCommon/b785c2c8d9509fe1d661250596eb3e92",
+      "published": "2026-01-15",
+      "effective": "2026-03-01",
+      "scope": "核实正式发布、施行时间、附件4名称；不据通知本身推导26条细则"
+    },
+    {
+      "id": "S02",
+      "kind": "官网附件入口，本次未成功获取PDF字节",
+      "title": "eCTD验证标准V1.1.pdf（通告附件4）",
+      "url": "https://www.cde.org.cn/ectd/download/7971e22795cc2bcf52a32fe11f96d8b2",
+      "sha256": null,
+      "scope": "已从CDE官网通知附件表核实此入口；本次下载失败，不声称已固定官网原件哈希"
+    },
+    {
+      "id": "S03",
+      "kind": "官方署名文档的公开副本，本次读表并查看页图",
+      "title": "eCTD验证标准V1.1，2026年1月",
+      "url": "https://www.cnpharm.com/upload/resources/file/2026/01/16/183313.pdf",
+      "pages": "物理页9—11：6-PDF分析；物理页12：严重程度说明",
+      "sha256": null,
+      "scope": "用于逐条交叉核对规则号、要点、严重程度、例外；未完成与官网附件字节一致性验证"
+    },
+    {
+      "id": "S04",
+      "kind": "用户上传的操作经验材料",
+      "title": "电子申报软件&PDF属性设置操作交流 202404.pdf",
+      "pages": "第02章：物理页13—33；页12为章节分隔",
+      "sha256": "ab7fadfa9a476a05373d716df340280efb53b13d549f05ab48a648ca9be9c525",
+      "scope": "OCR/字体/属性/书签/链接实操经验；不是2026年现行规则编号来源"
+    },
+    {
+      "id": "S05",
+      "kind": "远端仓库固定提交",
+      "title": "laojia-a/EZCTD main",
+      "url": "https://github.com/laojia-a/EZCTD/tree/682217846a49671c9ea8cea441eb7af88b11a161",
+      "commit": "682217846a49671c9ea8cea441eb7af88b11a161",
+      "scope": "现有代码和文档基线；本轮只读审查，未运行产品测试或修改远端"
+    },
+    {
+      "id": "S06",
+      "kind": "官方技术文档",
+      "title": "pikepdf: Outlines",
+      "url": "https://pikepdf.readthedocs.io/en/latest/topics/outlines.html",
+      "scope": "书签/目标/动作接口；文档显示10.13系列，不等同仓库已安装版本"
+    },
+    {
+      "id": "S07",
+      "kind": "官方技术文档",
+      "title": "pikepdf: Metadata",
+      "url": "https://pikepdf.readthedocs.io/en/latest/topics/metadata.html",
+      "scope": "Info/XMP协调、自动字段更新与PDF/A声明限制"
+    },
+    {
+      "id": "S08",
+      "kind": "官方技术文档",
+      "title": "qpdf: Running qpdf",
+      "url": "https://qpdf.readthedocs.io/en/stable/cli.html",
+      "scope": "结构检查、线性化、密码输入及版本选项的能力边界"
+    },
+    {
+      "id": "S09",
+      "kind": "官方技术文档",
+      "title": "OCRmyPDF: Cookbook",
+      "url": "https://ocrmypdf.readthedocs.io/en/latest/cookbook.html",
+      "scope": "OCR候选引擎的按页处理与输出配置；不是已选定或已打包的能力"
+    },
+    {
+      "id": "S10",
+      "kind": "官网栏目，本次检索",
+      "title": "CDE eCTD专栏",
+      "url": "https://www.cde.org.cn/ectd/index",
+      "scope": "本次可核实正式基线为V3.2.2配套V1.1；栏目另列v4.0征求意见通知，不混入本规格"
+    },
+    {
+      "id": "S11",
+      "kind": "Adobe官方API参考",
+      "title": "PDFont / Type3与CID字体",
+      "url": "https://opensource.adobe.com/dc-acrobat-sdk-docs/acrobatsdk/apireference/PD_Layer/PDFont.html",
+      "scope": "Type3字符绘制过程、字体类型与映射机制；技术定义，不替代CDE标准字体名单"
+    }
+  ],
+  "rules": [
+    {
+      "id": "6.1",
+      "title": "可读性",
+      "severity": "错误",
+      "legacy": "4.1",
+      "practice_pages": "13",
+      "operation": "OP-READABILITY",
+      "milestone": "M1",
+      "normative_summary": "检查损坏、不可读或零页PDF。",
+      "inspect": "严格解析、页树/内容流检查；记录全页渲染完成数和具体失败页。恢复模式可读与严格解析可读分别报告。",
+      "apply": "默认只检查；M5仅对可用独立证据证实内容保全的结构修复生成副本。",
+      "exceptions": "密码导致打不开由6.21单列；缺少解码器/超限/检查中断不是已证明损坏。无法建立内容基线时不自动重建。",
+      "preserve": "不得删页、补空白页或用首页能显示替代全页检查；恢复输出不得标为“原件内容已完整确认”。",
+      "positive": "3页合成文本PDF逐页可解析且可渲染",
+      "negative": "零页PDF或第2页确证无效内容流；定位失效页",
+      "uncertain": "渲染超时但未证实文件损坏；未完成部分保持未判定",
+      "requirement_id": "R-6.1",
+      "applicability": "ALL",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R61-P",
+        "AC-R61-N",
+        "AC-R61-U"
+      ]
+    },
+    {
+      "id": "6.2",
+      "title": "书签路径相对化",
+      "severity": "错误",
+      "legacy": "4.10",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_PATH",
+      "milestone": "M2",
+      "normative_summary": "适用文件的跨文件书签不应使用绝对路径。",
+      "inspect": "解析书签动作文件规格（含Unicode文件名）、路径类型及已授权目标；本地页内跳转无文件路径时不得误报。",
+      "apply": "只有明确且唯一的输入到输出路径映射才改相对路径；保留合法../兄弟目录引用。",
+      "exceptions": "同名不同目录、盘符不明、目标未提供进入映射待办；绝不扫描全盘寻找。",
+      "preserve": "仅改所选文件规格；目标页、缩放、书签标题和层级不变。",
+      "positive": "GoToR指向已提供兄弟目录PDF的相对路径",
+      "negative": "书签含C盘绝对路径且存在已确认映射",
+      "uncertain": "目标在未授权根目录；不读取且不凭同名映射",
+      "requirement_id": "R-6.2",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R62-P",
+        "AC-R62-N",
+        "AC-R62-U"
+      ]
+    },
+    {
+      "id": "6.3",
+      "title": "书签外部地址",
+      "severity": "错误",
+      "legacy": "4.11",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_EXTERNAL",
+      "milestone": "M2",
+      "normative_summary": "适用文件书签中的网页、邮箱等外部地址受限制。",
+      "inspect": "枚举URI及外部文件动作，保留实际类型和证据；普通书签标题包含网址不等于有外部动作。",
+      "apply": "批次显式启用删除/重定向策略后处理。没有有效替代目标的父节点不得仅清空动作留下失效书签。",
+      "exceptions": "带子节点的外链书签默认需选择重定向、提升子节点或明确删除子树；未选策略则跳过该操作。",
+      "preserve": "未经批准的子树、页面正文和其他书签不变；删除行为属于导航变化而非纯属性保全。",
+      "positive": "页内书签标题含网址但目标为本地页",
+      "negative": "适用报告中书签URI指向https网页",
+      "uncertain": "带有效子节点的URI父书签未给处置策略",
+      "requirement_id": "R-6.3",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R63-P",
+        "AC-R63-N",
+        "AC-R63-U"
+      ]
+    },
+    {
+      "id": "6.4",
+      "title": "书签动作类型",
+      "severity": "错误",
+      "legacy": "4.12",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_ACTION_TYPE",
+      "milestone": "M2",
+      "normative_summary": "允许类型名单为GoTo、GoToR、Launch；类型允许不代表目标正确或可以执行。",
+      "inspect": "递归观察主动作、附加动作及Next链，检测循环和异常字典；保存每个有效动作类型。",
+      "apply": "已确认的单步命名页导航可转为本地GoTo；其余须有明确替换目标/删除策略。",
+      "exceptions": "无法解析、循环或未知扩展类型集中列出；任何Launch、URI或脚本均不由扫描器执行。",
+      "preserve": "不把未知动作自动改到第一页；保留未选动作对象及共享引用。",
+      "positive": "单一合法GoTo动作",
+      "negative": "动作类型为JavaScript且确认适用",
+      "uncertain": "动作链循环达到上限；不能视为全链已检查",
+      "requirement_id": "R-6.4",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R64-P",
+        "AC-R64-N",
+        "AC-R64-U"
+      ]
+    },
+    {
+      "id": "6.5",
+      "title": "书签失效",
+      "severity": "错误",
+      "legacy": "4.13",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_MISSING_ACTION",
+      "milestone": "M2",
+      "normative_summary": "适用文件的书签不应缺少可用动作。",
+      "inspect": "区分无Dest/无A、空字典、无效动作，以及有动作但目标损坏（另归6.6）。",
+      "apply": "使用已批准的书签ID到目标映射补齐；无子节点无用书签可按已选策略移除。",
+      "exceptions": "不能仅依据标题相似猜页；父节点删除必须使用明确子节点策略。",
+      "preserve": "不能靠任意新增第一页目标凑有效；合成与真实目标含义验证分开。",
+      "positive": "有效目标引用的普通书签",
+      "negative": "无Dest及A的叶书签",
+      "uncertain": "被解析器恢复的异常节点仍无可靠原始结构",
+      "requirement_id": "R-6.5",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R65-P",
+        "AC-R65-N",
+        "AC-R65-U"
+      ]
+    },
+    {
+      "id": "6.6",
+      "title": "书签目标完整性",
+      "severity": "错误",
+      "legacy": "4.14",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_TARGET",
+      "milestone": "M2",
+      "normative_summary": "检查适用书签的目标是否存在、可解析。",
+      "inspect": "本地页对象必须属于当前页树；GoToR直接页号为零基整数；名称目标在目标文件解析。",
+      "apply": "按准确页映射、目标名称映射或明确文件映射重定向。",
+      "exceptions": "目标未提供、不可授权、目标打不开、真正缺失分别处理；前三种不冒称已证明目标损坏。",
+      "preserve": "保留目标语义；输入目标与输出目标均复验；不通过删除全部书签消除问题。",
+      "positive": "远端名称在已提供目标PDF解析到合法本地页",
+      "negative": "本地书签指向已不存在页对象",
+      "uncertain": "远端PDF未提供，目标状态为NOT_PROVIDED",
+      "requirement_id": "R-6.6",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R66-P",
+        "AC-R66-N",
+        "AC-R66-U"
+      ]
+    },
+    {
+      "id": "6.7",
+      "title": "书签动作唯一性",
+      "severity": "错误",
+      "legacy": "4.15",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_SINGLE_ACTION",
+      "milestone": "M2",
+      "normative_summary": "同一书签不能配置多个有效动作。",
+      "inspect": "计数Dest、A、AA及Next中的有效行为，区分共享引用与实际连续执行，检出循环。",
+      "apply": "按批次指定的“唯一保留动作选择器”裁剪；只匹配到一条时可执行。",
+      "exceptions": "匹配零条/多条或链循环时不取第一条代替决定。",
+      "preserve": "修后仅保留批准行为；不改变同一共享动作的其他所有者。",
+      "positive": "只有一个GoTo且无额外动作",
+      "negative": "A.Next包含第二个不同页跳转",
+      "uncertain": "共享动作加循环导致遍历不完整",
+      "requirement_id": "R-6.7",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R67-P",
+        "AC-R67-N",
+        "AC-R67-U"
+      ]
+    },
+    {
+      "id": "6.8",
+      "title": "书签承前缩放",
+      "severity": "警告",
+      "legacy": "4.16",
+      "practice_pages": "13、29",
+      "operation": "OP-BOOKMARK_ZOOM",
+      "milestone": "M2",
+      "normative_summary": "适用书签采用承前缩放。",
+      "inspect": "解析完整目标类型和参数，区分XYZ的null/0缩放、显式缩放、Fit类和畸形参数。",
+      "apply": "合法XYZ只改zoom；Fit类仅在已批准坐标转换策略覆盖时转换。名称/共享目标采用仅影响选中引用的写时复制。",
+      "exceptions": "缺参数不得当作合法null；不能确定定位的FitR或复杂目标保留待办。",
+      "preserve": "目标页、XYZ已有坐标、标题、树结构不变；未选引用不能随共享目标一起改变。",
+      "positive": "完整XYZ目标，zoom为null或0",
+      "negative": "完整XYZ目标，zoom为1.5",
+      "uncertain": "XYZ数组长度不足；不是承前缩放通过",
+      "requirement_id": "R-6.8",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R68-P",
+        "AC-R68-N",
+        "AC-R68-U"
+      ]
+    },
+    {
+      "id": "6.9",
+      "title": "超链接路径相对化",
+      "severity": "警告",
+      "legacy": "4.17",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_PATH",
+      "milestone": "M2",
+      "normative_summary": "适用跨文件链接使用相对路径。",
+      "inspect": "枚举每页Link注释及文件动作；读取热区、文件规格、目标和路径类别。",
+      "apply": "按唯一确认映射生成相对路径，处理中文/空格/大小写，不擅自URL解码两次。",
+      "exceptions": "绝对路径目标未确认、名称冲突时跳过；合法相对../不直接视作恶意。",
+      "preserve": "只改文件目标路径；Rect/QuadPoints、边框、正文及目标页不变。",
+      "positive": "合法../附件/报告.pdf链接",
+      "negative": "Link中含明确的盘符绝对路径",
+      "uncertain": "两个同名目标无明确选择",
+      "requirement_id": "R-6.9",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R69-P",
+        "AC-R69-N",
+        "AC-R69-U"
+      ]
+    },
+    {
+      "id": "6.10",
+      "title": "超链接外部地址",
+      "severity": "错误",
+      "legacy": "4.18",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_EXTERNAL",
+      "milestone": "M2",
+      "normative_summary": "适用文件真实超链接中的外部地址受限制。",
+      "inspect": "区分PDF真实URI Link与阅读器自动识别的普通URL文字；检查邮件/网页等目标。",
+      "apply": "按启用策略移除选中外链热点或重定向；对无边框普通外链可自动删除点击对象。",
+      "exceptions": "可见边框/外观流删除会改变页面显示，须批准其局部视觉差异；参考文献按豁免处理。",
+      "preserve": "正文网址、DOI和邮箱文字不删；页面其他区域不可变化。",
+      "positive": "正文出现DOI但没有Link对象",
+      "negative": "报告中的真实mailto链接",
+      "uncertain": "无法解析的Link外观资源；不承诺视觉无变化",
+      "requirement_id": "R-6.10",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R610-P",
+        "AC-R610-N",
+        "AC-R610-U"
+      ]
+    },
+    {
+      "id": "6.11",
+      "title": "超链接动作类型",
+      "severity": "错误",
+      "legacy": "4.19",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_ACTION_TYPE",
+      "milestone": "M2",
+      "normative_summary": "链接允许动作类型与书签对应；允许类型并非执行许可。",
+      "inspect": "遍历Link的主动作、附加动作及动作链；不执行Launch等。",
+      "apply": "有明确映射的导航动作转GoTo/GoToR；不明动作保留待办或按具体删除策略处理。",
+      "exceptions": "未知对象、遍历超限不返回全部合格；不把阅读器警告误当结构损坏。",
+      "preserve": "链接热区和未选动作所有者不变。",
+      "positive": "单一GoToR且目标合法",
+      "negative": "Link含JavaScript动作",
+      "uncertain": "嵌套动作遍历超限",
+      "requirement_id": "R-6.11",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R611-P",
+        "AC-R611-N",
+        "AC-R611-U"
+      ]
+    },
+    {
+      "id": "6.12",
+      "title": "超链接失效",
+      "severity": "错误",
+      "legacy": "4.20",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_MISSING_ACTION",
+      "milestone": "M2",
+      "normative_summary": "适用文件不应保留未指定可用操作的链接。",
+      "inspect": "识别无Dest/A及空动作的Link，定位物理页和热区。",
+      "apply": "依据确认目标映射补目标；选定移除空热点策略时删除该注释。",
+      "exceptions": "不得按邻近文字自动猜目标；有可见外观的热点删除需批准局部差异。",
+      "preserve": "不删正文文字、非链接注释或整页。",
+      "positive": "Link具有合法Dest",
+      "negative": "空A字典的Link",
+      "uncertain": "注释损坏无法确认Subtype",
+      "requirement_id": "R-6.12",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R612-P",
+        "AC-R612-N",
+        "AC-R612-U"
+      ]
+    },
+    {
+      "id": "6.13",
+      "title": "超链接目标完整性",
+      "severity": "错误",
+      "legacy": "4.21",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_TARGET",
+      "milestone": "M2",
+      "normative_summary": "适用链接的目标不能损坏或不存在。",
+      "inspect": "检查本地页、名称树与跨文件目标；在最终输出目录再解析一遍。",
+      "apply": "使用确认的文件/名称/页映射修复；不存在可靠映射则不处理。",
+      "exceptions": "未提供、未导出、权限拒绝、目标坏文件与明确不存在分开列出。",
+      "preserve": "保留正确热区和位置；只在最终目标已冻结时给最终链接结论。",
+      "positive": "报告链接到输出树中可解析的附件页",
+      "negative": "远端显式页号等于目标页数（越界）",
+      "uncertain": "目标可在输入访问但未被纳入输出",
+      "requirement_id": "R-6.13",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R613-P",
+        "AC-R613-N",
+        "AC-R613-U"
+      ]
+    },
+    {
+      "id": "6.14",
+      "title": "超链接动作唯一性",
+      "severity": "错误",
+      "legacy": "4.22",
+      "practice_pages": "13、30",
+      "operation": "OP-LINK_SINGLE_ACTION",
+      "milestone": "M2",
+      "normative_summary": "一个链接不能配置多个有效动作。",
+      "inspect": "与书签共用有界动作图解析，逐Link保留各有效动作证据。",
+      "apply": "按明确选择器保留唯一动作；不满足唯一性便跳过。",
+      "exceptions": "不能用默认保留首项作为业务决定；共享动作需所有者级处理。",
+      "preserve": "修后点击行为与选定目标一致；未选Link保持原有行为。",
+      "positive": "一个GoTo动作",
+      "negative": "Link有GoTo和Next Launch",
+      "uncertain": "选择器匹配多条动作",
+      "requirement_id": "R-6.14",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R614-P",
+        "AC-R614-N",
+        "AC-R614-U"
+      ]
+    },
+    {
+      "id": "6.15",
+      "title": "超链接承前缩放",
+      "severity": "警告",
+      "legacy": "4.23",
+      "practice_pages": "13、30—33",
+      "operation": "OP-LINK_ZOOM",
+      "milestone": "M2",
+      "normative_summary": "适用链接采用承前缩放。",
+      "inspect": "检查完整目标表达及共享情况；区分合法null/0与缺损参数。",
+      "apply": "与书签缩放共享目标转换器，但按Link所有者独立计划和统计。",
+      "exceptions": "复杂Fit/命名/跨文件情况仅在支持矩阵覆盖时自动化。",
+      "preserve": "Rect/QuadPoints、目标页、已有坐标不变；链接文字不改。",
+      "positive": "Link完整XYZ的zoom为0",
+      "negative": "Link完整XYZ的zoom为2",
+      "uncertain": "命名目标不能解析，缩放无法判断",
+      "requirement_id": "R-6.15",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R615-P",
+        "AC-R615-N",
+        "AC-R615-U"
+      ]
+    },
+    {
+      "id": "6.16",
+      "title": "版本与符合性",
+      "severity": "警告",
+      "legacy": "4.3",
+      "practice_pages": "13、22",
+      "operation": "OP-COMPATIBILITY",
+      "milestone": "M5",
+      "normative_summary": "接受1.4—1.7及PDF/A-1、PDF/A-2；PDF/A声明不等于已通过符合性验证。",
+      "inspect": "读取header、Catalog Version及扩展/特性，区分语法版本与PDF/A验证结果。",
+      "apply": "已接受不转换；只有预先验证的转换路径才执行。不以force-version/改头替代真实转换。",
+      "exceptions": "PDF2.0或超出支持矩阵的特性转人工/回源；PDF/A校验器未安装则其符合性未判定。",
+      "preserve": "正文、字体、导航、签章不因降级消失；输出版本与实际特性一致。",
+      "positive": "普通1.7 PDF且无冲突高版本声明",
+      "negative": "header与Catalog实际有效版本超出接受范围",
+      "uncertain": "仅有PDF/A声明但独立验证不可用",
+      "requirement_id": "R-6.16",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R616-P",
+        "AC-R616-N",
+        "AC-R616-U"
+      ]
+    },
+    {
+      "id": "6.17",
+      "title": "嵌入附件",
+      "severity": "错误",
+      "legacy": "4.4",
+      "practice_pages": "13",
+      "operation": "OP-ATTACHMENTS",
+      "milestone": "M5",
+      "normative_summary": "适用PDF不得内嵌附件。",
+      "inspect": "扫描EmbeddedFiles名称树、AF关联、EF文件规格、FileAttachment注释及嵌入流引用；不只查根目录。",
+      "apply": "经批次明确批准后提取到非交付隔离目录并移除选中附件；不自动执行或把提取物当已审查资料。",
+      "exceptions": "有外观的附件注释需明确视觉变化；无法安全移除全部相关引用则该操作失败。",
+      "preserve": "正文的附录页面不删；PDF/A-3等相关特性不能未经转换保持虚假声明。",
+      "positive": "无嵌入文件，仅有正文“附件一”页面",
+      "negative": "根级名称树下有嵌入xlsx",
+      "uncertain": "对象扫描被限额截断，不能确认无附件",
+      "requirement_id": "R-6.17",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R617-P",
+        "AC-R617-N",
+        "AC-R617-U"
+      ]
+    },
+    {
+      "id": "6.18",
+      "title": "非链接注释",
+      "severity": "提示信息",
+      "legacy": null,
+      "practice_pages": "13页原24项未独列，来自现行标准",
+      "operation": "OP-ANNOTATIONS",
+      "milestone": "M5",
+      "normative_summary": "除超文本链接外不应包含其他注释；本条严重程度为提示信息，不改成错误。",
+      "inspect": "按页枚举Subtype、外观、回复链及表单/签名信号；超链接不归此问题。",
+      "apply": "仅按明确Subtype和对象选择清理便笺等；签章、Widget、Redact等不做通用自动删除/扁平化。",
+      "exceptions": "可见标注属于真实页面表现，需批准局部差异；数字签名仍阻断重写。",
+      "preserve": "禁止删除全部Annots导致正文链接、表单或签章同时丢失。",
+      "positive": "只有Link注释",
+      "negative": "Text便笺或Highlight注释，输出提示信息",
+      "uncertain": "Widget是否涉及签名未判明，重写阻断",
+      "requirement_id": "R-6.18",
+      "applicability": "REF",
+      "legacy_mapping": "NONE_IN_24",
+      "test_ids": [
+        "AC-R618-P",
+        "AC-R618-N",
+        "AC-R618-U"
+      ]
+    },
+    {
+      "id": "6.19",
+      "title": "安全权限",
+      "severity": "错误",
+      "legacy": "4.5",
+      "practice_pages": "13、24",
+      "operation": "OP-SECURITY",
+      "milestone": "M5",
+      "normative_summary": "适用文件不得有安全设置，例如限制选取文字、图形等。",
+      "inspect": "即使空打开密码仍检查加密与权限，区别复制/打印限制及签名认证约束。",
+      "apply": "仅在明确授权、有效凭证、受支持加密类型且无签名时取消限制；密码只在受控内存/通道中使用。",
+      "exceptions": "凭证不足/证书加密/数字签名不自动绕过；不把密码写命令行、日志、预设和任务JSON。",
+      "preserve": "只解除批准限制，不抹除数字签名，不重绘内容；提取限制不应通过截图OCR绕过。",
+      "positive": "未加密且无限制PDF",
+      "negative": "空打开密码但禁止复制的PDF",
+      "uncertain": "需要未提供的所有者凭据或证书",
+      "requirement_id": "R-6.19",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R619-P",
+        "AC-R619-N",
+        "AC-R619-U"
+      ]
+    },
+    {
+      "id": "6.20",
+      "title": "初始视图",
+      "severity": "警告",
+      "legacy": "4.6",
+      "practice_pages": "13、23",
+      "operation": "OP-INITIAL_VIEW",
+      "milestone": "M1",
+      "normative_summary": "有书签时应展示书签；页面布局和放大率为默认。",
+      "inspect": "检查PageMode、PageLayout、OpenAction的直接目标/GoTo动作，以及选定ViewerPreferences。",
+      "apply": "有书签UseOutlines；无书签UseNone是材料衍生的产品标准化选项。默认布局采用已核验的表达；合法XYZ清zoom但保留起始页与坐标。",
+      "exceptions": "复杂打开动作、脚本或未知目标不粗暴删除；首批不把缺失参数当合法默认。",
+      "preserve": "不强制100%/单页；不顺手改起始页。其余窗口选项仅在预设显式选择时重置。",
+      "positive": "有书签UseOutlines且布局/缩放为默认",
+      "negative": "有书签但隐藏书签且打开缩放150%",
+      "uncertain": "OpenAction未知扩展动作，保留待办不静默删除",
+      "requirement_id": "R-6.20",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R620-P",
+        "AC-R620-N",
+        "AC-R620-U"
+      ]
+    },
+    {
+      "id": "6.21",
+      "title": "打开密码",
+      "severity": "错误",
+      "legacy": "4.2",
+      "practice_pages": "13、24",
+      "operation": "OP-SECURITY",
+      "milestone": "M5",
+      "normative_summary": "不可提交因密码保护而无法打开的文件；本条未列文献豁免。",
+      "inspect": "无凭据打开与授权凭据打开分别记录；文献PDF同样检查。",
+      "apply": "授权且符合支持矩阵时输出无打开密码的副本，并再次以无凭据方式验证。",
+      "exceptions": "缺少密码不是任务崩溃；不中断余下文件；不破解密码。",
+      "preserve": "原件加密字节保持；新副本无密码也不等于内容/其他规则已通过。",
+      "positive": "无打开密码",
+      "negative": "受打开密码保护，即使文献仍报告本项",
+      "uncertain": "解析器失败但未能区分加密算法和损坏",
+      "requirement_id": "R-6.21",
+      "applicability": "ALL",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R621-P",
+        "AC-R621-N",
+        "AC-R621-U"
+      ]
+    },
+    {
+      "id": "6.22",
+      "title": "快速Web查看",
+      "severity": "提示信息",
+      "legacy": null,
+      "practice_pages": "22（仅属性截图）",
+      "operation": "OP-LINEARIZE",
+      "milestone": "M1",
+      "normative_summary": "检查Fast Web View；严重程度保留提示信息。",
+      "inspect": "同时检查线性化结构存在和有效性，不只看标记。",
+      "apply": "放在所有PDF修改最后写出；已有效且无其他修改时原样复制；对最终文件再检查。",
+      "exceptions": "签名/未支持对象仍受保护；未完成校验不得报通过。",
+      "preserve": "线性化不得改变页面、可检索文字、字体及导航；不能随后再保存元数据破坏结果。",
+      "positive": "实际结构有效的线性化PDF",
+      "negative": "非线性化或线性化结构无效",
+      "uncertain": "仅检测到标记但结构校验未完成",
+      "requirement_id": "R-6.22",
+      "applicability": "REF_PLUS_M1",
+      "legacy_mapping": "NONE_IN_24",
+      "test_ids": [
+        "AC-R622-P",
+        "AC-R622-N",
+        "AC-R622-U"
+      ]
+    },
+    {
+      "id": "6.23",
+      "title": "超过5页的书签",
+      "severity": "错误",
+      "legacy": "4.7",
+      "practice_pages": "13",
+      "operation": "OP-CREATE_NAVIGATION",
+      "milestone": "M2",
+      "normative_summary": "对适用文件，超过5页需有书签；与材料“建议”不同。",
+      "inspect": "比较物理页数与可解析书签清单；6页/5页分别测试；存在书签不证明各书签有效。",
+      "apply": "从经用户确认的目录/页码映射批量创建有实际含义的书签，随后检查6.2—6.8。",
+      "exceptions": "自动识别标题只产生候选；不新增无意义“首页”书签凑通过。CRF不是本条的申请表例外。",
+      "preserve": "创建不改页数、页标签和正文；不复用错误的正文页码当物理页。",
+      "positive": "6页且有真实目录书签，或5页无书签",
+      "negative": "6页普通报告完全无书签",
+      "uncertain": "角色未确认，是否申请表/参考资料未知",
+      "requirement_id": "R-6.23",
+      "applicability": "REF_PLUS_FORM",
+      "legacy_mapping": "WORDING_CHANGED",
+      "test_ids": [
+        "AC-R623-P",
+        "AC-R623-N",
+        "AC-R623-U"
+      ]
+    },
+    {
+      "id": "6.24",
+      "title": "脚本及动态内容",
+      "severity": "警告",
+      "legacy": "4.8",
+      "practice_pages": "13、24（材料解释有限）",
+      "operation": "OP-ACTIVE_CONTENT",
+      "milestone": "M5",
+      "normative_summary": "检查JavaScript、3D及音视频等；材料4.8仅主题映射，不能从其权限截图推导完整现行含义。",
+      "inspect": "扫描文档、页面、注释、动作链、名称树和相关对象；不执行内容来验证。",
+      "apply": "显式清理策略仅处理已覆盖且可验证的对象类型；复杂多媒体交互保留待办。",
+      "exceptions": "静态替代画面、图层和普通文件跳转不得一并删除；脚本相关表单不自动扁平化。",
+      "preserve": "清理后所有未批准页面表现与导航不变；不得因阻断执行而声称原PDF已无脚本。",
+      "positive": "静态文本/图片PDF",
+      "negative": "文档级JavaScript或RichMedia对象",
+      "uncertain": "活动对象遍历未完成；本项未判定",
+      "requirement_id": "R-6.24",
+      "applicability": "REF",
+      "legacy_mapping": "TOPIC_ONLY",
+      "test_ids": [
+        "AC-R624-P",
+        "AC-R624-N",
+        "AC-R624-U"
+      ]
+    },
+    {
+      "id": "6.25",
+      "title": "可搜索文本",
+      "severity": "警告",
+      "legacy": "4.9",
+      "practice_pages": "13—19",
+      "operation": "OP-OCR",
+      "milestone": "M3",
+      "normative_summary": "适用文本应可搜索；扫描页需可搜索文本。",
+      "inspect": "逐页区分原生文本、纯扫描、混合、既有OCR、乱码疑点、空白/纯图表和未知；仅页眉有字不足以判整页通过。",
+      "apply": "批次启用OCR后，对支持的待识别页加文字层；默认保留原可见页面与既有文字，不默认全页栅格化。",
+      "exceptions": "材料演示可编辑文本图像模式，产品默认不同须标注；混合页/手写/低清难例用有限支持或复核，不强制凑文本。",
+      "preserve": "原图与关键结构不丢；页数、可见内容、既有原生文本、导航不变。OCR识别正确性另记，不自动宣称全部正确。",
+      "positive": "原生正文可提取且搜索回定位一致",
+      "negative": "纯扫描报告页无文本层",
+      "uncertain": "仅有页眉文本的大幅正文扫描图，需进一步分类",
+      "requirement_id": "R-6.25",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R625-P",
+        "AC-R625-N",
+        "AC-R625-U"
+      ]
+    },
+    {
+      "id": "6.26",
+      "title": "字体资源",
+      "severity": "警告",
+      "legacy": "4.24",
+      "practice_pages": "13、20—21",
+      "operation": "OP-FONT_EMBED",
+      "milestone": "M4",
+      "normative_summary": "按发布的标准字体清单判定非标准字体嵌入要求。",
+      "inspect": "解析实际用字的页面/继承资源/Form/外观等；分别处理TrueType、Type0/CID、Type1/CFF、Type3及字形映射。",
+      "apply": "仅使用用户有权使用且可精确确认的字体资源，按已验证类型补嵌；OCR新字体由输出引擎正确嵌入后复查。",
+      "exceptions": "Type3不能仅凭无FontFile判缺嵌；去掉子集前缀不等于字体别名获官方认可；无资源不以替换字体补位。",
+      "preserve": "数字、单位、上下标、字宽、换行、ToUnicode及检索结果保持；不得把转图当字体修复。",
+      "positive": "实际使用的非标准字体已完整或有效子集嵌入",
+      "negative": "非标准字体明确无所需字体程序",
+      "uncertain": "SimSun别名与标准清单未完成对应核验，或Type3结构需独立判断",
+      "requirement_id": "R-6.26",
+      "applicability": "REF",
+      "legacy_mapping": "FUNCTIONAL_CROSSWALK",
+      "test_ids": [
+        "AC-R626-P",
+        "AC-R626-N",
+        "AC-R626-U"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "FR-001",
+      "title": "模块及输入边界",
+      "requirement": "用户选择的处理范围仅为模块5、2.5、2.7的PDF；无需完整CTD目录、XML、STF或0000序列。目录命名用于候选提示，不静默证明模块归属。",
+      "acceptance": "导入只含5.3.1.2报告的任意命名目录即可检查；2.50不得因前缀被识别成2.5。"
+    },
+    {
+      "id": "FR-002",
+      "title": "文件夹递归与快照",
+      "requirement": "递归枚举.pdf（大小写不敏感）及必要文件头验证，生成相对路径清单；哈希绑定实际消费字节，检测扫描/处理期间变化。",
+      "acceptance": "重复文件名分目录保留；坏后缀/访问失败/新增文件有明确状态，不静默漏掉。"
+    },
+    {
+      "id": "FR-003",
+      "title": "一次确认自动执行",
+      "requirement": "提供仅检查及按预设检查并处理；启动时确认一次输入清单和预设授权，逐文件自动生成计划并执行满足条件的动作，不弹逐文件确认。",
+      "acceptance": "一份需要密码的文件不阻断其余文件；已有映射/授权的同类问题自动处理。"
+    },
+    {
+      "id": "FR-004",
+      "title": "现行规则和来源",
+      "requirement": "界面、API、报告以6.1—6.26及固定profile为主；材料4.x仅保留crosswalk；规范要求、经验建议和工程决定分字段记录。",
+      "acceptance": "全部26条有severity、applicability、来源定位；不把6.18/6.22改成错误。"
+    },
+    {
+      "id": "FR-005",
+      "title": "批量上下文及逐条例外",
+      "requirement": "支持批次普通临床资料声明和子目录/精确相对路径覆盖；2.7.5、5.4参考文献及已确认外文参考资料逐规则豁免；未知角色不猜。",
+      "acceptance": "英文研究报告仍按普通报告；参考文献有打开密码仍执行6.21；2.7.50不得误豁免。"
+    },
+    {
+      "id": "FR-006",
+      "title": "每条规则可解释",
+      "requirement": "每文件26条均记录PASS/FAIL/NOT_APPLICABLE/INDETERMINATE/NOT_RUN、原始事实及完成度；没有发现问题不能替代穷尽检查。",
+      "acceptance": "超时的字体检查显示未判定；页面/对象位置可点击定位；输出不宣称官方通过。"
+    },
+    {
+      "id": "FR-007",
+      "title": "预设及选定范围",
+      "requirement": "内置保守的临床属性预设；元数据、OCR、精确补嵌、删除/移除、密码解除分别显式选择；规则豁免不等于禁止用户自愿标准化。",
+      "acceptance": "重开后复用不含密码的版本化预设；未知操作键拒绝；选择性修改不会波及未选对象。"
+    },
+    {
+      "id": "FR-008",
+      "title": "原件只读与无覆盖输出",
+      "requirement": "输入及只读依赖不写入；工作区/临时区/输出树与输入树分离，不覆盖既有输出，不以指向原件的硬链接交付。",
+      "acceptance": "输入哈希全部保持；目标已存在时报冲突；Windows别名/重解析点越界被拒绝。"
+    },
+    {
+      "id": "FR-009",
+      "title": "输出目录与未改文件",
+      "requirement": "保留批准交付范围的相对路径和文件名；无需改的PDF进行独立字节复制；未改、已改但有问题、阻断、未导出分别记录。",
+      "acceptance": "合格附件未需改仍在输出树；输出不是只含被修改文件；不可读/打不开原件置未处理隔离树而不伪装可交付。"
+    },
+    {
+      "id": "FR-010",
+      "title": "最终依赖复验",
+      "requirement": "在全部文件最终输出确定后，以输出根重新解析跨文件导航；外部只读依赖可用于诊断，但未纳入输出不能算交付目标已满足。",
+      "acceptance": "指向未导出文件显示TARGET_NOT_EXPORTED；修改目标文件后回查所有已知来源链接。"
+    },
+    {
+      "id": "FR-011",
+      "title": "异常集中处理与重跑",
+      "requirement": "文件失败不中断批次；按缺少密码/字体/映射/复核分组；补一次信息后重跑受影响项和依赖项，不重做所有成功文件。",
+      "acceptance": "新增映射只重跑相关文件；源哈希变化时旧计划失效，不复用过期OCR结果。"
+    },
+    {
+      "id": "FR-012",
+      "title": "进度取消与恢复",
+      "requirement": "显示文件级及页段进度；取消不发布半成品；应用中断可识别恢复点；自动网络轮询/未来定时运行不在本规格中。",
+      "acceptance": "终止OCR后保留已验证文件；重启校验输入/配置/引擎版本后从安全检查点继续。"
+    },
+    {
+      "id": "FR-013",
+      "title": "按操作验证改动",
+      "requirement": "每种操作定义允许改动的字段、对象及页面；所有未批准改动必须使该候选输出不被发布。",
+      "acceptance": "只改视图时偷偷改正文数字/隐藏链接/删书签必须被拒绝；不是只看像素。"
+    },
+    {
+      "id": "FR-014",
+      "title": "读图文本与OCR分层",
+      "requirement": "不把存在文字等同全页正文可搜索；OCR技术可搜索性与识别内容正确性分别评价；受试者编号/数值不由AI自动修订。",
+      "acceptance": "既有数字文本字节/提取值不变；低质量OCR显示待复核而非全部正确。"
+    },
+    {
+      "id": "FR-015",
+      "title": "安全与签章",
+      "requirement": "任何数字签名结构信号默认阻断重写；扫描纸质签章按批次业务声明选择允许技术处理或保留字节；不通过图像识别擅自判断。",
+      "acceptance": "签名文件原样复制并保留阻断原因；解除密码也不能删除签名；扫描件未知口径只读。"
+    },
+    {
+      "id": "FR-016",
+      "title": "本地数据及凭据",
+      "requirement": "文件、OCR结果、截图及字体仅在明确本机/授权NAS范围处理；无默认云API；不上传真实资料；密码不落日志/预设/报告。",
+      "acceptance": "断网仍能做已安装的基础功能；技术依赖安装另行告知；故障包默认不含PDF/正文/绝对路径。"
+    },
+    {
+      "id": "FR-017",
+      "title": "结果工作区",
+      "requirement": "按文件与按问题两种视角；原始值→计划值→输出值、已改动作与剩余问题分栏；保留已有阅读/搜索能力，不改造成重型编辑器。",
+      "acceptance": "点6.15定位具体页热点，批量筛选可处理项；无需逐个打开属性对话框。"
+    },
+    {
+      "id": "FR-018",
+      "title": "可测能力而非泛化承诺",
+      "requirement": "检查器、修改器、官方对照、Windows/NAS环境验收分别标状态；研究中的能力在UI禁用且说明原因，不能以空实现打勾。",
+      "acceptance": "26条都列出但部分未完成时显示真实覆盖；仅完成结构检查不标所有内容正确。"
+    },
+    {
+      "id": "FR-019",
+      "title": "资料角色与处理授权分离",
+      "requirement": "规则不适用、技术可修改及用户允许修改是三个维度；参考文献可以有技术问题但默认不强制改；允许Launch不等于允许执行。",
+      "acceptance": "豁免文件记录NOT_APPLICABLE且可原样交付；用户自愿标准化留独立操作记录，不改成规则FAIL。"
+    },
+    {
+      "id": "FR-020",
+      "title": "有限资源及操作顺序",
+      "requirement": "默认逐文件串行、OCR受限并发；先需用的解密/结构处理、页面处理/OCR/补嵌，再导航/属性，最后线性化和最终复验。",
+      "acceptance": "500页文本文件不做OCR；资源超限可解释且不中断批次；限额标工程限制，不混作监管阈值。"
+    }
+  ],
+  "supplemental_requirements": [
+    {
+      "id": "EX-01",
+      "title": "四项说明字段",
+      "practice_page": "22",
+      "operation": "OP-METADATA",
+      "milestone": "M1",
+      "requirement": "标题/作者/主题/关键词独立选择清理或指定值；协调Info及对应XMP；保留其余声明与字段。材料仅为建议，默认不勾选。"
+    },
+    {
+      "id": "EX-02",
+      "title": "页面方向",
+      "practice_page": "27",
+      "operation": "OP-ROTATE",
+      "milestone": "M5",
+      "requirement": "先检测/预览并允许按页确认；支持明确90度步进计划持久旋转；不把正确横向表格强制竖向。"
+    },
+    {
+      "id": "EX-03",
+      "title": "映射创建链接",
+      "practice_page": "31—33",
+      "operation": "OP-CREATE_NAVIGATION",
+      "milestone": "M2",
+      "requirement": "以已确认的文字区域、目标文件/物理页/坐标映射批量建链；不以AI猜测作为目标权威。"
+    },
+    {
+      "id": "EX-04",
+      "title": "可选链接外观",
+      "practice_page": "30—31",
+      "operation": "OP-LINK_STYLE",
+      "milestone": "M2",
+      "requirement": "颜色/线宽/边框仅为用户选项，不把截图示例当标准；可见改动需批准局部像素差异。"
+    },
+    {
+      "id": "EX-05",
+      "title": "阅读器URL偏好说明",
+      "practice_page": "28",
+      "operation": "OP-READER_GUIDANCE",
+      "milestone": "M1",
+      "requirement": "说明阅读器从URL自动建链与PDF真实Link不同；不伪装成文件批处理、不批改用户注册表。"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "基线与规则就位",
+      "depends": [],
+      "goal": "将现行6.x、模块范围、材料对照及状态模型固定为可实现输入。",
+      "exit": "26条规则号/严重程度/例外核对；24项旧号映射齐全；实施前基线测试有实际记录。",
+      "not_done": "只有文档或JSON不能算产品功能已交付；官网附件字节核实仍须如实记录。"
+    },
+    {
+      "id": "M1",
+      "title": "第一个真正可用的文件夹自动处理版本",
+      "depends": [
+        "M0"
+      ],
+      "goal": "一次导入和确认，逐文件检查，自动改初始视图/所选元数据，最后线性化，保留目录输出。",
+      "exit": "M1集成场景实跑；普通文件自动到底；坏文件不阻断；无需改的文件有独立原样副本；原件哈希保持。",
+      "not_done": "不能以“有26条结果行”宣称所有检查已完成；不把只有CLI函数当UI流程交付。"
+    },
+    {
+      "id": "M2",
+      "title": "书签及链接批处理",
+      "depends": [
+        "M1"
+      ],
+      "goal": "承前缩放、路径、动作、目标、目录映射以及输出树最终链接复验可用。",
+      "exit": "6.2—6.15、6.23的P/N/U及IT-11—18实跑；共享目标不会误改；文献默认不强制清理。",
+      "not_done": "仅简单XYZ通过不能称任意PDF导航全支持；支持矩阵必须明确Fit/命名/远端情况。"
+    },
+    {
+      "id": "M3",
+      "title": "按需OCR及复核",
+      "depends": [
+        "M1"
+      ],
+      "goal": "OCR是并行主线：纯扫描及已支持混合页可自动处理，原可见内容保留，疑点集中复核。",
+      "exit": "6.25及IT-19—23实跑；100页只处理需OCR的页；取消恢复有效；数值正确性状态独立。",
+      "not_done": "输出能搜索不等于转录正确；未支持的低清/手写/复杂混合页不可当成功。"
+    },
+    {
+      "id": "M4",
+      "title": "字体诊断与有限精确补嵌",
+      "depends": [
+        "M1"
+      ],
+      "goal": "与OCR并行研究，交付精确匹配的字体补嵌路径及OCR后字体复验。",
+      "exit": "6.26及IT-24—26实跑；至少受支持TrueType和中文CID样本可修复；错字体/缺字体不误成功；最终集成依赖M3的OCR接口。",
+      "not_done": "只有字体清单或“修复命令执行完毕”不算补嵌交付；不承诺任何第三方PDF都能修复。"
+    },
+    {
+      "id": "M5",
+      "title": "权限、内容清理及有限兼容处理",
+      "depends": [
+        "M1"
+      ],
+      "goal": "对凭据授权、附件/注释、动态内容、页面方向和版本建立明确自动处理范围。",
+      "exit": "相关逐规则场景与IT-27—30实跑；任何签名文件不重写；可见内容删除必须有明确批准差异。",
+      "not_done": "不是通用Acrobat替代；方向子任务依赖M2解析器，其他子任务可并行。"
+    },
+    {
+      "id": "M6",
+      "title": "组合运行与实际环境交付",
+      "depends": [
+        "M2",
+        "M3",
+        "M4",
+        "M5"
+      ],
+      "goal": "在目标Windows/NAS环境完成真实用户操作路径验收，冻结可发布能力和限制。",
+      "exit": "IT-31—35实跑、原生及浏览器证据齐全、所有产品级阻断已清；官方对照IT-36单独记录已完成或未完成。",
+      "not_done": "Win Server CI不等于Win10/11/NAS；本地通过不等于CDE通过，未完成官方对照不可冒充完成。"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-001",
+      "milestone": "M0",
+      "title": "固定6.x配置和来源状态",
+      "requirements": [
+        "FR-004",
+        "FR-018"
+      ],
+      "deliverable": "生成26条配置、24项对照和来源登记；官网附件哈希未取得保留null，补取后只更新来源证据，不伪称已测。",
+      "test_ids": [],
+      "dependencies": [],
+      "kind": "规格落库/核实",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-002",
+      "milestone": "M0",
+      "title": "复核实施前HEAD并跑既有基线",
+      "requirements": [
+        "FR-018"
+      ],
+      "deliverable": "记录实施时HEAD、依赖锁定、现有core/browser基线及失败/skip；不继承历史绿色CI。",
+      "test_ids": [],
+      "dependencies": [],
+      "kind": "回归",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-003",
+      "milestone": "M0",
+      "title": "实现模块及资料角色覆盖模型",
+      "requirements": [
+        "FR-001",
+        "FR-005",
+        "FR-019"
+      ],
+      "deliverable": "批次声明、目录级规则、精确路径覆盖及未知状态；限定5/2.5/2.7；文献与英文报告区别。",
+      "test_ids": [
+        "IT-11"
+      ],
+      "dependencies": [
+        "T-001"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-004",
+      "milestone": "M0",
+      "title": "定义检查/动作/终态模型",
+      "requirements": [
+        "FR-006",
+        "FR-018"
+      ],
+      "deliverable": "检查五态、操作状态、文件输出状态三套字段；未知与不适用不可折叠为PASS。",
+      "test_ids": [],
+      "dependencies": [
+        "T-001"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-005",
+      "milestone": "M0",
+      "title": "建立合成用例和期望值目录",
+      "requirements": [
+        "FR-018"
+      ],
+      "deliverable": "78个逐规则P/N/U计划项及36个集成场景登记，生成器不含真实资料；期望值不从被测程序反推。",
+      "test_ids": [],
+      "dependencies": [
+        "T-004"
+      ],
+      "kind": "测试基础",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-006",
+      "milestone": "M0",
+      "title": "确定依赖和受支持能力矩阵",
+      "requirements": [
+        "FR-016",
+        "FR-020"
+      ],
+      "deliverable": "锁定实际验证的pikepdf/PDFium等版本；OCR/字体候选单独探测；未支持自动操作UI禁用。",
+      "test_ids": [],
+      "dependencies": [
+        "T-002"
+      ],
+      "kind": "工程验证",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-007",
+      "milestone": "M1",
+      "title": "扩展目录导入和文件身份",
+      "requirements": [
+        "FR-001",
+        "FR-002"
+      ],
+      "deliverable": "递归发现、重复名独立ID、输入消费字节快照及变化检测，文件头诊断。",
+      "test_ids": [
+        "IT-01",
+        "IT-04"
+      ],
+      "dependencies": [
+        "T-004",
+        "T-003"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-008",
+      "milestone": "M1",
+      "title": "复用并补强只读及发布边界",
+      "requirements": [
+        "FR-008",
+        "FR-016"
+      ],
+      "deliverable": "输入/工作/输出隔离，无覆盖发布；不使用原件硬链接；路径与别名复验。",
+      "test_ids": [
+        "IT-02",
+        "IT-05",
+        "IT-06"
+      ],
+      "dependencies": [
+        "T-007"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-009",
+      "milestone": "M1",
+      "title": "持久批次状态及恢复接口",
+      "requirements": [
+        "FR-011",
+        "FR-012"
+      ],
+      "deliverable": "单用户本地持久化事件/状态；不可变输出与内部状态区分；恢复验证输入及配置身份。",
+      "test_ids": [
+        "IT-22",
+        "IT-34"
+      ],
+      "dependencies": [
+        "T-008"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-010",
+      "milestone": "M1",
+      "title": "接通一次确认自动管线",
+      "requirements": [
+        "FR-003",
+        "FR-007",
+        "FR-020"
+      ],
+      "deliverable": "同一批次自动check→plan→apply→verify；按文件继续；阶段capability过滤而不每份弹窗。",
+      "test_ids": [
+        "IT-03"
+      ],
+      "dependencies": [
+        "T-009",
+        "T-006"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-011",
+      "milestone": "M1",
+      "title": "增强只读可读性及打开状态检查",
+      "requirements": [
+        "R-6.1",
+        "R-6.21",
+        "FR-006"
+      ],
+      "deliverable": "全页读取完成度/失败页和加密诊断；scan模式即使不能重写仍可输出有限事实。",
+      "test_ids": [
+        "AC-R61-P",
+        "AC-R61-N",
+        "AC-R61-U",
+        "AC-R621-P",
+        "AC-R621-N",
+        "AC-R621-U"
+      ],
+      "dependencies": [
+        "T-007"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-012",
+      "milestone": "M1",
+      "title": "操作级允许差异复验器",
+      "requirements": [
+        "FR-013"
+      ],
+      "deliverable": "字段/对象选择器的前置期望与后置值验证；结构/文本/像素多层证据；非全局忽略Outlines或Metadata。",
+      "test_ids": [
+        "IT-07"
+      ],
+      "dependencies": [
+        "T-008",
+        "T-005"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-013",
+      "milestone": "M1",
+      "title": "初始视图检查和修改",
+      "requirements": [
+        "R-6.20"
+      ],
+      "deliverable": "PageMode分支、默认布局、受支持OpenAction处理及可选ViewerPreferences；保留起始页。",
+      "test_ids": [
+        "AC-R620-P",
+        "AC-R620-N",
+        "AC-R620-U",
+        "IT-08"
+      ],
+      "dependencies": [
+        "T-010",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-014",
+      "milestone": "M1",
+      "title": "四说明字段检查和修改",
+      "requirements": [
+        "EX-01"
+      ],
+      "deliverable": "Info/XMP对应字段选择性清理/指定，保留其余值；记录自动更新字段策略。",
+      "test_ids": [
+        "IT-09"
+      ],
+      "dependencies": [
+        "T-010",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-015",
+      "milestone": "M1",
+      "title": "接入末端线性化及有效性检查",
+      "requirements": [
+        "R-6.22"
+      ],
+      "deliverable": "复用已有线性化处理，改为最终保存环节；标记加结构验证；不继承官方通过状态。",
+      "test_ids": [
+        "AC-R622-P",
+        "AC-R622-N",
+        "AC-R622-U",
+        "IT-10"
+      ],
+      "dependencies": [
+        "T-013",
+        "T-014"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-016",
+      "milestone": "M1",
+      "title": "镜像输出与原样复制分支",
+      "requirements": [
+        "FR-009"
+      ],
+      "deliverable": "保持相对路径/文件名；无需修改PDF原样独立复制；失败/不可读分流并标明未交付。",
+      "test_ids": [
+        "IT-06",
+        "IT-17"
+      ],
+      "dependencies": [
+        "T-008",
+        "T-010"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-017",
+      "milestone": "M1",
+      "title": "批量任务入口与双视角结果",
+      "requirements": [
+        "FR-017",
+        "EX-05"
+      ],
+      "deliverable": "接入现有本地页面；仅检查/按预设处理、一次确认、进度/取消、文件和问题视角、阅读器URL说明。",
+      "test_ids": [
+        "IT-03",
+        "IT-08"
+      ],
+      "dependencies": [
+        "T-013",
+        "T-014",
+        "T-016"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-018",
+      "milestone": "M1",
+      "title": "首个可用批处理阶段验收",
+      "requirements": [
+        "FR-003",
+        "FR-006",
+        "FR-008",
+        "FR-018"
+      ],
+      "deliverable": "跑M1原生与浏览器场景；产出实际可修改PDF、逐文件证据和原件未变证明；本阶段不得标全26项已完成。",
+      "test_ids": [
+        "IT-01",
+        "IT-03",
+        "IT-04",
+        "IT-05",
+        "IT-07",
+        "IT-08",
+        "IT-09",
+        "IT-10"
+      ],
+      "dependencies": [
+        "T-015",
+        "T-017",
+        "T-011"
+      ],
+      "kind": "阶段验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-019",
+      "milestone": "M2",
+      "title": "共享目标及动作图解析器",
+      "requirements": [
+        "R-6.4",
+        "R-6.11",
+        "FR-006"
+      ],
+      "deliverable": "统一本地/远端/命名目标、完整参数校验、AA/Next、所有者反向引用与有界遍历。",
+      "test_ids": [
+        "IT-12",
+        "IT-13",
+        "IT-14",
+        "IT-15"
+      ],
+      "dependencies": [
+        "T-018"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-020",
+      "milestone": "M2",
+      "title": "26规则适用性自动测试",
+      "requirements": [
+        "FR-005",
+        "FR-019"
+      ],
+      "deliverable": "逐规则执行参考文献例外；外文角色不是语言；申请表不是CRF；未知上下文保留未判定。",
+      "test_ids": [
+        "IT-11"
+      ],
+      "dependencies": [
+        "T-003",
+        "T-018"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-021",
+      "milestone": "M2",
+      "title": "书签承前缩放修改器",
+      "requirements": [
+        "R-6.8"
+      ],
+      "deliverable": "支持XYZ及经明确批准的Fit转换；共享/命名目标写时复制，保持未选引用。",
+      "test_ids": [
+        "AC-R68-P",
+        "AC-R68-N",
+        "AC-R68-U",
+        "IT-12",
+        "IT-14"
+      ],
+      "dependencies": [
+        "T-019",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-022",
+      "milestone": "M2",
+      "title": "超链接承前缩放修改器",
+      "requirements": [
+        "R-6.15"
+      ],
+      "deliverable": "按Link所有者修改缩放；保持Rect/QuadPoints/文字及目标位置。",
+      "test_ids": [
+        "AC-R615-P",
+        "AC-R615-N",
+        "AC-R615-U",
+        "IT-12",
+        "IT-14"
+      ],
+      "dependencies": [
+        "T-021"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-023",
+      "milestone": "M2",
+      "title": "明确映射下的相对路径修复",
+      "requirements": [
+        "R-6.2",
+        "R-6.9"
+      ],
+      "deliverable": "中文路径/相对../、绝对路径及输入输出映射；不扫盘，不按basename匹配。",
+      "test_ids": [
+        "AC-R62-P",
+        "AC-R62-N",
+        "AC-R62-U",
+        "AC-R69-P",
+        "AC-R69-N",
+        "AC-R69-U",
+        "IT-13"
+      ],
+      "dependencies": [
+        "T-019",
+        "T-016"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-024",
+      "milestone": "M2",
+      "title": "外链清理与保护子树",
+      "requirements": [
+        "R-6.3",
+        "R-6.10"
+      ],
+      "deliverable": "处理URI Link与书签；正文URL保留，父节点子树策略与可见边框差异需显式批准。",
+      "test_ids": [
+        "AC-R63-P",
+        "AC-R63-N",
+        "AC-R63-U",
+        "AC-R610-P",
+        "AC-R610-N",
+        "AC-R610-U",
+        "IT-16"
+      ],
+      "dependencies": [
+        "T-019",
+        "T-020",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-025",
+      "milestone": "M2",
+      "title": "未知动作及多动作选择修复",
+      "requirements": [
+        "R-6.4",
+        "R-6.7",
+        "R-6.11",
+        "R-6.14"
+      ],
+      "deliverable": "唯一选择器匹配/失败结果；不自动取第一条；不运行Launch/JS。",
+      "test_ids": [
+        "AC-R64-P",
+        "AC-R64-N",
+        "AC-R64-U",
+        "AC-R67-P",
+        "AC-R67-N",
+        "AC-R67-U",
+        "AC-R611-P",
+        "AC-R611-N",
+        "AC-R611-U",
+        "AC-R614-P",
+        "AC-R614-N",
+        "AC-R614-U",
+        "IT-15"
+      ],
+      "dependencies": [
+        "T-019",
+        "T-024"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-026",
+      "milestone": "M2",
+      "title": "无目标和损坏目标检查修复",
+      "requirements": [
+        "R-6.5",
+        "R-6.6",
+        "R-6.12",
+        "R-6.13"
+      ],
+      "deliverable": "精确对象/页/名称映射；目标未提供与损坏分开；无效叶节点按已选策略处理。",
+      "test_ids": [
+        "AC-R65-P",
+        "AC-R65-N",
+        "AC-R65-U",
+        "AC-R66-P",
+        "AC-R66-N",
+        "AC-R66-U",
+        "AC-R612-P",
+        "AC-R612-N",
+        "AC-R612-U",
+        "AC-R613-P",
+        "AC-R613-N",
+        "AC-R613-U"
+      ],
+      "dependencies": [
+        "T-023",
+        "T-025"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-027",
+      "milestone": "M2",
+      "title": "创建有意义书签和链接",
+      "requirements": [
+        "R-6.23",
+        "EX-03"
+      ],
+      "deliverable": "导入确认映射/候选确认后批量生成；页标签/正文页/物理页分离；创建后跑导航规则。",
+      "test_ids": [
+        "AC-R623-P",
+        "AC-R623-N",
+        "AC-R623-U",
+        "IT-18"
+      ],
+      "dependencies": [
+        "T-019",
+        "T-021",
+        "T-022"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-028",
+      "milestone": "M2",
+      "title": "可选链接外观模板",
+      "requirements": [
+        "EX-04"
+      ],
+      "deliverable": "仅在明确勾选时设置边框/颜色；存储批准热区及可见差异，不作为CDE强制模板。",
+      "test_ids": [
+        "IT-16"
+      ],
+      "dependencies": [
+        "T-027",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-029",
+      "milestone": "M2",
+      "title": "最终输出目标图复验",
+      "requirements": [
+        "FR-010",
+        "FR-011"
+      ],
+      "deliverable": "全部输出落定后重查相对目标，保留NOT_PROVIDED/NOT_EXPORTED/UNREADABLE/INVALID等状态；反向依赖重跑。",
+      "test_ids": [
+        "IT-17"
+      ],
+      "dependencies": [
+        "T-026",
+        "T-016"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-030",
+      "milestone": "M2",
+      "title": "导航整批验收",
+      "requirements": [
+        "FR-018"
+      ],
+      "deliverable": "执行所有6.2—6.15、6.23逐规则场景及参考文献/共享目标集成；未支持目标不算修复完成。",
+      "test_ids": [
+        "IT-11",
+        "IT-12",
+        "IT-13",
+        "IT-14",
+        "IT-15",
+        "IT-16",
+        "IT-17",
+        "IT-18"
+      ],
+      "dependencies": [
+        "T-028",
+        "T-029",
+        "T-020"
+      ],
+      "kind": "阶段验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-031",
+      "milestone": "M3",
+      "title": "本地OCR能力与许可验证",
+      "requirements": [
+        "FR-016",
+        "FR-020"
+      ],
+      "deliverable": "选择并锁定本地引擎/语言包/依赖及许可；比较纯加文字层路径；不默认购买服务或调用云API。",
+      "test_ids": [
+        "IT-23"
+      ],
+      "dependencies": [
+        "T-006",
+        "T-018"
+      ],
+      "kind": "工程验证",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-032",
+      "milestone": "M3",
+      "title": "逐页可搜索性分类",
+      "requirements": [
+        "R-6.25",
+        "FR-014"
+      ],
+      "deliverable": "分类原生/扫描/混合/旧OCR/纯图/未知；扩展图像资源与ToUnicode观察；页眉文字不能遮盖正文缺层。",
+      "test_ids": [
+        "AC-R625-P",
+        "AC-R625-N",
+        "AC-R625-U",
+        "IT-20"
+      ],
+      "dependencies": [
+        "T-018"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-033",
+      "milestone": "M3",
+      "title": "按需OCR受控worker",
+      "requirements": [
+        "R-6.25",
+        "FR-014",
+        "FR-020"
+      ],
+      "deliverable": "支持明确页段、语言、资源限额及可取消；默认不改变原可见层，不强制全文件重做。",
+      "test_ids": [
+        "IT-19",
+        "IT-23"
+      ],
+      "dependencies": [
+        "T-031",
+        "T-032",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-034",
+      "milestone": "M3",
+      "title": "混合页与旧OCR处理分支",
+      "requirements": [
+        "R-6.25",
+        "FR-014"
+      ],
+      "deliverable": "支持矩阵内做分区文字层注入；其余候选集中复核；不以skip-text跳过全部混合正文。",
+      "test_ids": [
+        "IT-20"
+      ],
+      "dependencies": [
+        "T-033"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-035",
+      "milestone": "M3",
+      "title": "OCR后结构与内容风险复查",
+      "requirements": [
+        "FR-013",
+        "FR-014"
+      ],
+      "deliverable": "页数/图像/原生文字/导航保全；新增层可检索与坐标一致；数值转录质量单列，不自动更正。",
+      "test_ids": [
+        "IT-21",
+        "IT-23"
+      ],
+      "dependencies": [
+        "T-034",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-036",
+      "milestone": "M3",
+      "title": "OCR页段检查点和恢复",
+      "requirements": [
+        "FR-011",
+        "FR-012"
+      ],
+      "deliverable": "同一输入/预设/引擎身份下安全复用已验证页段；无半成品发布。",
+      "test_ids": [
+        "IT-22"
+      ],
+      "dependencies": [
+        "T-033",
+        "T-009"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-037",
+      "milestone": "M3",
+      "title": "OCR批次选项与疑点清单",
+      "requirements": [
+        "FR-017",
+        "FR-007"
+      ],
+      "deliverable": "语言/页范围/支持度/风险提示集中展示；显示材料模式与产品默认差异。",
+      "test_ids": [
+        "IT-19",
+        "IT-21"
+      ],
+      "dependencies": [
+        "T-035",
+        "T-036"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-038",
+      "milestone": "M3",
+      "title": "OCR可用阶段验收",
+      "requirements": [
+        "R-6.25",
+        "FR-018"
+      ],
+      "deliverable": "冻结有限支持矩阵，执行正常/低清/混合/超时/取消/恢复原生测试；不以OCR退出码等同内容正确。",
+      "test_ids": [
+        "IT-19",
+        "IT-20",
+        "IT-21",
+        "IT-22",
+        "IT-23"
+      ],
+      "dependencies": [
+        "T-037"
+      ],
+      "kind": "阶段验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-039",
+      "milestone": "M4",
+      "title": "实际用字与字体资源递归检查",
+      "requirements": [
+        "R-6.26"
+      ],
+      "deliverable": "覆盖继承资源、Form、注释外观及限额；实际使用与仅声明资源分开；原始名/子集名/别名分列。",
+      "test_ids": [
+        "AC-R626-P",
+        "AC-R626-N",
+        "AC-R626-U",
+        "IT-24"
+      ],
+      "dependencies": [
+        "T-018"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-040",
+      "milestone": "M4",
+      "title": "Type3和CID类型专用判据",
+      "requirements": [
+        "R-6.26"
+      ],
+      "deliverable": "Type3检查CharProcs/资源；Type0/CID检查后裔字体与字形映射；不能一律FontFile存在性判断。",
+      "test_ids": [
+        "IT-24"
+      ],
+      "dependencies": [
+        "T-039"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-041",
+      "milestone": "M4",
+      "title": "本地精确字体资源提供器",
+      "requirements": [
+        "FR-016",
+        "R-6.26"
+      ],
+      "deliverable": "用户指定字体目录，核对字体名称/版本/字形映射/嵌入权限；不上传/分发字体，不按相似度替换。",
+      "test_ids": [
+        "IT-24"
+      ],
+      "dependencies": [
+        "T-040"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-042",
+      "milestone": "M4",
+      "title": "受支持类型的精确补嵌",
+      "requirements": [
+        "R-6.26"
+      ],
+      "deliverable": "至少交付一个明确的TrueType路径及一个经样例验证的中文CID路径；其余类型保留未支持而非伪成功。",
+      "test_ids": [
+        "IT-24",
+        "IT-25"
+      ],
+      "dependencies": [
+        "T-041",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-043",
+      "milestone": "M4",
+      "title": "补嵌后字形和文本复验",
+      "requirements": [
+        "FR-013",
+        "R-6.26"
+      ],
+      "deliverable": "检查嵌入结果、Unicode/字宽/行布局、数字单位上下标、全页渲染；不接受仅修复命令返回0。",
+      "test_ids": [
+        "IT-25"
+      ],
+      "dependencies": [
+        "T-042"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-044",
+      "milestone": "M4",
+      "title": "接通OCR后字体复查",
+      "requirements": [
+        "R-6.26",
+        "FR-014"
+      ],
+      "deliverable": "与OCR管线相接；新增字体合格嵌入、编码/检索正常；确实不能补嵌时给资源需求清单。",
+      "test_ids": [
+        "IT-26"
+      ],
+      "dependencies": [
+        "T-043",
+        "T-033"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-045",
+      "milestone": "M4",
+      "title": "字体阶段验收",
+      "requirements": [
+        "R-6.26",
+        "FR-018"
+      ],
+      "deliverable": "精确支持类型与负例全部实测；错字体/无字体/Type3不得误绿；中英文表格确认。",
+      "test_ids": [
+        "IT-24",
+        "IT-25",
+        "IT-26"
+      ],
+      "dependencies": [
+        "T-044"
+      ],
+      "kind": "阶段验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-046",
+      "milestone": "M5",
+      "title": "凭据管理和授权解密",
+      "requirements": [
+        "R-6.19",
+        "R-6.21",
+        "FR-016"
+      ],
+      "deliverable": "批次内安全传递凭据、不存日志预设；解密支持类型/授权确认；签名仍阻断。",
+      "test_ids": [
+        "AC-R619-P",
+        "AC-R619-N",
+        "AC-R619-U",
+        "AC-R621-P",
+        "AC-R621-N",
+        "AC-R621-U",
+        "IT-27"
+      ],
+      "dependencies": [
+        "T-018"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-047",
+      "milestone": "M5",
+      "title": "签名及纸质签章处理策略",
+      "requirements": [
+        "FR-015"
+      ],
+      "deliverable": "保留结构信号阻断与只读复制；批次声明扫描签章是否允许技术处理，不用视觉猜测自动授权。",
+      "test_ids": [
+        "IT-27"
+      ],
+      "dependencies": [
+        "T-046"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-048",
+      "milestone": "M5",
+      "title": "附件深度枚举及批准移除",
+      "requirements": [
+        "R-6.17"
+      ],
+      "deliverable": "对象级提取/隔离/移除，引用一致性复验；不会删除附录页面。",
+      "test_ids": [
+        "AC-R617-P",
+        "AC-R617-N",
+        "AC-R617-U",
+        "IT-28"
+      ],
+      "dependencies": [
+        "T-047",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-049",
+      "milestone": "M5",
+      "title": "注释分类检查和有限清理",
+      "requirements": [
+        "R-6.18"
+      ],
+      "deliverable": "Subtype策略清理普通便笺；签章/Redact/Widget等保持阻断或专用处理；保留Link。",
+      "test_ids": [
+        "AC-R618-P",
+        "AC-R618-N",
+        "AC-R618-U",
+        "IT-28"
+      ],
+      "dependencies": [
+        "T-048",
+        "T-012"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-050",
+      "milestone": "M5",
+      "title": "动态内容检查与有限清理",
+      "requirements": [
+        "R-6.24"
+      ],
+      "deliverable": "有界全图检查；支持无可见副作用的已知脚本移除；未知动态表单/媒体不通用扁平化。",
+      "test_ids": [
+        "AC-R624-P",
+        "AC-R624-N",
+        "AC-R624-U",
+        "IT-28"
+      ],
+      "dependencies": [
+        "T-049"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-051",
+      "milestone": "M5",
+      "title": "版本检查与有限兼容转换",
+      "requirements": [
+        "R-6.16"
+      ],
+      "deliverable": "区分有效版本和PDF/A声明；支持矩阵内真实转换；独立符合性验证，否则未判定。",
+      "test_ids": [
+        "AC-R616-P",
+        "AC-R616-N",
+        "AC-R616-U",
+        "IT-29"
+      ],
+      "dependencies": [
+        "T-012",
+        "T-050"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-052",
+      "milestone": "M5",
+      "title": "批准页方向持久处理",
+      "requirements": [
+        "EX-02"
+      ],
+      "deliverable": "明确页号/角度/原始几何计划，保留正确横页，验热区及目标；不包含A4缩放/重排。",
+      "test_ids": [
+        "IT-30"
+      ],
+      "dependencies": [
+        "T-012",
+        "T-019"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-053",
+      "milestone": "M5",
+      "title": "限定结构恢复路径",
+      "requirements": [
+        "R-6.1"
+      ],
+      "deliverable": "仅对固定病理类型、可建立内容基线的损坏副本恢复；差异不能证明时回源，禁止补空白页。",
+      "test_ids": [
+        "AC-R61-P",
+        "AC-R61-N",
+        "AC-R61-U"
+      ],
+      "dependencies": [
+        "T-011",
+        "T-012",
+        "T-051"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-054",
+      "milestone": "M5",
+      "title": "剩余规则与可选操作验收",
+      "requirements": [
+        "FR-018"
+      ],
+      "deliverable": "安全限制、附件、注释、内容、版本、方向的真实正负例测试，限定支持说明。",
+      "test_ids": [
+        "IT-27",
+        "IT-28",
+        "IT-29",
+        "IT-30"
+      ],
+      "dependencies": [
+        "T-053",
+        "T-052",
+        "T-050",
+        "T-047"
+      ],
+      "kind": "阶段验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-055",
+      "milestone": "M6",
+      "title": "整批管线与操作组合回归",
+      "requirements": [
+        "FR-003",
+        "FR-009",
+        "FR-010",
+        "FR-020"
+      ],
+      "deliverable": "组合操作拓扑排序、最终保存和输出树链接复查；100文件批次零逐文件确认。",
+      "test_ids": [
+        "IT-31"
+      ],
+      "dependencies": [
+        "T-030",
+        "T-038",
+        "T-045",
+        "T-054"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-056",
+      "milestone": "M6",
+      "title": "故障注入与跨阶段恢复验收",
+      "requirements": [
+        "FR-011",
+        "FR-012",
+        "FR-013"
+      ],
+      "deliverable": "取消/崩溃/磁盘满/发布中断/输入变化覆盖；统计守恒且无错误复用。",
+      "test_ids": [
+        "IT-34"
+      ],
+      "dependencies": [
+        "T-055"
+      ],
+      "kind": "实现",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-057",
+      "milestone": "M6",
+      "title": "Windows本机回归",
+      "requirements": [
+        "FR-008",
+        "FR-018"
+      ],
+      "deliverable": "Win10/11环境分别记录；权限、中文/长路径、浏览器、原生worker、启动及依赖检查。",
+      "test_ids": [
+        "IT-32"
+      ],
+      "dependencies": [
+        "T-055"
+      ],
+      "kind": "环境验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-058",
+      "milestone": "M6",
+      "title": "指定NAS共享回归",
+      "requirements": [
+        "FR-008",
+        "FR-018"
+      ],
+      "deliverable": "NAS输入/输出拓扑、断连、文件锁、原子发布能力验证；不支持安全发布时要求本地输出。",
+      "test_ids": [
+        "IT-32"
+      ],
+      "dependencies": [
+        "T-057"
+      ],
+      "kind": "环境验收",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-059",
+      "milestone": "M6",
+      "title": "基准测量与资源参数冻结",
+      "requirements": [
+        "FR-020"
+      ],
+      "deliverable": "记录基准设备、吞吐/首进度/内存及超限处理；目标与实测分开，不编造所有PDF固定耗时。",
+      "test_ids": [
+        "IT-33"
+      ],
+      "dependencies": [
+        "T-055"
+      ],
+      "kind": "性能验证",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-060",
+      "milestone": "M6",
+      "title": "隐私和活动内容回归",
+      "requirements": [
+        "FR-015",
+        "FR-016"
+      ],
+      "deliverable": "离线运行、无凭据泄漏、无自动外链执行、故障包不含真实资料；第三方许可清单。",
+      "test_ids": [
+        "IT-35"
+      ],
+      "dependencies": [
+        "T-055"
+      ],
+      "kind": "安全验证",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-061",
+      "milestone": "M6",
+      "title": "官方验证器有限对照",
+      "requirements": [
+        "FR-018",
+        "FR-004"
+      ],
+      "deliverable": "在可用且获准的环境记录实际6.x对照；未取得可运行官方环境则标独立未完成，不阻断本地副本工具已验证能力。",
+      "test_ids": [
+        "IT-36"
+      ],
+      "dependencies": [
+        "T-055"
+      ],
+      "kind": "外部对照",
+      "status": "TODO",
+      "completion_evidence": []
+    },
+    {
+      "id": "T-062",
+      "milestone": "M6",
+      "title": "阶段交付清单与用户验收",
+      "requirements": [
+        "FR-017",
+        "FR-018"
+      ],
+      "deliverable": "交付锁定版本、支持范围、安装说明、能力禁用项、所有执行证据；不将官方对照未完成写为已通过。",
+      "test_ids": [
+        "IT-31",
+        "IT-32",
+        "IT-33",
+        "IT-34",
+        "IT-35"
+      ],
+      "dependencies": [
+        "T-056",
+        "T-058",
+        "T-059",
+        "T-060"
+      ],
+      "kind": "交付验收",
+      "status": "TODO",
+      "completion_evidence": []
+    }
+  ],
+  "rule_acceptance_tests": [
+    {
+      "id": "AC-R61-P",
+      "rule": "6.1",
+      "case_type": "POSITIVE",
+      "fixture": "3页合成文本PDF逐页可解析且可渲染",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R61-N",
+      "rule": "6.1",
+      "case_type": "NEGATIVE",
+      "fixture": "零页PDF或第2页确证无效内容流；定位失效页",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R61-U",
+      "rule": "6.1",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "渲染超时但未证实文件损坏；未完成部分保持未判定",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R62-P",
+      "rule": "6.2",
+      "case_type": "POSITIVE",
+      "fixture": "GoToR指向已提供兄弟目录PDF的相对路径",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R62-N",
+      "rule": "6.2",
+      "case_type": "NEGATIVE",
+      "fixture": "书签含C盘绝对路径且存在已确认映射",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R62-U",
+      "rule": "6.2",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "目标在未授权根目录；不读取且不凭同名映射",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R63-P",
+      "rule": "6.3",
+      "case_type": "POSITIVE",
+      "fixture": "页内书签标题含网址但目标为本地页",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R63-N",
+      "rule": "6.3",
+      "case_type": "NEGATIVE",
+      "fixture": "适用报告中书签URI指向https网页",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R63-U",
+      "rule": "6.3",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "带有效子节点的URI父书签未给处置策略",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R64-P",
+      "rule": "6.4",
+      "case_type": "POSITIVE",
+      "fixture": "单一合法GoTo动作",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R64-N",
+      "rule": "6.4",
+      "case_type": "NEGATIVE",
+      "fixture": "动作类型为JavaScript且确认适用",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R64-U",
+      "rule": "6.4",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "动作链循环达到上限；不能视为全链已检查",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R65-P",
+      "rule": "6.5",
+      "case_type": "POSITIVE",
+      "fixture": "有效目标引用的普通书签",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R65-N",
+      "rule": "6.5",
+      "case_type": "NEGATIVE",
+      "fixture": "无Dest及A的叶书签",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R65-U",
+      "rule": "6.5",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "被解析器恢复的异常节点仍无可靠原始结构",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R66-P",
+      "rule": "6.6",
+      "case_type": "POSITIVE",
+      "fixture": "远端名称在已提供目标PDF解析到合法本地页",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R66-N",
+      "rule": "6.6",
+      "case_type": "NEGATIVE",
+      "fixture": "本地书签指向已不存在页对象",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R66-U",
+      "rule": "6.6",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "远端PDF未提供，目标状态为NOT_PROVIDED",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R67-P",
+      "rule": "6.7",
+      "case_type": "POSITIVE",
+      "fixture": "只有一个GoTo且无额外动作",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R67-N",
+      "rule": "6.7",
+      "case_type": "NEGATIVE",
+      "fixture": "A.Next包含第二个不同页跳转",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R67-U",
+      "rule": "6.7",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "共享动作加循环导致遍历不完整",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R68-P",
+      "rule": "6.8",
+      "case_type": "POSITIVE",
+      "fixture": "完整XYZ目标，zoom为null或0",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R68-N",
+      "rule": "6.8",
+      "case_type": "NEGATIVE",
+      "fixture": "完整XYZ目标，zoom为1.5",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R68-U",
+      "rule": "6.8",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "XYZ数组长度不足；不是承前缩放通过",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R69-P",
+      "rule": "6.9",
+      "case_type": "POSITIVE",
+      "fixture": "合法../附件/报告.pdf链接",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R69-N",
+      "rule": "6.9",
+      "case_type": "NEGATIVE",
+      "fixture": "Link中含明确的盘符绝对路径",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R69-U",
+      "rule": "6.9",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "两个同名目标无明确选择",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R610-P",
+      "rule": "6.10",
+      "case_type": "POSITIVE",
+      "fixture": "正文出现DOI但没有Link对象",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R610-N",
+      "rule": "6.10",
+      "case_type": "NEGATIVE",
+      "fixture": "报告中的真实mailto链接",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R610-U",
+      "rule": "6.10",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "无法解析的Link外观资源；不承诺视觉无变化",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R611-P",
+      "rule": "6.11",
+      "case_type": "POSITIVE",
+      "fixture": "单一GoToR且目标合法",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R611-N",
+      "rule": "6.11",
+      "case_type": "NEGATIVE",
+      "fixture": "Link含JavaScript动作",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R611-U",
+      "rule": "6.11",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "嵌套动作遍历超限",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R612-P",
+      "rule": "6.12",
+      "case_type": "POSITIVE",
+      "fixture": "Link具有合法Dest",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R612-N",
+      "rule": "6.12",
+      "case_type": "NEGATIVE",
+      "fixture": "空A字典的Link",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R612-U",
+      "rule": "6.12",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "注释损坏无法确认Subtype",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R613-P",
+      "rule": "6.13",
+      "case_type": "POSITIVE",
+      "fixture": "报告链接到输出树中可解析的附件页",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R613-N",
+      "rule": "6.13",
+      "case_type": "NEGATIVE",
+      "fixture": "远端显式页号等于目标页数（越界）",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R613-U",
+      "rule": "6.13",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "目标可在输入访问但未被纳入输出",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R614-P",
+      "rule": "6.14",
+      "case_type": "POSITIVE",
+      "fixture": "一个GoTo动作",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R614-N",
+      "rule": "6.14",
+      "case_type": "NEGATIVE",
+      "fixture": "Link有GoTo和Next Launch",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R614-U",
+      "rule": "6.14",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "选择器匹配多条动作",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R615-P",
+      "rule": "6.15",
+      "case_type": "POSITIVE",
+      "fixture": "Link完整XYZ的zoom为0",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R615-N",
+      "rule": "6.15",
+      "case_type": "NEGATIVE",
+      "fixture": "Link完整XYZ的zoom为2",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R615-U",
+      "rule": "6.15",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "命名目标不能解析，缩放无法判断",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R616-P",
+      "rule": "6.16",
+      "case_type": "POSITIVE",
+      "fixture": "普通1.7 PDF且无冲突高版本声明",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R616-N",
+      "rule": "6.16",
+      "case_type": "NEGATIVE",
+      "fixture": "header与Catalog实际有效版本超出接受范围",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R616-U",
+      "rule": "6.16",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "仅有PDF/A声明但独立验证不可用",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R617-P",
+      "rule": "6.17",
+      "case_type": "POSITIVE",
+      "fixture": "无嵌入文件，仅有正文“附件一”页面",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R617-N",
+      "rule": "6.17",
+      "case_type": "NEGATIVE",
+      "fixture": "根级名称树下有嵌入xlsx",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R617-U",
+      "rule": "6.17",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "对象扫描被限额截断，不能确认无附件",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R618-P",
+      "rule": "6.18",
+      "case_type": "POSITIVE",
+      "fixture": "只有Link注释",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R618-N",
+      "rule": "6.18",
+      "case_type": "NEGATIVE",
+      "fixture": "Text便笺或Highlight注释，输出提示信息",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R618-U",
+      "rule": "6.18",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "Widget是否涉及签名未判明，重写阻断",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R619-P",
+      "rule": "6.19",
+      "case_type": "POSITIVE",
+      "fixture": "未加密且无限制PDF",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R619-N",
+      "rule": "6.19",
+      "case_type": "NEGATIVE",
+      "fixture": "空打开密码但禁止复制的PDF",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R619-U",
+      "rule": "6.19",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "需要未提供的所有者凭据或证书",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R620-P",
+      "rule": "6.20",
+      "case_type": "POSITIVE",
+      "fixture": "有书签UseOutlines且布局/缩放为默认",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R620-N",
+      "rule": "6.20",
+      "case_type": "NEGATIVE",
+      "fixture": "有书签但隐藏书签且打开缩放150%",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R620-U",
+      "rule": "6.20",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "OpenAction未知扩展动作，保留待办不静默删除",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R621-P",
+      "rule": "6.21",
+      "case_type": "POSITIVE",
+      "fixture": "无打开密码",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R621-N",
+      "rule": "6.21",
+      "case_type": "NEGATIVE",
+      "fixture": "受打开密码保护，即使文献仍报告本项",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R621-U",
+      "rule": "6.21",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "解析器失败但未能区分加密算法和损坏",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R622-P",
+      "rule": "6.22",
+      "case_type": "POSITIVE",
+      "fixture": "实际结构有效的线性化PDF",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R622-N",
+      "rule": "6.22",
+      "case_type": "NEGATIVE",
+      "fixture": "非线性化或线性化结构无效",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R622-U",
+      "rule": "6.22",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "仅检测到标记但结构校验未完成",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R623-P",
+      "rule": "6.23",
+      "case_type": "POSITIVE",
+      "fixture": "6页且有真实目录书签，或5页无书签",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R623-N",
+      "rule": "6.23",
+      "case_type": "NEGATIVE",
+      "fixture": "6页普通报告完全无书签",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R623-U",
+      "rule": "6.23",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "角色未确认，是否申请表/参考资料未知",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R624-P",
+      "rule": "6.24",
+      "case_type": "POSITIVE",
+      "fixture": "静态文本/图片PDF",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R624-N",
+      "rule": "6.24",
+      "case_type": "NEGATIVE",
+      "fixture": "文档级JavaScript或RichMedia对象",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R624-U",
+      "rule": "6.24",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "活动对象遍历未完成；本项未判定",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R625-P",
+      "rule": "6.25",
+      "case_type": "POSITIVE",
+      "fixture": "原生正文可提取且搜索回定位一致",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R625-N",
+      "rule": "6.25",
+      "case_type": "NEGATIVE",
+      "fixture": "纯扫描报告页无文本层",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R625-U",
+      "rule": "6.25",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "仅有页眉文本的大幅正文扫描图，需进一步分类",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R626-P",
+      "rule": "6.26",
+      "case_type": "POSITIVE",
+      "fixture": "实际使用的非标准字体已完整或有效子集嵌入",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R626-N",
+      "rule": "6.26",
+      "case_type": "NEGATIVE",
+      "fixture": "非标准字体明确无所需字体程序",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "AC-R626-U",
+      "rule": "6.26",
+      "case_type": "UNCERTAIN_BOUNDARY",
+      "fixture": "SimSun别名与标准清单未完成对应核验，或Type3结构需独立判断",
+      "status": "PLANNED_NOT_RUN"
+    }
+  ],
+  "integration_tests": [
+    {
+      "id": "IT-01",
+      "milestone": "M1",
+      "title": "目录递归与同名文件",
+      "acceptance": "空腹/report.pdf、餐后/report.PDF及一个非PDF伪装扩展名；各自识别、定位，顺序稳定，伪PDF有明确失败原因。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-02",
+      "milestone": "M1",
+      "title": "越界与别名",
+      "acceptance": "符号链接、硬链接别名、Windows重解析点、路径穿越及输出包含输入；拒绝越权访问和覆盖，保留诊断。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-03",
+      "milestone": "M1",
+      "title": "一次确认批量执行",
+      "acceptance": "混合有书签/无书签、无需修改、打不开文件；只确认一次，正常项自动完成，异常不阻塞。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-04",
+      "milestone": "M1",
+      "title": "输入变化",
+      "acceptance": "计划后改源文件；受影响计划失效且不发布，其他稳定文件继续。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-05",
+      "milestone": "M1",
+      "title": "无覆盖发布",
+      "acceptance": "PDF或证据文件预先存在；不得覆盖，不删除已有文件，不声称完成。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-06",
+      "milestone": "M1",
+      "title": "完整副本与不重写",
+      "acceptance": "无需修改PDF复制后哈希等于原件且是独立文件；路径保持；不是原件硬链接。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-07",
+      "milestone": "M1",
+      "title": "纯属性未授权改动注入",
+      "acceptance": "只准改视图，测试注入正文数字变化、书签删除、ToUnicode修改；三者均拒绝发布。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-08",
+      "milestone": "M1",
+      "title": "默认视图与打开页",
+      "acceptance": "有/无书签自动分支；保持起始第3页；默认不是100%；复杂OpenAction给未支持而非粗暴移除。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-09",
+      "milestone": "M1",
+      "title": "元数据对应关系",
+      "acceptance": "Info和多语言XMP标题/作者/主题/关键词不同步；仅所选字段消除，未选字段及合规声明保留且重新评估。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-10",
+      "milestone": "M1",
+      "title": "线性化最后执行",
+      "acceptance": "先改元数据和视图再线性化；最终输出实际通过结构检验；无改动文件不无谓重写。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-11",
+      "milestone": "M2",
+      "title": "文献与英文报告",
+      "acceptance": "2.7.5/5.4及已确认外文参考资料豁免逐条生效；英文正式临床报告不豁免；参考文献的密码仍报6.21。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-12",
+      "milestone": "M2",
+      "title": "名称树及共享目标",
+      "acceptance": "两个书签、一个Link共享名称目标，只选其中一个；未选引用语义不变，无新多动作。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-13",
+      "milestone": "M2",
+      "title": "本地与远端页语义",
+      "acceptance": "本地页对象、GoToR零基页号、远端名称三种；正确/越界/未提供均有独立结果。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-14",
+      "milestone": "M2",
+      "title": "Fit与畸形XYZ",
+      "acceptance": "覆盖Fit/FitH/FitV/FitR及截断XYZ；只有已批准可保留定位的转换执行，其他无误通过。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-15",
+      "milestone": "M2",
+      "title": "多动作和循环",
+      "acceptance": "Next数组/AA/共享链/循环；遍历计数正确，按明确选择裁剪，不取第一条。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-16",
+      "milestone": "M2",
+      "title": "移除外链不删文字",
+      "acceptance": "普通文本URL、URI Link、可见边框Link、带子节点外链书签分别处理；文字保持。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-17",
+      "milestone": "M2",
+      "title": "输出链接二次检查",
+      "acceptance": "未改附件须复制；未导出已提供目标标TARGET_NOT_EXPORTED；不回看输入树冒充输出成功。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-18",
+      "milestone": "M2",
+      "title": "目录创建与页码偏移",
+      "acceptance": "罗马数字页标签、正文从1开始但物理第7页；基于确认映射建书签/链接，不能把文本页码直接用作物理页。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-19",
+      "milestone": "M3",
+      "title": "纯扫描按需OCR",
+      "acceptance": "100页中3页需OCR；其他97页页面/文本/导航保持；输出层可检索并定位。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-20",
+      "milestone": "M3",
+      "title": "仅页眉有字的混合页",
+      "acceptance": "正文图像没有OCR却有页眉文本；不能整页PASS；支持范围内分区OCR，否则集中复核。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-21",
+      "milestone": "M3",
+      "title": "OCR内容风险",
+      "acceptance": "合成0/O、1/l、0.125、mg/μg及上下标；记录独立转录质量检查，不自动改临床数值。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-22",
+      "milestone": "M3",
+      "title": "取消超时与恢复",
+      "acceptance": "OCR第k页终止后无半成品进入输出；重启核对哈希、预设和引擎后从已验证检查点恢复。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-23",
+      "milestone": "M3",
+      "title": "OCR导出副作用",
+      "acceptance": "按页OCR同时发生全文件优化/转PDF-A/图像重编码的候选被发现；关闭未授权副作用或拒绝。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-24",
+      "milestone": "M4",
+      "title": "精确字体与别名",
+      "acceptance": "合法非标准字体样本、精确匹配字体、缺字体、错版本、Type3分别验证；不按视觉相似匹配。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-25",
+      "milestone": "M4",
+      "title": "中英文与数值排版",
+      "acceptance": "包含中文、希腊字母、上下标及数值表格；补嵌后字形/字宽/换行及搜索结果一致。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-26",
+      "milestone": "M4",
+      "title": "OCR新增字体",
+      "acceptance": "OCR后新增字体嵌入与ToUnicode有效；缺字体不能只因OCR退出码0算通过。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-27",
+      "milestone": "M5",
+      "title": "授权解密与签名",
+      "acceptance": "正确/错误/缺凭据、空打开密码限制复制及数字签名文件；只在支持且授权场景输出无密码副本，签名不解除。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-28",
+      "milestone": "M5",
+      "title": "注释和附件",
+      "acceptance": "便笺、Highlight、Stamp、Link、FileAttachment、Widget、Redact混合；只删除明确选项，签章/正文/其他对象保全。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-29",
+      "milestone": "M5",
+      "title": "版本与PDF/A声明",
+      "acceptance": "1.4/1.7/2.0、header/Catalog冲突及伪PDF/A；检测与转换分开，符合性验证失败不发布为符合。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-30",
+      "milestone": "M5",
+      "title": "方向与热区",
+      "acceptance": "页面已有Rotate且CropBox非零原点；按确认旋转后内容及点击定位一起验证，不强制所有横页改竖。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-31",
+      "milestone": "M6",
+      "title": "小批次无交互验收",
+      "acceptance": "100份合成/获准本机样本混合各支持操作；运行中零逐文件确认，文件终态统计守恒，所有未处理项可解释。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-32",
+      "milestone": "M6",
+      "title": "本机Windows与NAS",
+      "acceptance": "分别在Win10、Win11、本地NTFS、选定NAS共享记录结果；断连/权限/长路径/中文/重解析点专测，不用CI替代。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-33",
+      "milestone": "M6",
+      "title": "性能与资源",
+      "acceptance": "基准设备记录CPU/RAM/SSD及引擎；100份20页文本、500页扫描、大图页分别记录吞吐/峰值/首个进度时间，无虚构统一秒数。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-34",
+      "milestone": "M6",
+      "title": "应用崩溃恢复",
+      "acceptance": "发布PDF后证据记录前中断、恢复时源版本改变、已完成输出被外改等；不复用损坏状态，不覆盖输出。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-35",
+      "milestone": "M6",
+      "title": "隐私与错误信息",
+      "acceptance": "密码、正文、真实绝对路径不得进入导出的故障包/遥测；默认无云上传，阅读PDF不执行外链。",
+      "status": "PLANNED_NOT_RUN"
+    },
+    {
+      "id": "IT-36",
+      "milestone": "M6",
+      "title": "官方对照观察",
+      "acceptance": "获准本地样本在指定官方验证器版本对照26规则；只记录实际覆盖；缺XML不能阻止产品处理，不能伪造官方通过。",
+      "status": "PLANNED_NOT_RUN"
+    }
+  ]
+}
