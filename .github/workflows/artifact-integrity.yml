@@ -1,11 +1,15 @@
 name: Artifact integrity
 on:
   push:
-    branches: [main, "agent/**"]
+    branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -91,3 +95,21 @@ jobs:
           path: build/cro-browser/
           retention-days: 30
           if-no-files-found: error
+  pr-checks:
+    name: PR checks
+    if: ${{ always() }}
+    needs: [validate, cro-core, cro-browser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every validation job to pass
+        env:
+          VALIDATE_RESULT: ${{ needs.validate.result }}
+          CORE_RESULT: ${{ needs.cro-core.result }}
+          BROWSER_RESULT: ${{ needs.cro-browser.result }}
+        run: |
+          printf 'Artifacts: %s\nPDF core: %s\nBrowser: %s\n' \
+            "$VALIDATE_RESULT" "$CORE_RESULT" "$BROWSER_RESULT"
+          test "$VALIDATE_RESULT" = success
+          test "$CORE_RESULT" = success
+          test "$BROWSER_RESULT" = success
