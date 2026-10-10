@@ -125,7 +125,12 @@ class Handler(BaseHTTPRequestHandler):
             result = self._route(payload)
             self._send(200, result)
         except (ValueError, KeyError, TypeError, OSError, RuntimeError) as exc:
-            self._send(400, {'error': str(exc)[:2000], 'error_type': type(exc).__name__})
+            message = str(exc)
+            error = {'error': message[:2000], 'error_type': type(exc).__name__}
+            if any(signal in message.lower() for signal in
+                   ('source_changed', 'source changed', 'input changed', 'identity mismatch')):
+                error['error_code'] = 'SOURCE_CHANGED'
+            self._send(400, error)
         except Exception:
             self._send(500, {'error': 'Internal operation failed; no successful result is asserted'})
 
@@ -144,8 +149,25 @@ class Handler(BaseHTTPRequestHandler):
             return w.document_action(p['id'], 'view-page', page=page, dpi=dpi, query=query)
         if self.path == '/api/navigation':
             return w.document_action(p['id'], 'navigation')
+        if self.path == '/api/thumbnail':
+            page = p.get('page', 1)
+            if type(page) is not int or page < 1:
+                raise ValueError('Invalid physical page')
+            return w.document_action(p['id'], 'thumbnail', page=page)
         if self.path == '/api/search':
-            return w.document_action(p['id'], 'search-document', query=p['query'])
+            start_page, page_limit, query = p.get('start_page', 1), p.get('page_limit', 200), p.get('query')
+            if type(start_page) is not int or start_page < 1:
+                raise ValueError('Invalid search start page')
+            if type(page_limit) is not int or not 1 <= page_limit <= 2000:
+                raise ValueError('Search page limit must be between 1 and 2000')
+            if not isinstance(query, str) or not 1 <= len(query) <= 256 or '\x00' in query:
+                raise ValueError('Invalid query')
+            return w.document_action(p['id'], 'search-document', query=query,
+                                     start_page=start_page, page_limit=page_limit)
+        if self.path == '/api/history':
+            return w.job_history()
+        if self.path == '/api/retry':
+            return {'job_id': w.retry(p['id'])}
         if self.path == '/api/context':
             w.set_context(p['id'], p['context'])
             return {'saved': True}

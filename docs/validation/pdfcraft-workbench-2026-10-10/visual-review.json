@@ -1,0 +1,42 @@
+{
+  "browser_run_result": "PASS",
+  "interaction_checks_passed": 28,
+  "synthetic_only": true,
+  "reviewed_this_run": [
+    "control-recovery-accepted-recovered.png",
+    "control-recovery-rejected-recovered.png",
+    "workbench-plan-source-invalidation.png",
+    "workbench-reader.png",
+    "workbench-1000.png"
+  ],
+  "confirmed": [
+    "Chinese headings and controls render legibly; native PDF image and extracted text are visible.",
+    "Reader, file list and evidence panels remain distinct; 1000x800 has no horizontal document overflow and the footer remains visible.",
+    "Accepted completed-job recovery removes the old network-unknown notice, shows 1/1 completion and 26 rule states, and restores controls.",
+    "Empty-history recovery states that operations are restored and has no obsolete unknown-state message.",
+    "Real source identity failure remains visible after opening task history; the changed A row is red and marked invalid, B remains eligible, and the button confirms exactly one copy.",
+    "Task-plan rows, paths and controls in the inspected screenshots are legible and not overlapped."
+  ],
+  "previous_run_visual_coverage": "The previous 27-check run included direct inspection of all 17 screenshots covering thumbnails, nested bookmarks, 201-page search, query invalidation, source invalidation, focus, mixed plans, consumed history and retry.",
+  "input_integrity_scope": {
+    "ordinary_inputs_unchanged": 11,
+    "separate_deliberate_source_change_control_inputs": 2,
+    "control_a": "Actual SHA equals the expected SHA after appending one exact synthetic PDF comment.",
+    "control_b": "Unchanged."
+  },
+  "response_controls": {
+    "injected_HTTP_or_network_diagnostics": 6,
+    "real_local_API_identity_guard_diagnostic_after_deliberate_synthetic_source_change": 1,
+    "source_change_response_was_injected": false
+  },
+  "unexpected_browser_errors": 0,
+  "external_requests": 0,
+  "web_assets_unchanged_during_run": true,
+  "python_source_unchanged_during_run": true,
+  "official_validator_run": false,
+  "web_asset_sha256": {
+    "app.js": "c3f4b45766792fa76e358b9e312d4ab959a9222d77dacf27bc6d7165f74c7129",
+    "index.html": "394ace6fce8754b91c87aae2067021ed1a939e6c78d8945923124ef72583f3ef",
+    "style.css": "2505a421aea637cc628c5cd20fa69db596b5f3cda742accff6b25063403e26af"
+  }
+}

@@ -1,5 +1,7 @@
 """EZCTD experimental read-only PDF observation package."""
 
+__version__ = "0.4.0.dev0"
+
 from .catalog import RuleCatalog, RuleMetadata
 from .models import Evidence, Finding, PdfContext, ScanDiagnostics, ScanResult
 

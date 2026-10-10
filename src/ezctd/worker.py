@@ -12,17 +12,21 @@ def execute(request: dict) -> dict:
         from .reader import navigation, search_document
         if operation == 'navigation':
             return navigation(Path(request['path']), request['expected_sha256'])
-        return search_document(Path(request['path']), request['expected_sha256'], request['query'])
+        return search_document(Path(request['path']), request['expected_sha256'], request['query'],
+                               start_page=request.get('start_page', 1),
+                               page_limit=request.get('page_limit', 200))
     if operation in ('inspect-copy', 'linearize-stage'):
         from .pdf_copy import inspect_copy, linearize_stage
         if operation == 'inspect-copy':
             return inspect_copy(Path(request['path']), request['expected_sha256'])
         return linearize_stage(Path(request['path']), request['expected_sha256'], Path(request['stage_path']))
-    if operation in ('inspect-page', 'render-page', 'view-page'):
+    if operation in ('inspect-page', 'render-page', 'view-page', 'thumbnail'):
         from .page_tools import page_operation
         return page_operation(Path(request['path']), page_number=request.get('page', 1),
-                              query=request.get('query'), render=operation in ('render-page', 'view-page'), include_text=operation == 'view-page',
-                              dpi=request.get('dpi', 120))
+                              query=request.get('query'), render=operation in ('render-page', 'view-page', 'thumbnail'),
+                              include_text=operation == 'view-page',
+                              dpi=36 if operation == 'thumbnail' else request.get('dpi', 120),
+                              max_pixels=180_000 if operation == 'thumbnail' else 16_000_000)
     if operation == 'scan-pdf':
         from .catalog import RuleCatalog
         from .models import PdfContext

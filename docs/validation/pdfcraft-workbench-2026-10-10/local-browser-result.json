@@ -1,0 +1,224 @@
+{
+  "synthetic_only": true,
+  "browser": "Chromium via Playwright",
+  "checks": [
+    "real_pdf_page_rendered_and_text_extracted",
+    "numeric_query_highlighted_with_native_coordinates",
+    "page_navigation_and_bookmark_targets",
+    "native_thumbnails_change_and_track_physical_page",
+    "reading_focus_toggle_keeps_document_and_layout",
+    "full_document_search_three_pages",
+    "clear_search_removes_results_and_continuation",
+    "selected_scan_only_one_pdf_and_unscanned_filter_seven",
+    "issue_status_and_query_filters_restore_all_26_rules",
+    "actual_eight_pdf_scan_with_bad_and_password_inputs",
+    "all_26_states_retained_with_explicit_issue_first",
+    "report_import_inert_and_bom_preserved",
+    "plan_two_eligible_one_signature_block_one_noop",
+    "two_real_linearized_copies_published_with_proof",
+    "history_opens_consumed_plan_without_reapply",
+    "mixed_valid_and_corrupt_plan_applies_only_verified_eligible_file",
+    "retry_failed_subset_excludes_success_and_preserves_published_copies",
+    "1000px_layout_no_document_overflow_and_footer_visible",
+    "delayed_native_page_response_cannot_draw_previous_query_highlights_or_count",
+    "editing_query_clears_existing_canvas_highlights_without_discarding_valid_page",
+    "injected_ordinary_page_error_keeps_unrelated_rules_navigation_search_and_report",
+    "injected_native_text_source_changed_error_clears_all_stale_document_evidence",
+    "thumbnail_collapse_reopen_finishes_all_12_native_previews_in_pending_group",
+    "bookmark_filter_keeps_matching_child_ancestor_and_real_target",
+    "full_search_continues_from_page_201_without_repeating_first_200",
+    "lost_first_accepted_submission_and_history_responses_recover_completed_job_without_resubmission",
+    "failed_first_submission_and_history_recover_empty_session_without_stuck_busy_controls",
+    "real_source_change_invalidates_only_affected_plan_row_and_preserves_other_eligible_entry"
+  ],
+  "browser_version": "140.0.7339.16",
+  "playwright_version": "1.55.0",
+  "application_source_version": "0.4.0.dev0",
+  "application_installed_version": "0.4.0.dev0",
+  "dependency_versions": {
+    "pikepdf": "10.16.0",
+    "pypdfium2": "5.13.0",
+    "Pillow": "12.3.0",
+    "pytest": "9.1.1",
+    "playwright": "1.55.0"
+  },
+  "browser_plugin": "not available",
+  "viewports": [
+    "1500x1000",
+    "1000x800"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "failures": [],
+  "expected_injected_network_diagnostics": [
+    {
+      "case": "ordinary_page_error_control",
+      "url": "http://127.0.0.1:54515/api/page",
+      "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+    },
+    {
+      "case": "source_identity_error_control",
+      "url": "http://127.0.0.1:54515/api/page",
+      "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+    },
+    {
+      "case": "control-recovery-accepted",
+      "url": "http://127.0.0.1:59751/api/scan",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "case": "control-recovery-accepted",
+      "url": "http://127.0.0.1:59751/api/history",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "case": "control-recovery-rejected",
+      "url": "http://127.0.0.1:35547/api/scan",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    },
+    {
+      "case": "control-recovery-rejected",
+      "url": "http://127.0.0.1:35547/api/history",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    }
+  ],
+  "ui_control_response_cases": [
+    {
+      "case": "page_query_response_race",
+      "mechanism": "delay_genuine_native_match_response_until_query_changes",
+      "fabricated_native_payload": false
+    },
+    {
+      "case": "ordinary_page_error_control",
+      "mechanism": "one_injected_HTTP_400_response",
+      "native_source_mutation": false
+    },
+    {
+      "case": "source_identity_error_control",
+      "mechanism": "one_injected_HTTP_400_with_actual_native_error_text_and_SOURCE_CHANGED_code",
+      "native_source_mutation": false
+    },
+    {
+      "case": "thumbnail_collapse_reopen",
+      "mechanism": "delay_two_genuine_native_responses_until_panel_collapsed",
+      "fabricated_native_payload": false
+    },
+    {
+      "case": "control-recovery-accepted",
+      "mechanism": "abort_first_browser_submission_response_and_first_history_response",
+      "submission_reached_real_server": true,
+      "accepted_job_count": 1,
+      "browser_scan_POST_count": 1,
+      "fabricated_native_payload": false
+    },
+    {
+      "case": "control-recovery-rejected",
+      "mechanism": "abort_first_browser_submission_response_and_first_history_response",
+      "submission_reached_real_server": false,
+      "accepted_job_count": 0,
+      "browser_scan_POST_count": 1,
+      "fabricated_native_payload": false
+    }
+  ],
+  "expected_deliberate_source_change_diagnostics": [
+    {
+      "case": "deliberate_synthetic_source_change_native_response",
+      "url": "http://127.0.0.1:34169/api/page",
+      "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+    }
+  ],
+  "inputs_unchanged": true,
+  "input_count": 8,
+  "official_validator_run": false,
+  "extended_reader_integrity": {
+    "synthetic_only": true,
+    "input_count": 1,
+    "before_sha256": {
+      "long-nested.pdf": "69d21c281d0f090062c67b3bdd72669f7ccf894ab2d2008659786c9fabd5deb7"
+    },
+    "unchanged": true
+  },
+  "recovery_case_integrity": {
+    "control-recovery-accepted": {
+      "synthetic_only": true,
+      "input_count": 1,
+      "before_sha256": {
+        "synthetic-recovery.pdf": "af6104b00012cef36bcb4b2f0de8192c22ddb3b82aa2b49efe639efb71471168"
+      },
+      "unchanged": true
+    },
+    "control-recovery-rejected": {
+      "synthetic_only": true,
+      "input_count": 1,
+      "before_sha256": {
+        "synthetic-recovery.pdf": "b354bcf07f7753c6b34a87803ebb935cae80ed343a7a3ce7b4edc62677f48bdf"
+      },
+      "unchanged": true
+    }
+  },
+  "deliberate_source_change_integrity": {
+    "synthetic_only": true,
+    "input_count": 2,
+    "deliberately_modified_input": "a-changed.pdf",
+    "preserved_input": "b-preserved.pdf",
+    "mutation": "append_exact_synthetic_PDF_comment",
+    "mutation_performed": true,
+    "before_sha256": {
+      "b-preserved.pdf": "0f062f98041d4fea13973debf339f285c53db7fdbd4da8d2f4f4efd116cf7607",
+      "a-changed.pdf": "7083954050ef94e549e797738cb599e81084fd0e6bc2a3ca2e31384a6b24f6a4"
+    },
+    "expected_after_sha256": {
+      "b-preserved.pdf": "0f062f98041d4fea13973debf339f285c53db7fdbd4da8d2f4f4efd116cf7607",
+      "a-changed.pdf": "402981cfef506d45b25ad510068c7bc09d8831cbc1cbc9625063bbb1734d8029"
+    },
+    "actual_after_sha256": {
+      "b-preserved.pdf": "0f062f98041d4fea13973debf339f285c53db7fdbd4da8d2f4f4efd116cf7607",
+      "a-changed.pdf": "402981cfef506d45b25ad510068c7bc09d8831cbc1cbc9625063bbb1734d8029"
+    },
+    "matches_exact_intended_mutation": true,
+    "unmodified_input_unchanged": true,
+    "source_error_code": "SOURCE_CHANGED",
+    "plan_id": "5b70d370534b48229fd1fc99587e571e",
+    "eligible_count_before": 2,
+    "eligible_count_after": 1,
+    "response_injected": false,
+    "not_part_of_11_unchanged_input_claim": true
+  },
+  "web_asset_sha256": {
+    "app.js": "c3f4b45766792fa76e358b9e312d4ab959a9222d77dacf27bc6d7165f74c7129",
+    "index.html": "394ace6fce8754b91c87aae2067021ed1a939e6c78d8945923124ef72583f3ef",
+    "style.css": "2505a421aea637cc628c5cd20fa69db596b5f3cda742accff6b25063403e26af"
+  },
+  "web_assets_unchanged_during_run": true,
+  "web_asset_sha256_after": {
+    "app.js": "c3f4b45766792fa76e358b9e312d4ab959a9222d77dacf27bc6d7165f74c7129",
+    "index.html": "394ace6fce8754b91c87aae2067021ed1a939e6c78d8945923124ef72583f3ef",
+    "style.css": "2505a421aea637cc628c5cd20fa69db596b5f3cda742accff6b25063403e26af"
+  },
+  "python_source_sha256": {
+    "src/ezctd/__init__.py": "97010352a982edd5e1688431f402ed3906a985e0f3a5e2835180d004da599e44",
+    "src/ezctd/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ezctd/applicability.py": "feb2d98fe62fdcbcd498d432d0a2d86c5b563ca08e0478f1e92eebf76dec0ed5",
+    "src/ezctd/assurance.py": "611330b5b123746682c61d4de0789d8bd7e81641363c0c8820f8292186cc3c4e",
+    "src/ezctd/batch.py": "1dd591b6784026c2609eba619ff7bf9bd397c17e26937a975c7c5ca9d89f9af4",
+    "src/ezctd/catalog.py": "5729f0965e23785bbc30bae563d69bea9cb83b01c43ee43b300804586e763b29",
+    "src/ezctd/cde_report.py": "508fd56c9a9f395913e0f8c393c10f836754a485e549b091b151f62bfeee8882",
+    "src/ezctd/cli.py": "9fffd512adbd644a7a91c237db14e49b4ca012d3306dac164758ca849f0dd345",
+    "src/ezctd/copy_service.py": "83983e0e5e9fbbe84ea2008438b130c12766b804cdc4e9eb3569bbd182e42fed",
+    "src/ezctd/models.py": "f323387f0a544630c81a25f886bb3376054b4294cf25960189859f5c8bb658df",
+    "src/ezctd/page_tools.py": "b2f14b5f60ffece2f81c2009a7c197fa97faac24e04d3fe939d091101a955a09",
+    "src/ezctd/pdf_copy.py": "68d88b1852746a9fed8bc68359b9463309b6d1b5c0605a24e3d5ce5ca3caa9b5",
+    "src/ezctd/pdf_observer.py": "7b4190e393391cfb3d7fc5d737ba5c7b7eee7598ee1a9a667fcca3e124f54d91",
+    "src/ezctd/pdf_resources.py": "a8b09177f2564e5e0b1acac0d47a2e860b2144f97c9fe2d45067d2e009cec780",
+    "src/ezctd/process_runner.py": "9f5071ef0118d2936985b90359f88bf8b48eb32af884554d4b8900a3f0efa3ec",
+    "src/ezctd/read_cache.py": "f2be25d1fa8c35bcc052f7cdf806a3e8dc00a49c7c8507f45001d133a4e0694a",
+    "src/ezctd/read_scope.py": "23d469ea1432cb5b9c28d0bc59c488d6a71ea4d6706fb29e75b92d4e20cca50f",
+    "src/ezctd/reader.py": "f5b9cb4aad0f04e6c68ae804a17529da946566534081020da664568b645e111a",
+    "src/ezctd/safe_io.py": "ade70fed288c6d383dd0489b8de46515799b20f386e5e3bf6e6bff04ef38945b",
+    "src/ezctd/workbench.py": "505cb53d7124517e2a69091c34049556d9018c3d0aaddd1934d6afd10d1d2e1d",
+    "src/ezctd/worker.py": "f07f00a595c153810ff1affff7cde2e7c704ae8be9e20405ae4bef8f65b84b2e",
+    "src/ezctd/workspace.py": "8a31b82f254a4f7952638ad1a223b37ac08311e22e3ed10a0dfdad239381594a"
+  },
+  "python_source_unchanged_during_run": true,
+  "result": "PASS"
+}

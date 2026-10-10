@@ -1,0 +1,23 @@
+{
+  "synthetic_only": true,
+  "browser": "Chromium via Playwright",
+  "checks": [
+    "real_pdf_page_rendered_and_text_extracted",
+    "numeric_query_highlighted_with_native_coordinates",
+    "page_navigation_and_bookmark_targets",
+    "full_document_search_three_pages",
+    "actual_eight_pdf_scan_with_bad_and_password_inputs",
+    "all_26_states_retained_with_explicit_issue_first",
+    "report_import_inert_and_bom_preserved",
+    "plan_two_eligible_one_signature_block_one_noop",
+    "two_real_linearized_copies_published_with_proof",
+    "1000px_layout_no_document_overflow_and_footer_visible"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "failures": [],
+  "inputs_unchanged": true,
+  "input_count": 8,
+  "official_validator_run": false,
+  "result": "PASS"
+}

@@ -66,6 +66,12 @@ def run_worker(request: dict, *, timeout: float = 60, cancel_event=None) -> dict
                     return {'worker_status': reason[0], 'message': reason[1]}
                 try:
                     proc.communicate(pending, timeout=min(0.1, max(0.001, timeout - (time.monotonic() - started))))
+                    # Cancellation can arrive while communicate is waiting for
+                    # a fast successful worker. Do not publish that success as
+                    # though the request had never been cancelled.
+                    if cancel_event is not None and cancel_event.is_set():
+                        return {'worker_status': 'CANCELLED',
+                                'message': 'Cancelled; unverified output is not published'}
                     break
                 except subprocess.TimeoutExpired:
                     pending = None
@@ -83,4 +89,10 @@ def run_worker(request: dict, *, timeout: float = 60, cancel_event=None) -> dict
             return {'worker_status': 'CRASH_OR_PROTOCOL_ERROR', 'exit_code': proc.returncode}
         if proc.returncode != 0 and payload['worker_status'] == 'OK':
             return {'worker_status': 'CRASH_OR_PROTOCOL_ERROR', 'exit_code': proc.returncode}
+        # Decoding a bounded but large payload can outlast communicate itself.
+        # A cancellation observed during JSON/protocol handling still wins over
+        # returning a successful native result to the publisher.
+        if cancel_event is not None and cancel_event.is_set():
+            return {'worker_status': 'CANCELLED',
+                    'message': 'Cancelled; unverified output is not published'}
         return payload
