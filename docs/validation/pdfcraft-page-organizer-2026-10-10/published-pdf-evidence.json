@@ -1,0 +1,446 @@
+{
+  "job_id": "7494656b005143f1a068e824b7dce1e6",
+  "actual_pdf": {
+    "sha256": "66e28b3ed428a5c2be0291c233b6e3d911d0dc8a06a92fcc16ff07720985d96b",
+    "pages": [
+      {
+        "output_page": 1,
+        "source_page": 1,
+        "rotation_degrees": 0,
+        "page_label": "i",
+        "size": [
+          595.0,
+          842.0
+        ]
+      },
+      {
+        "output_page": 2,
+        "source_page": 4,
+        "rotation_degrees": 0,
+        "page_label": "2",
+        "size": [
+          571.0,
+          804.0
+        ]
+      },
+      {
+        "output_page": 3,
+        "source_page": 5,
+        "rotation_degrees": 0,
+        "page_label": "3",
+        "size": [
+          595.0,
+          842.0
+        ]
+      },
+      {
+        "output_page": 4,
+        "source_page": 6,
+        "rotation_degrees": 0,
+        "page_label": "4",
+        "size": [
+          595.0,
+          842.0
+        ]
+      },
+      {
+        "output_page": 5,
+        "source_page": 2,
+        "rotation_degrees": 180,
+        "page_label": "ii",
+        "size": [
+          595.0,
+          842.0
+        ]
+      },
+      {
+        "output_page": 6,
+        "source_page": 3,
+        "rotation_degrees": 90,
+        "page_label": "1",
+        "size": [
+          842.0,
+          595.0
+        ]
+      }
+    ],
+    "bookmarks": {
+      "first": 1,
+      "nested_six": 4,
+      "second": 5
+    },
+    "links": [
+      {
+        "from": 1,
+        "to": 2
+      },
+      {
+        "from": 6,
+        "to": 3
+      }
+    ]
+  },
+  "proof": {
+    "operation": "organize-pages",
+    "verification_status": "VERIFIED_LOCAL_INVARIANTS",
+    "source_sha256": "e4e63705ae4079a32e27b0f58cc41c67777755846dfed55efda226fdb4ecbcea",
+    "output_sha256": "66e28b3ed428a5c2be0291c233b6e3d911d0dc8a06a92fcc16ff07720985d96b",
+    "output_bytes": 5299,
+    "page_count": 6,
+    "order": [
+      1,
+      4,
+      5,
+      6,
+      2,
+      3
+    ],
+    "rotations": [
+      0,
+      90,
+      90,
+      0,
+      0,
+      0
+    ],
+    "page_mapping": [
+      {
+        "output_position": 1,
+        "source_page": 1,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0
+      },
+      {
+        "output_position": 2,
+        "source_page": 4,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0
+      },
+      {
+        "output_position": 3,
+        "source_page": 5,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0
+      },
+      {
+        "output_position": 4,
+        "source_page": 6,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0
+      },
+      {
+        "output_position": 5,
+        "source_page": 2,
+        "rotation_delta": 90,
+        "source_rotation_degrees": 90,
+        "output_rotation_degrees": 180
+      },
+      {
+        "output_position": 6,
+        "source_page": 3,
+        "rotation_delta": 90,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 90
+      }
+    ],
+    "pages": [
+      {
+        "output_position": 1,
+        "source_page": 1,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0,
+        "dpi": 150,
+        "pixel_size": [
+          1240,
+          1755
+        ],
+        "expected_rotated_pixel_sha256": "f2afcaa0f937861f9a4cc3f85f33581c95d0f18b69e9bd67f4d20ac651f8f6fc",
+        "output_pixel_sha256": "f2afcaa0f937861f9a4cc3f85f33581c95d0f18b69e9bd67f4d20ac651f8f6fc",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "3609567908f684ae6fe1c98c0cfd955fab6501aa25ab91e322ec59e613062e9a",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      },
+      {
+        "output_position": 2,
+        "source_page": 4,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0,
+        "dpi": 150,
+        "pixel_size": [
+          1190,
+          1676
+        ],
+        "expected_rotated_pixel_sha256": "77d5698008fac3713fd0e27664e9ca1e849c95f37551c39d124bef15d1971284",
+        "output_pixel_sha256": "77d5698008fac3713fd0e27664e9ca1e849c95f37551c39d124bef15d1971284",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "91751390becd1ee23b4199fc620455b6ef61b9f96d84dce8563df97a9657201f",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      },
+      {
+        "output_position": 3,
+        "source_page": 5,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0,
+        "dpi": 150,
+        "pixel_size": [
+          1240,
+          1755
+        ],
+        "expected_rotated_pixel_sha256": "0505f2029d5e50ec3a1fd39c844c812f8aa5cb6718060a11fc0618e670dbbdee",
+        "output_pixel_sha256": "0505f2029d5e50ec3a1fd39c844c812f8aa5cb6718060a11fc0618e670dbbdee",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "beabc5eae7ba4169bfb3baf1dc05a9a01a43299ddec6a3fe94562989021269d9",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      },
+      {
+        "output_position": 4,
+        "source_page": 6,
+        "rotation_delta": 0,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 0,
+        "dpi": 150,
+        "pixel_size": [
+          1240,
+          1755
+        ],
+        "expected_rotated_pixel_sha256": "a46b85ebe8fcf4e4832c8f866e66dc6c8858aa5172c4f79a2eb962226eb9bc3f",
+        "output_pixel_sha256": "a46b85ebe8fcf4e4832c8f866e66dc6c8858aa5172c4f79a2eb962226eb9bc3f",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "b1104405336be2483994110a53f23e2281f028a401de768e6a3e899391476f28",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      },
+      {
+        "output_position": 5,
+        "source_page": 2,
+        "rotation_delta": 90,
+        "source_rotation_degrees": 90,
+        "output_rotation_degrees": 180,
+        "dpi": 150,
+        "pixel_size": [
+          1240,
+          1755
+        ],
+        "expected_rotated_pixel_sha256": "6af1753ca4b8dec38f46146261786d8581b3b2c34a84e25827397966f41916db",
+        "output_pixel_sha256": "6af1753ca4b8dec38f46146261786d8581b3b2c34a84e25827397966f41916db",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "47bca41591eacf8a3389e270d6ca913c8400703383b4914b7b26de4cba0d77e3",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      },
+      {
+        "output_position": 6,
+        "source_page": 3,
+        "rotation_delta": 90,
+        "source_rotation_degrees": 0,
+        "output_rotation_degrees": 90,
+        "dpi": 150,
+        "pixel_size": [
+          1755,
+          1240
+        ],
+        "expected_rotated_pixel_sha256": "240dfa169fd487263549444df4d7f4b38e7ddd6397b96591b9b7a1b841eceadc",
+        "output_pixel_sha256": "240dfa169fd487263549444df4d7f4b38e7ddd6397b96591b9b7a1b841eceadc",
+        "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+        "pixels_equal_after_declared_rotation": true,
+        "text_sha256": "6debd9dc83ec7aac83232b3c65b491cb48efdceb50576026e6768ca82cc6d329",
+        "text_equal": true,
+        "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+        "page_label_preserved": true,
+        "page_geometry_matches_edit": true
+      }
+    ],
+    "semantic_graph_before": "3d74adf284d828183846ac9c7394975886160bf7ceadd142b2a67b5d679092b8",
+    "semantic_graph_after_normalization": "3d74adf284d828183846ac9c7394975886160bf7ceadd142b2a67b5d679092b8",
+    "non_target_semantics_preserved": true,
+    "normalization_scope": [
+      "PAGE_TREE_LEAF_ORDER_AND_PARENT",
+      "DECLARED_ROTATION_DELTAS",
+      "VALIDATED_SOURCE_ASSOCIATED_PAGE_LABELS"
+    ],
+    "navigation": {
+      "preserved": true,
+      "structural": {
+        "binding_count": 6,
+        "named_destination_count": 1,
+        "source_target_sha256": "a6660a8d94c21e379cf9fa2b61a08f158647004ea3d51753294ac313ac3a1a18",
+        "integer_local_destinations": "BLOCKED",
+        "external_targets": "PRESERVED_INERT_NOT_FOLLOWED"
+      },
+      "pdfium": {
+        "bookmark_count": 3,
+        "link_count": 2,
+        "source_target_sha256": "72fe9742ff199d8daf0e9f665dc4d9083170e16a8523b00f68ce3e13d43891b3",
+        "scope": "PDFIUM_BOOKMARK_AND_LINK_PAGE_TARGETS"
+      }
+    },
+    "input_unchanged": true,
+    "engines": {
+      "pikepdf": "10.16.0",
+      "qpdf": "12.4.2",
+      "pypdfium2": "5.13.0",
+      "pdfium": "153.0.7999.0"
+    },
+    "limits": {
+      "max_bytes": 209715200,
+      "max_pages": 2000,
+      "verify_dpi": 150
+    },
+    "proof_scope": "Declared full permutation/rotation, source-associated labels, native navigation, reversible full semantic graph, all-page rotated pixels and source-oriented text; not all-reader equivalence or official approval",
+    "official_compliance": "NOT_ESTABLISHED",
+    "source_relative_path": "01-report-with-navigation.pdf",
+    "output_filename": "01-report-with-navigation.pdf",
+    "source_last_verified_sha256": "e4e63705ae4079a32e27b0f58cc41c67777755846dfed55efda226fdb4ecbcea",
+    "publication": "PUBLISHED_COPY_WITH_PROOF",
+    "regulatory_necessity": "USER_REQUESTED_PAGE_ORGANIZATION"
+  },
+  "output_relative_path": "copies/7494656b005143f1a068e824b7dce1e6/01-report-with-navigation.pdf",
+  "recovered_save": {
+    "job_id": "3f32022a8b81468f9a4d3a3e086b32bf",
+    "proof": {
+      "operation": "organize-pages",
+      "verification_status": "VERIFIED_LOCAL_INVARIANTS",
+      "source_sha256": "ce9cd1822201697b83789888245f19078b1db5d395705b35b56a23cd9c020f51",
+      "output_sha256": "be8a4d978f2e0755f270c14f0239b555227594c16f3e0f82b02dae2d54b173c8",
+      "output_bytes": 2041,
+      "page_count": 2,
+      "order": [
+        1,
+        2
+      ],
+      "rotations": [
+        0,
+        90
+      ],
+      "page_mapping": [
+        {
+          "output_position": 1,
+          "source_page": 1,
+          "rotation_delta": 0,
+          "source_rotation_degrees": 0,
+          "output_rotation_degrees": 0
+        },
+        {
+          "output_position": 2,
+          "source_page": 2,
+          "rotation_delta": 90,
+          "source_rotation_degrees": 0,
+          "output_rotation_degrees": 90
+        }
+      ],
+      "pages": [
+        {
+          "output_position": 1,
+          "source_page": 1,
+          "rotation_delta": 0,
+          "source_rotation_degrees": 0,
+          "output_rotation_degrees": 0,
+          "dpi": 150,
+          "pixel_size": [
+            1240,
+            1755
+          ],
+          "expected_rotated_pixel_sha256": "0dea352e96a801a47ba61074994faddc938c3e2909a2ed90c7e63ec67c4b5a51",
+          "output_pixel_sha256": "0dea352e96a801a47ba61074994faddc938c3e2909a2ed90c7e63ec67c4b5a51",
+          "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+          "pixels_equal_after_declared_rotation": true,
+          "text_sha256": "13d91da28e8d04551093361c38fb912d0e0406e68bcb23578660105c8b275259",
+          "text_equal": true,
+          "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+          "page_label_preserved": true,
+          "page_geometry_matches_edit": true
+        },
+        {
+          "output_position": 2,
+          "source_page": 2,
+          "rotation_delta": 90,
+          "source_rotation_degrees": 0,
+          "output_rotation_degrees": 90,
+          "dpi": 150,
+          "pixel_size": [
+            1755,
+            1240
+          ],
+          "expected_rotated_pixel_sha256": "b43ccf3968b4aab54036e91dc5297dc26a46ed62d2f2aa4b7526d8f4ab453bf1",
+          "output_pixel_sha256": "b43ccf3968b4aab54036e91dc5297dc26a46ed62d2f2aa4b7526d8f4ab453bf1",
+          "expected_pixel_transform": "SOURCE_PDFIUM_PERSISTENT_ROTATION",
+          "pixels_equal_after_declared_rotation": true,
+          "text_sha256": "035fe3a54392fca73eb450e03ba611c4efb495848d312ebeca1a99118881ad39",
+          "text_equal": true,
+          "text_comparison": "OUTPUT_IN_SOURCE_ORIENTATION",
+          "page_label_preserved": true,
+          "page_geometry_matches_edit": true
+        }
+      ],
+      "semantic_graph_before": "1651ea416c6499d194242ef2ddedd26ad72209189adc9f35b12ee923d578f2c9",
+      "semantic_graph_after_normalization": "1651ea416c6499d194242ef2ddedd26ad72209189adc9f35b12ee923d578f2c9",
+      "non_target_semantics_preserved": true,
+      "normalization_scope": [
+        "PAGE_TREE_LEAF_ORDER_AND_PARENT",
+        "DECLARED_ROTATION_DELTAS",
+        "VALIDATED_SOURCE_ASSOCIATED_PAGE_LABELS"
+      ],
+      "navigation": {
+        "preserved": true,
+        "structural": {
+          "binding_count": 2,
+          "named_destination_count": 0,
+          "source_target_sha256": "c9b02993ecb1bf8f73501b553dd325a8c2c80363f8bb2854372ca6ae108c5981",
+          "integer_local_destinations": "BLOCKED",
+          "external_targets": "PRESERVED_INERT_NOT_FOLLOWED"
+        },
+        "pdfium": {
+          "bookmark_count": 2,
+          "link_count": 0,
+          "source_target_sha256": "0099101de5efe443ec86e0cacedf621e3c01a0611c2d2550f8d30ee5ed7e7048",
+          "scope": "PDFIUM_BOOKMARK_AND_LINK_PAGE_TARGETS"
+        }
+      },
+      "input_unchanged": true,
+      "engines": {
+        "pikepdf": "10.16.0",
+        "qpdf": "12.4.2",
+        "pypdfium2": "5.13.0",
+        "pdfium": "153.0.7999.0"
+      },
+      "limits": {
+        "max_bytes": 209715200,
+        "max_pages": 2000,
+        "verify_dpi": 150
+      },
+      "proof_scope": "Declared full permutation/rotation, source-associated labels, native navigation, reversible full semantic graph, all-page rotated pixels and source-oriented text; not all-reader equivalence or official approval",
+      "official_compliance": "NOT_ESTABLISHED",
+      "source_relative_path": "02-other-report.pdf",
+      "output_filename": "02-other-report.pdf",
+      "source_last_verified_sha256": "ce9cd1822201697b83789888245f19078b1db5d395705b35b56a23cd9c020f51",
+      "publication": "PUBLISHED_COPY_WITH_PROOF",
+      "regulatory_necessity": "USER_REQUESTED_PAGE_ORGANIZATION"
+    },
+    "browser_save_request_count": 1
+  }
+}

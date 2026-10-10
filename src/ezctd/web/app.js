@@ -9,7 +9,7 @@ const state = {
   navigation: null, details: null, thumbnailsLoaded: 0, thumbnailBusy: false,
   search: null, searchBusy: false, pageImage: null, submissionUnknown: false, connectionNotice: null
 };
-const jobNames = {scan: '批量检查', plan: '副本处理计划', apply: '生成与复验副本'};
+const jobNames = {scan: '批量检查', plan: '副本处理计划', apply: '生成与复验副本', organize: '页面组织与保存'};
 const jobStates = {QUEUED: '等待开始', RUNNING: '处理中', FINALIZING: '保存任务记录',
   COMPLETED: '任务完成', COMPLETED_WITH_ERRORS: '部分未完成', CANCELLED: '已取消', ERROR: '任务失败'};
 const running = job => ['QUEUED', 'RUNNING', 'FINALIZING'].includes(job.status);
@@ -55,12 +55,12 @@ function clearConnectionIssue() {
   if (state.connectionNotice && $('notice').textContent === state.connectionNotice) notice('');
   state.connectionNotice = null;
 }
-async function api(route, payload = {}) {
+async function api(route, payload = {}, options = {}) {
   if (!token) throw new Error('本地会话凭证缺失。请从启动器给出的完整地址重新打开。');
   const response = await fetch('/api/' + route, {
     method: 'POST', cache: 'no-store', credentials: 'omit',
     headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + token},
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload), signal: options.signal
   });
   const body = await response.json();
   if (!response.ok) {
@@ -156,6 +156,7 @@ function updateSelection() {
   const hidden = state.selected.size - selectedVisible;
   $('selection-note').textContent = state.selected.size ? '已选 ' + state.selected.size + ' 份' +
     (hidden ? '，其中 ' + hidden + ' 份在筛选结果外' : '') : '尚未选择文件';
+  window.pdfOrganizer?.refreshControls();
 }
 function invalidateSearch() {
   state.searchEpoch++; state.search = null; state.searchBusy = false;
@@ -175,6 +176,7 @@ function queryChanged() {
 }
 function sourceFailure(error) {
   if (error.code !== 'SOURCE_CHANGED' && !/SOURCE_CHANGED|identity mismatch|Source changed|Input changed/i.test(error.message)) return;
+  window.pdfOrganizer?.sourceFailed(error, state.current);
   state.documentEpoch++; state.detailsEpoch++; state.sequence++;
   state.navigation = null; state.details = null; state.pageImage = null;
   queryChanged();
@@ -184,10 +186,12 @@ function sourceFailure(error) {
   $('page-empty').textContent = '源文件已变化；当前页面和检查结果已失效。';
   $('identity').textContent = '文件身份已失效，请重新打开工作区';
   renderIssues(); renderReport([]);
+  window.pdfOrganizer?.restoreIdentity();
 }
 async function openDocument(ident) {
   const epoch = ++state.documentEpoch;
   state.current = ident; state.page = 1; state.count = 0; state.details = null; state.navigation = null;
+  window.pdfOrganizer?.documentChanged(ident);
   state.thumbnailsLoaded = 0; state.thumbnailBusy = false; state.pageImage = null;
   $('search-query').value = ''; queryChanged();
   $('bookmark-filter').value = ''; $('thumbnails').replaceChildren();
@@ -214,6 +218,7 @@ async function openDocument(ident) {
   await Promise.allSettled([loadPage(1), loadDetails()]);
 }
 async function loadPage(number) {
+  if (window.pdfOrganizer?.active()) return;
   if (!state.current) return;
   if (!Number.isInteger(number) || number < 1 || (state.count && number > state.count)) {
     $('page-number').value = state.page;
@@ -480,6 +485,7 @@ function renderSearch() {
       : '可提取文本中没有命中；扫描或图片中的文字未参与检索。', 'muted'));
 }
 async function searchDocument(continuation = false) {
+  if (window.pdfOrganizer?.active()) return;
   if (!state.current || !$('search-query').value.trim() || state.searchBusy) return;
   const query = $('search-query').value.trim(), ident = state.current, docEpoch = state.documentEpoch;
   if (!continuation || !state.search || state.search.query !== query) {
@@ -545,6 +551,8 @@ async function pollJob(ident, epoch) {
     if (epoch !== state.pollEpoch) return;
     clearConnectionIssue();
     state.lastJobData = job;
+    await window.pdfOrganizer?.jobUpdated(job);
+    if (epoch !== state.pollEpoch) return;
     $('job-text').textContent = jobNames[job.kind] + ' · ' + job.done + '/' + job.total +
       (job.current ? ' · ' + job.current : '') + ' · ' + (jobStates[job.status] || job.status);
     $('job-progress').max = Math.max(1, job.total); $('job-progress').value = job.done;
@@ -554,7 +562,7 @@ async function pollJob(ident, epoch) {
     $('cancel-job').hidden = true; $('job-results').hidden = false;
     await refresh(); await loadDetails();
     if (epoch !== state.pollEpoch) return;
-    if (job.kind === 'plan' || job.kind === 'apply') showJob(job);
+    if (job.kind === 'plan' || job.kind === 'apply' || job.kind === 'organize') showJob(job);
     if (job.message) notice(job.message, true);
   } catch (error) {
     if (epoch !== state.pollEpoch) return;
@@ -593,11 +601,13 @@ function outcomeLabels(job) {
     .filter(row => row[1] > 0);
 }
 function showJob(job) {
-  const planning = job.kind === 'plan'; state.dialogJob = job; state.plan = job.can_apply ? job.id : null;
+  const planning = job.kind === 'plan', organizing = job.kind === 'organize'; state.dialogJob = job; state.plan = job.can_apply ? job.id : null;
+  if (organizing) void window.pdfOrganizer?.jobUpdated(job).catch(error => notice(error.message, true));
   $('dialog-title').textContent = planning ? '快速 Web 查看 · 修改前计划' : jobNames[job.kind] + ' · 任务结果';
   $('dialog-description').textContent = planning
     ? '检查每份文件后，再确认生成副本。只调整 PDF 存储结构；正文、文本、导航与全页图像仍须复验。签名、加密、表单、动态内容或附件会阻断重写。' +
       (job.status === 'COMPLETED_WITH_ERRORS' ? ' 本批有未完成项；仅下方身份已核实的合格文件可执行，其余项明确排除。' : '')
+    : organizing ? '按确认的页序与旋转保存新副本，并检查页映射、内容保留及文档导航。可直接打开已保存文件核对实际结果；原件保持不变。'
     : '成功副本保留相对路径并附 .ezctd.json 复验证据。错误、取消和未开始项分别保留；工作目录中的副本不是全量申报资料包，也不表示 CDE 已通过。';
   if (planning && job.status === 'CANCELLED') {
     $('dialog-description').textContent += ' 已取消计划不能执行；“重试”只处理未完成项。已完成规划的文件如需处理，请重新选择并生成计划。';
@@ -617,7 +627,9 @@ function showJob(job) {
       VERIFIED_COPY: '副本已复验', SCANNED: '本地检查已完成', ERROR: '未完成',
       CANCELLED: '已取消', NOT_STARTED: '未开始'}[row.eligibility || row.status] || row.status;
     let detail = row.message || (row.blockers || []).map(code => blockers[code] || code).join('；');
-    if (row.proof) detail = row.proof.page_count + ' 页 · 150 DPI 全页像素/文本/结构复验一致 · ' + row.output_relative;
+    if (row.proof) detail = organizing
+      ? row.proof.page_count + ' 页 · 页面组织复验完成 · ' + row.output_relative
+      : row.proof.page_count + ' 页 · 150 DPI 全页像素/文本/结构复验一致 · ' + row.output_relative;
     else if (row.eligibility === 'ELIGIBLE') detail = row.page_count + ' 页 · 执行前再次检查 SHA-256';
     else if (row.status === 'NOT_STARTED') detail = '本次未开始处理；可在新任务中继续。';
     if (planning && invalidated.has(row.id)) {
@@ -637,6 +649,7 @@ function showJob(job) {
   $('retry-job').textContent = job.kind === 'apply'
     ? '为 ' + job.retryable_count + ' 个未完成项重新生成计划'
     : '重试 ' + job.retryable_count + ' 个未完成项';
+  $('open-edited-output').hidden = !organizing || !(job.results || []).some(row => row.status === 'VERIFIED_COPY');
   $('output-path').textContent = '工作目录：' + state.session.output_root +
     (job.output_relative_root ? '/' + job.output_relative_root : '') +
     (job.retry_of ? ' · 本任务承接 ' + job.retry_of.slice(0,8) : '');
@@ -729,6 +742,10 @@ $('job-results').addEventListener('click', safe(async () => showJob(await api('j
 $('history').addEventListener('click', safe(showHistory));
 $('close-history').addEventListener('click', () => $('history-dialog').close());
 $('close-dialog').addEventListener('click', () => $('task-dialog').close());
+$('open-edited-output').addEventListener('click', safe(async () => {
+  const job = state.dialogJob; if (!job || job.kind !== 'organize') return;
+  $('task-dialog').close(); await window.pdfOrganizer?.openOutputJob(job);
+}));
 $('apply-plan').addEventListener('click', safe(async () => {
   const plan = state.plan; if (!plan) return;
   $('task-dialog').close(); await startJob('apply', {plan_id: plan, confirmed: true});
@@ -765,6 +782,7 @@ $('report-file').addEventListener('change', safe(async event => {
   event.target.value = '';
 }));
 document.addEventListener('keydown', safe(event => {
+  if (window.pdfOrganizer?.active()) return;
   if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
     event.preventDefault(); $('search-query').focus(); return;
   }

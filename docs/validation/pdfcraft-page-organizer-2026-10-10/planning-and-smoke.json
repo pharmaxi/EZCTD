@@ -1,0 +1,42 @@
+[
+  {
+    "command": [
+      "python",
+      "scripts/validate_artifacts.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.021,
+    "output": "EZCTD planning baseline validation passed\n  Rules: 26 unique entries\n  Profile: cde-ectd-v3.2.2-cn-v1.1\n"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/validate_p0b0_matrix.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.025,
+    "output": "{\n  \"status\": \"PASS\",\n  \"rules\": 26,\n  \"cases\": 163,\n  \"classes\": {\n    \"conformant\": 35,\n    \"violation\": 49,\n    \"boundary\": 37,\n    \"interaction\": 16,\n    \"exemption\": 26\n  },\n  \"generator_status\": {\n    \"implemented\": 130,\n    \"specified\": 22,\n    \"blocked\": 11\n  }\n}\n"
+  },
+  {
+    "command": [
+      "python",
+      "tools/corpus/build_pdf_fixtures.py",
+      "--output",
+      "tests/corpus/generated-smoke",
+      "--mode",
+      "smoke"
+    ],
+    "exit_code": 0,
+    "seconds": 0.269,
+    "output": "{\n  \"selected\": 28,\n  \"status_counts\": {\n    \"GENERATED\": 28\n  },\n  \"generated_files\": 56\n}\n"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/inspect_p0b0_smoke.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.103,
+    "output": "{\n  \"status\": \"PASS\",\n  \"inspected\": 28,\n  \"passed\": 28,\n  \"failed\": 0,\n  \"failures\": []\n}\n"
+  }
+]

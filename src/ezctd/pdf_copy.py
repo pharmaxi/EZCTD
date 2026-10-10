@@ -143,7 +143,14 @@ filter dictionaries, rather than silently omitting stream evidence.
         if isinstance(obj, pikepdf.Array):
             return [encode(value, depth=depth + 1) for value in obj]
         if isinstance(obj, pikepdf.Name):
-            return {'name': str(obj)}
+            try:
+                return {'name': str(obj)}
+            except UnicodeDecodeError:
+                # PDF Names are byte strings, including legal non-UTF-8 names.
+                # Preserve every raw byte; never replace undecodable characters
+                # or omit the name from the semantic proof. Existing UTF-8
+                # fingerprints keep their original representation unchanged.
+                return {'name_hex': bytes(obj).hex()}
         if isinstance(obj, pikepdf.String):
             return {'string_hex': bytes(obj).hex()}
         raise ValueError(f'Unsupported semantic object: {type(obj).__name__}')

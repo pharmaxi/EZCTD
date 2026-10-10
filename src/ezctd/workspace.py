@@ -17,7 +17,8 @@ import uuid
 import ezctd
 from .batch import discover_pdfs
 from .cde_report import parse_report
-from .copy_service import inspect_linearization, linearize_copy
+from .copy_service import inspect_linearization, linearize_copy, organize_copy
+from .editor import EditorConflict, EditorStore
 from .process_runner import run_worker
 from .read_cache import ReadCache
 from .read_scope import ReadScope, selected_path
@@ -63,6 +64,11 @@ class Workspace:
         self.lock = threading.RLock()
         self.native_slots = threading.BoundedSemaphore(2)
         self.read_cache = ReadCache()
+        self.editors = EditorStore()
+        self.editor_outputs: dict[str, dict] = {}
+        self.editor_threads: dict[str, threading.Thread] = {}
+        self.close_event = threading.Event()
+        self.output_scope = ReadScope((self.output,))
         self.closed = False
 
     def _document(self, ident: str) -> Document:
@@ -74,6 +80,12 @@ class Workspace:
         doc.invalidation_generation += 1
         doc.scan = None
         self.read_cache.invalidate_document(doc.id)
+        self.editors.invalidate(doc.id)
+        for job_id, job in self.jobs.items():
+            if (job['kind'] == 'organize' and job['status'] in ACTIVE_JOB_STATES
+                    and doc.id in job['requested_ids']):
+                job['cancellation_reason'] = 'SOURCE_CHANGED'
+                self.events[job_id].set()
         for plan_id, plan in self.plans.items():
             retained = [entry for entry in plan['entries'] if entry['id'] != doc.id]
             if len(retained) != len(plan['entries']):
@@ -184,6 +196,308 @@ class Workspace:
         with self.lock:
             return deepcopy({'scan': doc.scan, 'report_items': self.report_bindings.get(ident, []),
                              'context': doc.context, 'input_sha256': doc.sha256})
+
+    def editor_open(self, ident: str) -> dict:
+        doc = self._document(ident)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            existing = self.editors.by_document.get(ident)
+            generation = doc.invalidation_generation
+            if generation:
+                raise ValueError('SOURCE_CHANGED: close and reopen workspace to accept the new source version')
+        if existing is not None:
+            return self.editor_state(existing)
+        expected = self._freeze(doc)
+        inspected = self._native({'operation': 'inspect-organize', 'path': str(doc.path),
+                                  'expected_sha256': expected}, timeout=120, cancel_event=self.close_event)
+        current = self._freeze(doc)
+        if inspected.get('source_sha256') != expected or current != expected:
+            raise ValueError('Editor inspection identity mismatch')
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            if doc.invalidation_generation != generation:
+                raise ValueError('SOURCE_CHANGED: source was invalidated during editor inspection')
+            draft = self.editors.open(ident, inspected)
+            if draft.invalidated:
+                raise ValueError('SOURCE_CHANGED: close and reopen workspace')
+            return draft.state()
+
+    def _editor_snapshot(self, draft_id: str, revision=None, *, exact_revision=False) -> tuple[Document, dict]:
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            draft = self.editors.get(draft_id, revision) if exact_revision else self.editors.get(draft_id)
+            doc = self._document(draft.document_id)
+        expected = self._freeze(doc)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            draft = self.editors.get(draft_id, revision) if exact_revision else self.editors.get(draft_id)
+            if draft.invalidated or draft.source_sha256 != expected:
+                raise ValueError('SOURCE_CHANGED: close and reopen workspace to accept the new source version')
+            return doc, draft.state()
+
+    def editor_state(self, draft_id: str) -> dict:
+        return self._editor_snapshot(draft_id)[1]
+
+    def editor_edit(self, draft_id: str, revision: int, command: dict) -> dict:
+        self._editor_snapshot(draft_id, revision, exact_revision=True)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            return self.editors.edit(draft_id, revision, command)
+
+    def editor_history(self, draft_id: str, revision: int, *, redo=False) -> dict:
+        self._editor_snapshot(draft_id, revision, exact_revision=True)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            return self.editors.move_history(draft_id, revision, redo=redo)
+
+    @staticmethod
+    def _page_parameters(page, dpi, thumbnail) -> None:
+        if (type(page) is not int or page < 1 or type(dpi) is not int or not 36 <= dpi <= 300
+                or type(thumbnail) is not bool):
+            raise ValueError('Invalid physical page, DPI or thumbnail flag')
+
+    def _finish_editor_read(self, doc: Document, state: dict, result: dict, *, cache_key=None) -> dict:
+        expected = self._freeze(doc)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            draft = self.editors.get(state['draft_id'], state['revision'])
+            if draft.invalidated or expected != state['source_sha256']:
+                raise ValueError('SOURCE_CHANGED: source changed during edit preview')
+            if result.get('source_sha256') != expected:
+                raise ValueError('Editor preview identity mismatch')
+            result.update(draft_id=state['draft_id'], revision=state['revision'])
+            if cache_key is not None:
+                self.read_cache.put(cache_key, result)
+            return result
+
+    def editor_page(self, draft_id: str, revision: int, *, page: int = 1,
+                    dpi: int = 120, thumbnail: bool = False) -> dict:
+        self._page_parameters(page, dpi, thumbnail)
+        doc, state = self._editor_snapshot(draft_id, revision, exact_revision=True)
+        if state['eligibility'] != 'ELIGIBLE':
+            raise ValueError('This PDF is blocked for page organization')
+        if page > state['page_count']:
+            raise ValueError('Physical page is outside this document')
+        parameters = {'order': state['order'], 'rotations': state['rotations'],
+                      'page': page, 'dpi': 36 if thumbnail else dpi, 'thumbnail': thumbnail}
+        key = (doc.id, state['source_sha256'], 'organize-preview',
+               json.dumps([draft_id, revision, parameters], sort_keys=True, separators=(',', ':')))
+        result = self.read_cache.get(key)
+        cache_hit = result is not None
+        if not cache_hit:
+            result = self._native({'operation': 'organize-preview', 'path': str(doc.path),
+                                   'expected_sha256': state['source_sha256'], **parameters},
+                                  timeout=120, cancel_event=self.close_event)
+        return self._finish_editor_read(doc, state, result, cache_key=None if cache_hit else key)
+
+    def editor_navigation(self, draft_id: str, revision: int) -> dict:
+        doc, state = self._editor_snapshot(draft_id, revision, exact_revision=True)
+        result = self.document_action(doc.id, 'navigation')
+        positions = {source: position for position, source in enumerate(state['order'], 1)}
+        for bookmark in result['bookmarks']:
+            source_page = bookmark.get('physical_page')
+            bookmark['source_page'] = source_page
+            bookmark['physical_page'] = positions.get(source_page)
+        by_source = {row['physical_page']: row for row in result['page_labels']}
+        result['page_labels'] = [{**by_source[source_page], 'source_page': source_page,
+                                  'physical_page': position}
+                                 for position, source_page in enumerate(state['order'], 1)
+                                 if source_page in by_source]
+        result.update(preview_only=True, verification_status='DRAFT_TARGET_MAPPING_NOT_SAVED_OUTPUT')
+        return self._finish_editor_read(doc, state, result)
+
+    def editor_save(self, draft_id: str, revision: int, *, confirmed=False, retry=False) -> str:
+        if confirmed is not True or type(retry) is not bool:
+            raise ValueError('Saving an edited copy requires explicit confirmation')
+        doc, state = self._editor_snapshot(draft_id, revision, exact_revision=True)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            draft = self.editors.get(draft_id, revision)
+            previous_id = draft.saves.get(revision)
+            if previous_id is not None:
+                previous = self.jobs[previous_id]
+                if not retry or previous['status'] in ACTIVE_JOB_STATES or previous.get('published_copy'):
+                    return previous_id
+            elif retry:
+                raise ValueError('There is no save of this revision to retry')
+            self.editors.require_editable(draft)
+            if not state['has_changes']:
+                raise ValueError('No page organization changes to save')
+            if not state['dirty'] and previous_id is None:
+                raise ValueError('This edit state is already saved')
+            if len(self.jobs) >= 100:
+                raise ValueError('Session task limit reached')
+            if any(job['status'] in ACTIVE_JOB_STATES for job in self.jobs.values()):
+                raise EditorConflict('DRAFT_BUSY', 'A batch task is already active; finish or cancel it first')
+            job_id = uuid.uuid4().hex
+            self.events[job_id] = threading.Event()
+            self.jobs[job_id] = {'id': job_id, 'kind': 'organize', 'status': 'QUEUED',
+                                 'done': 0, 'total': 1, 'remaining': 1, 'current': '', 'results': [],
+                                 'requested_ids': [doc.id], 'retry_of': previous_id, 'source_plan_id': None,
+                                 'draft_id': draft_id, 'revision': revision,
+                                 'output_relative_root': f'copies/{job_id}',
+                                 'created_unix': time.time(), 'official_compliance': 'NOT_ESTABLISHED'}
+            old_job_id, old_save_revision = draft.save_job_id, draft.save_revision
+            draft.saving, draft.save_job_id, draft.save_revision = True, job_id, revision
+            draft.saves[revision] = job_id
+            thread = threading.Thread(target=self._run_editor_save, args=(job_id, doc, state), daemon=True)
+            self.editor_threads[job_id] = thread
+            try:
+                thread.start()
+            except Exception:
+                self.jobs.pop(job_id)
+                self.events.pop(job_id)
+                self.editor_threads.pop(job_id)
+                draft.saving, draft.save_job_id, draft.save_revision = False, old_job_id, old_save_revision
+                if previous_id is None:
+                    draft.saves.pop(revision)
+                else:
+                    draft.saves[revision] = previous_id
+                raise
+            return job_id
+
+    def _run_editor_save(self, job_id: str, doc: Document, state: dict) -> None:
+        event = self.events[job_id]
+        output = self.output / 'copies' / job_id / doc.relative
+        row = {'id': doc.id, 'relative_path': doc.relative, 'saved_revision': state['revision']}
+        with self.lock:
+            job = self.jobs[job_id]
+            job.update(status='RUNNING', current=doc.relative, phase='VERIFYING_EDITED_COPY')
+        published = False
+        try:
+            try:
+                expected = self._freeze(doc)
+                if expected != state['source_sha256']:
+                    raise ValueError('SOURCE_CHANGED: draft input changed; no rewrite performed')
+                with self.lock:
+                    if self.editors.get(state['draft_id']).invalidated:
+                        raise ValueError('SOURCE_CHANGED: draft was invalidated; no rewrite performed')
+                with self._native_slot(event):
+                    proof = organize_copy(doc.path, output, roots=(self.root,), expected=expected,
+                                          order=state['order'], rotations=state['rotations'],
+                                          cancel_event=event)
+                published = True
+                row.update(status='VERIFIED_COPY', output_relative=output.relative_to(self.output).as_posix(),
+                           output_basename=output.name, page_count=proof['page_count'], proof=proof)
+                with self.lock:
+                    self.editor_outputs[job_id] = {'path': output, 'sha256': proof['output_sha256'],
+                                                    'source_document_id': doc.id,
+                                                    'saved_revision': state['revision'],
+                                                    'page_mapping': deepcopy(proof['page_mapping']),
+                                                    'invalidated': False}
+                    job['published_copy'] = True
+            except Exception as exc:
+                row.update(status='CANCELLED' if event.is_set() else 'ERROR',
+                           message=f'{type(exc).__name__}: {exc}')
+            try:
+                observed = sha256_file(self.scope.authorize(doc.path))
+            except (ValueError, OSError):
+                observed = None
+            integrity = {'id': doc.id, 'sha256_expected': state['source_sha256'],
+                         'sha256_at_completion': observed, 'unchanged': observed == state['source_sha256']}
+            with self.lock:
+                if not integrity['unchanged']:
+                    self._invalidate_document_locked(doc)
+                job.update(status='FINALIZING', phase='SAVING_JOB_RECORD', current='', done=1, remaining=0,
+                           results=[row], input_integrity=[integrity])
+                failed = row['status'] == 'ERROR' or not integrity['unchanged']
+                final_status = ('CANCELLED' if event.is_set() else
+                                'COMPLETED_WITH_ERRORS' if failed else 'COMPLETED')
+                snapshot = deepcopy(job)
+                snapshot.update(status=final_status, counts=self._counts_locked(job))
+            write_new_text(self.output / 'jobs' / f'{job_id}.json',
+                           json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n', input_roots=(self.root,))
+            with self.lock:
+                draft = self.editors.get(state['draft_id'])
+                draft.saving = False
+                if published:
+                    draft.saved_snapshot = tuple(state['order']), tuple(state['rotations'])
+                    draft.last_saved_revision = state['revision']
+                job['status'] = final_status
+        except Exception as exc:
+            with self.lock:
+                job.update(status='ERROR', message=f'{type(exc).__name__}: {exc}', current='')
+                if not job['results']:
+                    job.update(results=[row], done=1, remaining=0)
+        finally:
+            with self.lock:
+                draft = self.editors.get(state['draft_id'])
+                # A new save may start after the terminal job status above.
+                # This older thread must not unlock or relabel that new save.
+                if draft.save_job_id == job_id:
+                    draft.saving = False
+                    if published:
+                        draft.saved_snapshot = tuple(state['order']), tuple(state['rotations'])
+                        draft.last_saved_revision = state['revision']
+
+    def editor_output(self, job_id: str, action: str, *, page=1, dpi=120, thumbnail=False) -> dict:
+        if action not in ('page', 'navigation'):
+            raise ValueError('Unsupported saved-output reader action')
+        self._page_parameters(page, dpi, thumbnail)
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            if not isinstance(job_id, str) or job_id not in self.editor_outputs:
+                raise ValueError('Unknown session editor output; filesystem paths are not accepted')
+            registration = self.editor_outputs[job_id]
+            registered = deepcopy(registration)
+            if registered['invalidated']:
+                raise ValueError('OUTPUT_CHANGED: the saved output no longer matches its proof')
+            if self.jobs[job_id]['status'] in ACTIVE_JOB_STATES:
+                raise EditorConflict('DRAFT_BUSY', 'Wait for saving to finish before opening the output')
+        path = registered['path']
+        expected = registered['sha256']
+
+        def verify_output():
+            try:
+                current = sha256_file(self.output_scope.authorize(path))
+            except (ValueError, OSError):
+                current = None
+            if current != expected:
+                with self.lock:
+                    self.editor_outputs[job_id]['invalidated'] = True
+                raise ValueError('OUTPUT_CHANGED: the saved output no longer matches its proof')
+
+        verify_output()
+        parameters = {} if action == 'navigation' else ({'page': page} if thumbnail else {'page': page, 'dpi': dpi})
+        operation = 'navigation' if action == 'navigation' else 'thumbnail' if thumbnail else 'view-page'
+        try:
+            result = self._native({'operation': operation, 'path': str(path),
+                                   'expected_sha256': expected, **parameters},
+                                  timeout=120, cancel_event=self.close_event)
+        except (RuntimeError, ValueError) as exc:
+            if any(signal in str(exc).lower() for signal in
+                   ('input changed', 'source changed', 'identity mismatch')):
+                with self.lock:
+                    if self.editor_outputs.get(job_id) is registration:
+                        registration['invalidated'] = True
+                raise ValueError('OUTPUT_CHANGED: native reader observed changed output bytes') from exc
+            raise
+        verify_output()
+        with self.lock:
+            if self.closed:
+                raise ValueError('Workspace is closed')
+            current = self.editor_outputs.get(job_id)
+            if (current is not registration or current.get('invalidated')
+                    or current.get('path') != path or current.get('sha256') != expected):
+                raise ValueError('OUTPUT_CHANGED: saved output was invalidated while being read')
+            if result.get('source_sha256', result.get('input_sha256')) != expected:
+                current['invalidated'] = True
+                raise ValueError('OUTPUT_CHANGED: output reader identity does not match the saved proof')
+            result.update(job_id=job_id, saved_revision=registered['saved_revision'],
+                          source_document_id=registered['source_document_id'], read_only=True,
+                          output_sha256=expected, output_relative=path.relative_to(self.output).as_posix())
+            if action == 'navigation':
+                result['page_mapping'] = registered['page_mapping']
+            return result
 
     def set_context(self, ident: str, context: dict) -> None:
         doc = self._document(ident)
@@ -297,6 +611,8 @@ class Workspace:
             if not isinstance(ident, str) or ident not in self.jobs:
                 raise ValueError('Unknown session job')
             previous = self.jobs[ident]
+            if previous['kind'] == 'organize':
+                raise ValueError('Retry a page-edit save from its current draft with explicit confirmation')
             if previous['status'] in ACTIVE_JOB_STATES:
                 raise ValueError('Wait for the task to finish before retrying')
             ids = self._retry_ids(previous)
@@ -472,7 +788,7 @@ class Workspace:
                    if key not in ('results', 'input_integrity')}
         plan = self.plans.get(job['id'])
         terminal = job['status'] not in ACTIVE_JOB_STATES
-        retryable = len(self._retry_ids(job))
+        retryable = 0 if job['kind'] == 'organize' else len(self._retry_ids(job))
         summary.update(counts=self._counts_locked(job), retryable_count=retryable,
                        can_retry=not self.closed and terminal and retryable > 0,
                        eligible_count=len(plan['entries']) if plan else 0,
@@ -513,6 +829,14 @@ class Workspace:
     def close(self) -> None:
         with self.lock:
             self.closed = True
+            self.close_event.set()
             self.read_cache.clear()
             for event in self.events.values():
                 event.set()
+            threads = list(self.editor_threads.values())
+        # Page-copy workers observe cancellation and remove incomplete staging.
+        # Join outside the lock so their final job record can be completed.
+        deadline = time.monotonic() + 15
+        for thread in threads:
+            if thread is not threading.current_thread() and thread.is_alive():
+                thread.join(max(0, deadline - time.monotonic()))

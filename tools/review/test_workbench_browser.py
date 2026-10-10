@@ -420,7 +420,7 @@ def main():
     server=LocalServer(workspace);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
     failures=[];errors=[];external=[];checks=[];viewports=[];browser_version=None
     expected_diagnostics=[];source_change_diagnostics=[];controls=[]
-    assets_before={name:sha256_file(root/'src/ezctd/web'/name) for name in ('app.js','index.html','style.css')}
+    assets_before={path.name:sha256_file(path) for path in sorted((root/'src/ezctd/web').iterdir()) if path.is_file()}
     python_before={path.relative_to(root).as_posix():sha256_file(path) for path in sorted((root/'src/ezctd').rglob('*.py'))}
     try:
         with sync_playwright() as engine:
@@ -571,6 +571,11 @@ def main():
             submission_recovery_case(browser,demo,args.output,checks,errors,external,expected_diagnostics,controls,accepted=True)
             submission_recovery_case(browser,demo,args.output,checks,errors,external,expected_diagnostics,controls,accepted=False)
             plan_source_change_case(browser,demo,args.output,checks,errors,external,source_change_diagnostics)
+            organizer=load_module(root/'tools/review/test_organizer_browser.py','organizer_browser_case')
+            organizer.organizer_case(browser,demo,args.output,checks,errors,external,expected_diagnostics,
+                                     controls,viewports,(BrowserDiagnostics,pdf_hashes,wait_for_condition))
+            organizer.organizer_source_change_recovery_case(browser,demo,args.output,checks,errors,external,
+                                     source_change_diagnostics,controls,(BrowserDiagnostics,pdf_hashes,wait_for_condition))
             browser.close()
     except Exception as exc:
         failures.append(f'{type(exc).__name__}: {exc}'.replace(server.token, '<redacted-session-token>'))
@@ -589,6 +594,10 @@ def main():
                             for path in sorted(args.output.glob('control-recovery-*/INPUT_INTEGRITY.json'))}
         source_control_evidence=args.output/'control-plan-source-change/INPUT_INTEGRITY.json'
         source_control_integrity=json.loads(source_control_evidence.read_text(encoding='utf-8')) if source_control_evidence.exists() else None
+        organizer_evidence=args.output/'page-organizer/INPUT_INTEGRITY.json'
+        organizer_integrity=json.loads(organizer_evidence.read_text(encoding='utf-8')) if organizer_evidence.exists() else None
+        organizer_source_evidence=args.output/'control-organizer-source-change/INPUT_INTEGRITY.json'
+        organizer_source_integrity=json.loads(organizer_source_evidence.read_text(encoding='utf-8')) if organizer_source_evidence.exists() else None
         result={'synthetic_only':True,'browser':'Chromium via Playwright','checks':checks,
                 'browser_version':browser_version,'playwright_version':importlib.metadata.version('playwright'),
                 'application_source_version':__version__,'application_installed_version':importlib.metadata.version('ezctd'),
@@ -600,6 +609,8 @@ def main():
                 'inputs_unchanged':before==after,'input_count':len(before),'official_validator_run':False,
                 'extended_reader_integrity':extended_integrity,'recovery_case_integrity':recovery_integrity,
                 'deliberate_source_change_integrity':source_control_integrity,
+                'page_organizer_integrity':organizer_integrity,
+                'organizer_source_change_recovery_integrity':organizer_source_integrity,
                 'web_asset_sha256':assets_before,'web_assets_unchanged_during_run':assets_unchanged,
                 'web_asset_sha256_after':assets_after,'python_source_sha256':python_before,
                 'python_source_unchanged_during_run':python_unchanged,

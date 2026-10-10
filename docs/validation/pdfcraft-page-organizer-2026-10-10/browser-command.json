@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python",
+    "-c",
+    "import sys,runpy; sys.path.insert(0,\"/workspace/scratch/6d9ca3c57d75/browser-runtime\"); sys.path.insert(0,\"tools/review\"); sys.argv=[\"tools/review/test_workbench_browser.py\",\"/workspace/scratch/6d9ca3c57d75/organizer-final-browser\",\"--browser\",\"/workspace/scratch/6d9ca3c57d75/browser-engines/chromium_headless_shell-1187/chrome-linux/headless_shell\"]; runpy.run_path(sys.argv[0],run_name=\"__main__\")"
+  ],
+  "exit_code": 0,
+  "seconds": 32.886
+}

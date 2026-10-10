@@ -37,6 +37,13 @@
   </aside>
   <section class="reader" aria-label="PDF 阅读器">
     <div class="reader-title"><div><strong id="document-name">选择一份 PDF 开始阅读</strong><span id="reader-status"></span></div><button id="focus-mode" aria-pressed="false" title="收起侧栏，扩大阅读区域">专注阅读</button></div>
+    <div class="document-modes" role="group" aria-label="文档工作模式">
+      <button id="mode-read" class="active" aria-pressed="true">阅读原件</button>
+      <button id="mode-organize" aria-pressed="false" disabled>组织页面</button>
+      <button id="mode-saved" aria-pressed="false" disabled>已保存副本</button>
+      <span id="document-draft-badge" hidden>草稿已保留</span>
+    </div>
+    <div id="source-reader-panel" class="source-reader-panel">
     <div class="reader-tools">
       <button id="prev" aria-label="上一页" disabled>‹</button>
       <label>物理页 <input id="page-number" type="number" min="1" value="1"></label><span id="page-count">/ —</span>
@@ -46,6 +53,44 @@
     </div>
     <div class="searchbar"><label class="sr-only" for="search-query">查找文字</label><input id="search-query" placeholder="查找中文、英文或数值 · Ctrl+F" maxlength="256"><button id="search-page">当前页</button><button id="search-doc">全文</button><button id="clear-search" aria-label="清除检索" title="清除检索">×</button><span id="search-count"></span></div>
     <div class="page-stage" id="page-stage"><p id="page-empty">选择一份 PDF 开始阅读。<br>文档将在本机解析。</p><canvas id="page-canvas" hidden aria-label="PDF 页面预览"></canvas></div>
+    </div>
+    <section id="organizer-panel" class="organizer-panel" aria-label="页面组织工作台" hidden>
+      <div class="organizer-sessionbar">
+        <div class="organizer-state"><span id="organizer-state-dot" aria-hidden="true"></span><strong id="organizer-status" role="status">正在打开页面草稿…</strong><small id="organizer-session-note">草稿保留在当前服务会话</small></div>
+        <div class="organizer-history-actions" role="group" aria-label="编辑历史"><button id="organizer-undo" disabled title="撤销 Ctrl+Z">撤销</button><button id="organizer-redo" disabled title="重做 Ctrl+Shift+Z">重做</button><button id="organizer-reset" disabled>还原原件</button></div>
+        <button id="organizer-save" class="primary" disabled>保存副本</button>
+      </div>
+      <div id="organizer-message" class="organizer-message" role="status" hidden></div>
+      <div id="organizer-recovery" class="organizer-recovery" hidden><span>操作结果尚未确认，请先读取服务器状态。</span><button id="organizer-reconnect">重新连接草稿</button></div>
+      <div id="organizer-edit-tools" class="organizer-edit-tools">
+        <div class="organizer-select-tools" role="group" aria-label="选择页面">
+          <label for="organizer-range">选择页位</label><input id="organizer-range" placeholder="例如 2-4,6" maxlength="512" autocomplete="off"><button id="organizer-select-range">选取</button><button id="organizer-select-all">全选</button><button id="organizer-clear-selection">清选</button><strong id="organizer-selection-count">已选 0 页</strong>
+        </div>
+        <div class="organizer-transform-tools" role="group" aria-label="处理所选页面">
+          <button id="organizer-move-prev" disabled title="所选页前移一个页位">前移</button><button id="organizer-move-next" disabled title="所选页后移一个页位">后移</button>
+          <label for="organizer-move-position">移到页位</label><input id="organizer-move-position" type="number" min="1" value="1" aria-describedby="organizer-move-help"><button id="organizer-move-to" disabled>移动</button>
+          <span class="organizer-tool-divider" aria-hidden="true"></span><button id="organizer-rotate-ccw" disabled aria-label="将所选页逆时针旋转 90 度" title="将所选页面逆时针旋转 90 度并保存到草稿">↶ 90°</button><button id="organizer-rotate-cw" disabled aria-label="将所选页顺时针旋转 90 度" title="将所选页面顺时针旋转 90 度并保存到草稿">↷ 90°</button>
+          <span id="organizer-move-help" class="sr-only">页位指当前输出顺序。移动时，所选页面保持彼此顺序，作为一组从指定页位开始。</span>
+        </div>
+      </div>
+      <div class="organizer-body">
+        <section class="organizer-page-list" aria-label="当前页序">
+          <div class="organizer-list-heading"><h3 id="organizer-list-title">页面顺序</h3><span id="organizer-page-total"></span></div>
+          <p id="organizer-selection-help" class="organizer-selection-help">Ctrl / ⌘ 多选 · Shift 连选 · 拖动调整页序</p>
+          <div id="organizer-pages" class="organizer-pages" role="group" aria-label="按当前输出页位排列的页面"></div>
+          <button id="organizer-pages-more" class="wide" hidden>继续显示页面</button>
+        </section>
+        <section class="organizer-preview" aria-label="实际 PDF 预览">
+          <div class="organizer-preview-tools"><button id="organizer-prev" aria-label="预览前一页" disabled>‹</button><label for="organizer-page-number">输出页位</label><input id="organizer-page-number" type="number" min="1" value="1"><span id="organizer-preview-count">/ —</span><button id="organizer-next" aria-label="预览后一页" disabled>›</button><label class="organizer-zoom"><span class="sr-only">编辑预览缩放</span><select id="organizer-zoom"><option value="fit">适合宽度</option><option value="100">100%</option><option value="150">150%</option></select></label><label><span class="sr-only">编辑预览清晰度</span><select id="organizer-dpi"><option value="72">72 DPI</option><option value="120" selected>120 DPI</option><option value="180">180 DPI</option></select></label></div>
+          <div class="organizer-preview-stage" id="organizer-preview-stage"><p id="organizer-preview-empty">正在读取页面…</p><canvas id="organizer-canvas" aria-label="编辑后实际 PDF 页面预览" hidden></canvas></div>
+          <p id="organizer-preview-caption" class="organizer-preview-caption" aria-live="polite"></p>
+          <div class="organizer-reference-panels">
+            <details id="organizer-navigation"><summary>当前文档书签 <span id="organizer-bookmark-count"></span></summary><div id="organizer-bookmarks"></div></details>
+            <details><summary>当前页文本</summary><textarea id="organizer-page-text" readonly aria-label="当前实际预览页的文本"></textarea></details>
+          </div>
+        </section>
+      </div>
+    </section>
   </section>
   <aside class="inspector" aria-label="检查与导航">
     <div class="tabs" role="tablist" aria-label="检查与导航">
@@ -76,12 +121,13 @@
 <dialog id="task-dialog" aria-labelledby="dialog-title">
   <div class="dialog-head"><h2 id="dialog-title"></h2><button id="close-dialog" aria-label="关闭对话框">关闭</button></div>
   <p id="dialog-description"></p><div id="job-outcomes" class="outcomes"></div><div id="dialog-rows"></div>
-  <div class="dialog-footer"><span id="output-path"></span><div class="dialog-actions"><button id="retry-job" hidden>重试未完成项</button><button id="apply-plan" class="primary" hidden>确认生成副本</button></div></div>
+  <div class="dialog-footer"><span id="output-path"></span><div class="dialog-actions"><button id="retry-job" hidden>重试未完成项</button><button id="apply-plan" class="primary" hidden>确认生成副本</button><button id="open-edited-output" class="primary" hidden>打开已保存副本</button></div></div>
 </dialog>
 <dialog id="history-dialog" aria-labelledby="history-title">
   <div class="dialog-head"><h2 id="history-title">任务历史</h2><button id="close-history" aria-label="关闭任务历史">关闭</button></div>
   <p>当前服务会话的全部任务。成功输出保留，重试只处理未完成项；重启服务后请查阅工作目录中的任务记录。</p><div id="history-list"></div>
 </dialog>
 <script src="/app.js"></script>
+<script src="/organizer.js"></script>
 </body>
 </html>

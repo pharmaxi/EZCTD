@@ -8,6 +8,17 @@ import sys
 
 def execute(request: dict) -> dict:
     operation = request['operation']
+    if operation in ('inspect-organize', 'organize-preview', 'organize-stage'):
+        from .pdf_organize import inspect_organize, organize_preview, organize_stage
+        source, expected = Path(request['path']), request['expected_sha256']
+        if operation == 'inspect-organize':
+            return inspect_organize(source, expected)
+        if operation == 'organize-preview':
+            return organize_preview(source, expected, request['order'], request['rotations'],
+                                    page=request.get('page', 1), dpi=request.get('dpi', 120),
+                                    thumbnail=request.get('thumbnail', False))
+        return organize_stage(source, expected, Path(request['stage_path']),
+                              request['order'], request['rotations'])
     if operation in ('navigation', 'search-document'):
         from .reader import navigation, search_document
         if operation == 'navigation':

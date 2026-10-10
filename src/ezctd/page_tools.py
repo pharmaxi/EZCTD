@@ -54,10 +54,7 @@ def _render_scale(width: float, height: float, dpi: float, max_pixels: int) -> f
     return lower
 
 
-def page_operation(path: Path, *, page_number: int, query: str | None = None,
-                   render: bool = False, dpi: int = 120, include_text: bool = False,
-                   max_pixels: int = MAX_PIXELS) -> dict:
-    source = selected_path(path)
+def _validate_page_request(page_number, dpi, max_pixels, query) -> None:
     if type(page_number) is not int or page_number < 1:
         raise ValueError('Physical page number is 1-based')
     if isinstance(dpi, bool) or not isinstance(dpi, (int, float)) or not 36 <= dpi <= 300:
@@ -71,16 +68,20 @@ def page_operation(path: Path, *, page_number: int, query: str | None = None,
             query.encode('utf-16-le')
         except UnicodeEncodeError as exc:
             raise ValueError('Search query must contain valid Unicode characters') from exc
-    if source.stat().st_size > MAX_BYTES:
-        raise ValueError('PDF exceeds the configured preview input-size limit')
-    before = sha256_file(source)
-    # Memory input prevents PDFium from following a file-name interpretation.
-    with source.open('rb') as stream:
-        data = stream.read(MAX_BYTES + 1)
-    if len(data) > MAX_BYTES:
-        raise ValueError('PDF grew beyond the preview input-size limit')
-    if hashlib.sha256(data).hexdigest() != before:
-        raise RuntimeError('Input changed while reading; discard this page result')
+
+
+def page_operation_bytes(data: bytes, *, page_number: int, query: str | None = None,
+                         render: bool = False, dpi: int = 120, include_text: bool = False,
+                         max_pixels: int = MAX_PIXELS) -> dict:
+    """Inspect or rasterize actual in-memory PDF bytes without creating a file.
+
+    Used by the editing worker for draft previews. This performs bounded reader
+    inspection only; it is not the editing operation's publication verification.
+    """
+    _validate_page_request(page_number, dpi, max_pixels, query)
+    if not isinstance(data, bytes) or len(data) > MAX_BYTES:
+        raise ValueError('PDF bytes exceed the configured preview input-size limit')
+    before = hashlib.sha256(data).hexdigest()
     with closing(pdfium.PdfDocument(data)) as doc:
         if page_number > len(doc):
             raise ValueError('Physical page number is outside this PDF')
@@ -141,6 +142,27 @@ def page_operation(path: Path, *, page_number: int, query: str | None = None,
                                    'resolution_state': 'REDUCED_TO_PIXEL_LIMIT' if reduced else 'REQUESTED_RESOLUTION',
                                    'render_limits': {'max_pixels': max_pixels, 'full_page': True},
                                    'png_base64': base64.b64encode(buffer.getvalue()).decode('ascii')})
+    result['input_integrity'] = {'sha256_before': before, 'sha256_after': before, 'unchanged': True}
+    return result
+
+
+def page_operation(path: Path, *, page_number: int, query: str | None = None,
+                   render: bool = False, dpi: int = 120, include_text: bool = False,
+                   max_pixels: int = MAX_PIXELS) -> dict:
+    source = selected_path(path)
+    _validate_page_request(page_number, dpi, max_pixels, query)
+    if source.stat().st_size > MAX_BYTES:
+        raise ValueError('PDF exceeds the configured preview input-size limit')
+    before = sha256_file(source)
+    # Memory input prevents PDFium from following a file-name interpretation.
+    with source.open('rb') as stream:
+        data = stream.read(MAX_BYTES + 1)
+    if len(data) > MAX_BYTES:
+        raise ValueError('PDF grew beyond the preview input-size limit')
+    if hashlib.sha256(data).hexdigest() != before:
+        raise RuntimeError('Input changed while reading; discard this page result')
+    result = page_operation_bytes(data, page_number=page_number, query=query, render=render,
+                                  dpi=dpi, include_text=include_text, max_pixels=max_pixels)
     after = sha256_file(source)
     if after != before:
         raise RuntimeError('Input changed while reading; discard this page result')

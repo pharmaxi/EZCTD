@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/cro_pdf",
+    "--junitxml=/workspace/scratch/6d9ca3c57d75/organizer-final-evidence/local-core-junit.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 21.113
+}
