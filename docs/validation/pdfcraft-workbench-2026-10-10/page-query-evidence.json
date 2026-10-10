@@ -1,0 +1,7 @@
+{
+  "synthetic_only": true,
+  "native_response_bytes_unchanged": true,
+  "unmarked_canvas_sha256": "cd42debaf8d8f066c10bdd8b747631f4f1f9446a23c2994b967e276705260a34",
+  "marked_canvas_sha256": "7523383abd831662f05ece270a59f299ebd60cefba33160a221e3ac5711008a5",
+  "canvas_after_query_edit_matches_unmarked": true
+}

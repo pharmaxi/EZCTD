@@ -1,0 +1,32 @@
+{
+  "reference": "PDFCraft source architecture and existing EZCTD visual system; no claim of running upstream GUI",
+  "browser_plugin": "not available",
+  "mechanism": "real Chromium through Playwright",
+  "reviewed_viewports": [
+    "1500x1000",
+    "1000x800",
+    "390x844"
+  ],
+  "actual_PDF_previews": true,
+  "document_horizontal_overflow": false,
+  "preserved": [
+    "existing local clinical document list and typography",
+    "reader/search/checking workflow",
+    "distinct source draft and saved output identities"
+  ],
+  "layout": [
+    "desktop page grid alongside actual PDF preview",
+    "source selection and output positions labeled separately",
+    "mobile tool wrapping and stacked document/page areas"
+  ],
+  "correction": "source-invalid draft badge no longer turns the independently valid saved-output status red",
+  "screenshots": {
+    "organizer-1000.png": "e3db2e4aaee34a0d759f2e8810b73535470706b41a475da55bb0665396b549b5",
+    "organizer-390.png": "9017833e23182882d96ba762a4ab8e919d0ba84596713769926b3967ec86943d",
+    "organizer-edited-1500.png": "b2723373fdb62ba301d0ff95ea79e8731647df38b58487dcd41182b866f5c132",
+    "organizer-output-after-source-change.png": "160e8fba224553e62869ab1b6545662a8bc17d69f91f1913f8088e57e6c8f1e1",
+    "organizer-save-recovered.png": "6c87d24b23ea70203075683ff6196efff05c617711d1c5cf38759e245309714d",
+    "organizer-save-unknown.png": "c552844bf8854d7d297430ca04ad66ca6d1db30148f1c3b1de7dc7637c6fdd6d",
+    "organizer-saved-reopened.png": "05d22825c17c223564753a3cd4d50b6b102bdaf5c34143d47ddc10366162e667"
+  }
+}

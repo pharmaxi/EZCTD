@@ -18,10 +18,12 @@ import threading
 import webbrowser
 
 from .workspace import Workspace
+from .editor import EditorConflict
 
 MAX_REQUEST = 8 * 1024 * 1024
 ASSETS = {'/': ('index.html', 'text/html; charset=utf-8'),
           '/app.js': ('app.js', 'text/javascript; charset=utf-8'),
+          '/organizer.js': ('organizer.js', 'text/javascript; charset=utf-8'),
           '/style.css': ('style.css', 'text/css; charset=utf-8')}
 CSP = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 
@@ -124,13 +126,24 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError('JSON object required')
             result = self._route(payload)
             self._send(200, result)
+        except EditorConflict as exc:
+            self._send(409, {'error': str(exc), 'error_type': type(exc).__name__, 'error_code': exc.code})
         except (ValueError, KeyError, TypeError, OSError, RuntimeError) as exc:
-            self._send(400, {'error': str(exc)[:2000], 'error_type': type(exc).__name__})
+            message = str(exc)
+            error = {'error': message[:2000], 'error_type': type(exc).__name__}
+            if any(signal in message.lower() for signal in
+                   ('source_changed', 'source changed', 'input changed', 'identity mismatch')):
+                error['error_code'] = 'SOURCE_CHANGED'
+            elif 'output_changed' in message.lower():
+                error['error_code'] = 'OUTPUT_CHANGED'
+            self._send(400, error)
         except Exception:
             self._send(500, {'error': 'Internal operation failed; no successful result is asserted'})
 
     def _route(self, p):
         w = self.server.workspace
+        if self.path.startswith('/api/editor/'):
+            return self._editor_route(p)
         if self.path == '/api/session':
             return w.session()
         if self.path == '/api/details':
@@ -144,8 +157,25 @@ class Handler(BaseHTTPRequestHandler):
             return w.document_action(p['id'], 'view-page', page=page, dpi=dpi, query=query)
         if self.path == '/api/navigation':
             return w.document_action(p['id'], 'navigation')
+        if self.path == '/api/thumbnail':
+            page = p.get('page', 1)
+            if type(page) is not int or page < 1:
+                raise ValueError('Invalid physical page')
+            return w.document_action(p['id'], 'thumbnail', page=page)
         if self.path == '/api/search':
-            return w.document_action(p['id'], 'search-document', query=p['query'])
+            start_page, page_limit, query = p.get('start_page', 1), p.get('page_limit', 200), p.get('query')
+            if type(start_page) is not int or start_page < 1:
+                raise ValueError('Invalid search start page')
+            if type(page_limit) is not int or not 1 <= page_limit <= 2000:
+                raise ValueError('Search page limit must be between 1 and 2000')
+            if not isinstance(query, str) or not 1 <= len(query) <= 256 or '\x00' in query:
+                raise ValueError('Invalid query')
+            return w.document_action(p['id'], 'search-document', query=query,
+                                     start_page=start_page, page_limit=page_limit)
+        if self.path == '/api/history':
+            return w.job_history()
+        if self.path == '/api/retry':
+            return {'job_id': w.retry(p['id'])}
         if self.path == '/api/context':
             w.set_context(p['id'], p['context'])
             return {'saved': True}
@@ -173,6 +203,44 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError('Base64 report bytes required to preserve original encoding and BOM')
             return w.import_report(base64.b64decode(p['report_base64'], validate=True))
         raise ValueError('Unknown API action; arbitrary filesystem operations are not supported')
+
+    def _editor_route(self, p):
+        w = self.server.workspace
+        action = self.path.removeprefix('/api/editor/')
+        schemas = {
+            'open': ({'id'}, set()), 'state': ({'draft_id'}, set()),
+            'edit': ({'draft_id', 'revision', 'command'}, set()),
+            'undo': ({'draft_id', 'revision'}, set()), 'redo': ({'draft_id', 'revision'}, set()),
+            'page': ({'draft_id', 'revision'}, {'page', 'dpi', 'thumbnail'}),
+            'navigation': ({'draft_id', 'revision'}, set()),
+            'save': ({'draft_id', 'revision', 'confirmed'}, {'retry'}),
+            'output-page': ({'job_id'}, {'page', 'dpi', 'thumbnail'}),
+            'output-navigation': ({'job_id'}, set()),
+        }
+        if action not in schemas:
+            raise ValueError('Unknown page-editor operation')
+        required, optional = schemas[action]
+        if required - set(p) or set(p) - required - optional:
+            raise ValueError('Missing required or unexpected page-editor parameters')
+        if action == 'open':
+            return w.editor_open(p['id'])
+        if action == 'state':
+            return w.editor_state(p['draft_id'])
+        if action == 'edit':
+            return w.editor_edit(p['draft_id'], p['revision'], p['command'])
+        if action in ('undo', 'redo'):
+            return w.editor_history(p['draft_id'], p['revision'], redo=action == 'redo')
+        if action == 'page':
+            return w.editor_page(p['draft_id'], p['revision'], page=p.get('page', 1),
+                                 dpi=p.get('dpi', 120), thumbnail=p.get('thumbnail', False))
+        if action == 'navigation':
+            return w.editor_navigation(p['draft_id'], p['revision'])
+        if action == 'save':
+            return {'job_id': w.editor_save(p['draft_id'], p['revision'], confirmed=p['confirmed'],
+                                            retry=p.get('retry', False))}
+        return w.editor_output(p['job_id'], 'page' if action == 'output-page' else 'navigation',
+                               page=p.get('page', 1), dpi=p.get('dpi', 120),
+                               thumbnail=p.get('thumbnail', False))
 
 
 def main(argv=None) -> int:
